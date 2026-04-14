@@ -1593,13 +1593,15 @@
         <div class="onboarding-illustration">
           <div class="ob-illus-bg" style="background: #E8F7EE;">
             <svg class="ob-illus-svg" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Pharmacist person -->
-              <circle cx="70" cy="42" r="22" fill="#27AE60" opacity="0.2"/>
+              <!-- Doctor context -->
+              <circle cx="70" cy="42" r="22" fill="#1A6B8A" opacity="0.2"/>
               <circle cx="70" cy="38" r="16" fill="#1A6B8A"/>
               <circle cx="70" cy="34" r="10" fill="#AED6E8"/>
               <!-- Coat -->
               <path d="M45 100 Q45 70 70 70 Q95 70 95 100 L95 115 L45 115 Z" fill="white"/>
-              <rect x="64" y="70" width="12" height="45" fill="#27AE60" opacity="0.3"/>
+              <!-- Stethoscope around neck -->
+              <path d="M60 75 Q60 85 70 85 Q80 85 80 75" stroke="#6B7A8D" stroke-width="2" fill="none"/>
+              <circle cx="80" cy="72" r="3" fill="#6B7A8D"/>
               <!-- Cross badge -->
               <circle cx="100" cy="52" r="20" fill="#27AE60"/>
               <rect x="95" y="44" width="10" height="16" rx="4" fill="white"/>
@@ -1638,16 +1640,16 @@
           <div class="ob-illus-bg" style="background: #E8F4F8;">
             <svg class="ob-illus-svg" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
               <!-- Pharmacy context -->
-              <rect x="30" y="30" width="80" height="90" rx="8" fill="white" stroke="#1A6B8A" stroke-width="2"/>
-              <rect x="40" y="45" width="60" height="40" rx="4" fill="#F4F9FC"/>
-              <rect x="45" y="55" width="30" height="4" rx="2" fill="#1A6B8A" opacity="0.4"/>
-              <rect x="45" y="65" width="50" height="3" rx="1.5" fill="#1A6B8A" opacity="0.2"/>
-              <!-- Cross badge -->
-              <circle cx="100" cy="95" r="22" fill="#27AE60"/>
-              <rect x="91" y="87" width="18" height="16" rx="4" fill="white"/>
-              <rect x="96" y="83" width="8" height="24" rx="3" fill="#27AE60"/>
-              <rect x="88" y="91" width="24" height="8" rx="3" fill="#27AE60"/>
-              <circle cx="100" cy="95" r="4" fill="white"/>
+              <rect x="25" y="30" width="90" height="90" rx="8" fill="white" stroke="#1A6B8A" stroke-width="2"/>
+              <rect x="35" y="45" width="70" height="20" rx="4" fill="#F4F9FC"/>
+              <rect x="40" y="52" width="40" height="6" rx="3" fill="#1A6B8A" opacity="0.4"/>
+              <!-- Shelf items -->
+              <rect x="35" y="75" width="15" height="25" rx="3" fill="#2196B3" opacity="0.5"/>
+              <rect x="55" y="75" width="15" height="25" rx="3" fill="#27AE60" opacity="0.5"/>
+              <rect x="75" y="75" width="15" height="25" rx="3" fill="#F39C12" opacity="0.5"/>
+              <!-- Pharmacy Cross -->
+              <circle cx="105" cy="100" r="22" fill="#27AE60"/>
+              <path d="M105 88 V112 M93 100 H117" stroke="white" stroke-width="6" stroke-linecap="round"/>
             </svg>
           </div>
         </div>
@@ -1672,7 +1674,7 @@
     <div class="screen" id="screen4" data-device="mobile">
       <div class="onboarding-screen">
         <div class="onboarding-header">
-          <div class="ob-logo">ILERA AFRICA</div>
+          <div class="ob-logo brand-cool">ILERA AFRICA</div>
           <div></div>
         </div>
         <div class="onboarding-illustration">
@@ -6703,14 +6705,20 @@
             <div style="display:flex;justify-content:center;">
               <div style="width:320px;height:320px;border-radius:50%;background:#E8F7EE;display:flex;align-items:center;justify-content:center;">
                 <svg width="200" height="200" viewBox="0 0 140 140" fill="none">
-                  <circle cx="70" cy="42" r="22" fill="#27AE60" opacity="0.2"/>
+                  <!-- Doctor context -->
+                  <circle cx="70" cy="42" r="22" fill="#1A6B8A" opacity="0.2"/>
                   <circle cx="70" cy="38" r="16" fill="#1A6B8A"/>
                   <circle cx="70" cy="34" r="10" fill="#AED6E8"/>
+                  <!-- Coat -->
                   <path d="M45 100 Q45 70 70 70 Q95 70 95 100 L95 115 L45 115 Z" fill="white"/>
-                  <rect x="64" y="70" width="12" height="45" fill="#27AE60" opacity="0.3"/>
+                  <!-- Stethoscope -->
+                  <path d="M60 75 Q60 85 70 85 Q80 85 80 75" stroke="#6B7A8D" stroke-width="2" fill="none"/>
+                  <circle cx="80" cy="72" r="3" fill="#6B7A8D"/>
+                  <!-- Cross badge -->
                   <circle cx="100" cy="52" r="20" fill="#27AE60"/>
                   <rect x="95" y="44" width="10" height="16" rx="4" fill="white"/>
                   <rect x="92" y="47" width="16" height="10" rx="4" fill="white"/>
+                  <!-- Shield -->
                   <path d="M70 85 L55 90 L55 105 Q55 115 70 120 Q85 115 85 105 L85 90 Z" fill="#E8F7EE" stroke="#27AE60" stroke-width="2"/>
                   <path d="M63 102 L67 106 L77 96" stroke="#27AE60" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
@@ -6743,15 +6751,16 @@
               <div style="width:320px;height:320px;border-radius:50%;background:#E8F4F8;display:flex;align-items:center;justify-content:center;">
                 <svg width="200" height="200" viewBox="0 0 140 140" fill="none">
                   <!-- Pharmacy context -->
-                  <rect x="30" y="30" width="80" height="90" rx="8" fill="white" stroke="#1A6B8A" stroke-width="2"/>
-                  <rect x="40" y="45" width="60" height="40" rx="4" fill="#F4F9FC"/>
-                  <rect x="45" y="55" width="30" height="4" rx="2" fill="#1A6B8A" opacity="0.4"/>
-                  <rect x="45" y="65" width="50" height="3" rx="1.5" fill="#1A6B8A" opacity="0.2"/>
-                  <circle cx="100" cy="95" r="22" fill="#27AE60"/>
-                  <rect x="91" y="87" width="18" height="16" rx="4" fill="white"/>
-                  <rect x="96" y="83" width="8" height="24" rx="3" fill="#27AE60"/>
-                  <rect x="88" y="91" width="24" height="8" rx="3" fill="#27AE60"/>
-                  <circle cx="100" cy="95" r="4" fill="white"/>
+                  <rect x="25" y="30" width="90" height="90" rx="8" fill="white" stroke="#1A6B8A" stroke-width="2"/>
+                  <rect x="35" y="45" width="70" height="20" rx="4" fill="#F4F9FC"/>
+                  <rect x="40" y="52" width="40" height="6" rx="3" fill="#1A6B8A" opacity="0.4"/>
+                  <!-- Shelf items -->
+                  <rect x="35" y="75" width="15" height="25" rx="3" fill="#2196B3" opacity="0.5"/>
+                  <rect x="55" y="75" width="15" height="25" rx="3" fill="#27AE60" opacity="0.5"/>
+                  <rect x="75" y="75" width="15" height="25" rx="3" fill="#F39C12" opacity="0.5"/>
+                  <!-- Pharmacy Cross -->
+                  <circle cx="105" cy="100" r="22" fill="#27AE60"/>
+                  <path d="M105 88 V112 M93 100 H117" stroke="white" stroke-width="6" stroke-linecap="round"/>
                 </svg>
               </div>
             </div>
