@@ -1908,9 +1908,9 @@
               <input type="number" placeholder="32" value="32" style="width:100%;padding:14px 16px;background:#fff;border:1.5px solid #E2ECF2;border-radius:12px;font-size:15px;color:#1A2332;font-family:'DM Sans',sans-serif;outline:none;">
             </div>
             <div>
-              <label style="font-size:12px;font-weight:600;color:#6B7A8D;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:6px;">Groupe Sanguin</label>
+              <label style="font-size:12px;font-weight:600;color:#6B7A8D;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:6px;">Groupe Sanguin <span style="font-size:10px;font-weight:400;color:#A0AEC0;text-transform:none;letter-spacing:0;">(facultatif)</span></label>
               <select style="width:100%;padding:14px 12px;background:#fff;border:1.5px solid #E2ECF2;border-radius:12px;font-size:15px;color:#1A2332;font-family:'DM Sans',sans-serif;outline:none;-webkit-appearance:none;">
-                <option>A+</option><option>A-</option><option selected>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                <option value="" style="color:#A0AEC0;">Non renseigné</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
               </select>
             </div>
           </div>
@@ -1932,7 +1932,7 @@
             <span style="font-size:20px;">🔒</span>
             <p style="font-size:12px;color:#1A6B8A;line-height:1.4;">Vos données de santé sont chiffrées et stockées selon les normes HDS.</p>
           </div>
-          <button onclick="showToast('✅ Compte créé avec succès ! Bienvenue Moussa !')" style="width:100%;padding:16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.35);margin-top:4px;">Créer mon compte →</button>
+          <button onclick="handleRegister()" style="width:100%;padding:16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.35);margin-top:4px;">Créer mon compte →</button>
           <p style="text-align:center;font-size:14px;color:#6B7A8D;">Déjà un compte ? <a onclick="goToScreen(8)" style="color:#1A6B8A;font-weight:600;cursor:pointer;">Se connecter</a></p>
         </div>
       </div>
@@ -7100,9 +7100,9 @@
                 <input class="web-field-input" type="number" placeholder="32" value="32" style="margin:0;">
               </div>
               <div class="web-field-group" style="margin:0;">
-                <label class="web-field-label">Groupe Sanguin</label>
+                <label class="web-field-label">Groupe Sanguin <span style="font-size:11px;font-weight:400;color:#A0AEC0;">(facultatif)</span></label>
                 <select class="web-field-input" style="margin:0;">
-                  <option>A+</option><option>A-</option><option selected>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                  <option value="" style="color:#A0AEC0;">Non renseigné</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
                 </select>
               </div>
             </div>
@@ -7126,7 +7126,7 @@
               <span style="font-size:18px;">🔒</span>
               <p style="font-size:12px;color:#1A6B8A;line-height:1.4;font-family:'DM Sans',sans-serif;">Vos données sont chiffrées selon les normes HDS et ne seront jamais revendues.</p>
             </div>
-            <button class="web-cta" onclick="showToast('✅ Compte créé avec succès ! Bienvenue Moussa !')">Créer mon compte →</button>
+            <button class="web-cta" onclick="handleRegisterWeb()">Créer mon compte →</button>
             <p class="web-login-footer">Déjà un compte ? <a onclick="goToWebScreen(8)">Se connecter</a></p>
           </div>
         </div>
@@ -11224,6 +11224,16 @@
   function handleLogin() {
     showToast('✅ Connexion réussie ! Bienvenue Moussa');
     setTimeout(() => goToScreen(10), 1200);
+  }
+
+  function handleRegister() {
+    showToast('🎉 Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
+    setTimeout(() => goToScreen(10), 1500);
+  }
+
+  function handleRegisterWeb() {
+    showToast('🎉 Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
+    setTimeout(() => goToWebScreen(10), 1500);
   }
 
   function handleWebLogin() {
