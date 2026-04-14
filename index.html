@@ -1552,6 +1552,25 @@
   @keyframes shine {
     to { background-position: 200% center; }
   }
+
+  /* Safety Reset to prevent drifting and rogue visibility */
+  .mobile-frame, .web-frame { position: relative; overflow: hidden; }
+  .screen, .web-screen {
+    position: absolute !important;
+    top: 0; left: 0;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box;
+    display: none;
+    background: var(--bg);
+  }
+  .screen.active, .web-screen.active {
+    display: flex !important;
+    flex-direction: column;
+  }
+
 </style>
 
 </head>
@@ -10334,1834 +10353,96 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  // Dynamic navigation injection for Admin Enrollments Screen
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll('nav').forEach(nav => {
-      // If the nav contains the 'Utilisateurs' link (screen 21), it's likely an Admin nav
-      if (nav.innerHTML.includes('goToWebScreen(24)')) {
-        let enrollementLink = `<a onclick="goToWebScreen('_admin_enrollements')" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:12px;font-family:'DM Sans',sans-serif;background:none;">📝 Enrôlements <span style="background:#E74C3C;color:#fff;border-radius:50px;padding:2px 6px;font-size:9px;font-weight:700;margin-left:auto;">2</span></a>`;
-        // Insert after Dashboard or Utilisateurs
-        nav.insertAdjacentHTML('beforeend', enrollementLink);
-      }
-    });
-  });
-
   // ============================================================
-  //  ILERA AFRICA — ENHANCED INTERACTIVE JS
-  //  - Transitions & animations
-  //  - Complete clickable flows (patient, pharmacien, admin)
-  //  - Demo mode with live dynamic data
+  //  CORE GLOBAL VARIABLES & STATE
   // ============================================================
-
-  let currentDevice = 'mobile';
   let currentScreen = 1;
   let currentWebScreen = 1;
-  let demoMode = false;
-  let demoInterval = null;
-  let prevScreen = 1;
-
-  // ===== PATIENT FLOW =====
-  const patientFlow = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 48, 26, 27, 28, 29, 30, 41, 13, 14, 15, 32, 33, 34, 35, 36, 37, 43, 44, 49];
-  const livreurFlow = [51, 52, 53, 54, 55, 56, 57, 58];
-  // ===== MÉDECIN FLOW =====
-  const medecinFlow = [59, 60, 61, 62, 63, 64, 65, 66, 67, 68];
-  // ===== PHARMACIEN FLOW =====
-  const pharmacistFlow = [16, 17, 18, 19, 20, 21, 22, 23, 38, 39, 40, 42, 50];
-  // ===== ADMIN FLOW =====
-  const adminFlow = [24, 45, 25, 75, 76, 77, 78, 79, 71, 72, 73, 74, 31];
-  // ===== DEMO SEQUENCE =====
-  const demoSequenceMobile = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 48, 26, 27, 28, 13, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 45, 51, 52, 53, 55, 59, 61, 62, 63, 66];
-  const demoSequenceWeb   = [1, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 54, 55, 56, 57, 58, 59, 60];
-  let demoIdx = 0;
-
-  // ============================================================
-  //  CSS TRANSITION ENGINE
-  // ============================================================
-  function injectTransitionCSS() {
-    const style = document.createElement('style');
-    style.id = 'pharma-transitions';
-    style.textContent = `
-      /* ===== SCREEN TRANSITIONS ===== */
-      [data-device="mobile"] {
-        position: absolute !important;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        opacity: 0;
-        transform: translateX(40px);
-        transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1),
-                    transform 0.35s cubic-bezier(0.4,0,0.2,1);
-        pointer-events: none;
-        display: flex !important;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      [data-device="mobile"].active {
-        opacity: 1;
-        transform: translateX(0);
-        pointer-events: auto;
-      }
-      [data-device="mobile"].slide-out {
-        opacity: 0;
-        transform: translateX(-40px);
-      }
-      .web-screen {
-        position: absolute !important;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-        pointer-events: none;
-        display: flex !important;
-        flex-direction: column;
-      }
-      .web-screen.active {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      /* ===== MOBILE FRAME position context ===== */
-      .mobile-frame { position: relative !important; }
-      .browser-content { position: relative !important; }
-
-      /* ===== DEMO MODE BADGE ===== */
-      #demo-badge {
-        position: fixed;
-        top: 72px;
-        right: 20px;
-        background: linear-gradient(135deg, #E74C3C, #c0392b);
-        color: #fff;
-        padding: 8px 16px;
-        border-radius: 50px;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        gap: 8px;
-        box-shadow: 0 4px 20px rgba(231,76,60,0.4);
-        animation: pulse-badge 2s infinite;
-        cursor: pointer;
-      }
-      #demo-badge.visible { display: flex; }
-      #demo-badge .demo-dot {
-        width: 8px; height: 8px;
-        background: #fff;
-        border-radius: 50%;
-        animation: blink 1s infinite;
-      }
-      @keyframes blink {
-        0%,100% { opacity: 1; } 50% { opacity: 0.3; }
-      }
-      @keyframes pulse-badge {
-        0%,100% { box-shadow: 0 4px 20px rgba(231,76,60,0.4); }
-        50% { box-shadow: 0 4px 30px rgba(231,76,60,0.7); }
-      }
-
-      /* ===== FLOW NAVIGATOR ===== */
-      #flow-nav {
-        position: fixed;
-        top: 72px;
-        left: 20px;
-        background: rgba(15,63,84,0.95);
-        border-radius: 16px;
-        padding: 12px;
-        z-index: 9998;
-        display: none;
-        flex-direction: column;
-        gap: 6px;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.1);
-        min-width: 180px;
-      }
-      #flow-nav.visible { display: flex; }
-      .flow-btn {
-        padding: 8px 14px;
-        border-radius: 10px;
-        border: none;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        text-align: left;
-        transition: all 0.2s;
-      }
-      .flow-btn.patient { background: #E8F4F8; color: #1A6B8A; }
-      .flow-btn.pharmacist { background: #E8F7EE; color: #27AE60; }
-      .flow-btn.admin { background: #FEF0EE; color: #E74C3C; }
-      .flow-btn.demo-btn { background: linear-gradient(135deg,#E74C3C,#c0392b); color: #fff; }
-      .flow-btn:hover { transform: translateX(4px); opacity: 0.9; }
-      #flow-toggle {
-        position: fixed;
-        top: 72px;
-        left: 20px;
-        background: rgba(15,63,84,0.95);
-        border: 1px solid rgba(255,255,255,0.15);
-        color: #fff;
-        padding: 8px 14px;
-        border-radius: 50px;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 12px;
-        font-weight: 700;
-        cursor: pointer;
-        z-index: 9999;
-        backdrop-filter: blur(10px);
-        transition: all 0.2s;
-      }
-      #flow-toggle:hover { background: rgba(26,107,138,0.9); }
-
-      /* ===== DEMO DATA ANIMATION ===== */
-      .demo-number {
-        transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-      }
-      .demo-number.updating {
-        transform: scale(1.15);
-        color: #27AE60 !important;
-      }
-
-      /* ===== PROGRESS BAR (demo) ===== */
-      #demo-progress {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #27AE60, #1A6B8A);
-        width: 0%;
-        z-index: 99999;
-        transition: width 0.3s ease;
-        display: none;
-      }
-      #demo-progress.active { display: block; }
-
-      /* ===== BUTTON RIPPLE ===== */
-      .ripple-btn { position: relative; overflow: hidden; }
-      .ripple {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.35);
-        transform: scale(0);
-        animation: ripple-anim 0.5s linear;
-        pointer-events: none;
-      }
-      @keyframes ripple-anim {
-        to { transform: scale(4); opacity: 0; }
-      }
-
-      /* ===== TOAST ENHANCED ===== */
-      #toast-container {
-        position: fixed;
-        top: 80px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 99999;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        pointer-events: none;
-      }
-      .toast-msg {
-        background: rgba(26,35,50,0.95);
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 50px;
-        font-family: 'DM Sans', sans-serif;
-        font-size: 13px;
-        font-weight: 600;
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.1);
-        opacity: 0;
-        transform: translateY(-10px) scale(0.95);
-        transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        white-space: nowrap;
-      }
-      .toast-msg.show {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    `;
-    document.head.appendChild(style);
-  }
-
-  // ============================================================
-  //  TOAST SYSTEM (enhanced, replaces old showToast)
-  // ============================================================
-  let toastContainer;
-  function showToast(msg) {
-    if (!toastContainer) {
-      toastContainer = document.createElement('div');
-      toastContainer.id = 'toast-container';
-      document.body.appendChild(toastContainer);
-    }
-    const toast = document.createElement('div');
-    toast.className = 'toast-msg';
-    toast.textContent = msg;
-    toastContainer.appendChild(toast);
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => { toast.classList.add('show'); });
-    });
-    setTimeout(() => {
-      toast.classList.remove('show');
-      setTimeout(() => toast.remove(), 300);
-    }, 2500);
-  }
-
-
-  // ============================================================
-  //  MODAL SYSTEM — bottom sheet dynamique
-  // ============================================================
-  function showModal(type) {
-    const existing = document.querySelector('.modal-overlay');
-    if (existing) existing.remove();
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
-    const sheet = document.createElement('div');
-    sheet.className = 'modal-sheet';
-    const handle = document.createElement('div');
-    handle.className = 'modal-handle';
-    sheet.appendChild(handle);
-    const modals = {
-      'qr-modal': `<div style="text-align:center;padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:16px;">🔲 Code QR Ordonnance</div><div style="width:160px;height:160px;margin:0 auto 16px;background:#fff;border-radius:16px;padding:10px;box-shadow:var(--shadow);"><svg viewBox="0 0 100 100" width="140" height="140"><rect x="10" y="10" width="30" height="30" rx="3" fill="#1A2332"/><rect x="15" y="15" width="20" height="20" rx="2" fill="#fff"/><rect x="18" y="18" width="14" height="14" rx="1" fill="#1A2332"/><rect x="60" y="10" width="30" height="30" rx="3" fill="#1A2332"/><rect x="65" y="15" width="20" height="20" rx="2" fill="#fff"/><rect x="68" y="18" width="14" height="14" rx="1" fill="#1A2332"/><rect x="10" y="60" width="30" height="30" rx="3" fill="#1A2332"/><rect x="15" y="65" width="20" height="20" rx="2" fill="#fff"/><rect x="18" y="68" width="14" height="14" rx="1" fill="#1A2332"/><rect x="50" y="50" width="6" height="6" fill="#1A2332"/><rect x="60" y="50" width="6" height="6" fill="#1A2332"/><rect x="70" y="50" width="6" height="6" fill="#1A2332"/><rect x="80" y="50" width="6" height="6" fill="#1A2332"/><rect x="50" y="60" width="6" height="6" fill="#1A2332"/><rect x="70" y="60" width="6" height="6" fill="#1A2332"/><rect x="50" y="70" width="6" height="6" fill="#1A2332"/><rect x="60" y="70" width="6" height="6" fill="#1A2332"/><rect x="80" y="70" width="6" height="6" fill="#1A2332"/><rect x="50" y="80" width="6" height="6" fill="#1A2332"/><rect x="70" y="80" width="6" height="6" fill="#1A2332"/><rect x="80" y="80" width="6" height="6" fill="#1A2332"/></svg></div><div style="font-size:12px;color:var(--text-muted);margin-bottom:4px;">Référence : ORD-2024-089</div><div style="font-size:11px;color:var(--secondary);font-weight:700;margin-bottom:20px;">✓ Anti-fraude · Signature numérique</div><button onclick="closeModal()" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--primary),#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Fermer</button></div>`,
-      'call-modal': `<div style="text-align:center;padding:8px 0 16px;"><div style="width:72px;height:72px;background:linear-gradient(135deg,var(--secondary),#2ecc71);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 12px;">📞</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:var(--text);margin-bottom:4px;">Appel en cours...</div><div style="font-size:13px;color:var(--text-muted);margin-bottom:24px;">Connexion sécurisée</div><div style="display:flex;gap:16px;justify-content:center;"><button onclick="closeModal();showToast('🔇 Micro coupé')" style="width:56px;height:56px;background:#F4F9FC;border:none;border-radius:50%;font-size:22px;">🔇</button><button onclick="closeModal();showToast('📞 Appel terminé')" style="width:56px;height:56px;background:#E74C3C;border:none;border-radius:50%;font-size:22px;color:#fff;">✕</button><button onclick="closeModal();showToast('🔊 Haut-parleur activé')" style="width:56px;height:56px;background:#F4F9FC;border:none;border-radius:50%;font-size:22px;">🔊</button></div></div>`,
-      'edit-field-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:16px;">✏️ Modifier</div><input type="text" placeholder="Nouvelle valeur..." style="width:100%;padding:14px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);margin-bottom:12px;"><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('✅ Modification enregistrée')" style="flex:2;padding:13px;background:linear-gradient(135deg,var(--primary),#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Enregistrer</button></div></div>`,
-      'confirm-modal': `<div style="padding:8px 0 16px;"><div style="text-align:center;font-size:40px;margin-bottom:12px;">⚠️</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);text-align:center;margin-bottom:8px;">Confirmer la suppression</div><div style="font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:20px;">Cette action est irréversible.</div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('🗑️ Supprimé')" style="flex:1;padding:13px;background:#E74C3C;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Supprimer</button></div></div>`,
-      'confirm-suspend-modal': `<div style="padding:8px 0 16px;"><div style="text-align:center;font-size:40px;margin-bottom:12px;">🔒</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);text-align:center;margin-bottom:8px;">Suspendre le compte</div><div style="font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:20px;">L'utilisateur n'aura plus accès à la plateforme.</div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('🔒 Compte suspendu')" style="flex:1;padding:13px;background:#F39C12;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Suspendre</button></div></div>`,
-      'confirm-delete-modal': `<div style="padding:8px 0 16px;"><div style="text-align:center;font-size:40px;margin-bottom:12px;">🗑️</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);text-align:center;margin-bottom:8px;">Supprimer définitivement</div><div style="font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:20px;">Cette action est irréversible. Êtes-vous sûr ?</div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('🗑️ Supprimé définitivement')" style="flex:1;padding:13px;background:#E74C3C;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Supprimer</button></div></div>`,
-      'add-user-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:16px;">➕ Nouvel utilisateur</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"><input type="text" placeholder="Nom complet" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><input type="email" placeholder="Email professionnel" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><select style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><option>Rôle : Patient</option><option>Rôle : Pharmacien</option><option>Rôle : Médecin</option><option>Rôle : Livreur</option><option>Rôle : Administrateur</option></select></div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('✅ Utilisateur créé et notifié par email')" style="flex:2;padding:13px;background:linear-gradient(135deg,var(--primary),#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Créer le compte</button></div></div>`,
-      'edit-user-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:16px;">✏️ Modifier l'utilisateur</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"><input type="text" value="Moussa Koné" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--primary);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><input type="email" value="moussa.kone@email.ci" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"></div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('✅ Modifications enregistrées')" style="flex:2;padding:13px;background:linear-gradient(135deg,var(--primary),#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Enregistrer</button></div></div>`,
-      'patient-select-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:12px;">👤 Sélectionner un patient</div><div style="display:flex;flex-direction:column;gap:8px;"><div onclick="closeModal();showToast('✓ Moussa Koné sélectionné')" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;cursor:pointer;border:1.5px solid var(--primary);"><div style="width:38px;height:38px;background:linear-gradient(135deg,var(--primary),#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;">M</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">Moussa Koné</div><div style="font-size:11px;color:var(--text-muted);">38 ans · A+ · 2 ordonnances</div></div></div><div onclick="closeModal();showToast('✓ Aïcha Diallo sélectionnée')" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;cursor:pointer;"><div style="width:38px;height:38px;background:linear-gradient(135deg,#E74C3C,#e67e22);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;">A</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">Aïcha Diallo</div><div style="font-size:11px;color:var(--text-muted);">29 ans · O+</div></div></div><div onclick="closeModal();showToast('✓ Yao Kouamé sélectionné')" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;cursor:pointer;"><div style="width:38px;height:38px;background:linear-gradient(135deg,var(--secondary),#2ecc71);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;">Y</div><div><div style="font-size:13px;font-weight:700;color:var(--text);">Yao Kouamé</div><div style="font-size:11px;color:var(--text-muted);">52 ans · B+ · Cardiopath.</div></div></div></div></div>`,
-      'med-select-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:12px;">💊 Ajouter un médicament</div><input type="text" placeholder="Rechercher..." style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--primary);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);margin-bottom:10px;"><div style="display:flex;flex-direction:column;gap:6px;"><div onclick="closeModal();showToast('✓ Amoxicilline 500mg ajoutée')" style="padding:10px 14px;background:var(--bg);border-radius:8px;cursor:pointer;"><div style="font-size:13px;font-weight:600;color:var(--text);">Amoxicilline 500mg</div><div style="font-size:11px;color:var(--text-muted);">Antibiotique · 1cp × 3/j</div></div><div onclick="closeModal();showToast('✓ Metformine 850mg ajoutée')" style="padding:10px 14px;background:var(--bg);border-radius:8px;cursor:pointer;"><div style="font-size:13px;font-weight:600;color:var(--text);">Metformine 850mg</div><div style="font-size:11px;color:var(--text-muted);">Antidiabétique · 1cp × 2/j</div></div><div onclick="closeModal();showToast('✓ Paracétamol 1g ajouté')" style="padding:10px 14px;background:var(--bg);border-radius:8px;cursor:pointer;"><div style="font-size:13px;font-weight:600;color:var(--text);">Paracétamol 1g</div><div style="font-size:11px;color:var(--text-muted);">Antalgique · 1cp / 6h</div></div></div></div>`,
-      'consent-modal': `<div style="padding:8px 0 16px;"><div style="text-align:center;font-size:40px;margin-bottom:12px;">🔒</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);text-align:center;margin-bottom:8px;">Consentement requis</div><div style="font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:16px;">Une demande d'accès au dossier médical va être envoyée au patient.</div><button onclick="closeModal();showToast('📨 Demande envoyée à Yao Kouamé')" style="width:100%;padding:14px;background:linear-gradient(135deg,#0D3B2E,#27AE60);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;margin-bottom:8px;">Envoyer la demande</button><button onclick="closeModal()" style="width:100%;padding:12px;background:transparent;color:var(--text-muted);border:none;font-family:'DM Sans',sans-serif;font-size:13px;">Annuler</button></div>`,
-      'docs-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">📄 Mes documents</div><div style="display:flex;flex-direction:column;gap:8px;"><div onclick="closeModal();showToast('📥 Téléchargement...')" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;cursor:pointer;"><span style="font-size:22px;">📋</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Carte CIN</div><div style="font-size:11px;color:var(--text-muted);">Validé · 245 Ko</div></div><span style="color:var(--primary);">↓</span></div><div onclick="closeModal();showToast('📥 Téléchargement...')" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;cursor:pointer;"><span style="font-size:22px;">🚗</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Permis de conduire</div><div style="font-size:11px;color:var(--text-muted);">Validé · 180 Ko</div></div><span style="color:var(--primary);">↓</span></div><div onclick="closeModal();showToast('📥 Téléchargement...')" style="display:flex;align-items:center;gap:10px;padding:12px;background:var(--bg);border-radius:10px;cursor:pointer;"><span style="font-size:22px;">🏍️</span><div style="flex:1;"><div style="font-size:13px;font-weight:600;color:var(--text);">Assurance moto</div><div style="font-size:11px;color:var(--text-muted);">Valide jusqu'au 31/12/2026</div></div><span style="color:var(--primary);">↓</span></div></div></div>`,
-      'pdf-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:4px;">📄 Posologie.pdf</div><div style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">Document médical sécurisé</div><div style="background:var(--bg);border-radius:12px;padding:16px;margin-bottom:14px;"><div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;">POSOLOGIE — Amoxicilline 500mg</div><div style="font-size:12px;color:var(--text-muted);line-height:1.8;"><p>• 1 comprimé × 3 fois par jour</p><p>• Durant les repas</p><p>• Durée : 7 jours</p><p>• Ne pas interrompre le traitement</p></div></div><button onclick="closeModal()" style="width:100%;padding:13px;background:linear-gradient(135deg,var(--primary),#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Fermer</button></div>`,
-      'file-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">📎 Joindre un fichier</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;"><div onclick="closeModal();showToast('📷 Caméra ouverte')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📷</div><div style="font-size:12px;font-weight:600;color:var(--text);">Caméra</div></div><div onclick="closeModal();showToast('🖼️ Galerie ouverte')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">🖼️</div><div style="font-size:12px;font-weight:600;color:var(--text);">Galerie</div></div><div onclick="closeModal();showToast('📁 Fichiers ouverts')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📁</div><div style="font-size:12px;font-weight:600;color:var(--text);">Fichiers</div></div><div onclick="closeModal();showToast('📄 PDF sélectionné')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📄</div><div style="font-size:12px;font-weight:600;color:var(--text);">PDF</div></div></div><button onclick="closeModal()" style="width:100%;padding:12px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;">Annuler</button></div>`,
-      'map-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:12px;">🗺 Navigation GPS</div><div style="background:linear-gradient(145deg,#b8d8e8,#7fb5cc);border-radius:14px;height:130px;position:relative;margin-bottom:12px;overflow:hidden;"><svg width="100%" height="130" viewBox="0 0 300 130"><circle cx="40" cy="95" r="10" fill="#F39C12" stroke="#fff" stroke-width="2"/><text x="40" y="100" text-anchor="middle" font-size="8" fill="#fff">🛵</text><path d="M50,95 Q130,55 200,35" stroke="#F39C12" stroke-width="3" fill="none" stroke-dasharray="6,3"/><circle cx="200" cy="35" r="10" fill="#1A6B8A" stroke="#fff" stroke-width="2"/><text x="200" y="40" text-anchor="middle" font-size="8" fill="#fff">📍</text></svg><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(26,35,50,0.9);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:#F39C12;white-space:nowrap;">ETA 17:30 · 8 min</div></div><div style="display:flex;gap:8px;"><button onclick="closeModal();showToast('🗺 Waze ouvert')" style="flex:1;padding:12px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;">Waze</button><button onclick="closeModal();showToast('🗺 Google Maps ouvert')" style="flex:1;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;">Google Maps</button></div></div>`,
-      'add-product-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">💊 Nouveau produit</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"><input type="text" placeholder="Nom du médicament" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input type="number" placeholder="Prix (FCFA)" style="padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><input type="number" placeholder="Stock initial" style="padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"></div></div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('✅ Produit ajouté au catalogue')" style="flex:2;padding:13px;background:linear-gradient(135deg,var(--secondary),#2ecc71);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Ajouter</button></div></div>`,
-      'fullmap-modal': `<div style="padding:8px 0 16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;">🗺 Suivi en temps réel</div>
-          <div style="background:#E8F7EE;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#27AE60;">● EN DIRECT</div>
-        </div>
-        <div style="background:linear-gradient(145deg,#c8e6f0,#8ac4db);border-radius:16px;height:200px;position:relative;margin-bottom:14px;overflow:hidden;">
-          <svg width="100%" height="200" viewBox="0 0 320 200">
-            <!-- Streets grid -->
-            <line x1="0" y1="60" x2="320" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
-            <line x1="0" y1="120" x2="320" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
-            <line x1="80" y1="0" x2="80" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
-            <line x1="200" y1="0" x2="200" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
-            <!-- Route path -->
-            <path d="M 40,160 Q 40,120 80,120 Q 140,120 140,60 Q 140,30 200,30" stroke="#F39C12" stroke-width="4" fill="none" stroke-dasharray="8,4" stroke-linecap="round"/>
-            <!-- Delivery moto -->
-            <circle cx="100" cy="120" r="12" fill="#F39C12" stroke="#fff" stroke-width="2"/>
-            <text x="100" y="125" text-anchor="middle" font-size="11">🛵</text>
-            <!-- Destination pin -->
-            <ellipse cx="200" cy="32" rx="6" ry="3" fill="rgba(231,76,60,0.3)"/>
-            <path d="M 200,14 Q 210,14 210,24 Q 210,34 200,40 Q 190,34 190,24 Q 190,14 200,14" fill="#E74C3C"/>
-            <circle cx="200" cy="24" r="4" fill="#fff"/>
-          </svg>
-          <div style="position:absolute;bottom:12px;left:12px;background:rgba(26,35,50,0.88);border-radius:12px;padding:8px 14px;">
-            <div style="font-size:11px;font-weight:700;color:#F39C12;">🛵 Livreur en route</div>
-            <div style="font-size:10px;color:rgba(255,255,255,0.8);margin-top:2px;">~2.4 km · Arrivée estimée 17:30</div>
-          </div>
-          <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.9);border-radius:10px;padding:5px 10px;font-size:11px;font-weight:700;color:#1A2332;">📍 Adresse : Cocody Riviera 3</div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
-          <div style="background:#F4F9FC;border-radius:12px;padding:10px;text-align:center;">
-            <div style="font-size:18px;">📏</div>
-            <div style="font-size:12px;font-weight:700;color:#1A2332;margin-top:4px;">2.4 km</div>
-            <div style="font-size:10px;color:#6B7A8D;">Distance</div>
-          </div>
-          <div style="background:#F4F9FC;border-radius:12px;padding:10px;text-align:center;">
-            <div style="font-size:18px;">⏱</div>
-            <div style="font-size:12px;font-weight:700;color:#1A2332;margin-top:4px;">~8 min</div>
-            <div style="font-size:10px;color:#6B7A8D;">ETA</div>
-          </div>
-          <div style="background:#F4F9FC;border-radius:12px;padding:10px;text-align:center;">
-            <div style="font-size:18px;">🛵</div>
-            <div style="font-size:12px;font-weight:700;color:#1A2332;margin-top:4px;">DHL Pharma</div>
-            <div style="font-size:10px;color:#6B7A8D;">Livreur</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;">
-          <button onclick="closeModal();showToast('🗺 Waze ouvert')" style="flex:1;padding:12px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Waze</button>
-          <button onclick="closeModal();showToast('🗺 Google Maps ouvert')" style="flex:1;padding:12px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Google Maps</button>
-          <button onclick="closeModal()" style="flex:1;padding:12px;background:#F4F9FC;color:#6B7A8D;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Fermer</button>
-        </div>
-      </div>`,
-      'cancel-order-modal': `<div style="padding:8px 0 16px;">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;margin-bottom:4px;">⚠️ Annuler la commande</div>
-        <div style="font-size:13px;color:#6B7A8D;margin-bottom:16px;">Veuillez sélectionner un motif d'annulation :</div>
-        <div id="cancel-reasons" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
-          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Erreur de médicament commandé" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
-            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
-            <span style="font-size:13px;font-weight:600;color:#1A2332;">💊 Erreur de médicament commandé</span>
-          </div>
-          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Traitement modifié par le médecin" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
-            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
-            <span style="font-size:13px;font-weight:600;color:#1A2332;">🩺 Traitement modifié par le médecin</span>
-          </div>
-          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Médicament trouvé en pharmacie" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
-            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
-            <span style="font-size:13px;font-weight:600;color:#1A2332;">🏪 Médicament trouvé en pharmacie</span>
-          </div>
-          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Prix trop élevé" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
-            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
-            <span style="font-size:13px;font-weight:600;color:#1A2332;">💰 Prix trop élevé</span>
-          </div>
-          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Autre" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
-            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
-            <span style="font-size:13px;font-weight:600;color:#1A2332;">✏️ Autre raison</span>
-          </div>
-        </div>
-        <textarea id="cancel-other-text" placeholder="Précisez votre motif (optionnel)..." style="width:100%;padding:12px 14px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:#1A2332;resize:none;height:64px;margin-bottom:14px;"></textarea>
-        <div style="display:flex;gap:8px;">
-          <button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:#6B7A8D;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Retour</button>
-          <button onclick="submitCancelOrder()" style="flex:2;padding:13px;background:#E74C3C;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Confirmer l'annulation</button>
-        </div>
-      </div>`,
-      'filter-catalog-modal': `<div style="padding:8px 0 16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#1A2332;">🔍 Filtres avancés</div>
-          <button onclick="resetFilters()" style="background:none;border:none;color:#1A6B8A;font-size:12px;font-weight:700;cursor:pointer;">Réinitialiser</button>
-        </div>
-        
-        <div class="filter-section">
-          <label class="filter-label">🌍 Pays</label>
-          <div class="filter-grid" id="country-filters">
-            <div class="filter-chip active" onclick="updateFilterCities('ci', this)">Côte d'Ivoire</div>
-            <div class="filter-chip" onclick="updateFilterCities('benin', this)">Bénin</div>
-            <div class="filter-chip" onclick="updateFilterCities('senegal', this)">Sénégal</div>
-          </div>
-        </div>
-
-        <div class="filter-section">
-          <label class="filter-label">📍 Ville</label>
-          <div class="filter-grid" id="city-filters">
-            <div class="filter-chip active" onclick="this.classList.toggle('active')">Abidjan</div>
-            <div class="filter-chip" onclick="this.classList.toggle('active')">Yamoussoukro</div>
-          </div>
-        </div>
-
-        <div class="filter-section">
-          <label class="filter-label">🏪 Pharmacie</label>
-          <select id="pharma-filter" style="width:100%;padding:12px;background:var(--bg);border:1.5px solid var(--border);border-radius:12px;font-size:13px;">
-            <option value="all">Toutes les pharmacies</option>
-            <option value="plateau">Pharmacie du Plateau</option>
-            <option value="centrale">Pharmacie Centrale</option>
-            <option value="express">Pharma Express</option>
-          </select>
-        </div>
-
-        <div class="filter-section">
-          <label class="filter-label">⚖️ Trier par</label>
-          <div class="filter-grid">
-            <div class="filter-chip active" onclick="setSort('popular', this)">Populaires</div>
-            <div class="filter-chip" onclick="setSort('price_asc', this)">Prix croissant</div>
-          </div>
-        </div>
-
-        <button onclick="applyCatalogFilters()" style="width:100%;padding:16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.25);">Appliquer les filtres</button>
-      </div>`,
-    };
-
-    sheet.innerHTML += (modals[type] || `<div style="padding:20px;text-align:center;color:var(--text-muted);">Action: ${type}</div>`);
-    overlay.appendChild(sheet);
-    const frame = document.getElementById('mobileFrame') || document.body;
-    frame.style.position = 'relative';
-    frame.appendChild(overlay);
-    requestAnimationFrame(() => { requestAnimationFrame(() => { overlay.classList.add('open'); }); });
-  }
-
-  function closeModal() {
-    const overlay = document.querySelector('.modal-overlay');
-    if (overlay) { overlay.classList.remove('open'); setTimeout(() => overlay.remove(), 400); }
-  }
-
-  function selectCancelReason(el) {
-    document.querySelectorAll('.cancel-reason-opt').forEach(opt => {
-      opt.style.borderColor = 'transparent';
-      opt.style.background = '#F4F9FC';
-      opt.querySelector('.radio-dot').style.background = '';
-      opt.querySelector('.radio-dot').style.borderColor = '#CBD5E0';
-    });
-    el.style.borderColor = '#E74C3C';
-    el.style.background = '#FEF0EE';
-    el.querySelector('.radio-dot').style.background = '#E74C3C';
-    el.querySelector('.radio-dot').style.borderColor = '#E74C3C';
-    el.setAttribute('data-selected', 'true');
-  }
-
-  function submitCancelOrder() {
-    const selected = document.querySelector('.cancel-reason-opt[data-selected="true"]');
-    if (!selected) {
-      showToast('⚠️ Veuillez sélectionner un motif');
-      return;
-    }
-    const reason = selected.getAttribute('data-val');
-    const other  = document.getElementById('cancel-other-text')?.value?.trim();
-    const msg    = other ? `${reason} — ${other}` : reason;
-    closeModal();
-    showToast(`✅ Commande annulée · Motif : ${msg}`);
-  }
-
-  // Utility functions for buttons
-  function sendMessage() { showToast('✉️ Message envoyé'); }
-  function triggerDownload() { showToast('📥 Fichier téléchargé ✓'); }
-  function triggerSearch() { showToast('🔍 Résultats affichés'); }
-  function refreshData() { showToast('🔄 Données actualisées ✓'); }
-  function filterOrders(type) { showToast('🔽 Filtre: ' + type); }
-  function filterAlerts() { showToast('🔽 Alertes filtrées'); }
-  function zoomIn() { showToast('🔍 Zoom +'); }
-  function zoomOut() { showToast('🔍 Zoom -'); }
-  function rotatePDF() { showToast('↻ Rotation appliquée'); }
-
-  function togglePassword(btn) {
-    const inp = btn.closest('div').querySelector('input');
-    if (!inp) return;
-    inp.type = inp.type === 'password' ? 'text' : 'password';
-    btn.textContent = inp.type === 'password' ? '👁' : '🙈';
-  }
-
-  function toggleFullscreen() {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      document.documentElement.requestFullscreen().catch(() => showToast('Plein écran non disponible'));
-    }
-  }
-
-  function decrementStock(btn) {
-    const el = btn.closest('[data-stock]') || btn.parentElement;
-    let val = parseInt(el.querySelector('.stock-val')?.textContent || '10');
-    val = Math.max(0, val - 1);
-    if (el.querySelector('.stock-val')) el.querySelector('.stock-val').textContent = val;
-    showToast('📦 Stock: ' + val);
-  }
-
-  function incrementStock(btn) {
-    const el = btn.closest('[data-stock]') || btn.parentElement;
-    let val = parseInt(el.querySelector('.stock-val')?.textContent || '10');
-    val = val + 1;
-    if (el.querySelector('.stock-val')) el.querySelector('.stock-val').textContent = val;
-    showToast('📦 Stock: ' + val);
-  }
-
-  // ============================================================
-  //  DEVICE SWITCH
-  // ============================================================
-  function setDevice(device) {
-    currentDevice = device;
-    document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
-    const mobileFrame = document.getElementById('mobileFrame');
-    const webFrame = document.getElementById('webFrame');
-    if (device === 'mobile') {
-      mobileFrame.style.display = 'block';
-      webFrame.style.display = 'none';
-      goToScreen(currentScreen);
-    } else {
-      mobileFrame.style.display = 'none';
-      webFrame.style.display = 'block';
-      goToWebScreen(currentWebScreen || 1);
-    }
-  }
-
-  // ============================================================
-  //  SCREEN NAVIGATION WITH TRANSITION
-  // ============================================================
+  let currentDevice = 'mobile';
   let navigating = false;
-  function goToScreen(n) {
-    if (navigating) return;
-    const prev = document.getElementById('screen' + currentScreen);
-    currentScreen = n;
-
-    // Slide out previous
-    if (prev && prev.classList.contains('active')) {
-      navigating = true;
-      prev.classList.add('slide-out');
-      setTimeout(() => {
-        prev.classList.remove('active', 'slide-out');
-        const target = document.getElementById('screen' + n);
-        if (target) target.classList.add('active');
-        navigating = false;
-      }, 300);
-    } else {
-      document.querySelectorAll('[data-device="mobile"]').forEach(s => s.classList.remove('active', 'slide-out'));
-      const target = document.getElementById('screen' + n);
-      if (target) target.classList.add('active');
-    }
-
-    // Sync picker dot
-    syncPickerDot(n);
-
-    // Update URL bar if web mode
-    updateBrowserBar(n);
-  }
-
-  function goToWebScreen(n) {
-    currentWebScreen = n;
-    document.querySelectorAll('.web-screen').forEach(s => s.classList.remove('active'));
-    const target = document.getElementById('wscreen' + n);
-    if (target) {
-      setTimeout(() => target.classList.add('active'), 10);
-    } else if (n >= 51) {
-      // Écrans mobile-only : basculer automatiquement en mode mobile
-      const mobileFrame = document.getElementById('mobileFrame');
-      const webFrame = document.getElementById('webFrame');
-      if (mobileFrame && webFrame) {
-        mobileFrame.style.display = 'block';
-        webFrame.style.display = 'none';
-        document.querySelectorAll('.switch-btn').forEach((b,i) => b.classList.toggle('active', i===0));
-        currentDevice = 'mobile';
-        goToScreen(n);
-        showToast('📱 Cet écran est mobile uniquement');
-        return;
-      }
-    }
-    syncPickerDot(n);   // web dot
-    updateBrowserBar(n);
-  }
-
-  function updateBrowserBar(n) {
-    const urlEl = document.querySelector('.browser-url');
-    if (!urlEl) return;
-    const urls = {
-      1: 'ilera.africa', 2: 'ilera.africa/login', 3: 'ilera.africa/otp',
-      4: 'ilera.africa/profil', 5: 'ilera.africa/login-web', 6: 'ilera.africa/catalogue',
-      7: 'ilera.africa/accueil', 8: 'ilera.africa/messages', 9: 'ilera.africa/commandes',
-      10: 'ilera.africa/ordonnances', 11: 'ilera.africa/commandes/90214',
-      12: 'ilera.africa/paiement', 13: 'ilera.africa/messages/dr-lefebvre',
-      16: 'pro.ilera.africa/login', 17: 'pro.ilera.africa/dashboard',
-      18: 'pro.ilera.africa/ordonnances', 19: 'pro.ilera.africa/ordonnances/089',
-      20: 'pro.ilera.africa/qr-code', 24: 'admin.ilera.africa/login',
-      25: 'admin.ilera.africa/dashboard', 48: 'ilera.africa/confirmation',
-      51: 'livreur.ilera.africa/dashboard', 52: 'livreur.ilera.africa/commandes',
-      53: 'livreur.ilera.africa/livraison/90214', 58: 'livreur.ilera.africa/profil',
-      59: 'medecin.ilera.africa/login', 60: 'medecin.ilera.africa/otp',
-      61: 'medecin.ilera.africa/dashboard', 62: 'medecin.ilera.africa/ordonnances/nouvelle',
-      63: 'medecin.ilera.africa/ordonnances', 64: 'medecin.ilera.africa/patients',
-      65: 'medecin.ilera.africa/messages', 66: 'medecin.ilera.africa/pharmacies',
-      67: 'medecin.ilera.africa/statistiques', 68: 'medecin.ilera.africa/profil',
-      54: 'medecin.ilera.africa/login', 55: 'medecin.ilera.africa/dashboard',
-      56: 'medecin.ilera.africa/ordonnances', 57: 'medecin.ilera.africa/patients',
-      58: 'medecin.ilera.africa/pharmacies', 59: 'medecin.ilera.africa/messagerie',
-      60: 'medecin.ilera.africa/profil',
-    };
-    urlEl.textContent = '🔒 ' + (urls[n] || 'ilera.africa/ecran-' + n);
-  }
-
-  // ============================================================
-  //  FLOW NAVIGATOR WIDGET
-  // ============================================================
-  function buildFlowNav() {
-    // Toggle button
-    const toggle = document.createElement('button');
-    toggle.id = 'flow-toggle';
-    toggle.textContent = '🗺 Parcours';
-    toggle.onclick = () => {
-      const nav = document.getElementById('flow-nav');
-      if (!nav) return;
-      const visible = nav.classList.contains('visible');
-      nav.classList.toggle('visible', !visible);
-      toggle.style.display = visible ? 'block' : 'none';
-    };
-    document.body.appendChild(toggle);
-
-    const nav = document.createElement('div');
-    nav.id = 'flow-nav';
-    nav.innerHTML = `
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);letter-spacing:0.5px;margin-bottom:4px;">PARCOURS GUIDÉS</div>
-      <button class="flow-btn patient" onclick="startFlow('patient')">🧑‍🦱 Patient · 31 écrans</button>
-      <button class="flow-btn pharmacist" onclick="startFlow('pharmacist')">⚕️ Pharmacien · 13 écrans</button>
-      <button class="flow-btn admin" onclick="startFlow('admin')">🛡️ Admin · 13 écrans</button>
-      <div style="height:1px;background:rgba(255,255,255,0.1);margin:4px 0;"></div>
-      <button class="flow-btn" style="background:#E8F7EE;color:#0D3B2E;" onclick="startFlow('medecin')">🩺 Médecin · 10 écrans</button>
-      <button class="flow-btn" style="background:#FEF9EE;color:#F39C12;" onclick="startFlow('livreur')">🛵 Livreur · 8 écrans</button>
-      <button class="flow-btn" style="background:#E8F4F8;color:#1A6B8A;" onclick="goToScreen(72);closeFlowNav()">🤖 Chatbot IA</button>
-      <button class="flow-btn" style="background:#F0E8FF;color:#8B5CF6;" onclick="startFlow('technique')">🔬 Modules techniques · 4 écrans</button>
-      <button class="flow-btn demo-btn" onclick="toggleDemo()">▶ Mode Démo Auto</button>
-      <div style="font-size:10px;color:rgba(255,255,255,0.4);text-align:center;margin-top:4px;">Clic + ← → pour naviguer</div>
-      <button onclick="closeFlowNav()" style="margin-top:6px;padding:6px;background:rgba(255,255,255,0.05);border:none;border-radius:8px;color:rgba(255,255,255,0.4);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;">Fermer ✕</button>
-    `;
-    document.body.appendChild(nav);
-  }
-
-  function closeFlowNav() {
-    document.getElementById('flow-nav').classList.remove('visible');
-    document.getElementById('flow-toggle').style.display = 'block';
-  }
-
-  // ============================================================
-  //  GUIDED FLOWS
-  // ============================================================
   let flowSteps = [];
-  let flowIndex = 0;
-  let activeFlow = null;
-
-  function startFlow(type) {
-    stopDemo();
-    closeFlowNav();
-    activeFlow = type;
-
-    if (type === 'patient') {
-      flowSteps = patientFlow;
-      showToast('🧑‍🦱 Parcours Patient — utilisez → ou ← pour avancer');
-      if (currentDevice === 'web') {
-        // Switch to mobile for patient flow
-        document.querySelectorAll('.switch-btn')[0]?.click();
-      }
-    } else if (type === 'pharmacist') {
-      flowSteps = pharmacistFlow;
-      showToast('⚕️ Parcours Pharmacien démarré');
-      if (currentDevice === 'web') {
-        document.querySelectorAll('.switch-btn')[0]?.click();
-      }
-    } else if (type === 'medecin') {
-      flowSteps = medecinFlow;
-      showToast('🩺 Parcours Médecin démarré — Connexion → Dashboard → Ordonnances → Patients');
-      if (currentDevice === 'web') {
-        document.querySelectorAll('.switch-btn')[0]?.click();
-      }
-    } else if (type === 'livreur') {
-      flowSteps = livreurFlow;
-      showToast('🛵 Parcours Livreur démarré');
-      if (currentDevice === 'web') {
-        document.querySelectorAll('.switch-btn')[0]?.click();
-      }
-    } else if (type === 'admin') {
-      flowSteps = adminFlow;
-      showToast('🛡️ Parcours Admin démarré — 13 écrans');
-      if (currentDevice === 'web') {
-        document.querySelectorAll('.switch-btn')[0]?.click();
-      }
-    } else if (type === 'technique') {
-      flowSteps = [71, 72, 73, 74];
-      showToast('🔬 Modules Techniques — FIG.2/3/4');
-      if (currentDevice === 'web') {
-        document.querySelectorAll('.switch-btn')[0]?.click();
-      }
-    }
-
-    flowIndex = 0;
-    goToScreen(flowSteps[0]);
-    buildFlowProgress();
-  }
-
-  function buildFlowProgress() {
-    let bar = document.getElementById('flow-progress-bar');
-    if (!bar) {
-      bar = document.createElement('div');
-      bar.id = 'flow-progress-bar';
-      bar.style.cssText = 'position:fixed;bottom:72px;left:50%;transform:translateX(-50%);background:rgba(15,63,84,0.9);border-radius:12px;padding:8px 16px;z-index:9998;display:flex;align-items:center;gap:8px;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.1);font-family:DM Sans,sans-serif;font-size:12px;';
-      document.body.appendChild(bar);
-    }
-    const colors = {patient:'#1A6B8A', pharmacist:'#27AE60', admin:'#E74C3C', medecin:'#0D3B2E', livreur:'#F39C12'};
-    const labels = {patient:'Patient', pharmacist:'Pharmacien', admin:'Admin', livreur:'Livreur', medecin:'Médecin'};
-    const c = colors[activeFlow] || '#1A6B8A';
-    bar.innerHTML = `
-      <button onclick="flowPrev()" style="background:rgba(255,255,255,0.1);border:none;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:14px;">←</button>
-      <span style="color:rgba(255,255,255,0.7);">${labels[activeFlow]} · Étape <span id="flow-step-num" style="color:#fff;font-weight:700;">${flowIndex+1}</span>/${flowSteps.length}</span>
-      <button onclick="flowNext()" style="background:${c};border:none;color:#fff;border-radius:6px;padding:4px 10px;cursor:pointer;font-size:14px;font-weight:700;">→</button>
-      <button onclick="endFlow()" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.5);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:11px;">✕</button>
-    `;
-  }
-
-  function flowNext() {
-    if (!activeFlow || flowIndex >= flowSteps.length - 1) {
-      showToast('✅ Fin du parcours ' + (activeFlow === 'patient' ? 'Patient' : activeFlow === 'pharmacist' ? 'Pharmacien' : 'Admin'));
-      endFlow();
-      return;
-    }
-    flowIndex++;
-    goToScreen(flowSteps[flowIndex]);
-    document.getElementById('flow-step-num').textContent = flowIndex + 1;
-  }
-
-  function flowPrev() {
-    if (!activeFlow || flowIndex <= 0) return;
-    flowIndex--;
-    goToScreen(flowSteps[flowIndex]);
-    document.getElementById('flow-step-num').textContent = flowIndex + 1;
-  }
-
-  function endFlow() {
-    activeFlow = null;
-    const bar = document.getElementById('flow-progress-bar');
-    if (bar) bar.remove();
-  }
+  let currentStep = 0;
 
   // ============================================================
-  //  DEMO MODE — automatic slideshow
+  //  UI CORE FUNCTIONS (RESTORED)
   // ============================================================
-  function buildDemoBadge() {
-    const badge = document.createElement('div');
-    badge.id = 'demo-badge';
-    badge.innerHTML = '<div class="demo-dot"></div><span id="demo-label">DÉMO EN COURS</span>';
-    badge.onclick = toggleDemo;
-    document.body.appendChild(badge);
-
-    const bar = document.createElement('div');
-    bar.id = 'demo-progress';
-    document.body.appendChild(bar);
-  }
-
-  function toggleDemo() {
-    if (demoMode) { stopDemo(); } else { startDemo(); }
-    const nav = document.getElementById('flow-nav');
-    if (nav) nav.classList.remove('visible');
-    const toggle = document.getElementById('flow-toggle');
-    if (toggle) toggle.style.display = 'block';
-  }
-
-  function startDemo() {
-    endFlow();
-    demoMode = true;
-    demoIdx = 0;
-    document.getElementById('demo-badge').classList.add('visible');
-    document.getElementById('demo-progress').classList.add('active');
-    showToast('▶ Mode démo démarré — clic sur le badge pour arrêter');
-
-    const seq = currentDevice === 'web' ? demoSequenceWeb : demoSequenceMobile;
-    runDemoStep(seq);
-  }
-
-  function runDemoStep(seq) {
-    if (!demoMode) return;
-    if (demoIdx >= seq.length) { demoIdx = 0; }
-
-    const n = seq[demoIdx];
-    const progress = ((demoIdx + 1) / seq.length) * 100;
-    document.getElementById('demo-progress').style.width = progress + '%';
-
-    if (currentDevice === 'web') {
-      goToWebScreen(n);
-    } else {
-      goToScreen(n);
-    }
-
-    // Animate live data every few screens
-    if (demoIdx % 3 === 0) animateDemoData();
-
-    demoIdx++;
-    demoInterval = setTimeout(() => runDemoStep(seq), 2800);
-  }
-
-  function stopDemo() {
-    demoMode = false;
-    clearTimeout(demoInterval);
-    const badge = document.getElementById('demo-badge');
-    if (badge) badge.classList.remove('visible');
-    const bar = document.getElementById('demo-progress');
-    if (bar) { bar.classList.remove('active'); bar.style.width = '0%'; }
-    showToast('⏹ Mode démo arrêté');
-  }
-
-  // ============================================================
-  //  LIVE DEMO DATA — dynamic KPI updates
-  // ============================================================
-  const demoData = {
-    pendingOrders: 12,
-    validatedToday: 45,
-    activeUsers: 2847,
-    dailyOrders: 156,
-    revenue: 4200000
+  window.showToast = function(msg) {
+    const t = document.getElementById('toast');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 3000);
   };
 
-  function animateDemoData() {
-    // Randomly fluctuate numbers
-    demoData.pendingOrders = Math.max(8, demoData.pendingOrders + Math.floor(Math.random() * 5 - 2));
-    demoData.validatedToday = demoData.validatedToday + Math.floor(Math.random() * 3);
-    demoData.activeUsers = demoData.activeUsers + Math.floor(Math.random() * 10 - 3);
-    demoData.dailyOrders = demoData.dailyOrders + Math.floor(Math.random() * 4);
-
-    // Update visible KPI elements
-    updateLiveKPI('kpi-pending', demoData.pendingOrders);
-    updateLiveKPI('kpi-validated', demoData.validatedToday);
-    updateLiveKPI('kpi-users', demoData.activeUsers.toLocaleString('fr-FR'));
-    updateLiveKPI('kpi-orders', demoData.dailyOrders);
-
-    // Update time display
-    const now = new Date();
-    document.querySelectorAll('.live-time').forEach(el => {
-      el.textContent = now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-    });
-  }
-
-  function updateLiveKPI(id, value) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.add('updating');
-    el.textContent = value;
-    setTimeout(() => el.classList.remove('updating'), 500);
-  }
-
-  // Inject live IDs into dashboard KPIs on load
-  function injectKPIIds() {
-    // Pharmacist dashboard KPIs (screen17 and wscreen13)
-    const s17 = document.getElementById('screen17');
-    if (s17) {
-      const nums = s17.querySelectorAll('.kpi-num, [style*="font-size:28px"]');
-      if (nums[0]) nums[0].id = 'kpi-pending';
-      if (nums[1]) nums[1].id = 'kpi-validated';
-    }
-    // Admin dashboard KPIs (wscreen20)
-    const s20 = document.getElementById('wscreen20');
-    if (s20) {
-      const nums = s20.querySelectorAll('[style*="font-size:28px"]');
-      if (nums[0]) nums[0].id = 'kpi-users';
-      if (nums[1]) nums[1].id = 'kpi-orders';
-    }
-  }
-
-  // ============================================================
-  //  OTP INPUT HANDLERS
-  // ============================================================
-  function otpNext(el) {
-    el.value = el.value.replace(/[^0-9]/g, '');
-    if (el.value.length === 1) {
-      const next = el.nextElementSibling;
-      if (next && next.classList.contains('otp-input')) next.focus();
-    }
-  }
-
-  function webOtpNext(el) {
-    el.value = el.value.replace(/[^0-9]/g, '');
-    if (el.value.length === 1) {
-      const next = el.nextElementSibling;
-      if (next && next.classList.contains('web-otp-box')) next.focus();
-    }
-  }
-
-  function otpBack(e, el) {
-    if (e.key === 'Backspace' && !el.value) {
-      const prev = el.previousElementSibling;
-      if (prev) { prev.value = ''; prev.focus(); }
-    }
-  }
-
-  // ============================================================
-  //  LOGIN HANDLERS (wired to correct flows)
-  // ============================================================
-  function handleLogin() {
-    showToast('✅ Connexion réussie ! Bienvenue Moussa');
-    setTimeout(() => goToScreen(10), 1200);
-  }
-
-  function handleRegister() {
-    showToast('🎉 Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
-    setTimeout(() => goToScreen(10), 1500);
-  }
-
-  function handleRegisterWeb() {
-    showToast('🎉 Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
-    setTimeout(() => goToWebScreen(10), 1500);
-  }
-
-  // ============================================================
-  //  ORDER DETAIL — dynamic screen update based on status
-  // ============================================================
-  function showOrderDetail(orderId, date, pharmacy, amount, status, items) {
-    // Update header
-    document.getElementById('od-orderId').textContent = '#' + orderId;
-    document.getElementById('od-date').textContent = date + ' · ' + pharmacy;
-
-    const badge = document.getElementById('od-badge');
-    const stepper = document.getElementById('od-stepper');
-    const actions = document.getElementById('od-actions');
-    const header = document.getElementById('od-header');
-
-    // Default items if none provided
-    const displayItems = items || [
-      { name: 'Amoxicilline 500mg', qty: '2 boîtes', price: '4 200 FCFA' },
-      { name: 'Paracétamol 1g', qty: '3 boîtes', price: '3 600 FCFA' }
-    ];
-
-    // Populate meds list
-    let medsHTML = '';
-    displayItems.forEach((item, idx) => {
-      medsHTML += `
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div><div style="font-size:14px;font-weight:600;color:#1A2332;">${item.name}</div><div style="font-size:12px;color:#6B7A8D;">Qté: ${item.qty}</div></div>
-          <div style="font-size:13px;font-weight:700;color:#1A2332;">${item.price}</div>
-        </div>`;
-      if(idx < displayItems.length - 1) medsHTML += '<div style="height:1px;background:#F4F9FC;"></div>';
-    });
-    document.getElementById('od-meds-list').innerHTML = medsHTML;
-    document.getElementById('od-total').textContent = amount;
-
-    // Config per status
-    const cfg = {
-      ongoing: {
-        badge: '🚚 En livraison', badgeBg: 'rgba(255,255,255,0.15)', headerBg: '#1A6B8A',
-        stepperHTML: stepperHTML(3),
-        actionsHTML: `
-          <button onclick="showToast('✅ Réception confirmée !')" style="padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Valider la réception</button>
-          <button onclick="showModal('call-modal')" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;">Contacter le livreur</button>`
-      },
-      delivered: {
-        badge: '✓ Livrée', badgeBg: 'rgba(39,174,96,0.25)', headerBg: '#27AE60',
-        stepperHTML: stepperHTML(4),
-        actionsHTML: `
-          <button onclick="downloadInvoice()" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;"><span>📄</span> Télécharger la facture</button>
-          <button onclick="reorderOrder('${orderId}', '${amount}')" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;"><span>🔁</span> Commander à nouveau</button>`
-      },
-      validation: {
-        badge: '⏳ En validation', badgeBg: 'rgba(243,156,18,0.25)', headerBg: '#F39C12',
-        stepperHTML: stepperHTML(1),
-        actionsHTML: `
-          <button onclick="showModal('cancel-order-modal')" style="padding:14px;background:transparent;color:#E74C3C;border:2px solid #E74C3C;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;"><span>⚠️</span> Annuler la commande</button>`
-      },
-      cancelled: {
-        badge: '✕ Annulée', badgeBg: 'rgba(231,76,60,0.25)', headerBg: '#E74C3C',
-        stepperHTML: stepperHTML(0),
-        actionsHTML: `
-          <button onclick="reorderOrder('${orderId}', '${amount}')" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Commander à nouveau</button>`
-      }
-    };
-
-    const c = cfg[status] || cfg.ongoing;
-    header.style.background = c.headerBg;
-    badge.textContent = c.badge;
-    badge.style.background = c.badgeBg;
-    stepper.innerHTML = c.stepperHTML;
-    actions.innerHTML = c.actionsHTML;
-
-    goToScreen(14);
-  }
-
-  // ============================================================
-  //  PRESCRIPTION DETAIL — dynamic patient read-only view
-  // ============================================================
-  function showPrescriptionDetail(id, date, doctor, meds, status, orderId) {
-    const cfg = {
-      pending:   { label: '⏳ En attente',  bg: '#FFF3CD', border: '#F39C12', color: '#F39C12',
-                   headerBg: 'linear-gradient(135deg,#1A2332,#0F3F54)',
-                   steps: [
-                     { label:'Envoyée',              date: date+', 09:30', done:true  },
-                     { label:'En cours de validation',date: date+', 10:15', done:true  },
-                     { label:'Validation médecin',   date:'En attente...',  active:true },
-                     { label:'Préparation commande', date:'',               done:false  },
-                     { label:'Livrée',               date:'',               done:false  },
-                   ],
-                   note: 'Une note sera ajoutée par le médecin après vérification de votre ordonnance.',
-                   noteStyle: 'italic',
-                   cta: `<button onclick="goToScreen(16)" style="width:100%;padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">💬 Contacter le médecin</button>` },
-      validated: { label: '✓ Validée',      bg: '#E8F7EE', border: '#27AE60', color: '#27AE60',
-                   headerBg: 'linear-gradient(135deg,#0D3B2E,#27AE60)',
-                   steps: [
-                     { label:'Envoyée',              date: date+', 09:30', done:true  },
-                     { label:'En cours de validation',date: date+', 10:15', done:true  },
-                     { label:'Validée — médecin',    date: date+', 11:00', done:true  },
-                     { label:'Commande préparée',    date: date+', 14:00', done:true  },
-                     { label:'Livrée',               date: date+', 17:45', done:true  },
-                   ],
-                   note: '✅ Ordonnance validée par '+doctor+'. Votre commande a bien été préparée et livrée.',
-                   noteStyle: 'normal',
-                   cta: orderId
-                     ? `<button onclick="showOrderDetail('${orderId}','${date}','Pharmacie associée','—','delivered')" style="width:100%;padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📦 Voir la commande associée</button>`
-                     : `<button onclick="goToScreen(13)" style="width:100%;padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📦 Voir mes commandes</button>` },
-      rejected:  { label: '✕ Rejetée',      bg: '#FEF0EE', border: '#E74C3C', color: '#E74C3C',
-                   headerBg: 'linear-gradient(135deg,#7b1a1a,#E74C3C)',
-                   steps: [
-                     { label:'Envoyée',              date: date+', 09:30', done:true  },
-                     { label:'En cours de validation',date: date+', 10:15', done:true  },
-                     { label:'Rejetée — médecin',    date: date+', 11:30', rejected:true },
-                     { label:'Préparation commande', date:'',               done:false  },
-                     { label:'Livrée',               date:'',               done:false  },
-                   ],
-                   note: '❌ Ordonnance rejetée par '+doctor+'. Motif : médicament non conforme à la prescription. Veuillez contacter votre médecin pour une nouvelle ordonnance.',
-                   noteStyle: 'normal',
-                   cta: `<button onclick="goToScreen(16)" style="width:100%;padding:14px;background:linear-gradient(135deg,#E74C3C,#e74c3c);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">⚠️ Contacter le médecin</button>` },
-    };
-    const c = cfg[status] || cfg.pending;
-    const filename = 'ordonnance_' + doctor.replace('Dr. ','').replace(/[^a-zA-Z0-9]/g,'_') + '.pdf';
-
-    // — Header
-    document.getElementById('pdetail-header').innerHTML = `
-      <div style="background:${c.headerBg};padding:52px 20px 16px;flex-shrink:0;">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;">
-          <button onclick="goToScreen(35)" style="width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;flex-shrink:0;">←</button>
-          <div style="flex:1;">
-            <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#fff;">Ordonnance #${id}</div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:2px;">${date} · ${doctor}</div>
-          </div>
-          <div style="background:${c.bg};border:1.5px solid ${c.border};border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;color:${c.color};white-space:nowrap;">${c.label}</div>
-        </div>
-      </div>`;
-
-    // — Build timeline steps
-    let stepsHTML = c.steps.map((s, i) => {
-      const isLast = i === c.steps.length - 1;
-      let dotBg, dotIcon;
-      if (s.rejected) { dotBg = '#E74C3C'; dotIcon = '✕'; }
-      else if (s.done)   { dotBg = '#27AE60'; dotIcon = '✓'; }
-      else if (s.active) { dotBg = '#F39C12'; dotIcon = '⟳'; }
-      else               { dotBg = '#E2ECF2'; dotIcon = '○'; }
-      const labelColor = s.rejected ? '#E74C3C' : s.active ? '#F39C12' : s.done ? '#1A2332' : '#6B7A8D';
-      const labelW     = s.rejected || s.active ? '700' : s.done ? '600' : '400';
-      return `<div style="display:flex;gap:12px;align-items:flex-start;">
-        <div style="display:flex;flex-direction:column;align-items:center;width:28px;flex-shrink:0;">
-          <div style="width:28px;height:28px;background:${dotBg};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;">${dotIcon}</div>
-          ${!isLast ? '<div style="width:2px;flex:1;background:#E2ECF2;margin:4px 0;min-height:24px;"></div>' : ''}
-        </div>
-        <div style="padding-bottom:${!isLast ? '14' : '0'}px;">
-          <div style="font-size:13px;font-weight:${labelW};color:${labelColor};">${s.label}</div>
-          ${s.date ? `<div style="font-size:11px;color:#6B7A8D;">${s.date}</div>` : ''}
-        </div>
-      </div>`;
-    }).join('');
-
-    // — Body
-    document.getElementById('pdetail-body').innerHTML = `
-      <!-- Prescription file -->
-      <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:10px;">📋 Ordonnance envoyée</div>
-        <div onclick="showPrescriptionZoom()" style="height:100px;background:linear-gradient(135deg,#F0F8FF,#E0EEFC);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;position:relative;">
-          <div style="font-size:30px;">📄</div>
-          <div>
-            <div style="font-size:13px;font-weight:600;color:#1A2332;">${filename}</div>
-            <div style="font-size:11px;color:#6B7A8D;font-weight:500;">Prescription : ${meds}</div>
-            <div style="font-size:11px;color:#1A6B8A;font-weight:600;margin-top:2px;">🔍 Appuyer pour agrandir</div>
-          </div>
-          <div style="position:absolute;top:8px;right:10px;background:#1A6B8A;border-radius:8px;padding:3px 8px;font-size:10px;color:#fff;font-weight:700;">⛶ ZOOM</div>
-        </div>
-      </div>
-      <!-- Timeline -->
-      <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">🕐 Suivi de traitement</div>
-        <div style="display:flex;flex-direction:column;">${stepsHTML}</div>
-      </div>
-      <!-- Doctor note -->
-      <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:10px;">📝 Note du médecin</div>
-        <div style="background:#F4F9FC;border-radius:10px;padding:12px;font-size:13px;color:#6B7A8D;font-style:${c.noteStyle};line-height:1.6;">${c.note}</div>
-      </div>
-      <!-- CTA -->
-      ${c.cta}`;
-
-    goToScreen(12);
-  }
-
-  // ============================================================
-  //  PRESCRIPTION ZOOM MODAL — dynamically built from window._currentPrescr
-  // ============================================================
-  function showPrescriptionZoom() {
-    const p = window._currentPrescr || {};
-    const fname = p.doctor ? 'ordonnance_' + p.doctor.replace('Dr. ','').replace(/\s+/g,'_') + '.pdf' : 'ordonnance.pdf';
-    const existing = document.querySelector('.modal-overlay');
-    if (existing) existing.remove();
-    const overlay = document.createElement('div');
-    overlay.className = 'modal-overlay';
-    overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
-    const sheet = document.createElement('div');
-    sheet.className = 'modal-sheet';
-    const handle = document.createElement('div');
-    handle.className = 'modal-handle';
-    sheet.appendChild(handle);
-    sheet.innerHTML += `
-      <div style="padding:8px 0 16px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;">🔍 Ordonnance</div>
-          <div style="font-size:11px;color:#6B7A8D;font-weight:600;">Document sécurisé · Anti-fraude</div>
-        </div>
-        <div style="background:linear-gradient(145deg,#EEF6FF,#DCECfB);border-radius:16px;padding:20px;margin-bottom:14px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
-          <div style="font-size:56px;">📄</div>
-          <div style="text-align:center;">
-            <div style="font-size:14px;font-weight:700;color:#1A2332;">${fname}</div>
-            <div style="font-size:12px;color:#6B7A8D;margin-top:4px;">${p.meds || ''}</div>
-          </div>
-          <div style="background:rgba(26,107,138,0.1);border-radius:10px;padding:10px 16px;text-align:center;width:100%;">
-            <div style="font-size:11px;color:#1A6B8A;font-weight:700;">🔒 Signature numérique validée</div>
-            <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Réf : ${p.id || '—'} · ${p.date || '—'}</div>
-          </div>
-        </div>
-        <div style="display:flex;gap:8px;">
-          <button onclick="downloadPrescription()" style="flex:1;padding:12px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">📥 Télécharger</button>
-          <button onclick="closeModal()" style="flex:1;padding:12px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Fermer</button>
-        </div>
-      </div>`;
-    overlay.appendChild(sheet);
-    const frame = document.getElementById('mobileFrame') || document.body;
-    frame.style.position = 'relative';
-    frame.appendChild(overlay);
-    requestAnimationFrame(() => { requestAnimationFrame(() => { overlay.classList.add('open'); }); });
-  }
-
-  // ============================================================
-    function reorderOrder(orderId, amount) {
-    showToast('🔁 Préparation de votre nouvelle commande...');
-    setTimeout(() => {
-      // Direct to payment for re-order
-      showToast('✅ Articles ajoutés au panier. Redirection au paiement...');
-      setTimeout(() => {
-        goToScreen(15);
-      }, 1000);
-    }, 1000);
-  }
-
-  // ============================================================
-  //  DOWNLOAD PRESCRIPTION — generates a real HTML prescription file
-  // ============================================================
-  function downloadPrescription() {
-    closeModal();
-    const p = window._currentPrescr || {};
-    const fname = p.doctor ? 'ordonnance_' + p.doctor.replace('Dr. ','').replace(/\s+/g,'_') : 'ordonnance';
-    const now = new Date().toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
-
-    const statusMap = {
-      pending:   { label: 'En attente de validation', color: '#F39C12' },
-      validated: { label: 'Validée ✓',                color: '#27AE60' },
-      rejected:  { label: 'Rejetée ✕',                color: '#E74C3C' },
-    };
-    const st = statusMap[p.status] || statusMap.pending;
-
-    const html = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Ordonnance ${p.id || ''}</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: Arial, sans-serif; background: #f5f5f5; display:flex; justify-content:center; padding:30px 10px; }
-  .page { background:#fff; width:595px; min-height:842px; padding:48px; box-shadow:0 4px 24px rgba(0,0,0,0.12); border-radius:4px; }
-  .header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:32px; padding-bottom:20px; border-bottom:2px solid #1A6B8A; }
-  .logo-block .brand { font-size:22px; font-weight:800; color:#1A6B8A; }
-  .logo-block .tagline { font-size:10px; color:#6B7A8D; margin-top:2px; }
-  .ref-block { text-align:right; }
-  .ref-block .ref { font-size:12px; font-weight:700; color:#1A2332; }
-  .ref-block .date { font-size:11px; color:#6B7A8D; margin-top:3px; }
-  .status-badge { display:inline-block; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; color:${st.color}; border:1.5px solid ${st.color}; background:transparent; margin-top:6px; }
-  .section-title { font-size:13px; font-weight:700; color:#1A6B8A; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; margin-top:24px; }
-  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; background:#F4F9FC; border-radius:8px; padding:16px; }
-  .info-item label { font-size:10px; color:#6B7A8D; font-weight:600; text-transform:uppercase; }
-  .info-item p { font-size:13px; color:#1A2332; font-weight:600; margin-top:3px; }
-  .meds-table { width:100%; border-collapse:collapse; margin-top:8px; }
-  .meds-table th { background:#1A6B8A; color:#fff; padding:10px 12px; font-size:12px; text-align:left; }
-  .meds-table td { padding:10px 12px; font-size:12px; color:#1A2332; border-bottom:1px solid #E2ECF2; }
-  .meds-table tr:nth-child(even) td { background:#F9FCFD; }
-  .timeline { margin-top:8px; }
-  .tl-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; }
-  .tl-dot { width:20px; height:20px; border-radius:50%; background:#27AE60; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; flex-shrink:0; margin-top:2px; }
-  .tl-dot.active { background:#F39C12; }
-  .tl-dot.empty { background:#E2ECF2; }
-  .tl-dot.rejected { background:#E74C3C; }
-  .tl-text strong { font-size:12px; color:#1A2332; }
-  .tl-text span { font-size:10px; color:#6B7A8D; display:block; }
-  .footer { margin-top:40px; padding-top:16px; border-top:1px solid #E2ECF2; display:flex; justify-content:space-between; align-items:flex-end; }
-  .footer .legal { font-size:9px; color:#6B7A8D; line-height:1.6; max-width:340px; }
-  .footer .qr-placeholder { width:60px; height:60px; border:2px solid #E2ECF2; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; }
-  .security { background:#E8F7EE; border-left:3px solid #27AE60; padding:10px 14px; border-radius:4px; margin-top:16px; font-size:11px; color:#1A2332; }
-</style>
-</head>
-<body>
-<div class="page">
-  <div class="header">
-    <div class="logo-block">
-      <div class="brand">🌿 ILERA AFRICA</div>
-      <div class="tagline">Plateforme de santé numérique</div>
-    </div>
-    <div class="ref-block">
-      <div class="ref">Réf. ordonnance : #${p.id || 'ORD-XXXX'}</div>
-      <div class="date">Émise le : ${p.date || now}</div>
-      <div class="date">Imprimée le : ${now}</div>
-      <div class="status-badge">${st.label}</div>
-    </div>
-  </div>
-
-  <div class="section-title">Informations patient</div>
-  <div class="info-grid">
-    <div class="info-item"><label>Nom complet</label><p>Moussa Koné</p></div>
-    <div class="info-item"><label>Date de naissance</label><p>12 mars 1986 · 38 ans</p></div>
-    <div class="info-item"><label>Groupe sanguin</label><p>A+</p></div>
-    <div class="info-item"><label>N° dossier</label><p>PAT-2024-0042</p></div>
-  </div>
-
-  <div class="section-title">Médecin prescripteur</div>
-  <div class="info-grid">
-    <div class="info-item"><label>Médecin</label><p>${p.doctor || '—'}</p></div>
-    <div class="info-item"><label>Date prescription</label><p>${p.date || '—'}</p></div>
-  </div>
-
-  <div class="section-title">Médicaments prescrits</div>
-  <table class="meds-table">
-    <thead><tr><th>#</th><th>Médicament</th><th>Posologie</th><th>Durée</th></tr></thead>
-    <tbody>
-      ${(p.meds || 'Médicament').split(',').map((m, i) => `
-      <tr>
-        <td>${i+1}</td>
-        <td><strong>${m.trim()}</strong></td>
-        <td>1 comprimé × 3/jour</td>
-        <td>7 jours</td>
-      </tr>`).join('')}
-    </tbody>
-  </table>
-
-  <div class="section-title">Suivi de l'ordonnance</div>
-  <div class="timeline">
-    <div class="tl-item"><div class="tl-dot">✓</div><div class="tl-text"><strong>Ordonnance envoyée</strong><span>${p.date || ''}, 09:30</span></div></div>
-    <div class="tl-item"><div class="tl-dot">✓</div><div class="tl-text"><strong>Reçue — en cours de validation</strong><span>${p.date || ''}, 10:15</span></div></div>
-    <div class="tl-item"><div class="tl-dot ${p.status === 'validated' ? '' : p.status === 'rejected' ? 'rejected' : 'active'}">${p.status === 'validated' ? '✓' : p.status === 'rejected' ? '✕' : '⟳'}</div><div class="tl-text"><strong>Validation médecin</strong><span>${p.status === 'pending' ? 'En attente...' : p.date + ', 11:00'}</span></div></div>
-    <div class="tl-item"><div class="tl-dot ${p.status === 'validated' ? '' : 'empty'}">${p.status === 'validated' ? '✓' : '○'}</div><div class="tl-text"><strong>Commande préparée</strong></div></div>
-    <div class="tl-item"><div class="tl-dot ${p.status === 'validated' ? '' : 'empty'}">${p.status === 'validated' ? '✓' : '○'}</div><div class="tl-text"><strong>Livrée</strong></div></div>
-  </div>
-
-  <div class="security">🔒 Document authentifié · Signature numérique Ilera Africa · Ce document est protégé contre la falsification. Réf. sécurité : <strong>ILR-${Date.now().toString(36).toUpperCase()}</strong></div>
-
-  <div class="footer">
-    <div class="legal">
-      Ce document est une ordonnance numérique officielle émise via la plateforme Ilera Africa.
-      Toute falsification est passible de poursuites judiciaires conformément à la loi.
-      Pour toute vérification : support@ilerafrica.ci · +225 27 22 XX XX XX
-    </div>
-    <div class="qr-placeholder">🔲</div>
-  </div>
-</div>
-</body></html>`;
-
-    const blob = new Blob([html], { type: 'text/html' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href = url;
-    a.download = fname + '.html';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 2000);
-    showToast('📥 Ordonnance téléchargée avec succès !');
-  }
-
-  // ============================================================
-  //  DOWNLOAD INVOICE — generates a real HTML invoice file
-  // ============================================================
-  function downloadInvoice() {
-    const orderId  = document.getElementById('od-orderId')?.textContent || '#CMD-90201';
-    const dateEl   = document.getElementById('od-date')?.textContent || '10 oct. 2024 · PharmaCIV Abidjan';
-    const now      = new Date().toLocaleDateString('fr-FR', {day:'2-digit',month:'long',year:'numeric'});
-
-    const invoiceHTML = `<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Facture ${orderId} — ILERA AFRICA</title>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family: 'Arial', sans-serif; background:#F4F9FC; padding:40px; color:#1A2332; }
-    .invoice { background:#fff; max-width:640px; margin:0 auto; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); }
-    .header { background:linear-gradient(135deg,#1A6B8A,#2196B3); padding:32px 36px; color:#fff; }
-    .header h1 { font-size:28px; font-weight:800; letter-spacing:-0.5px; }
-    .header p  { font-size:13px; opacity:0.8; margin-top:4px; }
-    .badge     { display:inline-block; background:rgba(255,255,255,0.2); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:700; margin-top:12px; }
-    .body      { padding:32px 36px; }
-    .meta      { display:flex; justify-content:space-between; margin-bottom:28px; gap:24px; }
-    .meta-block label { font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#6B7A8D; display:block; margin-bottom:4px; }
-    .meta-block span  { font-size:14px; font-weight:700; color:#1A2332; }
-    .divider   { height:1px; background:#E2ECF2; margin:20px 0; }
-    table      { width:100%; border-collapse:collapse; }
-    th         { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#6B7A8D; padding:0 0 10px; }
-    th:last-child, td:last-child { text-align:right; }
-    td         { padding:10px 0; font-size:14px; color:#1A2332; border-bottom:1px solid #F4F9FC; }
-    .total-row td { border:none; font-weight:800; font-size:16px; color:#1A6B8A; padding-top:16px; }
-    .delivery-row td { color:#6B7A8D; font-size:13px; }
-    .footer    { background:#F4F9FC; padding:20px 36px; font-size:11px; color:#6B7A8D; text-align:center; line-height:1.6; }
-    .stamp     { display:inline-block; border:2px solid #27AE60; border-radius:8px; color:#27AE60; font-weight:700; font-size:13px; padding:6px 18px; margin-top:20px; letter-spacing:1px; }
-    @media print { body { background:#fff; padding:0; } }
-  </style>
-</head>
-<body>
-  <div class="invoice">
-    <div class="header">
-      <h1>ILERA AFRICA</h1>
-      <p>Pharmacie en ligne · Abidjan, Côte d'Ivoire</p>
-      <div class="badge">✓ FACTURE OFFICIELLE</div>
-    </div>
-    <div class="body">
-      <div class="meta">
-        <div class="meta-block"><label>Numéro de commande</label><span>${orderId}</span></div>
-        <div class="meta-block"><label>Date de commande</label><span>${dateEl}</span></div>
-        <div class="meta-block"><label>Date d'émission</label><span>${now}</span></div>
-        <div class="meta-block"><label>Client</label><span>Moussa Koné</span></div>
-      </div>
-      <div class="divider"></div>
-      <table>
-        <thead><tr><th>Médicament</th><th>Qté</th><th>Prix unitaire</th><th>Total</th></tr></thead>
-        <tbody>
-          <tr><td>Amoxicilline 500mg</td><td>×2</td><td>2 100 FCFA</td><td>4 200 FCFA</td></tr>
-          <tr><td>Paracétamol 1g</td><td>×3</td><td>1 200 FCFA</td><td>3 600 FCFA</td></tr>
-          <tr><td>Metformine 850mg</td><td>×1</td><td>2 800 FCFA</td><td>2 800 FCFA</td></tr>
-          <tr class="delivery-row"><td colspan="3">Frais de livraison</td><td>1 900 FCFA</td></tr>
-        </tbody>
-        <tfoot>
-          <tr class="total-row"><td colspan="3">TOTAL TTC</td><td>12 500 FCFA</td></tr>
-        </tfoot>
-      </table>
-      <div class="divider"></div>
-      <div style="text-align:center;">
-        <div class="stamp">PAYÉ ✓</div>
-        <p style="font-size:12px;color:#6B7A8D;margin-top:10px;">Paiement Mobile Money — MTN</p>
-      </div>
-    </div>
-    <div class="footer">
-      ILERA AFRICA SAS · RC CI-ABJ-2024-B · TVA CI-12345-X<br>
-      Cocody Riviera 3, Abidjan · contact@ilera-africa.ci · +225 07 00 00 00 00<br>
-      Ce document tient lieu de facture conformément à la réglementation ivoirienne.
-    </div>
-  </div>
-</body>
-</html>`;
-
-    const blob = new Blob([invoiceHTML], { type: 'text/html' });
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = `Facture_${orderId.replace('#','')}_ILERA.html`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-    showToast('📄 Facture téléchargée avec succès !');
-  }
-
-  // Build stepper HTML — activeStep: 0=none,1=validation,2=preparation,3=livraison,4=livré
-
-  function stepperHTML(activeStep) {
-    const steps = [
-      { label: 'Validation', icon: '✓' },
-      { label: 'Préparation', icon: '✓' },
-      { label: 'Livraison', icon: '🚚' },
-      { label: 'Livré', icon: '✓' }
-    ];
-    let html = '';
-    steps.forEach((s, i) => {
-      const done  = i < activeStep;
-      const active = i === activeStep - 1;
-      const inactive = !done && !active;
-      const circleBg = done ? '#27AE60' : active ? '#1A6B8A' : '#E8F4F8';
-      const circleBorder = inactive ? 'border:2px solid #E2ECF2;' : '';
-      const iconColor = done || active ? '#fff' : '#6B7A8D';
-      const labelColor = done ? '#27AE60' : active ? '#1A6B8A' : '#6B7A8D';
-      const lineBg = i < steps.length - 1 ? (done ? '#27AE60' : '#E2ECF2') : '';
-
-      html += `<div style="display:flex;flex-direction:column;align-items:center;gap:0;flex:1;">
-        <div style="width:28px;height:28px;background:${circleBg};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${i===2?'13':'12'}px;color:${iconColor};font-weight:700;flex-shrink:0;${circleBorder}">${done || active ? s.icon : '○'}</div>
-        <div style="width:2px;height:28px;background:${done ? '#27AE60' : '#E2ECF2'};"></div>
-        <div style="font-size:10px;font-weight:${done||active?'600':'500'};color:${labelColor};text-align:center;margin-top:4px;">${s.label}</div>
-      </div>`;
-      if (i < steps.length - 1) {
-        html += `<div style="height:2px;background:${lineBg};flex:1;margin-top:13px;"></div>`;
-      }
-    });
-    return html;
-  }
-
-
-
-  function handleWebLogin() {
-    showToast('✅ Connexion pharmacien réussie');
-    setTimeout(() => goToWebScreen(16), 1200);
-  }
-
-  // ============================================================
-  //  KEYBOARD NAVIGATION
-  // ============================================================
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-      if (activeFlow) { flowNext(); return; }
-      const next = currentDevice === 'web' ? currentWebScreen + 1 : currentScreen + 1;
-      if (next <= 50) {
-        currentDevice === 'web' ? goToWebScreen(next) : goToScreen(next);
-      }
-    }
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-      if (activeFlow) { flowPrev(); return; }
-      const prev = currentDevice === 'web' ? currentWebScreen - 1 : currentScreen - 1;
-      if (prev >= 1) {
-        currentDevice === 'web' ? goToWebScreen(prev) : goToScreen(prev);
-      }
-    }
-    if (e.key === 'Escape') { stopDemo(); endFlow(); }
-    if (e.key === 'd' || e.key === 'D') { toggleDemo(); }
-  });
-
-  // ============================================================
-  //  RIPPLE EFFECT on buttons
-  // ============================================================
-  function addRipple(e) {
-    const btn = e.currentTarget;
-    const ripple = document.createElement('span');
-    const rect = btn.getBoundingClientRect();
-    const size = Math.max(rect.width, rect.height);
-    ripple.className = 'ripple';
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-    ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
-    btn.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-  }
-
-  function applyRipples() {
-    document.querySelectorAll('button').forEach(btn => {
-      if (!btn.dataset.rippled) {
-        btn.classList.add('ripple-btn');
-        btn.addEventListener('click', addRipple);
-        btn.dataset.rippled = '1';
-      }
-    });
-  }
-
-  // ============================================================
-  //  LIVE CLOCK in demo mode
-  // ============================================================
-  function startLiveClock() {
-    setInterval(() => {
-      const now = new Date();
-      const t = now.toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'});
-      document.querySelectorAll('.live-time').forEach(el => el.textContent = t);
-    }, 30000);
-  }
-
-  // ============================================================
-  //  INIT
-  // ============================================================
-
-  // ── Chatbot functions ──
-  function chatbotReply(text) {
-    const input = document.getElementById('chatbot-input');
-    if (input) { input.value = text; chatbotSend(); }
-  }
-  function chatbotSend() {
-    var input = document.getElementById('chatbot-input');
-    if (!input || !input.value.trim()) return;
-    var msgs = document.getElementById('chatbot-messages');
-    if (!msgs) return;
-    var text = input.value;
-    var userMsg = document.createElement('div');
-    userMsg.style.cssText = 'display:flex;justify-content:flex-end;margin-bottom:4px;';
-    userMsg.innerHTML = '<div style="background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:16px 16px 4px 16px;padding:12px 14px;max-width:75%;font-size:13px;color:#fff;line-height:1.5;">' + text + '</div>';
-    msgs.appendChild(userMsg);
-    var q = text.toLowerCase();
-    input.value = '';
-    msgs.scrollTop = msgs.scrollHeight;
-    setTimeout(function() {
-      var reply, action = '';
-      if (q.indexOf('interaction') >= 0) {
-        reply = 'Les interactions peuvent etre dangereuses. Utilisez notre outil de verification.';
-        action = '<button onclick="goToScreen(24)" style="background:#E8F4F8;color:#1A6B8A;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;margin-top:8px;display:block;">Verifier les interactions</button>';
-      } else if (q.indexOf('pharmacie') >= 0 || q.indexOf('proche') >= 0) {
-        reply = 'Je localise les pharmacies les plus proches avec les stocks disponibles.';
-        action = '<button onclick="goToScreen(32)" style="background:#E8F4F8;color:#1A6B8A;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;margin-top:8px;display:block;">Voir les pharmacies</button>';
-      } else if (q.indexOf('amoxicilline') >= 0 || q.indexOf('posologie') >= 0) {
-        reply = 'Amoxicilline 500mg : 1 comprime toutes les 8h pendant 7 a 10 jours, pendant les repas. Ordonnance obligatoire.';
-      } else {
-        reply = 'Consultez votre pharmacien pour une reponse personnalisee a votre situation.';
-        action = '<button onclick="goToScreen(16)" style="background:#E8F4F8;color:#1A6B8A;border:none;border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;margin-top:8px;display:block;">Consulter un pharmacien</button>';
-      }
-      var botMsg = document.createElement('div');
-      botMsg.style.cssText = 'display:flex;gap:8px;align-items:flex-end;margin-bottom:4px;';
-      botMsg.innerHTML = '<div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">&#x1F916;</div><div style="background:#fff;border-radius:16px 16px 16px 4px;padding:12px 14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);max-width:75%;font-size:13px;color:#1A2332;line-height:1.6;">' + reply + action + '</div>';
-      msgs.appendChild(botMsg);
-      msgs.scrollTop = msgs.scrollHeight;
-    }, 700);
-  }
-
-
-  function toggleWebPwd() {
-    const inp = document.querySelector('.web-frame input[type="password"], .web-frame input[type="text"]');
-    if (!inp) return;
-    inp.type = inp.type === 'password' ? 'text' : 'password';
-  }
-
-
-  // ── Unified Drawer System ──
-  var _activeDrawer = null;
-  function openDrawer(profile) {
-    // Map profile to drawer id
-    var ids = { patient: 'sideMenuDrawer', pharmacien: 'drawer-pharmacien', admin: 'drawer-admin', livreur: 'drawer-livreur', medecin: 'drawer-medecin' };
-    var drawerId = ids[profile] || ids['patient'];
-    var overlay = document.getElementById('sideMenuOverlay');
-    var drawer  = document.getElementById(drawerId);
-    if (!overlay || !drawer) return;
-    // Close any open drawer first
-    if (_activeDrawer && _activeDrawer !== drawer) {
-      _activeDrawer.style.transform = 'translateX(-100%)';
-      _activeDrawer.style.display = 'none';
-    }
-    _activeDrawer = drawer;
-
-    // All drawers: position:absolute inside the mobile frame
-    overlay.style.position = 'absolute';
-    overlay.style.top = '0'; overlay.style.left = '0';
-    overlay.style.width = '100%'; overlay.style.height = '100%';
-    drawer.style.position = 'absolute';
-    drawer.style.top  = '0';
-    drawer.style.left = '0';
-    drawer.style.height = '100%';
-
-    overlay.style.display = 'block';
-    drawer.style.display  = 'block';
-    requestAnimationFrame(function() {
-      overlay.style.opacity = '1';
-      drawer.style.transform = 'translateX(0)';
-    });
-    document.addEventListener('keydown', _menuEscHandler);
-  }
-  function closeDrawer() {
-    var overlay = document.getElementById('sideMenuOverlay');
-    if (!overlay) return;
-    overlay.style.opacity = '0';
-    if (_activeDrawer) {
-      _activeDrawer.style.transform = 'translateX(-100%)';
-      var d = _activeDrawer;
-      setTimeout(function() {
-        overlay.style.display = 'none';
-        d.style.display = 'none';
-      }, 320);
-      _activeDrawer = null;
-    } else {
-      setTimeout(function() { overlay.style.display = 'none'; }, 320);
-    }
-    document.removeEventListener('keydown', _menuEscHandler);
-  }
-  function _menuEscHandler(e) {
-    if (e.key === 'Escape') closeDrawer();
-  }
-
-
-  // ── Map / Itinéraire Modal ──
-  function openMapModal() {
-    var overlay = document.getElementById('mapModalOverlay');
-    var modal   = document.getElementById('mapModal');
-    if (!overlay || !modal) return;
-    overlay.style.display = 'block';
-    modal.style.display   = 'block';
-    requestAnimationFrame(function() {
-      overlay.style.opacity = '1';
-      modal.style.transform = 'translateY(0)';
-    });
-  }
-  function closeMapModal() {
-    var overlay = document.getElementById('mapModalOverlay');
-    var modal   = document.getElementById('mapModal');
-    if (!overlay || !modal) return;
-    overlay.style.opacity = '0';
-    modal.style.transform = 'translateY(100%)';
-    setTimeout(function() {
-      overlay.style.display = 'none';
-      modal.style.display   = 'none';
-    }, 350);
-  }
-
-
-  // ── Conseils Santé — filtres ──
-  function filterArticles(cat, el) {
-    var parent = el.parentElement;
-    parent.querySelectorAll('div').forEach(function(btn) {
-      btn.style.background = 'rgba(255,255,255,0.15)';
-      btn.style.color = 'rgba(255,255,255,0.8)';
-    });
-    el.style.background = '#fff';
-    el.style.color = '#1A6B8A';
-    var cards = document.querySelectorAll('.article-card');
-    cards.forEach(function(card) {
-      card.style.display = (cat === 'tous' || card.dataset.cat === cat) ? 'flex' : 'none';
-    });
-  }
-
-  // ── Article modal ──
-  var _articles = {
-    paludisme: { emoji:"💊", cat:"Prévention", catColor:"#27AE60", catBg:"#E8F7EE", title:"Bien gérer son traitement antipaludéen", time:"5 min de lecture", body:"Le paludisme reste l'une des maladies les plus répandues en Afrique de l'Ouest. Un traitement bien suivi est essentiel.<br><br><strong>Les points clés :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Prenez vos médicaments à heure fixe chaque jour</li><li>Ne jamais interrompre le traitement même si vous vous sentez mieux</li><li>Conservez les médicaments à l'abri de la chaleur</li><li>Consultez votre pharmacien en cas d'effets secondaires</li></ul><br><div style='background:#E8F7EE;border-radius:12px;padding:12px;font-size:12px;color:#27AE60;font-weight:600;'>Astuce : activez les rappels de prise dans l'appli ILERA AFRICA</div>" },
-    diabete: { emoji:"🥗", cat:"Nutrition", catColor:"#F39C12", catBg:"#FFF3CD", title:"Alimentation et diabète : les bons réflexes", time:"7 min de lecture", body:"Une alimentation équilibrée est le premier pilier du contrôle du diabète de type 2.<br><br><strong>A privilégier :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Légumes verts, légumineuses, céréales complètes</li><li>Poissons, viandes blanches</li><li>Fruits entiers en quantité modérée</li></ul><br><strong>A limiter :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Sucres rapides (sodas, sucreries)</li><li>Graisses saturées et fritures</li></ul><br><div style='background:#FFF3CD;border-radius:12px;padding:12px;font-size:12px;color:#F39C12;font-weight:600;'>Consultez un nutritionniste pour un plan personnalisé</div>" },
-    stress: { emoji:"🧘", cat:"Bien-être", catColor:"#8B5CF6", catBg:"#F0E8FF", title:"Gérer le stress au quotidien", time:"4 min de lecture", body:"Le stress chronique impacte directement la santé. Quelques habitudes simples peuvent vous aider.<br><br><strong>Techniques efficaces :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Respiration abdominale : 4s inspiration, 6s expiration</li><li>30 minutes de marche par jour</li><li>Réduire le temps d'écran avant de dormir</li><li>Pratiquer la gratitude chaque soir</li></ul><br><div style='background:#F0E8FF;border-radius:12px;padding:12px;font-size:12px;color:#8B5CF6;font-weight:600;'>Si le stress persiste, parlez-en à votre médecin</div>" },
-    antibiotiques: { emoji:"🦠", cat:"Médicaments", catColor:"#E74C3C", catBg:"#FEF0EE", title:"Antibiotiques : ne pas interrompre le traitement", time:"6 min de lecture", body:"Les antibiotiques ne sont efficaces que contre les infections bactériennes.<br><br><strong>Règles essentielles :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Toujours terminer la cure prescrite</li><li>Ne jamais partager vos antibiotiques</li><li>Ne pas prendre pour un virus (rhume, grippe)</li><li>Respectez les heures de prise indiquées</li></ul><br><div style='background:#FEF0EE;border-radius:12px;padding:12px;font-size:12px;color:#E74C3C;font-weight:600;'>Antibiotiques uniquement sur ordonnance médicale</div>" },
-    hypertension: { emoji:"❤️", cat:"Prévention", catColor:"#27AE60", catBg:"#E8F7EE", title:"Hypertension : surveiller sa pression artérielle", time:"8 min de lecture", body:"L'hypertension artérielle est souvent silencieuse mais dangereuse si elle n'est pas prise en charge.<br><br><strong>Valeurs normales :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Idéale : moins de 120/80 mmHg</li><li>Normale haute : 130-139 / 85-89</li><li>Hypertension : 140/90 et plus</li></ul><br><strong>Conseils :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Réduire le sel dans l'alimentation</li><li>Pratiquer une activité physique régulière</li></ul><br><div style='background:#E8F7EE;border-radius:12px;padding:12px;font-size:12px;color:#27AE60;font-weight:600;'>Mesurez votre tension en pharmacie gratuitement</div>" },
-    hydratation: { emoji:"💧", cat:"Nutrition", catColor:"#F39C12", catBg:"#FFF3CD", title:"Bien s'hydrater en saison chaude", time:"3 min de lecture", body:"En période de chaleur, le corps perd beaucoup d'eau. Une bonne hydratation est essentielle.<br><br><strong>Recommandations :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Boire au moins 1,5 à 2 litres d'eau par jour</li><li>Ne pas attendre d'avoir soif</li><li>Consommer des fruits et légumes riches en eau</li><li>Éviter l'alcool et les boissons sucrées</li></ul><br><div style='background:#FFF3CD;border-radius:12px;padding:12px;font-size:12px;color:#F39C12;font-weight:600;'>Une urine claire est signe d'une bonne hydratation</div>" },
-    sommeil: { emoji:"🌙", cat:"Bien-être", catColor:"#8B5CF6", catBg:"#F0E8FF", title:"Améliorer la qualité de son sommeil", time:"5 min de lecture", body:"Un sommeil de qualité est essentiel pour la santé physique et mentale.<br><br><strong>Bonnes habitudes :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Se coucher et se lever à heures régulières</li><li>Éteindre les écrans 30 min avant le coucher</li><li>Maintenir la chambre fraîche et obscure</li><li>Éviter caféine et repas lourds le soir</li></ul><br><div style='background:#F0E8FF;border-radius:12px;padding:12px;font-size:12px;color:#8B5CF6;font-weight:600;'>7 à 9 heures de sommeil recommandées pour un adulte</div>" }
-  };;
-
-  function showArticleModal(key) {
-    var a = _articles[key];
-    if (!a) return;
-    var el = document.getElementById('articleModalContent');
-    el.innerHTML = '<div style="display:inline-block;background:' + a.catBg + ';color:' + a.catColor + ';font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px;">' + a.cat + '</div><div style="font-size:36px;margin-bottom:10px;">' + a.emoji + '</div><div style="font-family:Plus Jakarta Sans,sans-serif;font-size:18px;font-weight:800;color:#1A2332;line-height:1.3;margin-bottom:6px;">' + a.title + '</div><div style="font-size:12px;color:#6B7A8D;margin-bottom:16px;">&#128337; ' + a.time + '</div><hr style="border:none;border-top:1px solid #E2ECF2;margin-bottom:16px;"><div style="font-size:13px;color:#1A2332;line-height:1.7;">' + a.body + '</div><button onclick="closeArticleModal()" style="width:100%;margin-top:24px;padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:DM Sans,sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Fermer</button>';
-    var overlay = document.getElementById('articleModalOverlay');
-    var modal   = document.getElementById('articleModal');
-    overlay.style.display = 'block';
-    modal.style.display   = 'block';
-    requestAnimationFrame(function() {
-      overlay.style.opacity = '1';
-      modal.style.transform = 'translateY(0)';
-    });
-  }
-  function closeArticleModal() {
-    var overlay = document.getElementById('articleModalOverlay');
-    var modal   = document.getElementById('articleModal');
-    overlay.style.opacity = '0';
-    modal.style.transform = 'translateY(100%)';
-    setTimeout(function() {
-      overlay.style.display = 'none';
-      modal.style.display   = 'none';
-    }, 350);
-  }
-
-  // Écrans mobile uniquement (pas d'équivalent web)
-  const MOBILE_ONLY = new Set([8,9,10,11,12,13,14,15,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79]);
-  // Écrans web uniquement (pas d'équivalent mobile, accessible via goToWebScreen)
-  const WEB_SCREENS = new Set([14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69]);
-
-  const SCREEN_GROUPS = [
-    // ── MOBILE ──
-    { label: '📱 MOBILE', isHeader: true },
-    { label: '🏠 Commun', flow: 'patient',    screens: [1,2,3,4,7,8,9,10,49,50,51,52] },
-    { label: '🧑 Patient', flow: 'patient',   screens: [11,12,13,14,15,16,17,18,29,30,31,32,33,34,35,36,37,38,39,40,44,46,47,72,73] },
-    { label: '💊 Pharmacien', flow: 'pharmacist', screens: [19,20,21,22,23,24,25,26,41,42,43,45,53] },
-    { label: '🩺 Médecin', flow: 'medecin',   screens: [62,63,64,65,66,67,68,69,70,71] },
-    { label: '🛵 Livreur', flow: 'livreur',   screens: [54,55,56,57,58,59,60,61] },
-    { label: '🛡️ Admin mobile', flow: 'admin', screens: [27,28,48,78,79,80,81,82] },
-    { label: '🔬 Technique FIG.2/3/4', flow: 'technique', screens: [74,75,76,77] },
-    // ── WEB ──
-    { label: '💻 WEB', isHeader: true },
-    { label: '🌐 Patient web', flow: 'patient',    web: true, screens: [1,2,3,4,7,8,9,10,11,12,13,14,15] },
-    { label: '💊 Pharmacien web', flow: 'pharmacist', web: true, screens: [16,17,18,19,20,21] },
-    { label: '🛡️ Admin web', flow: 'admin',     web: true, screens: [22,23,24,25,26,27,28,54,55,56,64,65,66,67,68,69] },
-    { label: '🩺 Médecin web', flow: 'medecin',  web: true, screens: [57,58,59,60,61,62,63] },
-    { label: '⚠️ Système web', flow: 'patient',  web: true, screens: [49,50] },
-  ];
-
-  
-  let currentDevice = 'mobile';
-  let currentWebScreen = 1;
+  window.showModal = function(id) {
+    const m = document.getElementById(id);
+    if (m) m.classList.add('active');
+  };
+
+  window.closeModal = function() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('active'));
+  };
+
+  window.setDevice = function(device) {
+    switchTo(device);
+  };
 
   function switchTo(device) {
+    currentDevice = device;
     const mobileFrame = document.getElementById('mobileFrame');
     const webFrame = document.getElementById('webFrame');
-    const btnMobile = document.getElementById('btn-mobile');
-    const btnWeb = document.getElementById('btn-web');
+    const btns = document.querySelectorAll('.switch-btn');
     
-    currentDevice = device;
     if (device === 'mobile') {
       if (mobileFrame) mobileFrame.style.display = 'block';
       if (webFrame) webFrame.style.display = 'none';
-      document.querySelectorAll('.switch-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+      if (btns[0]) btns[0].classList.add('active');
+      if (btns[1]) btns[1].classList.remove('active');
       goToScreen(currentScreen);
     } else {
       if (mobileFrame) mobileFrame.style.display = 'none';
       if (webFrame) webFrame.style.display = 'block';
-      document.querySelectorAll('.switch-btn').forEach((b,i) => b.classList.toggle('active', i===1));
-      goToWebScreen(currentWebScreen);
+      if (btns[0]) btns[0].classList.remove('active');
+      if (btns[1]) btns[1].classList.add('active');
+      goToWebScreen(currentWebScreen || 1);
     }
+    syncPickerDot(device === 'web' ? currentWebScreen : currentScreen);
   }
 
-  function startFlow(flowId) {
-    const flows = {
-      patient: [1,2,3,4,7,8,9,10,11,12,13,14,29,30,31],
-      pharmacist: [19,20,21,22,23,24,25,26],
-      admin: [27,28],
-      medecin: [62,63,64],
-      livreur: [54,55]
-    };
-    flowSteps = flows[flowId] || [];
-    currentStep = 0;
-    goToScreen(flowSteps[0]);
-    showToast('🚀 Parcours ' + flowId + ' démarré');
-  }
+  // ============================================================
+  //  NAVIGATION FUNCTIONS
+  // ============================================================
+  window.goToScreen = function(n) {
+    if (navigating) return;
+    const prev = document.getElementById('screen' + currentScreen);
+    currentScreen = n;
+    
+    // Simple direct switch to avoid animation bugs during restoration
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active', 'slide-out'));
+    const target = document.getElementById('screen' + n);
+    if (target) {
+        target.classList.add('active');
+        if (target.dataset.device === 'desktop') switchTo('web');
+    }
+    
+    syncPickerDot(n);
+    updateBrowserBar(n);
+    document.dispatchEvent(new CustomEvent('screenChanged'));
+  };
 
-
-  function buildScreenPicker() {
-    const panel = document.getElementById('screen-picker');
-    if (!panel) return;
-
-    const header = document.createElement('div');
-    header.id = 'screen-picker-header';
-    header.innerHTML = `<span>📺 Navigation — 79 écrans</span><button id="screen-picker-close" onclick="toggleScreenPicker()">✕</button>`;
-    panel.appendChild(header);
-
-    const body = document.createElement('div');
-    body.id = 'screen-picker-body';
-
-    SCREEN_GROUPS.forEach(group => {
-      // Section header
-      if (group.isHeader) {
-        const sep = document.createElement('div');
-        sep.style.cssText = 'font-family:"Plus Jakarta Sans",sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.7);letter-spacing:1px;padding:4px 0 2px;border-top:1px solid rgba(255,255,255,0.08);margin-top:4px;';
-        sep.textContent = group.label;
-        body.appendChild(sep);
-        return;
-      }
-
-      const label = document.createElement('div');
-      label.className = 'sp-section-label';
-      label.textContent = group.label + (group.web ? ' (web)' : ' (mobile)');
-      body.appendChild(label);
-
-      const dots = document.createElement('div');
-      dots.className = 'sp-dots';
-
-      group.screens.forEach(n => {
-        const btn = document.createElement('button');
-        btn.className = 'nav-dot';
-        btn.id = (group.web ? 'navdot-w' : 'navdot-') + n;
-        btn.dataset.flow = group.flow;
-        btn.dataset.web = group.web ? '1' : '0';
-        btn.textContent = n;
-        btn.title = (group.web ? 'Web écran ' : 'Mobile écran ') + n;
-
-        if (group.web) {
-          // Bord coloré pour distinguer web
-          btn.style.borderStyle = 'dashed';
-          btn.onclick = () => {
-            // Basculer en web si nécessaire
-            if (currentDevice !== 'web') {
-              const webBtn = document.querySelectorAll('.switch-btn')[1];
-              if (webBtn) webBtn.click();
-            }
-            setTimeout(() => goToWebScreen(n), 50);
-            toggleScreenPicker();
-          };
-        } else {
-          btn.onclick = () => {
-            // Basculer en mobile si nécessaire
-            if (currentDevice !== 'mobile') {
-              const mobileBtn = document.querySelectorAll('.switch-btn')[0];
-              if (mobileBtn) mobileBtn.click();
-            }
-            setTimeout(() => goToScreen(n), 50);
-            toggleScreenPicker();
-          };
-        }
-        dots.appendChild(btn);
-      });
-      body.appendChild(dots);
-    });
-
-    // Légende
-    const legend = document.createElement('div');
-    legend.style.cssText = 'font-size:10px;color:rgba(255,255,255,0.3);padding:8px 0 4px;border-top:1px solid rgba(255,255,255,0.06);margin-top:4px;';
-    legend.textContent = 'Bordure pleine = mobile · Bordure pointillée = web';
-    body.appendChild(legend);
-
-    panel.appendChild(body);
-
-    // Fermer en cliquant dehors
-    document.addEventListener('click', (e) => {
-      const panel = document.getElementById('screen-picker');
-      const toggle = document.getElementById('screen-picker-toggle');
-      if (panel && panel.classList.contains('open') && !panel.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
-        panel.classList.remove('open');
-      }
-    });
-  }
-
-  function toggleScreenPicker() {
-    const panel = document.getElementById('screen-picker');
-    if (panel) panel.classList.toggle('open');
-  }
+  window.goToWebScreen = function(n) {
+    currentWebScreen = n;
+    document.querySelectorAll('.web-screen').forEach(s => s.classList.remove('active'));
+    const target = document.getElementById('wscreen' + n);
+    if (target) target.classList.add('active');
+    syncPickerDot(n);
+    updateBrowserBar(n);
+    document.dispatchEvent(new CustomEvent('screenChanged'));
+  };
 
   function syncPickerDot(n) {
-    // Mettre à jour le bon dot selon le device
     document.querySelectorAll('.nav-dot').forEach(d => d.classList.remove('active'));
-    const prefix = currentDevice === 'web' ? 'navdot-w' : 'navdot-';
+    const prefix = (currentDevice === 'web' ? 'navdot-w' : 'navdot-');
     const active = document.getElementById(prefix + n);
     if (active) {
       active.classList.add('active');
@@ -12171,114 +10452,90 @@
     if (label) label.textContent = (currentDevice === 'web' ? '🌐' : '📱') + n;
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    injectTransitionCSS();
-    buildFlowNav();
-    buildDemoBadge();
-    buildScreenPicker();   // ← nouveau
-    injectKPIIds();
-    startLiveClock();
-    applyRipples();
-
-    // Apply ripples after a short delay for dynamically inserted buttons
-    setTimeout(applyRipples, 500);
-
-    // ── Render charts on wscreen20 activation ──
-    function renderAdminCharts() {
-      const barEl = document.getElementById('admin-bar-chart');
-      if (barEl && !barEl.dataset.rendered) {
-        barEl.dataset.rendered = '1';
-        const data = [98, 112, 89, 134, 156, 143, 156];
-        const max = Math.max(...data);
-        barEl.innerHTML = data.map((v, i) => `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;"><div style="font-size:9px;font-weight:700;">${v}</div><div style="width:100%;background:#F4F9FC;border-radius:4px;flex:1;display:flex;align-items:flex-end;"><div class="chart-bar" style="width:100%;height:${Math.round(v/max*100)}%;background:#1A6B8A;border-radius:4px;"></div></div></div>`).join('');
-      }
-      const donutEl = document.getElementById('admin-donut-chart');
-      if (donutEl && !donutEl.dataset.rendered) {
-        donutEl.dataset.rendered = '1';
-        donutEl.innerHTML = '<svg width="120" height="120"><circle cx="60" cy="60" r="44" fill="none" stroke="#1A6B8A" stroke-width="12"/></svg>';
-      }
-    }
-
-    const observer = new MutationObserver(() => {
-      const ws20 = document.getElementById('wscreen20');
-      if (ws20 && ws20.classList.contains('active')) renderAdminCharts();
-    });
-    const webFrame = document.getElementById('webFrame');
-    if (webFrame) observer.observe(webFrame, { subtree: true, attributes: true, attributeFilter: ['class'] });
-
-    function renderPharmacistChart() {
-      const ph = document.getElementById('pharma-sparkline-wrap');
-      if (ph && !ph.dataset.rendered) {
-        ph.dataset.rendered = '1';
-        ph.innerHTML = '<svg width="200" height="40"><polyline points="0,20 200,20" stroke="#27AE60" fill="none"/></svg>';
-      }
-    }
-    document.addEventListener('screenChanged', () => {
-      if (window.currentScreen === 17) setTimeout(renderPharmacistChart, 100);
-    });
-
-    setTimeout(() => { showToast('👋 ILERA AFRICA · 🗺 Parcours guidés · ← → pour naviguer'); }, 300);
-    goToScreen(1);
-  });
+  function updateBrowserBar(n) {
+    const urlEl = document.querySelector('.browser-url');
+    if (!urlEl) return;
+    urlEl.textContent = '🔒 ilera.africa/' + (currentDevice === 'web' ? 'web/' : 'app/') + n;
+  }
 
   // ============================================================
-  //  GLOBAL FUNCTIONS (ACCESSOR)
+  //  SCREEN PICKER LOGIC
   // ============================================================
-  window.toggleScreenPicker = function() {
+  const SCREEN_GROUPS = [
+    { label: '📱 MOBILE', isHeader: true },
+    { label: '🏠 Commun', flow: 'patient', screens: [1,2,3,4,7,8,9,10,49,50,51,52] },
+    { label: '🧑 Patient', flow: 'patient', screens: [11,12,13,14,15,16,17,18,29,30,31,32,33,34,35,36,37,38,39,40,44,46,47,72,73] },
+    { label: '💊 Pharmacien', flow: 'pharmacist', screens: [19,20,21,22,23,24,25,26,41,42,43,45,53] },
+    { label: '🩺 Médecin', flow: 'medecin', screens: [62,63,64,65,66,67,68,69,70,71] },
+    { label: '🛵 Livreur', flow: 'livreur', screens: [54,55,56,57,58,59,60,61] },
+    { label: '🛡️ Admin mobile', flow: 'admin', screens: [27,28,48,78,79,80,81,82] },
+    { label: '💻 WEB', isHeader: true },
+    { label: '🌐 Patient web', flow: 'patient', web: true, screens: [1,2,3,4,7,8,9,10,11,12,13,14,15] },
+    { label: '💊 Pharmacien web', flow: 'pharmacist', web: true, screens: [16,17,18,19,20,21] },
+    { label: '🛡️ Admin web', flow: 'admin', web: true, screens: [22,23,24,25,26,27,28,54,55,56,64,65,66,67,68,69] }
+  ];
+
+  window.buildScreenPicker = function() {
     const panel = document.getElementById('screen-picker');
-    if (panel) panel.classList.toggle('open');
+    if (!panel) return;
+    panel.innerHTML = `<div id="screen-picker-header"><span>📺 Navigation</span><button onclick="toggleScreenPicker()">✕</button></div><div id="screen-picker-body"></div>`;
+    const body = panel.querySelector('#screen-picker-body');
+    SCREEN_GROUPS.forEach(group => {
+      if (group.isHeader) {
+        const h = document.createElement('div');
+        h.style.cssText = 'font-size:10px;font-weight:800;color:rgba(255,255,255,0.4);margin-top:8px;padding:4px 0;border-top:1px solid rgba(255,255,255,0.1);';
+        h.textContent = group.label;
+        body.appendChild(h);
+      } else {
+        const dots = document.createElement('div');
+        dots.className = 'sp-dots';
+        group.screens.forEach(n => {
+          const b = document.createElement('button');
+          b.className = 'nav-dot';
+          b.id = (group.web ? 'navdot-w' : 'navdot-') + n;
+          b.textContent = n;
+          b.onclick = () => {
+            if (group.web) { switchTo('web'); goToWebScreen(n); }
+            else { switchTo('mobile'); goToScreen(n); }
+            toggleScreenPicker();
+          };
+          dots.appendChild(b);
+        });
+        body.appendChild(dots);
+      }
+    });
   };
 
-  window.filterCatalogCat = function(cat, el) {
+  window.toggleScreenPicker = function() {
+    const p = document.getElementById('screen-picker');
+    if (p) p.classList.toggle('open');
+  };
+
+  // ============================================================
+  //  UI HELPERS
+  // ============================================================
+  window.filterCatalogCat = (cat, el) => {
     document.querySelectorAll('#catalog-cats .cat-chip').forEach(c => {
-      c.style.background = '#F4F9FC';
-      c.style.color = '#6B7A8D';
+      c.style.background = '#F4F9FC'; c.style.color = '#6B7A8D';
     });
-    el.style.background = '#1A6B8A';
-    el.style.color = '#fff';
+    el.style.background = '#1A6B8A'; el.style.color = '#fff';
     showToast('📂 Catégorie : ' + el.textContent);
   };
 
-  window.updateQty = function(delta) {
-    const qtyEl = document.getElementById('med-qty');
-    if(qtyEl) {
-      let qty = parseInt(qtyEl.textContent);
-      qty = Math.max(1, qty + delta);
-      qtyEl.textContent = qty;
-    }
+  window.updateQty = (delta) => {
+    const el = document.getElementById('med-qty');
+    if(el) el.textContent = Math.max(1, parseInt(el.textContent) + delta);
   };
 
-  window.updateFilterCities = function(country, el) {
-    if(el) {
-      document.querySelectorAll('#country-filters .filter-chip').forEach(c => c.classList.remove('active'));
-      el.classList.add('active');
-    }
-    const grid = document.getElementById('city-filters');
-    if(grid) grid.innerHTML = '<div class="filter-chip active">Ville simulée</div>';
-  };
-
-  window.applyCatalogFilters = function() {
-    closeModal();
-    showToast('✅ Filtres appliqués');
-  };
-
-  window.resetFilters = function() {
-    showToast('🔄 Filtres réinitialisés');
-  };
-
-  window.setSort = function(type, el) {
-    showToast('⚖️ Tri activé');
-  };
-
-  if (typeof goToScreen === 'function' && !window._screenEventInjected) {
-    window._screenEventInjected = true;
-    const _origGoToScreen = goToScreen;
-    window.goToScreen = function(n) {
-      window.currentScreen = n;
-      _origGoToScreen(n);
-      document.dispatchEvent(new CustomEvent('screenChanged'));
-    };
-  }
+  // ============================================================
+  //  INITIALIZATION
+  // ============================================================
+  document.addEventListener('DOMContentLoaded', () => {
+    buildScreenPicker();
+    switchTo('mobile');
+    goToScreen(1);
+    setTimeout(() => showToast('👋 Bienvenue sur ILERA AFRICA'), 800);
+  });
 </script>
 </body>
 </html>
