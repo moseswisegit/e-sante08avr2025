@@ -1558,6 +1558,7 @@
             <div class="ob-dot active"></div>
             <div class="ob-dot"></div>
             <div class="ob-dot"></div>
+            <div class="ob-dot"></div>
           </div>
           <button class="ob-btn" onclick="goToScreen(3)">
             Suivant
@@ -1601,6 +1602,48 @@
             <div class="ob-dot"></div>
             <div class="ob-dot active"></div>
             <div class="ob-dot"></div>
+            <div class="ob-dot"></div>
+          </div>
+          <button class="ob-btn" onclick="goToScreen('screen3b')">
+            Suivant
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3B — ONBOARDING 3/4 (Pharmacien) -->
+    <div class="screen" id="screen3b" data-device="mobile">
+      <div class="onboarding-screen">
+        <div class="onboarding-header">
+          <div class="ob-logo">ILERA africa</div>
+          <button class="skip-btn" onclick="goToScreen(5)">Ignorer</button>
+        </div>
+        <div class="onboarding-illustration">
+          <div class="ob-illus-bg" style="background: #E8F4F8;">
+            <svg class="ob-illus-svg" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Pharmacy context -->
+              <rect x="30" y="30" width="80" height="90" rx="8" fill="white" stroke="#1A6B8A" stroke-width="2"/>
+              <rect x="40" y="45" width="60" height="40" rx="4" fill="#F4F9FC"/>
+              <rect x="45" y="55" width="30" height="4" rx="2" fill="#1A6B8A" opacity="0.4"/>
+              <rect x="45" y="65" width="50" height="3" rx="1.5" fill="#1A6B8A" opacity="0.2"/>
+              <!-- Cross badge -->
+              <circle cx="100" cy="95" r="22" fill="#27AE60"/>
+              <rect x="91" y="87" width="18" height="16" rx="4" fill="white"/>
+              <rect x="96" y="83" width="8" height="24" rx="3" fill="#27AE60"/>
+              <rect x="88" y="91" width="24" height="8" rx="3" fill="#27AE60"/>
+              <circle cx="100" cy="95" r="4" fill="white"/>
+            </svg>
+          </div>
+        </div>
+        <div class="onboarding-content">
+          <h1 class="ob-title">Validée par un pharmacien</h1>
+          <p class="ob-subtitle">Votre pharmacien prépare vos médicaments et vérifie les interactions pour votre sécurité.</p>
+          <div class="ob-dots">
+            <div class="ob-dot"></div>
+            <div class="ob-dot"></div>
+            <div class="ob-dot active"></div>
+            <div class="ob-dot"></div>
           </div>
           <button class="ob-btn" onclick="goToScreen(4)">
             Suivant
@@ -1610,7 +1653,7 @@
       </div>
     </div>
 
-    <!-- SCREEN 4 — ONBOARDING 3/3 -->
+    <!-- SCREEN 4 — ONBOARDING 4/4 -->
     <div class="screen" id="screen4" data-device="mobile">
       <div class="onboarding-screen">
         <div class="onboarding-header">
@@ -1652,6 +1695,7 @@
           <h1 class="ob-title">Livraison à domicile</h1>
           <p class="ob-subtitle">Recevez vos médicaments directement chez vous, rapidement et en toute sécurité.</p>
           <div class="ob-dots">
+            <div class="ob-dot"></div>
             <div class="ob-dot"></div>
             <div class="ob-dot"></div>
             <div class="ob-dot active"></div>
@@ -6584,11 +6628,12 @@
         <div style="min-height:756px;display:flex;align-items:center;justify-content:center;background:#fff;padding:60px;">
           <div style="max-width:900px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
             <div>
-              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A6B8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 1 sur 3</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A6B8A;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 1 sur 4</div>
               <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#1A2332;line-height:1.2;margin-bottom:20px;">Téléversez votre<br><span style="color:#1A6B8A;">ordonnance</span></h1>
               <p style="font-size:17px;color:#6B7A8D;line-height:1.7;margin-bottom:40px;">Prenez simplement une photo de votre ordonnance médicale ou importez un fichier PDF. Notre système sécurisé protège vos données médicales.</p>
               <div style="display:flex;gap:8px;margin-bottom:40px;">
                 <div style="height:6px;width:40px;border-radius:3px;background:#1A6B8A;"></div>
+                <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
                 <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
                 <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
               </div>
@@ -6622,16 +6667,17 @@
         <div style="min-height:756px;display:flex;align-items:center;justify-content:center;background:#fff;padding:60px;">
           <div style="max-width:900px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
             <div>
-              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#27AE60;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 2 sur 3</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#27AE60;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 2 sur 4</div>
               <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#1A2332;line-height:1.2;margin-bottom:20px;">Validée par un<br><span style="color:#27AE60;">médecin</span></h1>
               <p style="font-size:17px;color:#6B7A8D;line-height:1.7;margin-bottom:40px;">Chaque ordonnance est vérifiée par un professionnel diplômé. Nos médecins certifiés garantissent votre sécurité thérapeutique.</p>
               <div style="display:flex;gap:8px;margin-bottom:40px;">
                 <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
                 <div style="height:6px;width:40px;border-radius:3px;background:#27AE60;"></div>
                 <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
+                <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
               </div>
               <div style="display:flex;gap:12px;">
-                <button onclick="goToWebScreen(4);goToScreen(4);" style="padding:16px 36px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,0.3);">Suivant →</button>
+                <button onclick="goToWebScreen('3b');goToScreen('screen3b');" style="padding:16px 36px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,0.3);">Suivant →</button>
                 <button onclick="goToWebScreen(1);goToScreen(2);" style="padding:16px 28px;background:transparent;color:#6B7A8D;border:2px solid #E2ECF2;border-radius:50px;font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif;">← Retour</button>
               </div>
             </div>
@@ -6655,15 +6701,54 @@
         </div>
       </div>
 
+      <!-- WEB SCREEN 3B (Pharmacien) -->
+      <div class="web-screen" id="wscreen3b">
+        <div style="min-height:756px;display:flex;align-items:center;justify-content:center;background:#fff;padding:60px;">
+          <div style="max-width:900px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+            <div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#27AE60;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 3 sur 4</div>
+              <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#1A2332;line-height:1.2;margin-bottom:20px;">Validée par un<br><span style="color:#27AE60;">pharmacien</span></h1>
+              <p style="font-size:17px;color:#6B7A8D;line-height:1.7;margin-bottom:40px;">Votre pharmacien prépare vos médicaments et vérifie les interactions pour votre sécurité thérapeutique.</p>
+              <div style="display:flex;gap:8px;margin-bottom:40px;">
+                <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
+                <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
+                <div style="height:6px;width:40px;border-radius:3px;background:#27AE60;"></div>
+                <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
+              </div>
+              <div style="display:flex;gap:12px;">
+                <button onclick="goToWebScreen(4);goToScreen(4);" style="padding:16px 36px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,0.3);">Suivant →</button>
+                <button onclick="goToWebScreen(3);goToScreen(3);" style="padding:16px 28px;background:transparent;color:#6B7A8D;border:2px solid #E2ECF2;border-radius:50px;font-size:15px;cursor:pointer;font-family:'DM Sans',sans-serif;">← Retour</button>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:center;">
+              <div style="width:320px;height:320px;border-radius:50%;background:#E8F4F8;display:flex;align-items:center;justify-content:center;">
+                <svg width="200" height="200" viewBox="0 0 140 140" fill="none">
+                  <!-- Pharmacy context -->
+                  <rect x="30" y="30" width="80" height="90" rx="8" fill="white" stroke="#1A6B8A" stroke-width="2"/>
+                  <rect x="40" y="45" width="60" height="40" rx="4" fill="#F4F9FC"/>
+                  <rect x="45" y="55" width="30" height="4" rx="2" fill="#1A6B8A" opacity="0.4"/>
+                  <rect x="45" y="65" width="50" height="3" rx="1.5" fill="#1A6B8A" opacity="0.2"/>
+                  <circle cx="100" cy="95" r="22" fill="#27AE60"/>
+                  <rect x="91" y="87" width="18" height="16" rx="4" fill="white"/>
+                  <rect x="96" y="83" width="8" height="24" rx="3" fill="#27AE60"/>
+                  <rect x="88" y="91" width="24" height="8" rx="3" fill="#27AE60"/>
+                  <circle cx="100" cy="95" r="4" fill="white"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
       <!-- WEB SCREEN 4 -->
       <div class="web-screen" id="wscreen4">
         <div style="min-height:756px;display:flex;align-items:center;justify-content:center;background:#fff;padding:60px;">
           <div style="max-width:900px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
             <div>
-              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#F39C12;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 3 sur 3</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#F39C12;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Étape 4 sur 4</div>
               <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#1A2332;line-height:1.2;margin-bottom:20px;">Livraison à<br><span style="color:#F39C12;">domicile</span></h1>
               <p style="font-size:17px;color:#6B7A8D;line-height:1.7;margin-bottom:40px;">Recevez vos médicaments directement chez vous. Livraison rapide, sécurisée et suivie en temps réel partout en Côte d'Ivoire.</p>
               <div style="display:flex;gap:8px;margin-bottom:40px;">
+                <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
                 <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
                 <div style="height:6px;width:12px;border-radius:3px;background:rgba(26,107,138,0.2);"></div>
                 <div style="height:6px;width:40px;border-radius:3px;background:#F39C12;"></div>
