@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ILERA africa</title>
+<title>ILERA AFRICA</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
-     DESIGN TOKENS — ILERA africa v2
+     DESIGN TOKENS — ILERA AFRICA v2
   ============================================================ */
   :root {
     /* Brand */
@@ -1466,6 +1466,21 @@
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: rgba(26,107,138,0.2); border-radius: 2px; }
+  /* ── Brand Cool Style ── */
+  .brand-cool {
+    background: linear-gradient(135deg, #27AE60 0%, #1A6B8A 50%, #F39C12 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    animation: shine 5s linear infinite;
+  }
+  @keyframes shine {
+    to { background-position: 200% center; }
+  }
 </style>
 
 </head>
@@ -1507,7 +1522,7 @@
             </svg>
           </div>
         </div>
-        <div class="splash-brand">ILERA africa</div>
+        <div class="splash-brand brand-cool">ILERA AFRICA</div>
         <div class="splash-tagline">Votre santé, où que vous soyez</div>
         <div class="splash-badge">
           <div class="splash-badge-dot"></div>
@@ -1523,7 +1538,7 @@
     <div class="screen" id="screen2" data-device="mobile">
       <div class="onboarding-screen">
         <div class="onboarding-header">
-          <div class="ob-logo">ILERA africa</div>
+          <div class="ob-logo brand-cool">ILERA AFRICA</div>
           <button class="skip-btn" onclick="goToScreen(5)">Ignorer</button>
         </div>
         <div class="onboarding-illustration">
@@ -1572,7 +1587,7 @@
     <div class="screen" id="screen3" data-device="mobile">
       <div class="onboarding-screen">
         <div class="onboarding-header">
-          <div class="ob-logo">ILERA africa</div>
+          <div class="ob-logo brand-cool">ILERA AFRICA</div>
           <button class="skip-btn" onclick="goToScreen(5)">Ignorer</button>
         </div>
         <div class="onboarding-illustration">
@@ -1616,7 +1631,7 @@
     <div class="screen" id="screen3b" data-device="mobile">
       <div class="onboarding-screen">
         <div class="onboarding-header">
-          <div class="ob-logo">ILERA africa</div>
+          <div class="ob-logo brand-cool">ILERA AFRICA</div>
           <button class="skip-btn" onclick="goToScreen(5)">Ignorer</button>
         </div>
         <div class="onboarding-illustration">
@@ -1657,7 +1672,7 @@
     <div class="screen" id="screen4" data-device="mobile">
       <div class="onboarding-screen">
         <div class="onboarding-header">
-          <div class="ob-logo">ILERA africa</div>
+          <div class="ob-logo">ILERA AFRICA</div>
           <div></div>
         </div>
         <div class="onboarding-illustration">
@@ -1716,7 +1731,7 @@
             <div class="login-logo-icon">
               <svg width="24" height="24" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg>
             </div>
-            <div class="login-logo-text">ILERA africa</div>
+            <div class="login-logo-text brand-cool">ILERA AFRICA</div>
           </div>
           <h1 class="login-title">Bienvenue dans votre<br>sanctuaire de santé</h1>
           <p class="login-subtitle">Connectez-vous pour accéder à votre espace</p>
@@ -1825,7 +1840,7 @@
         <!-- Top bar -->
         <div style="display:flex;align-items:center;justify-content:space-between;padding:52px 20px 16px;background:#fff;border-bottom:1px solid #E2ECF2;">
           <button onclick="openDrawer('patient')" style="width:38px;height:38px;background:#F4F9FC;border:none;border-radius:10px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;">☰</button>
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A6B8A;">ILERA africa</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A6B8A;">ILERA AFRICA</div>
           <div style="position:relative;">
             <button onclick="goToScreen(15)" style="width:38px;height:38px;background:#F4F9FC;border:none;border-radius:10px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;">🔔</button>
             <div style="position:absolute;top:4px;right:4px;width:16px;height:16px;background:#E74C3C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;border:2px solid #fff;">3</div>
@@ -2556,7 +2571,7 @@
 <div class="screen" id="screen17" data-device="mobile" style="background:#F4F9FC;">
   <div style="background:#0F3F54;padding:52px 16px 16px;display:flex;align-items:center;justify-content:space-between;">
     <button onclick="openDrawer('pharmacien')" style="width:36px;height:36px;background:rgba(255,255,255,0.12);border:none;border-radius:10px;cursor:pointer;font-size:18px;color:#fff;display:flex;align-items:center;justify-content:center;">☰</button>
-    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#fff;">ILERA africa Pro</div>
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#fff;">ILERA AFRICA Pro</div>
     <div style="width:38px;height:38px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid rgba(255,255,255,0.2);">👨‍⚕️</div>
   </div>
   <!-- KPI scroll -->
@@ -3044,7 +3059,7 @@
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;">
     <div style="width:72px;height:72px;background:rgba(231,76,60,0.2);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:16px;border:2px solid rgba(231,76,60,0.3);">🛡️</div>
     <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#fff;text-align:center;margin-bottom:6px;">Espace Administrateur</div>
-    <div style="font-size:13px;color:rgba(255,255,255,0.55);text-align:center;margin-bottom:32px;">Accès hautement sécurisé · ILERA africa</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.55);text-align:center;margin-bottom:32px;">Accès hautement sécurisé · ILERA AFRICA</div>
     <div style="background:rgba(255,255,255,0.07);border-radius:20px;padding:24px;width:100%;border:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:14px;">
       <div>
         <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.5);margin-bottom:6px;letter-spacing:0.5px;">EMAIL</div>
@@ -3826,7 +3841,7 @@
   <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
     <div style="width:100px;height:100px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;border:2px solid rgba(255,255,255,0.2);">🛠️</div>
     <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#fff;">Maintenance en cours</div>
-    <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;max-width:260px;">Nous améliorons ILERA africa pour vous offrir une meilleure expérience. Nous revenons dans :</div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;max-width:260px;">Nous améliorons ILERA AFRICA pour vous offrir une meilleure expérience. Nous revenons dans :</div>
     <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:800;color:#fff;">02:00</div>
     <div style="font-size:13px;color:rgba(255,255,255,0.6);">heures</div>
     <!-- Progress bar -->
@@ -4450,7 +4465,7 @@
     <!-- Logo + badge -->
     <div style="text-align:center;margin-bottom:36px;">
       <div style="width:72px;height:72px;background:linear-gradient(135deg,#F39C12,#e67e22);border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 14px;box-shadow:0 8px 24px rgba(243,156,18,0.4);">🛵</div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#fff;">ILERA africa</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#fff;">ILERA AFRICA</div>
       <div style="background:rgba(243,156,18,0.2);border:1px solid rgba(243,156,18,0.4);border-radius:50px;padding:4px 16px;margin-top:8px;display:inline-block;">
         <span style="font-size:12px;font-weight:700;color:#F39C12;">⚡ Espace Livreur</span>
       </div>
@@ -5738,7 +5753,7 @@
     <button onclick="closeDrawer()" style="position:absolute;top:52px;right:16px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;color:#fff;font-size:16px;cursor:pointer;">✕</button>
     <div style="width:56px;height:56px;background:rgba(231,76,60,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:10px;border:2px solid rgba(231,76,60,0.35);">🛡️</div>
     <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#fff;">Admin Système</div>
-    <div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px;">SuperAdmin · ILERA africa CI</div>
+    <div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px;">SuperAdmin · ILERA AFRICA CI</div>
     <div style="margin-top:8px;display:inline-flex;align-items:center;gap:5px;background:rgba(231,76,60,0.2);padding:3px 10px;border-radius:20px;">
       <span style="font-size:11px;color:#ff9d9d;font-weight:700;">● SuperAdmin</span>
     </div>
@@ -6474,7 +6489,7 @@
               <div style="width:40px;height:40px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:12px;display:flex;align-items:center;justify-content:center;">
                 <svg width="24" height="24" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg>
               </div>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#1A2332;letter-spacing:-0.5px;">ILERA africa</span>
+              <span class="brand-cool" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;">ILERA AFRICA</span>
             </div>
             <div style="display:flex;align-items:center;gap:32px;">
               <a onclick="showToast('Téléchargez notre application mobile pour accéder.')" style="font-size:15px;font-weight:600;color:#1A2332;cursor:pointer;text-decoration:none;">Espace Patient</a>
@@ -6520,7 +6535,7 @@
             <div style="flex:1;display:flex;justify-content:center;position:relative;z-index:2;">
               <div style="width:360px;height:680px;background:#fff;border-radius:40px;border:12px solid #1A2332;box-shadow:0 30px 80px rgba(26,107,138,0.25);overflow:hidden;position:relative;display:flex;flex-direction:column;">
                 <div style="width:140px;height:24px;background:#1A2332;position:absolute;top:0;left:50%;transform:translateX(-50%);border-radius:0 0 16px 16px;"></div>
-                <div style="background:#1A6B8A;padding:40px 20px 20px;text-align:center;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;">ILERA africa</div>
+                <div style="background:#1A6B8A;padding:40px 20px 20px;text-align:center;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;">ILERA AFRICA</div>
                 <div style="padding:20px;display:flex;flex-direction:column;gap:12px;flex:1;background:#F4F9FC;">
                   <div style="background:#fff;padding:16px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);display:flex;align-items:center;gap:12px;">
                     <div style="font-size:24px;">🩺</div>
@@ -6550,7 +6565,7 @@
               <div style="width:40px;height:40px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:12px;display:flex;align-items:center;justify-content:center;">
                 <svg width="24" height="24" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg>
               </div>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#1A2332;letter-spacing:-0.5px;">ILERA africa</span>
+              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#1A2332;letter-spacing:-0.5px;">ILERA AFRICA</span>
             </div>
             <button onclick="goToWebScreen(1)" style="padding:10px 20px;background:transparent;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Annuler</button>
           </nav>
@@ -6790,7 +6805,7 @@
             <div class="web-nav-logo-icon">
               <svg width="20" height="20" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg>
             </div>
-            <div class="web-nav-logo-text">ILERA africa</div>
+            <div class="web-nav-logo-text brand-cool">ILERA AFRICA</div>
           </div>
           <a class="web-nav-link" onclick="showModal('map-modal')">Accueil</a>
           <a class="web-nav-link" onclick="showModal('map-modal')">Ordonnances</a>
@@ -6837,7 +6852,7 @@
               <span>🔒 CRYPTAGE DE BOUT EN BOUT — SSL 256-bit</span>
             </div>
             <button class="web-cta" onclick="handleWebLogin()">Se connecter</button>
-            <p class="web-login-footer">Nouveau sur ILERA africa ? <a onclick="goToWebScreen(6)">Créer un compte →</a></p>
+            <p class="web-login-footer">Nouveau sur ILERA AFRICA ? <a onclick="goToWebScreen(6)">Créer un compte →</a></p>
             <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid #E2ECF2;">
               <p style="text-align:center;font-size:11px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px;">Accès professionnel</p>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
@@ -6861,7 +6876,7 @@
         <nav class="web-nav">
           <div class="web-nav-logo">
             <div class="web-nav-logo-icon"><svg width="20" height="20" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-            <div class="web-nav-logo-text">ILERA africa</div>
+            <div class="web-nav-logo-text brand-cool">ILERA AFRICA</div>
           </div>
           <a class="web-nav-link" onclick="goToWebScreen(5)">Se connecter</a>
           <button class="web-nav-btn" style="background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;">Déjà membre ?</button>
@@ -6931,7 +6946,7 @@
         <nav class="web-nav">
           <div class="web-nav-logo">
             <div class="web-nav-logo-icon"><svg width="20" height="20" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-            <div class="web-nav-logo-text">ILERA africa</div>
+            <div class="web-nav-logo-text brand-cool">ILERA AFRICA</div>
           </div>
           <a class="web-nav-link" onclick="goToScreen(7)">Accueil</a>
           <a class="web-nav-link" onclick="goToWebScreen(9)">Mes Ordonnances</a>
@@ -7064,7 +7079,7 @@
         <nav class="web-nav">
           <div class="web-nav-logo">
             <div class="web-nav-logo-icon"><svg width="20" height="20" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-            <div class="web-nav-logo-text">ILERA africa</div>
+            <div class="web-nav-logo-text brand-cool">ILERA AFRICA</div>
           </div>
           <a class="web-nav-link" onclick="goToWebScreen(7)">← Tableau de bord</a>
           <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
@@ -7142,7 +7157,7 @@
         <nav class="web-nav">
           <div class="web-nav-logo">
             <div class="web-nav-logo-icon"><svg width="20" height="20" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-            <div class="web-nav-logo-text">ILERA africa</div>
+            <div class="web-nav-logo-text brand-cool">ILERA AFRICA</div>
           </div>
           <a class="web-nav-link" onclick="goToWebScreen(7)">Tableau de bord</a>
           <a class="web-nav-link" style="color:#1A6B8A;font-weight:700;">Mes Ordonnances</a>
@@ -7254,7 +7269,7 @@
           <nav style="display:flex;align-items:center;padding:0 32px;height:64px;background:#fff;border-bottom:1px solid #E2ECF2;position:sticky;top:0;z-index:10;gap:20px;">
             <div style="display:flex;align-items:center;gap:10px;margin-right:24px;">
               <div style="width:32px;height:32px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A6B8A;">ILERA africa</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A6B8A;">ILERA AFRICA</div>
             </div>
             <a onclick="goToScreen(7)" style="font-size:14px;color:#6B7A8D;cursor:pointer;font-family:'DM Sans',sans-serif;">Accueil</a>
             <a onclick="goToScreen(46)" style="font-size:14px;color:#6B7A8D;cursor:pointer;font-family:'DM Sans',sans-serif;">À propos</a>
@@ -7273,7 +7288,7 @@
                 <span style="font-size:12px;font-weight:700;color:#27AE60;letter-spacing:0.5px;">CERTIFIÉ SÉCURITÉ CLINIQUE · CÔTE D'IVOIRE</span>
               </div>
               <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:40px;font-weight:800;color:#1A2332;line-height:1.2;margin-bottom:16px;">Commandez vos médicaments<br><span style="color:#1A6B8A;">en toute sécurité</span></h1>
-              <p style="font-size:16px;color:#6B7A8D;line-height:1.6;margin-bottom:28px;">ILERA africa connecte les patients aux pharmacies agréées. Envoyez votre ordonnance, consultez un pharmacien et recevez vos médicaments à domicile.</p>
+              <p style="font-size:16px;color:#6B7A8D;line-height:1.6;margin-bottom:28px;">ILERA AFRICA connecte les patients aux pharmacies agréées. Envoyez votre ordonnance, consultez un pharmacien et recevez vos médicaments à domicile.</p>
               <div style="display:flex;gap:12px;flex-wrap:wrap;">
                 <button onclick="goToWebScreen(6)" style="padding:14px 28px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.35);">Créer mon compte →</button>
                 <button onclick="showToast('Vidéo explicative...')" style="padding:14px 24px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">▶ Comment ça marche ?</button>
@@ -7337,7 +7352,7 @@
             <div style="padding:40px 48px;background:linear-gradient(135deg,#1A6B8A,#0F3F54);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;">
               <div style="font-size:32px;margin-bottom:12px;">🚀</div>
               <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:800;color:#fff;margin-bottom:10px;">Prêt à simplifier<br>vos soins ?</h2>
-              <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:20px;">Rejoignez 50 000 patients qui font confiance à ILERA africa pour gérer leur santé au quotidien.</p>
+              <p style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;margin-bottom:20px;">Rejoignez 50 000 patients qui font confiance à ILERA AFRICA pour gérer leur santé au quotidien.</p>
               <button onclick="goToWebScreen(6)" style="padding:14px 28px;background:#27AE60;color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.2);">Commencer gratuitement →</button>
               <div style="display:flex;gap:16px;margin-top:20px;">
                 <div style="text-align:center;"><div style="font-size:22px;font-weight:800;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;">50K+</div><div style="font-size:11px;color:rgba(255,255,255,0.6);">Patients</div></div>
@@ -7352,14 +7367,14 @@
           <footer style="background:#0F3F54;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
             <div style="display:flex;align-items:center;gap:10px;">
               <div style="width:28px;height:28px;background:rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.8);">ILERA africa</span>
+              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:rgba(255,255,255,0.8);">ILERA AFRICA</span>
             </div>
             <div style="display:flex;gap:20px;">
               <a onclick="goToScreen(46)" style="font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;font-family:'DM Sans',sans-serif;">Support</a>
               <a onclick="showToast('Mentions légales')" style="font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;font-family:'DM Sans',sans-serif;">Mentions légales</a>
               <a onclick="showToast('Confidentialité')" style="font-size:13px;color:rgba(255,255,255,0.5);cursor:pointer;font-family:'DM Sans',sans-serif;">Confidentialité</a>
             </div>
-            <div style="font-size:12px;color:rgba(255,255,255,0.4);font-family:'DM Sans',sans-serif;">© 2024 ILERA africa · Côte d'Ivoire</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.4);font-family:'DM Sans',sans-serif;">© 2024 ILERA AFRICA · Côte d'Ivoire</div>
           </footer>
         </div>
       </div>
@@ -7371,7 +7386,7 @@
   <div style="display:flex;height:100%;background:#F4F9FC;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
       <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
-        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA africa</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:20px;">
           <a onclick="goToWebScreen(7)" style="font-size:13px;color:#6B7A8D;cursor:pointer;font-family:'DM Sans',sans-serif;">Tableau de bord</a>
           <a onclick="goToWebScreen(9)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:700;">Mes Commandes</a>
@@ -7460,7 +7475,7 @@
     <div style="position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.03);bottom:-80px;left:-60px;"></div>
     <div style="position:absolute;top:24px;left:32px;display:flex;align-items:center;gap:8px;">
       <div style="width:32px;height:32px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,0.8);">ILERA africa</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,0.8);">ILERA AFRICA</span>
     </div>
     <div style="background:#fff;border-radius:24px;padding:40px;width:420px;box-shadow:0 32px 80px rgba(0,0,0,0.3);">
       <div style="text-align:center;margin-bottom:28px;">
@@ -7502,7 +7517,7 @@
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="width:220px;background:#0F3F54;display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;">
       <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);">
-        <div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;">⚕️</div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">ILERA africa Pro</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:28px;height:28px;background:rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;">⚕️</div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">ILERA AFRICA Pro</span></div>
       </div>
       <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
         <a onclick="goToWebScreen(13)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.12);border-radius:10px;color:#fff;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;">📊 Tableau de bord</a>
@@ -7580,7 +7595,7 @@
 <div class="web-screen" id="wscreen14">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="width:220px;background:#0F3F54;flex-shrink:0;display:flex;flex-direction:column;">
-      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA africa Pro</div></div>
+      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA AFRICA Pro</div></div>
       <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
         <a onclick="goToWebScreen(13)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📊 Tableau de bord</a>
         <a onclick="goToWebScreen(14)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.12);border-radius:10px;color:#fff;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;">📋 Ordonnances <span style="margin-left:auto;background:#E74C3C;color:#fff;border-radius:50%;width:18px;height:18px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">12</span></a>
@@ -7660,7 +7675,7 @@
 <div class="web-screen" id="wscreen15">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="width:220px;background:#0F3F54;flex-shrink:0;display:flex;flex-direction:column;">
-      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA africa Pro</div></div>
+      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA AFRICA Pro</div></div>
       <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
         <a onclick="goToWebScreen(13)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📊 Tableau de bord</a>
         <a onclick="goToWebScreen(14)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,0.12);border-radius:10px;color:#fff;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;">📋 Ordonnances</a>
@@ -7732,7 +7747,7 @@
 <div class="web-screen" id="wscreen16">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="width:220px;background:#0F3F54;flex-shrink:0;display:flex;flex-direction:column;">
-      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA africa Pro</div></div>
+      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA AFRICA Pro</div></div>
       <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
         <a onclick="goToWebScreen(13)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📊 Tableau de bord</a>
         <a onclick="goToWebScreen(14)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📋 Ordonnances</a>
@@ -7803,7 +7818,7 @@
 <div class="web-screen" id="wscreen17">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="width:220px;background:#0F3F54;flex-shrink:0;display:flex;flex-direction:column;">
-      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA africa Pro</div></div>
+      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA AFRICA Pro</div></div>
       <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
         <a onclick="goToWebScreen(13)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📊 Tableau de bord</a>
         <a onclick="goToWebScreen(14)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📋 Ordonnances</a>
@@ -7865,7 +7880,7 @@
 <div class="web-screen" id="wscreen18">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="width:220px;background:#0F3F54;flex-shrink:0;display:flex;flex-direction:column;">
-      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA africa Pro</div></div>
+      <div style="padding:20px 16px;border-bottom:1px solid rgba(255,255,255,0.08);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#fff;">⚕️ ILERA AFRICA Pro</div></div>
       <nav style="flex:1;padding:12px 8px;display:flex;flex-direction:column;gap:2px;">
         <a onclick="goToWebScreen(13)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📊 Tableau de bord</a>
         <a onclick="goToWebScreen(14)" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;color:rgba(255,255,255,0.6);cursor:pointer;font-size:13px;font-family:'DM Sans',sans-serif;">📋 Ordonnances</a>
@@ -7958,13 +7973,13 @@
     <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:rgba(231,76,60,0.04);top:-200px;right:-150px;"></div>
     <div style="position:absolute;top:24px;left:32px;display:flex;align-items:center;gap:8px;">
       <div style="width:32px;height:32px;background:rgba(255,255,255,0.1);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div>
-      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,0.7);">ILERA africa</span>
+      <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:rgba(255,255,255,0.7);">ILERA AFRICA</span>
     </div>
     <div style="background:#fff;border-radius:24px;padding:40px;width:420px;box-shadow:0 32px 80px rgba(0,0,0,0.5);">
       <div style="text-align:center;margin-bottom:28px;">
         <div style="width:56px;height:56px;background:#FEF0EE;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px;">🛡️</div>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#1A2332;">Accès Administrateur</div>
-        <div style="font-size:13px;color:#6B7A8D;margin-top:6px;">Panneau d'administration sécurisé · ILERA africa</div>
+        <div style="font-size:13px;color:#6B7A8D;margin-top:6px;">Panneau d'administration sécurisé · ILERA AFRICA</div>
       </div>
       <div style="display:flex;flex-direction:column;gap:14px;">
         <div><div style="font-size:11px;font-weight:700;color:#6B7A8D;margin-bottom:6px;letter-spacing:0.5px;">EMAIL ADMINISTRATEUR</div><input type="email" value="admin@ilera.africa" style="width:100%;padding:12px 14px;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;color:#1A2332;box-sizing:border-box;"></div>
@@ -8500,7 +8515,7 @@
     <!-- Patient top nav -->
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
       <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
-        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA africa</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:20px;">
           <a onclick="goToWebScreen(7)" style="font-size:13px;color:#6B7A8D;cursor:pointer;font-family:'DM Sans',sans-serif;">Accueil</a>
           <a onclick="goToWebScreen(26)" style="font-size:13px;color:#1A6B8A;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Catalogue</a>
@@ -8599,7 +8614,7 @@
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
       <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
-        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA africa</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:20px;">
           <a onclick="goToWebScreen(26)" style="font-size:13px;color:#1A6B8A;font-weight:700;cursor:pointer;">← Catalogue</a>
           <div style="position:relative;cursor:pointer;" onclick="goToWebScreen(28)"><div style="width:32px;height:32px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;">🛒</div><div style="position:absolute;top:-4px;right:-4px;width:16px;height:16px;background:#E74C3C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#fff;font-weight:700;">3</div></div>
@@ -8660,7 +8675,7 @@
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
       <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
-        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA africa</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:16px;"><a onclick="goToWebScreen(26)" style="font-size:13px;color:#6B7A8D;cursor:pointer;">← Continuer les achats</a><div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;">MK</div></div>
       </div>
       <div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;">
@@ -8715,7 +8730,7 @@
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
       <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
-        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA africa</span></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><rect x="20" y="6" width="12" height="40" rx="6" fill="white"/><rect x="6" y="20" width="40" height="12" rx="6" fill="white"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <a onclick="goToWebScreen(7)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a>
       </div>
       <div style="flex:1;overflow:hidden;display:flex;">
@@ -8971,7 +8986,7 @@
     <div style="text-align:center;padding:40px;color:#fff;">
       <div style="font-size:80px;margin-bottom:20px;">🔧</div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;margin-bottom:8px;">Maintenance en cours</div>
-      <div style="font-size:14px;opacity:0.7;margin-bottom:24px;">ILERA africa sera de retour très bientôt</div>
+      <div style="font-size:14px;opacity:0.7;margin-bottom:24px;">ILERA AFRICA sera de retour très bientôt</div>
       <div style="background:rgba(255,255,255,0.1);border-radius:12px;padding:16px 32px;font-size:24px;font-weight:800;letter-spacing:4px;">02:45:30</div>
     </div>
   </div>
@@ -9013,7 +9028,7 @@
   <div style="height:100%;background:linear-gradient(135deg,#F4F9FC,#E0F0F7);display:flex;align-items:center;justify-content:center;">
     <div style="background:#fff;border-radius:24px;padding:48px;max-width:600px;width:100%;box-shadow:0 8px 40px rgba(0,0,0,0.1);">
       <div style="text-align:center;margin-bottom:32px;">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;margin-bottom:6px;">Bienvenue sur ILERA africa Pro</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;margin-bottom:6px;">Bienvenue sur ILERA AFRICA Pro</div>
         <div style="font-size:13px;color:#6B7A8D;">Configurez votre espace pharmacien en 5 étapes</div>
       </div>
       <div style="display:flex;gap:6px;margin-bottom:32px;">
@@ -9332,7 +9347,7 @@
     <!-- Top bar -->
     <div style="background:#fff;padding:0 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;height:60px;flex-shrink:0;">
       <div style="display:flex;align-items:center;gap:16px;">
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#0D3B2E;">🩺 ILERA africa <span style="color:#27AE60;">Médecin</span></div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#0D3B2E;">🩺 ILERA AFRICA <span style="color:#27AE60;">Médecin</span></div>
         <div style="height:20px;width:1px;background:#E2ECF2;"></div>
         <nav style="display:flex;gap:4px;">
           <a onclick="goToWebScreen(55)" style="padding:6px 14px;background:#E8F7EE;color:#27AE60;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🏠 Dashboard</a>
@@ -11233,7 +11248,7 @@
 
   // ── Article modal ──
   var _articles = {
-    paludisme: { emoji:"💊", cat:"Prévention", catColor:"#27AE60", catBg:"#E8F7EE", title:"Bien gérer son traitement antipaludéen", time:"5 min de lecture", body:"Le paludisme reste l'une des maladies les plus répandues en Afrique de l'Ouest. Un traitement bien suivi est essentiel.<br><br><strong>Les points clés :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Prenez vos médicaments à heure fixe chaque jour</li><li>Ne jamais interrompre le traitement même si vous vous sentez mieux</li><li>Conservez les médicaments à l'abri de la chaleur</li><li>Consultez votre pharmacien en cas d'effets secondaires</li></ul><br><div style='background:#E8F7EE;border-radius:12px;padding:12px;font-size:12px;color:#27AE60;font-weight:600;'>Astuce : activez les rappels de prise dans l'appli ILERA africa</div>" },
+    paludisme: { emoji:"💊", cat:"Prévention", catColor:"#27AE60", catBg:"#E8F7EE", title:"Bien gérer son traitement antipaludéen", time:"5 min de lecture", body:"Le paludisme reste l'une des maladies les plus répandues en Afrique de l'Ouest. Un traitement bien suivi est essentiel.<br><br><strong>Les points clés :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Prenez vos médicaments à heure fixe chaque jour</li><li>Ne jamais interrompre le traitement même si vous vous sentez mieux</li><li>Conservez les médicaments à l'abri de la chaleur</li><li>Consultez votre pharmacien en cas d'effets secondaires</li></ul><br><div style='background:#E8F7EE;border-radius:12px;padding:12px;font-size:12px;color:#27AE60;font-weight:600;'>Astuce : activez les rappels de prise dans l'appli ILERA AFRICA</div>" },
     diabete: { emoji:"🥗", cat:"Nutrition", catColor:"#F39C12", catBg:"#FFF3CD", title:"Alimentation et diabète : les bons réflexes", time:"7 min de lecture", body:"Une alimentation équilibrée est le premier pilier du contrôle du diabète de type 2.<br><br><strong>A privilégier :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Légumes verts, légumineuses, céréales complètes</li><li>Poissons, viandes blanches</li><li>Fruits entiers en quantité modérée</li></ul><br><strong>A limiter :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Sucres rapides (sodas, sucreries)</li><li>Graisses saturées et fritures</li></ul><br><div style='background:#FFF3CD;border-radius:12px;padding:12px;font-size:12px;color:#F39C12;font-weight:600;'>Consultez un nutritionniste pour un plan personnalisé</div>" },
     stress: { emoji:"🧘", cat:"Bien-être", catColor:"#8B5CF6", catBg:"#F0E8FF", title:"Gérer le stress au quotidien", time:"4 min de lecture", body:"Le stress chronique impacte directement la santé. Quelques habitudes simples peuvent vous aider.<br><br><strong>Techniques efficaces :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Respiration abdominale : 4s inspiration, 6s expiration</li><li>30 minutes de marche par jour</li><li>Réduire le temps d'écran avant de dormir</li><li>Pratiquer la gratitude chaque soir</li></ul><br><div style='background:#F0E8FF;border-radius:12px;padding:12px;font-size:12px;color:#8B5CF6;font-weight:600;'>Si le stress persiste, parlez-en à votre médecin</div>" },
     antibiotiques: { emoji:"🦠", cat:"Médicaments", catColor:"#E74C3C", catBg:"#FEF0EE", title:"Antibiotiques : ne pas interrompre le traitement", time:"6 min de lecture", body:"Les antibiotiques ne sont efficaces que contre les infections bactériennes.<br><br><strong>Règles essentielles :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Toujours terminer la cure prescrite</li><li>Ne jamais partager vos antibiotiques</li><li>Ne pas prendre pour un virus (rhume, grippe)</li><li>Respectez les heures de prise indiquées</li></ul><br><div style='background:#FEF0EE;border-radius:12px;padding:12px;font-size:12px;color:#E74C3C;font-weight:600;'>Antibiotiques uniquement sur ordonnance médicale</div>" },
@@ -11473,7 +11488,7 @@
 
     // ── Add keyboard shortcut hint ──
     setTimeout(() => {
-      showToast('👋 ILERA africa · 🗺 Parcours pour les flows guidés · ← → pour naviguer');
+      showToast('👋 ILERA AFRICA · 🗺 Parcours pour les flows guidés · ← → pour naviguer');
     }, 300);
 
     // Show first screen
