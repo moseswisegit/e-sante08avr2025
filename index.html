@@ -2216,7 +2216,7 @@
             <div style="height:1px;background:#F4F9FC;margin-bottom:10px;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div style="font-size:15px;font-weight:700;color:#1A2332;">12 500 FCFA</div>
-              <button onclick="showToast('Détail commande #CMD-90214')" style="padding:8px 16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
+              <button onclick="showOrderDetail('CMD-90214','14 oct. 2024','Pharmacie Centrale CI','12 500 FCFA','ongoing')" style="padding:8px 16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
             </div>
           </div>
           <!-- Order card 2 -->
@@ -2231,7 +2231,7 @@
             <div style="height:1px;background:#F4F9FC;margin-bottom:10px;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div style="font-size:15px;font-weight:700;color:#1A2332;">8 750 FCFA</div>
-              <button onclick="showToast('Détail commande #CMD-90201')" style="padding:8px 16px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
+              <button onclick="showOrderDetail('CMD-90201','10 oct. 2024','PharmaCIV Abidjan','8 750 FCFA','delivered')" style="padding:8px 16px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
             </div>
           </div>
           <!-- Order card 3 -->
@@ -2246,7 +2246,7 @@
             <div style="height:1px;background:#F4F9FC;margin-bottom:10px;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div style="font-size:15px;font-weight:700;color:#1A2332;">21 300 FCFA</div>
-              <button onclick="showToast('Détail commande #CMD-90187')" style="padding:8px 16px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
+              <button onclick="showOrderDetail('CMD-90187','2 oct. 2024','Pharmacie du Plateau','21 300 FCFA','validation')" style="padding:8px 16px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
             </div>
           </div>
           <!-- Order card 4 -->
@@ -2261,7 +2261,7 @@
             <div style="height:1px;background:#F4F9FC;margin-bottom:10px;"></div>
             <div style="display:flex;justify-content:space-between;align-items:center;">
               <div style="font-size:15px;font-weight:700;color:#6B7A8D;text-decoration:line-through;">5 200 FCFA</div>
-              <button onclick="showToast('Détail commande #CMD-90154')" style="padding:8px 16px;background:#F4F9FC;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
+              <button onclick="showOrderDetail('CMD-90154','18 sept. 2024','Pharma Express','5 200 FCFA','cancelled')" style="padding:8px 16px;background:#F4F9FC;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir détail →</button>
             </div>
           </div>
         </div>
@@ -2272,19 +2272,20 @@
      SCREEN 11 — ORDER DETAIL & TRACKING
 ======================================== -->
 <div class="screen" id="screen14" data-device="mobile" style="background:#F4F9FC;">
-  <div style="background:#1A6B8A;padding:52px 20px 20px;display:flex;align-items:center;gap:12px;">
+  <div id="od-header" style="background:#1A6B8A;padding:52px 20px 20px;display:flex;align-items:center;gap:12px;">
     <button onclick="goToScreen(13)" style="width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;">←</button>
     <div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;">#CMD-90214</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.7);">14 octobre 2024</div>
+      <div id="od-orderId" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;">#CMD-90214</div>
+      <div id="od-date" style="font-size:12px;color:rgba(255,255,255,0.7);">14 octobre 2024</div>
     </div>
-    <div style="margin-left:auto;background:rgba(255,255,255,0.15);border-radius:20px;padding:6px 12px;font-size:11px;font-weight:700;color:#fff;">🚚 En livraison</div>
+    <div id="od-badge" style="margin-left:auto;background:rgba(255,255,255,0.15);border-radius:20px;padding:6px 12px;font-size:11px;font-weight:700;color:#fff;">🚚 En livraison</div>
   </div>
   <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
     <!-- Status stepper -->
     <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:14px;">Suivi de commande</div>
-      <div style="display:flex;align-items:flex-start;gap:0;">
+      <div id="od-stepper" style="display:flex;align-items:flex-start;gap:0;">
+        <!-- Stepper injected by showOrderDetail() -->
         <div style="display:flex;flex-direction:column;align-items:center;gap:0;flex:1;">
           <div style="width:28px;height:28px;background:#27AE60;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;font-weight:700;flex-shrink:0;">✓</div>
           <div style="width:2px;height:28px;background:#27AE60;"></div>
@@ -2360,8 +2361,10 @@
       </div>
     </div>
     <!-- Actions -->
-    <button onclick="showToast('✅ Réception confirmée !')" style="padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Valider la réception</button>
-    <button onclick="showModal('call-modal')" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Contacter le livreur</button>
+    <div id="od-actions">
+      <button onclick="showToast('✅ Réception confirmée !')" style="padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Valider la réception</button>
+      <button onclick="showModal('call-modal')" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;">Contacter le livreur</button>
+    </div>
   </div>
 </div>
 
@@ -10769,7 +10772,39 @@
       'file-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">📎 Joindre un fichier</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;"><div onclick="closeModal();showToast('📷 Caméra ouverte')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📷</div><div style="font-size:12px;font-weight:600;color:var(--text);">Caméra</div></div><div onclick="closeModal();showToast('🖼️ Galerie ouverte')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">🖼️</div><div style="font-size:12px;font-weight:600;color:var(--text);">Galerie</div></div><div onclick="closeModal();showToast('📁 Fichiers ouverts')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📁</div><div style="font-size:12px;font-weight:600;color:var(--text);">Fichiers</div></div><div onclick="closeModal();showToast('📄 PDF sélectionné')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📄</div><div style="font-size:12px;font-weight:600;color:var(--text);">PDF</div></div></div><button onclick="closeModal()" style="width:100%;padding:12px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;">Annuler</button></div>`,
       'map-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:12px;">🗺 Navigation GPS</div><div style="background:linear-gradient(145deg,#b8d8e8,#7fb5cc);border-radius:14px;height:130px;position:relative;margin-bottom:12px;overflow:hidden;"><svg width="100%" height="130" viewBox="0 0 300 130"><circle cx="40" cy="95" r="10" fill="#F39C12" stroke="#fff" stroke-width="2"/><text x="40" y="100" text-anchor="middle" font-size="8" fill="#fff">🛵</text><path d="M50,95 Q130,55 200,35" stroke="#F39C12" stroke-width="3" fill="none" stroke-dasharray="6,3"/><circle cx="200" cy="35" r="10" fill="#1A6B8A" stroke="#fff" stroke-width="2"/><text x="200" y="40" text-anchor="middle" font-size="8" fill="#fff">📍</text></svg><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(26,35,50,0.9);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:#F39C12;white-space:nowrap;">ETA 17:30 · 8 min</div></div><div style="display:flex;gap:8px;"><button onclick="closeModal();showToast('🗺 Waze ouvert')" style="flex:1;padding:12px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;">Waze</button><button onclick="closeModal();showToast('🗺 Google Maps ouvert')" style="flex:1;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;">Google Maps</button></div></div>`,
       'add-product-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">💊 Nouveau produit</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"><input type="text" placeholder="Nom du médicament" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input type="number" placeholder="Prix (FCFA)" style="padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><input type="number" placeholder="Stock initial" style="padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"></div></div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('✅ Produit ajouté au catalogue')" style="flex:2;padding:13px;background:linear-gradient(135deg,var(--secondary),#2ecc71);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Ajouter</button></div></div>`,
+      'cancel-order-modal': `<div style="padding:8px 0 16px;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;margin-bottom:4px;">⚠️ Annuler la commande</div>
+        <div style="font-size:13px;color:#6B7A8D;margin-bottom:16px;">Veuillez sélectionner un motif d'annulation :</div>
+        <div id="cancel-reasons" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
+          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Erreur de médicament commandé" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
+            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
+            <span style="font-size:13px;font-weight:600;color:#1A2332;">💊 Erreur de médicament commandé</span>
+          </div>
+          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Traitement modifié par le médecin" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
+            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
+            <span style="font-size:13px;font-weight:600;color:#1A2332;">🩺 Traitement modifié par le médecin</span>
+          </div>
+          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Médicament trouvé en pharmacie" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
+            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
+            <span style="font-size:13px;font-weight:600;color:#1A2332;">🏪 Médicament trouvé en pharmacie</span>
+          </div>
+          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Prix trop élevé" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
+            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
+            <span style="font-size:13px;font-weight:600;color:#1A2332;">💰 Prix trop élevé</span>
+          </div>
+          <div class="cancel-reason-opt" onclick="selectCancelReason(this)" data-val="Autre" style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#F4F9FC;border-radius:10px;cursor:pointer;border:1.5px solid transparent;transition:all 0.2s;">
+            <div style="width:16px;height:16px;border-radius:50%;border:2px solid #CBD5E0;flex-shrink:0;" class="radio-dot"></div>
+            <span style="font-size:13px;font-weight:600;color:#1A2332;">✏️ Autre raison</span>
+          </div>
+        </div>
+        <textarea id="cancel-other-text" placeholder="Précisez votre motif (optionnel)..." style="width:100%;padding:12px 14px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:#1A2332;resize:none;height:64px;margin-bottom:14px;"></textarea>
+        <div style="display:flex;gap:8px;">
+          <button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:#6B7A8D;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Retour</button>
+          <button onclick="submitCancelOrder()" style="flex:2;padding:13px;background:#E74C3C;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Confirmer l'annulation</button>
+        </div>
+      </div>`,
     };
+
     sheet.innerHTML += (modals[type] || `<div style="padding:20px;text-align:center;color:var(--text-muted);">Action: ${type}</div>`);
     overlay.appendChild(sheet);
     const frame = document.getElementById('mobileFrame') || document.body;
@@ -10781,6 +10816,33 @@
   function closeModal() {
     const overlay = document.querySelector('.modal-overlay');
     if (overlay) { overlay.classList.remove('open'); setTimeout(() => overlay.remove(), 400); }
+  }
+
+  function selectCancelReason(el) {
+    document.querySelectorAll('.cancel-reason-opt').forEach(opt => {
+      opt.style.borderColor = 'transparent';
+      opt.style.background = '#F4F9FC';
+      opt.querySelector('.radio-dot').style.background = '';
+      opt.querySelector('.radio-dot').style.borderColor = '#CBD5E0';
+    });
+    el.style.borderColor = '#E74C3C';
+    el.style.background = '#FEF0EE';
+    el.querySelector('.radio-dot').style.background = '#E74C3C';
+    el.querySelector('.radio-dot').style.borderColor = '#E74C3C';
+    el.setAttribute('data-selected', 'true');
+  }
+
+  function submitCancelOrder() {
+    const selected = document.querySelector('.cancel-reason-opt[data-selected="true"]');
+    if (!selected) {
+      showToast('⚠️ Veuillez sélectionner un motif');
+      return;
+    }
+    const reason = selected.getAttribute('data-val');
+    const other  = document.getElementById('cancel-other-text')?.value?.trim();
+    const msg    = other ? `${reason} — ${other}` : reason;
+    closeModal();
+    showToast(`✅ Commande annulée · Motif : ${msg}`);
   }
 
   // Utility functions for buttons
@@ -11235,6 +11297,184 @@
     showToast('🎉 Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
     setTimeout(() => goToWebScreen(10), 1500);
   }
+
+  // ============================================================
+  //  ORDER DETAIL — dynamic screen update based on status
+  // ============================================================
+  function showOrderDetail(orderId, date, pharmacy, amount, status) {
+    // Update header
+    document.getElementById('od-orderId').textContent = '#' + orderId;
+    document.getElementById('od-date').textContent = date + ' · ' + pharmacy;
+
+    const badge = document.getElementById('od-badge');
+    const stepper = document.getElementById('od-stepper');
+    const actions = document.getElementById('od-actions');
+    const header = document.getElementById('od-header');
+
+    // Config per status
+    const cfg = {
+      ongoing: {
+        badge: '🚚 En livraison', badgeBg: 'rgba(255,255,255,0.15)', headerBg: '#1A6B8A',
+        stepperHTML: stepperHTML(3),
+        actionsHTML: `
+          <button onclick="showToast('✅ Réception confirmée !')" style="padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Valider la réception</button>
+          <button onclick="showModal('call-modal')" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;">Contacter le livreur</button>`
+      },
+      delivered: {
+        badge: '✓ Livrée', badgeBg: 'rgba(39,174,96,0.25)', headerBg: '#27AE60',
+        stepperHTML: stepperHTML(4),
+        actionsHTML: `
+          <button onclick="downloadInvoice()" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;"><span>📄</span> Télécharger la facture</button>
+          <button onclick="goToScreen(11)" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;"><span>🔁</span> Commander à nouveau</button>`
+      },
+      validation: {
+        badge: '⏳ En validation', badgeBg: 'rgba(243,156,18,0.25)', headerBg: '#F39C12',
+        stepperHTML: stepperHTML(1),
+        actionsHTML: `
+          <button onclick="showModal('cancel-order-modal')" style="padding:14px;background:transparent;color:#E74C3C;border:2px solid #E74C3C;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;"><span>⚠️</span> Annuler la commande</button>`
+      },
+      cancelled: {
+        badge: '✕ Annulée', badgeBg: 'rgba(231,76,60,0.25)', headerBg: '#E74C3C',
+        stepperHTML: stepperHTML(0),
+        actionsHTML: `
+          <button onclick="showToast('🔁 Nouvelle commande lancée !')" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Commander à nouveau</button>`
+      }
+    };
+
+    const c = cfg[status] || cfg.ongoing;
+    header.style.background = c.headerBg;
+    badge.textContent = c.badge;
+    badge.style.background = c.badgeBg;
+    stepper.innerHTML = c.stepperHTML;
+    actions.innerHTML = c.actionsHTML;
+
+    goToScreen(14);
+  }
+
+  // ============================================================
+  //  DOWNLOAD INVOICE — generates a real HTML invoice file
+  // ============================================================
+  function downloadInvoice() {
+    const orderId  = document.getElementById('od-orderId')?.textContent || '#CMD-90201';
+    const dateEl   = document.getElementById('od-date')?.textContent || '10 oct. 2024 · PharmaCIV Abidjan';
+    const now      = new Date().toLocaleDateString('fr-FR', {day:'2-digit',month:'long',year:'numeric'});
+
+    const invoiceHTML = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Facture ${orderId} — ILERA AFRICA</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Arial', sans-serif; background:#F4F9FC; padding:40px; color:#1A2332; }
+    .invoice { background:#fff; max-width:640px; margin:0 auto; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); }
+    .header { background:linear-gradient(135deg,#1A6B8A,#2196B3); padding:32px 36px; color:#fff; }
+    .header h1 { font-size:28px; font-weight:800; letter-spacing:-0.5px; }
+    .header p  { font-size:13px; opacity:0.8; margin-top:4px; }
+    .badge     { display:inline-block; background:rgba(255,255,255,0.2); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:700; margin-top:12px; }
+    .body      { padding:32px 36px; }
+    .meta      { display:flex; justify-content:space-between; margin-bottom:28px; gap:24px; }
+    .meta-block label { font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#6B7A8D; display:block; margin-bottom:4px; }
+    .meta-block span  { font-size:14px; font-weight:700; color:#1A2332; }
+    .divider   { height:1px; background:#E2ECF2; margin:20px 0; }
+    table      { width:100%; border-collapse:collapse; }
+    th         { text-align:left; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; color:#6B7A8D; padding:0 0 10px; }
+    th:last-child, td:last-child { text-align:right; }
+    td         { padding:10px 0; font-size:14px; color:#1A2332; border-bottom:1px solid #F4F9FC; }
+    .total-row td { border:none; font-weight:800; font-size:16px; color:#1A6B8A; padding-top:16px; }
+    .delivery-row td { color:#6B7A8D; font-size:13px; }
+    .footer    { background:#F4F9FC; padding:20px 36px; font-size:11px; color:#6B7A8D; text-align:center; line-height:1.6; }
+    .stamp     { display:inline-block; border:2px solid #27AE60; border-radius:8px; color:#27AE60; font-weight:700; font-size:13px; padding:6px 18px; margin-top:20px; letter-spacing:1px; }
+    @media print { body { background:#fff; padding:0; } }
+  </style>
+</head>
+<body>
+  <div class="invoice">
+    <div class="header">
+      <h1>ILERA AFRICA</h1>
+      <p>Pharmacie en ligne · Abidjan, Côte d'Ivoire</p>
+      <div class="badge">✓ FACTURE OFFICIELLE</div>
+    </div>
+    <div class="body">
+      <div class="meta">
+        <div class="meta-block"><label>Numéro de commande</label><span>${orderId}</span></div>
+        <div class="meta-block"><label>Date de commande</label><span>${dateEl}</span></div>
+        <div class="meta-block"><label>Date d'émission</label><span>${now}</span></div>
+        <div class="meta-block"><label>Client</label><span>Moussa Koné</span></div>
+      </div>
+      <div class="divider"></div>
+      <table>
+        <thead><tr><th>Médicament</th><th>Qté</th><th>Prix unitaire</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Amoxicilline 500mg</td><td>×2</td><td>2 100 FCFA</td><td>4 200 FCFA</td></tr>
+          <tr><td>Paracétamol 1g</td><td>×3</td><td>1 200 FCFA</td><td>3 600 FCFA</td></tr>
+          <tr><td>Metformine 850mg</td><td>×1</td><td>2 800 FCFA</td><td>2 800 FCFA</td></tr>
+          <tr class="delivery-row"><td colspan="3">Frais de livraison</td><td>1 900 FCFA</td></tr>
+        </tbody>
+        <tfoot>
+          <tr class="total-row"><td colspan="3">TOTAL TTC</td><td>12 500 FCFA</td></tr>
+        </tfoot>
+      </table>
+      <div class="divider"></div>
+      <div style="text-align:center;">
+        <div class="stamp">PAYÉ ✓</div>
+        <p style="font-size:12px;color:#6B7A8D;margin-top:10px;">Paiement Mobile Money — MTN</p>
+      </div>
+    </div>
+    <div class="footer">
+      ILERA AFRICA SAS · RC CI-ABJ-2024-B · TVA CI-12345-X<br>
+      Cocody Riviera 3, Abidjan · contact@ilera-africa.ci · +225 07 00 00 00 00<br>
+      Ce document tient lieu de facture conformément à la réglementation ivoirienne.
+    </div>
+  </div>
+</body>
+</html>`;
+
+    const blob = new Blob([invoiceHTML], { type: 'text/html' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `Facture_${orderId.replace('#','')}_ILERA.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('📄 Facture téléchargée avec succès !');
+  }
+
+  // Build stepper HTML — activeStep: 0=none,1=validation,2=preparation,3=livraison,4=livré
+
+  function stepperHTML(activeStep) {
+    const steps = [
+      { label: 'Validation', icon: '✓' },
+      { label: 'Préparation', icon: '✓' },
+      { label: 'Livraison', icon: '🚚' },
+      { label: 'Livré', icon: '✓' }
+    ];
+    let html = '';
+    steps.forEach((s, i) => {
+      const done  = i < activeStep;
+      const active = i === activeStep - 1;
+      const inactive = !done && !active;
+      const circleBg = done ? '#27AE60' : active ? '#1A6B8A' : '#E8F4F8';
+      const circleBorder = inactive ? 'border:2px solid #E2ECF2;' : '';
+      const iconColor = done || active ? '#fff' : '#6B7A8D';
+      const labelColor = done ? '#27AE60' : active ? '#1A6B8A' : '#6B7A8D';
+      const lineBg = i < steps.length - 1 ? (done ? '#27AE60' : '#E2ECF2') : '';
+
+      html += `<div style="display:flex;flex-direction:column;align-items:center;gap:0;flex:1;">
+        <div style="width:28px;height:28px;background:${circleBg};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${i===2?'13':'12'}px;color:${iconColor};font-weight:700;flex-shrink:0;${circleBorder}">${done || active ? s.icon : '○'}</div>
+        <div style="width:2px;height:28px;background:${done ? '#27AE60' : '#E2ECF2'};"></div>
+        <div style="font-size:10px;font-weight:${done||active?'600':'500'};color:${labelColor};text-align:center;margin-top:4px;">${s.label}</div>
+      </div>`;
+      if (i < steps.length - 1) {
+        html += `<div style="height:2px;background:${lineBg};flex:1;margin-top:13px;"></div>`;
+      }
+    });
+    return html;
+  }
+
+
 
   function handleWebLogin() {
     showToast('✅ Connexion pharmacien réussie');
