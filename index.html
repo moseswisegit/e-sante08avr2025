@@ -2272,30 +2272,21 @@
     <!-- Medicines list -->
     <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Médicaments commandés</div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div><div style="font-size:14px;font-weight:600;color:#1A2332;">Amoxicilline 500mg</div><div style="font-size:12px;color:#6B7A8D;">Qté: 2 boîtes</div></div>
-          <div style="font-size:13px;font-weight:700;color:#1A2332;">4 200 FCFA</div>
-        </div>
-        <div style="height:1px;background:#F4F9FC;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div><div style="font-size:14px;font-weight:600;color:#1A2332;">Paracétamol 1g</div><div style="font-size:12px;color:#6B7A8D;">Qté: 3 boîtes</div></div>
-          <div style="font-size:13px;font-weight:700;color:#1A2332;">3 600 FCFA</div>
-        </div>
-        <div style="height:1px;background:#F4F9FC;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div><div style="font-size:14px;font-weight:600;color:#1A2332;">Metformine 850mg</div><div style="font-size:12px;color:#6B7A8D;">Qté: 1 boîte</div></div>
-          <div style="font-size:13px;font-weight:700;color:#1A2332;">2 800 FCFA</div>
-        </div>
-        <div style="height:1px;background:#E2ECF2;margin:4px 0;"></div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-size:12px;color:#6B7A8D;">Livraison</div>
-          <div style="font-size:13px;font-weight:600;color:#6B7A8D;">1 900 FCFA</div>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:#1A2332;">Total</div>
-          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A6B8A;">12 500 FCFA</div>
-        </div>
+      <div id="od-meds-list" style="display:flex;flex-direction:column;gap:10px;">
+        <!-- dynamic list -->
+      </div>
+      <div style="height:1px;background:#E2ECF2;margin:12px 0;"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;">
+        <div style="font-size:12px;color:#6B7A8D;">Sous-total</div>
+        <div id="od-subtotal" style="font-size:13px;font-weight:600;color:#1A2332;">0 FCFA</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+        <div style="font-size:12px;color:#6B7A8D;">Livraison</div>
+        <div id="od-delivery" style="font-size:13px;font-weight:600;color:#6B7A8D;">1 900 FCFA</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:800;color:#1A2332;">Total</div>
+        <div id="od-total" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A6B8A;">0 FCFA</div>
       </div>
     </div>
     <!-- Actions -->
@@ -2371,7 +2362,7 @@
       <span style="font-size:14px;">🔒</span>
       <span style="font-size:12px;font-weight:600;color:#27AE60;">Paiement sécurisé SSL 256-bit</span>
     </div>
-    <button onclick="goToScreen(51)" style="padding:16px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;box-shadow:0 8px 24px rgba(39,174,96,0.35);">Confirmer et payer — 12 500 FCFA</button>
+    <button onclick="showSuccess('payment', '#CMD-90214')" style="padding:16px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;box-shadow:0 8px 24px rgba(39,174,96,0.35);">Confirmer et payer — 12 500 FCFA</button>
   </div>
 </div>
 
@@ -3473,7 +3464,7 @@
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;"><div><div style="font-size:14px;font-weight:700;color:#1A2332;">#ORD-2024-089</div><div style="font-size:11px;color:#6B7A8D;">14 oct. 2024</div></div><div style="background:#FEF9EE;border-radius:50px;padding:4px 10px;font-size:11px;font-weight:700;color:#F39C12;">⏳ En attente</div></div>
         <div style="font-size:12px;color:#6B7A8D;">Amoxicilline, Paracétamol · Dr. Lefebvre</div>
       </div>
-      <div onclick="showPrescriptionDetail('ORD-2024-071','2 oct. 2024','Dr. Diabaté','Metformine 850mg','validated')" style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;">
+      <div onclick="showPrescriptionDetail('ORD-2024-071','2 oct. 2024','Dr. Diabaté','Metformine 850mg','validated','CMD-90201')" style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;"><div><div style="font-size:14px;font-weight:700;color:#1A2332;">#ORD-2024-071</div><div style="font-size:11px;color:#6B7A8D;">2 oct. 2024</div></div><div style="background:#E8F7EE;border-radius:50px;padding:4px 10px;font-size:11px;font-weight:700;color:#27AE60;">✓ Validée</div></div>
         <div style="font-size:12px;color:#6B7A8D;">Metformine 850mg · Dr. Diabaté</div>
       </div>
@@ -4368,11 +4359,11 @@
       <div style="font-size:44px;">✓</div>
     </div>
     <style>@keyframes successPulse{0%,100%{box-shadow:0 16px 48px rgba(39,174,96,0.35)}50%{box-shadow:0 16px 64px rgba(39,174,96,0.55)}}</style>
-    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;">Ordonnance envoyée !</div>
-    <div style="font-size:14px;color:#6B7A8D;line-height:1.6;max-width:270px;">Votre ordonnance a été envoyée avec succès à votre pharmacien.</div>
+    <div id="success-title" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;">Ordonnance envoyée !</div>
+    <div id="success-msg" style="font-size:14px;color:#6B7A8D;line-height:1.6;max-width:270px;">Votre ordonnance a été envoyée avec succès à votre pharmacien.</div>
     <div style="background:#fff;border-radius:16px;padding:16px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.08);width:100%;">
-      <div style="font-size:12px;color:#6B7A8D;margin-bottom:4px;">Référence de commande</div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#1A6B8A;">#ORD-2024-089</div>
+      <div id="success-ref-label" style="font-size:12px;color:#6B7A8D;margin-bottom:4px;">Référence de commande</div>
+      <div id="success-ref-val" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#1A6B8A;">#ORD-2024-089</div>
     </div>
     <div style="background:#E8F7EE;border-radius:14px;padding:14px;border:1px solid rgba(39,174,96,0.2);width:100%;">
       <div style="font-size:13px;color:#27AE60;line-height:1.5;">🔔 Vous serez notifié dès la validation par votre médecin. Délai habituel : <strong>15-30 minutes</strong></div>
@@ -11290,7 +11281,7 @@
   // ============================================================
   //  ORDER DETAIL — dynamic screen update based on status
   // ============================================================
-  function showOrderDetail(orderId, date, pharmacy, amount, status) {
+  function showOrderDetail(orderId, date, pharmacy, amount, status, items) {
     // Update header
     document.getElementById('od-orderId').textContent = '#' + orderId;
     document.getElementById('od-date').textContent = date + ' · ' + pharmacy;
@@ -11299,6 +11290,25 @@
     const stepper = document.getElementById('od-stepper');
     const actions = document.getElementById('od-actions');
     const header = document.getElementById('od-header');
+
+    // Default items if none provided
+    const displayItems = items || [
+      { name: 'Amoxicilline 500mg', qty: '2 boîtes', price: '4 200 FCFA' },
+      { name: 'Paracétamol 1g', qty: '3 boîtes', price: '3 600 FCFA' }
+    ];
+
+    // Populate meds list
+    let medsHTML = '';
+    displayItems.forEach((item, idx) => {
+      medsHTML += `
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <div><div style="font-size:14px;font-weight:600;color:#1A2332;">${item.name}</div><div style="font-size:12px;color:#6B7A8D;">Qté: ${item.qty}</div></div>
+          <div style="font-size:13px;font-weight:700;color:#1A2332;">${item.price}</div>
+        </div>`;
+      if(idx < displayItems.length - 1) medsHTML += '<div style="height:1px;background:#F4F9FC;"></div>';
+    });
+    document.getElementById('od-meds-list').innerHTML = medsHTML;
+    document.getElementById('od-total').textContent = amount;
 
     // Config per status
     const cfg = {
@@ -11314,7 +11324,7 @@
         stepperHTML: stepperHTML(4),
         actionsHTML: `
           <button onclick="downloadInvoice()" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;"><span>📄</span> Télécharger la facture</button>
-          <button onclick="goToScreen(11)" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;"><span>🔁</span> Commander à nouveau</button>`
+          <button onclick="reorderOrder('${orderId}', '${amount}')" style="padding:14px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:8px;"><span>🔁</span> Commander à nouveau</button>`
       },
       validation: {
         badge: '⏳ En validation', badgeBg: 'rgba(243,156,18,0.25)', headerBg: '#F39C12',
@@ -11326,7 +11336,7 @@
         badge: '✕ Annulée', badgeBg: 'rgba(231,76,60,0.25)', headerBg: '#E74C3C',
         stepperHTML: stepperHTML(0),
         actionsHTML: `
-          <button onclick="showToast('🔁 Nouvelle commande lancée !')" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Commander à nouveau</button>`
+          <button onclick="reorderOrder('${orderId}', '${amount}')" style="padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Commander à nouveau</button>`
       }
     };
 
@@ -11343,7 +11353,7 @@
   // ============================================================
   //  PRESCRIPTION DETAIL — dynamic patient read-only view
   // ============================================================
-  function showPrescriptionDetail(id, date, doctor, meds, status) {
+  function showPrescriptionDetail(id, date, doctor, meds, status, orderId) {
     const cfg = {
       pending:   { label: '⏳ En attente',  bg: '#FFF3CD', border: '#F39C12', color: '#F39C12',
                    headerBg: 'linear-gradient(135deg,#1A2332,#0F3F54)',
@@ -11368,7 +11378,9 @@
                    ],
                    note: '✅ Ordonnance validée par '+doctor+'. Votre commande a bien été préparée et livrée.',
                    noteStyle: 'normal',
-                   cta: `<button onclick="goToScreen(13)" style="width:100%;padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📦 Voir la commande associée</button>` },
+                   cta: orderId
+                     ? `<button onclick="showOrderDetail('${orderId}','${date}','Pharmacie associée','—','delivered')" style="width:100%;padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📦 Voir la commande associée</button>`
+                     : `<button onclick="goToScreen(13)" style="width:100%;padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📦 Voir mes commandes</button>` },
       rejected:  { label: '✕ Rejetée',      bg: '#FEF0EE', border: '#E74C3C', color: '#E74C3C',
                    headerBg: 'linear-gradient(135deg,#7b1a1a,#E74C3C)',
                    steps: [
@@ -11383,6 +11395,7 @@
                    cta: `<button onclick="goToScreen(16)" style="width:100%;padding:14px;background:linear-gradient(135deg,#E74C3C,#e74c3c);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">⚠️ Contacter le médecin</button>` },
     };
     const c = cfg[status] || cfg.pending;
+    const filename = 'ordonnance_' + doctor.replace('Dr. ','').replace(/[^a-zA-Z0-9]/g,'_') + '.pdf';
 
     // — Header
     document.getElementById('pdetail-header').innerHTML = `
@@ -11424,13 +11437,14 @@
       <!-- Prescription file -->
       <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:10px;">📋 Ordonnance envoyée</div>
-        <div onclick="showToast('🔍 Zoom sur l\\'ordonnance...')" style="height:100px;background:linear-gradient(135deg,#F0F8FF,#E0EEFC);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;">
+        <div onclick="showPrescriptionZoom()" style="height:100px;background:linear-gradient(135deg,#F0F8FF,#E0EEFC);border-radius:12px;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;position:relative;">
           <div style="font-size:30px;">📄</div>
           <div>
-            <div style="font-size:13px;font-weight:600;color:#1A2332;">ordonnance_${doctor.replace('Dr. ','').replace(' ','_')}.pdf</div>
-            <div style="font-size:11px;color:#6B7A8D;">${meds}</div>
-            <div style="font-size:11px;color:#6B7A8D;">Appuyer pour agrandir 🔍</div>
+            <div style="font-size:13px;font-weight:600;color:#1A2332;">${filename}</div>
+            <div style="font-size:11px;color:#6B7A8D;font-weight:500;">Prescription : ${meds}</div>
+            <div style="font-size:11px;color:#1A6B8A;font-weight:600;margin-top:2px;">🔍 Appuyer pour agrandir</div>
           </div>
+          <div style="position:absolute;top:8px;right:10px;background:#1A6B8A;border-radius:8px;padding:3px 8px;font-size:10px;color:#fff;font-weight:700;">⛶ ZOOM</div>
         </div>
       </div>
       <!-- Timeline -->
@@ -11447,6 +11461,194 @@
       ${c.cta}`;
 
     goToScreen(12);
+  }
+
+  // ============================================================
+  //  PRESCRIPTION ZOOM MODAL — dynamically built from window._currentPrescr
+  // ============================================================
+  function showPrescriptionZoom() {
+    const p = window._currentPrescr || {};
+    const fname = p.doctor ? 'ordonnance_' + p.doctor.replace('Dr. ','').replace(/\s+/g,'_') + '.pdf' : 'ordonnance.pdf';
+    const existing = document.querySelector('.modal-overlay');
+    if (existing) existing.remove();
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
+    const sheet = document.createElement('div');
+    sheet.className = 'modal-sheet';
+    const handle = document.createElement('div');
+    handle.className = 'modal-handle';
+    sheet.appendChild(handle);
+    sheet.innerHTML += `
+      <div style="padding:8px 0 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;">🔍 Ordonnance</div>
+          <div style="font-size:11px;color:#6B7A8D;font-weight:600;">Document sécurisé · Anti-fraude</div>
+        </div>
+        <div style="background:linear-gradient(145deg,#EEF6FF,#DCECfB);border-radius:16px;padding:20px;margin-bottom:14px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;">
+          <div style="font-size:56px;">📄</div>
+          <div style="text-align:center;">
+            <div style="font-size:14px;font-weight:700;color:#1A2332;">${fname}</div>
+            <div style="font-size:12px;color:#6B7A8D;margin-top:4px;">${p.meds || ''}</div>
+          </div>
+          <div style="background:rgba(26,107,138,0.1);border-radius:10px;padding:10px 16px;text-align:center;width:100%;">
+            <div style="font-size:11px;color:#1A6B8A;font-weight:700;">🔒 Signature numérique validée</div>
+            <div style="font-size:10px;color:#6B7A8D;margin-top:2px;">Réf : ${p.id || '—'} · ${p.date || '—'}</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="downloadPrescription()" style="flex:1;padding:12px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">📥 Télécharger</button>
+          <button onclick="closeModal()" style="flex:1;padding:12px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Fermer</button>
+        </div>
+      </div>`;
+    overlay.appendChild(sheet);
+    const frame = document.getElementById('mobileFrame') || document.body;
+    frame.style.position = 'relative';
+    frame.appendChild(overlay);
+    requestAnimationFrame(() => { requestAnimationFrame(() => { overlay.classList.add('open'); }); });
+  }
+
+  // ============================================================
+    function reorderOrder(orderId, amount) {
+    showToast('🔁 Préparation de votre nouvelle commande...');
+    setTimeout(() => {
+      // Direct to payment for re-order
+      showToast('✅ Articles ajoutés au panier. Redirection au paiement...');
+      setTimeout(() => {
+        goToScreen(15);
+      }, 1000);
+    }, 1000);
+  }
+
+  // ============================================================
+  //  DOWNLOAD PRESCRIPTION — generates a real HTML prescription file
+  // ============================================================
+  function downloadPrescription() {
+    closeModal();
+    const p = window._currentPrescr || {};
+    const fname = p.doctor ? 'ordonnance_' + p.doctor.replace('Dr. ','').replace(/\s+/g,'_') : 'ordonnance';
+    const now = new Date().toLocaleDateString('fr-FR', {day:'2-digit', month:'long', year:'numeric'});
+
+    const statusMap = {
+      pending:   { label: 'En attente de validation', color: '#F39C12' },
+      validated: { label: 'Validée ✓',                color: '#27AE60' },
+      rejected:  { label: 'Rejetée ✕',                color: '#E74C3C' },
+    };
+    const st = statusMap[p.status] || statusMap.pending;
+
+    const html = `<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Ordonnance ${p.id || ''}</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, sans-serif; background: #f5f5f5; display:flex; justify-content:center; padding:30px 10px; }
+  .page { background:#fff; width:595px; min-height:842px; padding:48px; box-shadow:0 4px 24px rgba(0,0,0,0.12); border-radius:4px; }
+  .header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:32px; padding-bottom:20px; border-bottom:2px solid #1A6B8A; }
+  .logo-block .brand { font-size:22px; font-weight:800; color:#1A6B8A; }
+  .logo-block .tagline { font-size:10px; color:#6B7A8D; margin-top:2px; }
+  .ref-block { text-align:right; }
+  .ref-block .ref { font-size:12px; font-weight:700; color:#1A2332; }
+  .ref-block .date { font-size:11px; color:#6B7A8D; margin-top:3px; }
+  .status-badge { display:inline-block; padding:5px 14px; border-radius:20px; font-size:12px; font-weight:700; color:${st.color}; border:1.5px solid ${st.color}; background:transparent; margin-top:6px; }
+  .section-title { font-size:13px; font-weight:700; color:#1A6B8A; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; margin-top:24px; }
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; background:#F4F9FC; border-radius:8px; padding:16px; }
+  .info-item label { font-size:10px; color:#6B7A8D; font-weight:600; text-transform:uppercase; }
+  .info-item p { font-size:13px; color:#1A2332; font-weight:600; margin-top:3px; }
+  .meds-table { width:100%; border-collapse:collapse; margin-top:8px; }
+  .meds-table th { background:#1A6B8A; color:#fff; padding:10px 12px; font-size:12px; text-align:left; }
+  .meds-table td { padding:10px 12px; font-size:12px; color:#1A2332; border-bottom:1px solid #E2ECF2; }
+  .meds-table tr:nth-child(even) td { background:#F9FCFD; }
+  .timeline { margin-top:8px; }
+  .tl-item { display:flex; gap:12px; align-items:flex-start; margin-bottom:12px; }
+  .tl-dot { width:20px; height:20px; border-radius:50%; background:#27AE60; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; flex-shrink:0; margin-top:2px; }
+  .tl-dot.active { background:#F39C12; }
+  .tl-dot.empty { background:#E2ECF2; }
+  .tl-dot.rejected { background:#E74C3C; }
+  .tl-text strong { font-size:12px; color:#1A2332; }
+  .tl-text span { font-size:10px; color:#6B7A8D; display:block; }
+  .footer { margin-top:40px; padding-top:16px; border-top:1px solid #E2ECF2; display:flex; justify-content:space-between; align-items:flex-end; }
+  .footer .legal { font-size:9px; color:#6B7A8D; line-height:1.6; max-width:340px; }
+  .footer .qr-placeholder { width:60px; height:60px; border:2px solid #E2ECF2; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:24px; }
+  .security { background:#E8F7EE; border-left:3px solid #27AE60; padding:10px 14px; border-radius:4px; margin-top:16px; font-size:11px; color:#1A2332; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="logo-block">
+      <div class="brand">🌿 ILERA AFRICA</div>
+      <div class="tagline">Plateforme de santé numérique</div>
+    </div>
+    <div class="ref-block">
+      <div class="ref">Réf. ordonnance : #${p.id || 'ORD-XXXX'}</div>
+      <div class="date">Émise le : ${p.date || now}</div>
+      <div class="date">Imprimée le : ${now}</div>
+      <div class="status-badge">${st.label}</div>
+    </div>
+  </div>
+
+  <div class="section-title">Informations patient</div>
+  <div class="info-grid">
+    <div class="info-item"><label>Nom complet</label><p>Moussa Koné</p></div>
+    <div class="info-item"><label>Date de naissance</label><p>12 mars 1986 · 38 ans</p></div>
+    <div class="info-item"><label>Groupe sanguin</label><p>A+</p></div>
+    <div class="info-item"><label>N° dossier</label><p>PAT-2024-0042</p></div>
+  </div>
+
+  <div class="section-title">Médecin prescripteur</div>
+  <div class="info-grid">
+    <div class="info-item"><label>Médecin</label><p>${p.doctor || '—'}</p></div>
+    <div class="info-item"><label>Date prescription</label><p>${p.date || '—'}</p></div>
+  </div>
+
+  <div class="section-title">Médicaments prescrits</div>
+  <table class="meds-table">
+    <thead><tr><th>#</th><th>Médicament</th><th>Posologie</th><th>Durée</th></tr></thead>
+    <tbody>
+      ${(p.meds || 'Médicament').split(',').map((m, i) => `
+      <tr>
+        <td>${i+1}</td>
+        <td><strong>${m.trim()}</strong></td>
+        <td>1 comprimé × 3/jour</td>
+        <td>7 jours</td>
+      </tr>`).join('')}
+    </tbody>
+  </table>
+
+  <div class="section-title">Suivi de l'ordonnance</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot">✓</div><div class="tl-text"><strong>Ordonnance envoyée</strong><span>${p.date || ''}, 09:30</span></div></div>
+    <div class="tl-item"><div class="tl-dot">✓</div><div class="tl-text"><strong>Reçue — en cours de validation</strong><span>${p.date || ''}, 10:15</span></div></div>
+    <div class="tl-item"><div class="tl-dot ${p.status === 'validated' ? '' : p.status === 'rejected' ? 'rejected' : 'active'}">${p.status === 'validated' ? '✓' : p.status === 'rejected' ? '✕' : '⟳'}</div><div class="tl-text"><strong>Validation médecin</strong><span>${p.status === 'pending' ? 'En attente...' : p.date + ', 11:00'}</span></div></div>
+    <div class="tl-item"><div class="tl-dot ${p.status === 'validated' ? '' : 'empty'}">${p.status === 'validated' ? '✓' : '○'}</div><div class="tl-text"><strong>Commande préparée</strong></div></div>
+    <div class="tl-item"><div class="tl-dot ${p.status === 'validated' ? '' : 'empty'}">${p.status === 'validated' ? '✓' : '○'}</div><div class="tl-text"><strong>Livrée</strong></div></div>
+  </div>
+
+  <div class="security">🔒 Document authentifié · Signature numérique Ilera Africa · Ce document est protégé contre la falsification. Réf. sécurité : <strong>ILR-${Date.now().toString(36).toUpperCase()}</strong></div>
+
+  <div class="footer">
+    <div class="legal">
+      Ce document est une ordonnance numérique officielle émise via la plateforme Ilera Africa.
+      Toute falsification est passible de poursuites judiciaires conformément à la loi.
+      Pour toute vérification : support@ilerafrica.ci · +225 27 22 XX XX XX
+    </div>
+    <div class="qr-placeholder">🔲</div>
+  </div>
+</div>
+</body></html>`;
+
+    const blob = new Blob([html], { type: 'text/html' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url;
+    a.download = fname + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+    showToast('📥 Ordonnance téléchargée avec succès !');
   }
 
   // ============================================================
