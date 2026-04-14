@@ -2316,7 +2316,7 @@
       <div style="position:absolute;inset:0;background:linear-gradient(135deg,#d4eaf2,#b8d8e8);"></div>
       <div style="position:absolute;top:40%;left:55%;width:16px;height:20px;background:#E74C3C;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 8px rgba(231,76,60,0.4);"></div>
       <div style="position:absolute;bottom:16px;left:16px;background:#fff;border-radius:10px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:11px;font-weight:600;color:#1A2332;">📍 En route · ~2.4 km</div>
-      <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.9);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;" onclick="showToast('Carte en plein écran')">⛶</div>
+      <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.9);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;" onclick="showModal('fullmap-modal')">⛶</div>
     </div>
     <!-- Info cards -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
@@ -10772,6 +10772,57 @@
       'file-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">📎 Joindre un fichier</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;"><div onclick="closeModal();showToast('📷 Caméra ouverte')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📷</div><div style="font-size:12px;font-weight:600;color:var(--text);">Caméra</div></div><div onclick="closeModal();showToast('🖼️ Galerie ouverte')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">🖼️</div><div style="font-size:12px;font-weight:600;color:var(--text);">Galerie</div></div><div onclick="closeModal();showToast('📁 Fichiers ouverts')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📁</div><div style="font-size:12px;font-weight:600;color:var(--text);">Fichiers</div></div><div onclick="closeModal();showToast('📄 PDF sélectionné')" style="background:var(--bg);border-radius:12px;padding:16px;text-align:center;cursor:pointer;border:1.5px dashed var(--border);"><div style="font-size:28px;margin-bottom:6px;">📄</div><div style="font-size:12px;font-weight:600;color:var(--text);">PDF</div></div></div><button onclick="closeModal()" style="width:100%;padding:12px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;">Annuler</button></div>`,
       'map-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:12px;">🗺 Navigation GPS</div><div style="background:linear-gradient(145deg,#b8d8e8,#7fb5cc);border-radius:14px;height:130px;position:relative;margin-bottom:12px;overflow:hidden;"><svg width="100%" height="130" viewBox="0 0 300 130"><circle cx="40" cy="95" r="10" fill="#F39C12" stroke="#fff" stroke-width="2"/><text x="40" y="100" text-anchor="middle" font-size="8" fill="#fff">🛵</text><path d="M50,95 Q130,55 200,35" stroke="#F39C12" stroke-width="3" fill="none" stroke-dasharray="6,3"/><circle cx="200" cy="35" r="10" fill="#1A6B8A" stroke="#fff" stroke-width="2"/><text x="200" y="40" text-anchor="middle" font-size="8" fill="#fff">📍</text></svg><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(26,35,50,0.9);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;color:#F39C12;white-space:nowrap;">ETA 17:30 · 8 min</div></div><div style="display:flex;gap:8px;"><button onclick="closeModal();showToast('🗺 Waze ouvert')" style="flex:1;padding:12px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;">Waze</button><button onclick="closeModal();showToast('🗺 Google Maps ouvert')" style="flex:1;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;">Google Maps</button></div></div>`,
       'add-product-modal': `<div style="padding:8px 0 16px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:14px;">💊 Nouveau produit</div><div style="display:flex;flex-direction:column;gap:10px;margin-bottom:14px;"><input type="text" placeholder="Nom du médicament" style="width:100%;padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><input type="number" placeholder="Prix (FCFA)" style="padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"><input type="number" placeholder="Stock initial" style="padding:12px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text);"></div></div><div style="display:flex;gap:8px;"><button onclick="closeModal()" style="flex:1;padding:13px;background:#F4F9FC;color:var(--text-muted);border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;">Annuler</button><button onclick="closeModal();showToast('✅ Produit ajouté au catalogue')" style="flex:2;padding:13px;background:linear-gradient(135deg,var(--secondary),#2ecc71);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;">Ajouter</button></div></div>`,
+      'fullmap-modal': `<div style="padding:8px 0 16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;">🗺 Suivi en temps réel</div>
+          <div style="background:#E8F7EE;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#27AE60;">● EN DIRECT</div>
+        </div>
+        <div style="background:linear-gradient(145deg,#c8e6f0,#8ac4db);border-radius:16px;height:200px;position:relative;margin-bottom:14px;overflow:hidden;">
+          <svg width="100%" height="200" viewBox="0 0 320 200">
+            <!-- Streets grid -->
+            <line x1="0" y1="60" x2="320" y2="60" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+            <line x1="0" y1="120" x2="320" y2="120" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+            <line x1="80" y1="0" x2="80" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+            <line x1="200" y1="0" x2="200" y2="200" stroke="rgba(255,255,255,0.3)" stroke-width="6"/>
+            <!-- Route path -->
+            <path d="M 40,160 Q 40,120 80,120 Q 140,120 140,60 Q 140,30 200,30" stroke="#F39C12" stroke-width="4" fill="none" stroke-dasharray="8,4" stroke-linecap="round"/>
+            <!-- Delivery moto -->
+            <circle cx="100" cy="120" r="12" fill="#F39C12" stroke="#fff" stroke-width="2"/>
+            <text x="100" y="125" text-anchor="middle" font-size="11">🛵</text>
+            <!-- Destination pin -->
+            <ellipse cx="200" cy="32" rx="6" ry="3" fill="rgba(231,76,60,0.3)"/>
+            <path d="M 200,14 Q 210,14 210,24 Q 210,34 200,40 Q 190,34 190,24 Q 190,14 200,14" fill="#E74C3C"/>
+            <circle cx="200" cy="24" r="4" fill="#fff"/>
+          </svg>
+          <div style="position:absolute;bottom:12px;left:12px;background:rgba(26,35,50,0.88);border-radius:12px;padding:8px 14px;">
+            <div style="font-size:11px;font-weight:700;color:#F39C12;">🛵 Livreur en route</div>
+            <div style="font-size:10px;color:rgba(255,255,255,0.8);margin-top:2px;">~2.4 km · Arrivée estimée 17:30</div>
+          </div>
+          <div style="position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.9);border-radius:10px;padding:5px 10px;font-size:11px;font-weight:700;color:#1A2332;">📍 Adresse : Cocody Riviera 3</div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+          <div style="background:#F4F9FC;border-radius:12px;padding:10px;text-align:center;">
+            <div style="font-size:18px;">📏</div>
+            <div style="font-size:12px;font-weight:700;color:#1A2332;margin-top:4px;">2.4 km</div>
+            <div style="font-size:10px;color:#6B7A8D;">Distance</div>
+          </div>
+          <div style="background:#F4F9FC;border-radius:12px;padding:10px;text-align:center;">
+            <div style="font-size:18px;">⏱</div>
+            <div style="font-size:12px;font-weight:700;color:#1A2332;margin-top:4px;">~8 min</div>
+            <div style="font-size:10px;color:#6B7A8D;">ETA</div>
+          </div>
+          <div style="background:#F4F9FC;border-radius:12px;padding:10px;text-align:center;">
+            <div style="font-size:18px;">🛵</div>
+            <div style="font-size:12px;font-weight:700;color:#1A2332;margin-top:4px;">DHL Pharma</div>
+            <div style="font-size:10px;color:#6B7A8D;">Livreur</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button onclick="closeModal();showToast('🗺 Waze ouvert')" style="flex:1;padding:12px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Waze</button>
+          <button onclick="closeModal();showToast('🗺 Google Maps ouvert')" style="flex:1;padding:12px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">Google Maps</button>
+          <button onclick="closeModal()" style="flex:1;padding:12px;background:#F4F9FC;color:#6B7A8D;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;">Fermer</button>
+        </div>
+      </div>`,
       'cancel-order-modal': `<div style="padding:8px 0 16px;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;margin-bottom:4px;">⚠️ Annuler la commande</div>
         <div style="font-size:13px;color:#6B7A8D;margin-bottom:16px;">Veuillez sélectionner un motif d'annulation :</div>
