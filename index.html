@@ -2074,7 +2074,7 @@
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Mes commandes</div>
                 <div style="font-size:12px;color:#27AE60;font-weight:600;margin-top:2px;">2 en cours</div>
               </div>
-              <div onclick="goToScreen(16)" style="background:#fff;border-radius:16px;padding:16px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+              <div onclick="goToScreen(74)" style="background:#fff;border-radius:16px;padding:16px;cursor:pointer;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
                 <div style="font-size:28px;margin-bottom:8px;">💬</div>
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Consulter</div>
                 <div style="font-size:12px;color:#1A6B8A;font-weight:600;margin-top:2px;">Pharmacien en ligne</div>
@@ -2461,7 +2461,7 @@
 ======================================== -->
 <div class="screen" id="screen16" data-device="mobile" style="background:#F4F9FC;">
   <div style="background:#1A6B8A;padding:52px 16px 16px;display:flex;align-items:center;gap:12px;">
-    <button onclick="goToScreen(10)" style="width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;">←</button>
+    <button onclick="goToScreen(74)" style="width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;">←</button>
     <div style="width:38px;height:38px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;">👩‍⚕️</div>
     <div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#fff;">Dr. Sophie Lefebvre</div>
@@ -3883,6 +3883,346 @@ window.showPhTab = function(tab) {
 };
 </script>
 <!-- ========================================
+     SCREEN 74 — SÉLECTION MÉDECIN
+======================================== -->
+
+<div class="screen" id="screen74" data-device="mobile" style="background:#F4F9FC;display:flex;flex-direction:column;position:relative;">
+
+<!-- BOTTOM SHEET FILTRES -->
+<div id="doc-filter-overlay" onclick="closeDocFilters()" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:200;opacity:0;transition:opacity 0.32s;"></div>
+<div id="doc-filter-sheet" style="display:none;position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:24px 24px 0 0;z-index:201;padding:0 0 32px;max-height:85%;overflow-y:auto;transform:translateY(100%);transition:transform 0.32s cubic-bezier(0.16,1,0.3,1);">
+  <div style="width:36px;height:4px;background:#E2ECF2;border-radius:2px;margin:12px auto 20px;"></div>
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:0 20px 16px;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A2332;">Filtres</div>
+    <button onclick="resetDocFilters()" style="background:none;border:none;font-size:13px;color:#E74C3C;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Réinitialiser</button>
+  </div>
+
+  <!-- Disponibilité -->
+  <div style="padding:0 20px 18px;border-bottom:1px solid #F4F9FC;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">🕐 Disponibilité</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" data-active="1" style="background:#E8F4F8;color:#1A6B8A;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #1A6B8A;">🟢 Disponible maintenant</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">📅 Prendre un RDV</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🌙 Garde de nuit</div>
+    </div>
+  </div>
+
+  <!-- Type de consultation -->
+  <div style="padding:16px 20px 18px;border-bottom:1px solid #F4F9FC;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">💬 Type de consultation</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">📹 Vidéo</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">💬 Chat</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🏥 En présentiel</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🏠 Visite à domicile</div>
+    </div>
+  </div>
+
+  <!-- Spécialité -->
+  <div style="padding:16px 20px 18px;border-bottom:1px solid #F4F9FC;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">🩺 Spécialité</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🩺 Généraliste</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">❤️ Cardiologie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">👶 Pédiatrie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🧠 Neurologie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🦷 Dentiste</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">👁️ Ophtalmologie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🩻 Radiologie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🧪 Diabétologie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🌸 Gynécologie</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">💆 Psychiatrie</div>
+    </div>
+  </div>
+
+  <!-- Pays -->
+  <div style="padding:16px 20px 18px;border-bottom:1px solid #F4F9FC;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">🌍 Pays</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" data-active="1" style="background:#E8F4F8;color:#1A6B8A;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #1A6B8A;">🇨🇮 Côte d'Ivoire</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇸🇳 Sénégal</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇲🇱 Mali</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇬🇭 Ghana</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇧🇫 Burkina Faso</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇧🇯 Bénin</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇨🇲 Cameroun</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">🇹🇬 Togo</div>
+    </div>
+  </div>
+
+  <!-- Ville -->
+  <div style="padding:16px 20px 18px;border-bottom:1px solid #F4F9FC;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">🏙️ Ville</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" data-active="1" style="background:#E8F4F8;color:#1A6B8A;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #1A6B8A;">📍 Abidjan</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Dakar</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Bamako</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Accra</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Ouagadougou</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Cotonou</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Yaoundé</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Douala</div>
+    </div>
+  </div>
+
+  <!-- Langue -->
+  <div style="padding:16px 20px 18px;border-bottom:1px solid #F4F9FC;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">🗣️ Langue de consultation</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" data-active="1" style="background:#E8F4F8;color:#1A6B8A;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #1A6B8A;">Français</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">English</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Dioula</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Wolof</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Haoussa</div>
+    </div>
+  </div>
+
+  <!-- Tarif -->
+  <div style="padding:16px 20px 24px;">
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:10px;">💰 Tarif de consultation</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">Gratuit</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">< 5 000 F CFA</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">5 000 – 15 000 F</div>
+      <div class="df-chip" onclick="toggleDocChip(this)" style="background:#F4F9FC;color:#6B7A8D;border-radius:50px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid #E2ECF2;">> 15 000 F CFA</div>
+    </div>
+  </div>
+
+  <!-- Bouton Appliquer -->
+  <div style="padding:0 20px;position:sticky;bottom:0;background:#fff;padding-top:12px;">
+    <button onclick="applyDocFilters()" style="width:100%;padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(26,107,138,0.3);">Appliquer les filtres</button>
+  </div>
+</div>
+
+  <!-- HEADER -->
+  <div style="background:linear-gradient(135deg,#1A6B8A,#0F3F54);padding:52px 16px 14px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+      <button onclick="goToScreen(10)" style="background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:36px;height:36px;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;">←</button>
+      <div style="flex:1;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#fff;">Consulter un médecin</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.65);margin-top:1px;">🟢 12 médecins disponibles maintenant</div>
+      </div>
+    </div>
+    <!-- Barre de recherche + bouton filtres -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;">
+      <div style="flex:1;background:rgba(255,255,255,0.15);border-radius:12px;display:flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(255,255,255,0.2);">
+        <span style="font-size:15px;">🔍</span>
+        <input placeholder="Nom, spécialité…" style="background:none;border:none;outline:none;color:#fff;font-size:13px;font-family:'DM Sans',sans-serif;flex:1;" onclick="showToast('Recherche active')"/>
+      </div>
+      <button onclick="openDocFilters()" style="background:rgba(255,255,255,0.2);border:1.5px solid rgba(255,255,255,0.35);border-radius:12px;padding:0 14px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;">
+        ⚙️ Filtres <span id="doc-filter-count" style="background:#fff;color:#1A6B8A;border-radius:50%;width:18px;height:18px;display:none;align-items:center;justify-content:center;font-size:10px;font-weight:800;">0</span>
+      </button>
+    </div>
+    <!-- Chips rapides -->
+    <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;">
+      <div id="docfil-all" class="doc-quick-chip" onclick="docFilter('all',this)" style="flex-shrink:0;background:#fff;color:#1A6B8A;border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;">Tous</div>
+      <div class="doc-quick-chip" onclick="docFilter('dispo',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">🟢 Disponible</div>
+      <div class="doc-quick-chip" onclick="docFilter('video',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">📹 Vidéo</div>
+      <div class="doc-quick-chip" onclick="docFilter('general',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">🩺 Généraliste</div>
+      <div class="doc-quick-chip" onclick="docFilter('cardio',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">❤️ Cardio</div>
+      <div class="doc-quick-chip" onclick="docFilter('pedo',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">👶 Pédiatrie</div>
+    </div>
+  </div>
+
+  <!-- LISTE DES MÉDECINS -->
+  <div style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;">
+
+    <!-- Médecin 1 — Disponible, généraliste -->
+    <div onclick="goToScreen(16)" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,0.06);cursor:pointer;display:flex;align-items:center;gap:12px;border:1.5px solid transparent;" onmouseover="this.style.borderColor='#1A6B8A'" onmouseout="this.style.borderColor='transparent'">
+      <div style="position:relative;flex-shrink:0;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#1A6B8A,#0F3F54);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;">👩‍⚕️</div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:#27AE60;border-radius:50%;border:2px solid #fff;"></div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Dr. Sophie Lefebvre</div>
+          <div style="font-size:11px;font-weight:700;color:#27AE60;background:#E8F7EE;padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:6px;">Dispo.</div>
+        </div>
+        <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Médecin généraliste · 8 ans exp.</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+          <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.9</span><span style="font-size:10px;color:#6B7A8D;">(203)</span></div>
+          <span style="width:3px;height:3px;background:#D1D5DB;border-radius:50%;"></span>
+          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">📹 Vidéo</div>
+          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">💬 Chat</div>
+        </div>
+      </div>
+      <div style="font-size:20px;color:#C5D3DC;flex-shrink:0;">›</div>
+    </div>
+
+    <!-- Médecin 2 — Disponible, cardiologue -->
+    <div onclick="goToScreen(16)" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,0.06);cursor:pointer;display:flex;align-items:center;gap:12px;border:1.5px solid transparent;" onmouseover="this.style.borderColor='#1A6B8A'" onmouseout="this.style.borderColor='transparent'">
+      <div style="position:relative;flex-shrink:0;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#E74C3C,#c0392b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;">👨‍⚕️</div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:#27AE60;border-radius:50%;border:2px solid #fff;"></div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Dr. Konan Yao</div>
+          <div style="font-size:11px;font-weight:700;color:#27AE60;background:#E8F7EE;padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:6px;">Dispo.</div>
+        </div>
+        <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Cardiologue · 15 ans exp.</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+          <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.8</span><span style="font-size:10px;color:#6B7A8D;">(178)</span></div>
+          <span style="width:3px;height:3px;background:#D1D5DB;border-radius:50%;"></span>
+          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">📹 Vidéo</div>
+        </div>
+      </div>
+      <div style="font-size:20px;color:#C5D3DC;flex-shrink:0;">›</div>
+    </div>
+
+    <!-- Médecin 3 — En consultation, généraliste -->
+    <div onclick="showToast('Dr. Diallo est en consultation · Prochain dispo dans 20 min')" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,0.06);cursor:pointer;display:flex;align-items:center;gap:12px;opacity:0.8;">
+      <div style="position:relative;flex-shrink:0;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#F39C12,#e67e22);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;">👨‍⚕️</div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:#F39C12;border-radius:50%;border:2px solid #fff;"></div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Dr. Moussa Diallo</div>
+          <div style="font-size:11px;font-weight:700;color:#F39C12;background:#FEF9EE;padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:6px;">En consultation</div>
+        </div>
+        <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Médecin généraliste · 12 ans exp.</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+          <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.7</span><span style="font-size:10px;color:#6B7A8D;">(95)</span></div>
+          <span style="font-size:10px;color:#F39C12;font-weight:600;">⏱ Dispo dans ~20 min</span>
+        </div>
+      </div>
+      <div style="font-size:20px;color:#C5D3DC;flex-shrink:0;">›</div>
+    </div>
+
+    <!-- Médecin 4 — Disponible, pédiatre -->
+    <div onclick="goToScreen(16)" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,0.06);cursor:pointer;display:flex;align-items:center;gap:12px;border:1.5px solid transparent;" onmouseover="this.style.borderColor='#1A6B8A'" onmouseout="this.style.borderColor='transparent'">
+      <div style="position:relative;flex-shrink:0;">
+        <div style="width:52px;height:52px;background:linear-gradient(135deg,#27AE60,#2ecc71);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;">👩‍⚕️</div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:#27AE60;border-radius:50%;border:2px solid #fff;"></div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Dr. Aminata Traoré</div>
+          <div style="font-size:11px;font-weight:700;color:#27AE60;background:#E8F7EE;padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:6px;">Dispo.</div>
+        </div>
+        <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Pédiatre · 10 ans exp.</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
+          <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.9</span><span style="font-size:10px;color:#6B7A8D;">(312)</span></div>
+          <span style="width:3px;height:3px;background:#D1D5DB;border-radius:50%;"></span>
+          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">📹 Vidéo</div>
+          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">💬 Chat</div>
+        </div>
+      </div>
+      <div style="font-size:20px;color:#C5D3DC;flex-shrink:0;">›</div>
+    </div>
+
+    <!-- Médecin 5 — Hors ligne -->
+    <div onclick="showToast('Dr. Touré reprend les consultations demain à 08h00')" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,0.06);cursor:pointer;display:flex;align-items:center;gap:12px;opacity:0.6;">
+      <div style="position:relative;flex-shrink:0;">
+        <div style="width:52px;height:52px;background:#E2ECF2;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;">👨‍⚕️</div>
+        <div style="position:absolute;bottom:0;right:0;width:14px;height:14px;background:#9CA3AF;border-radius:50%;border:2px solid #fff;"></div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Dr. Ibrahim Touré</div>
+          <div style="font-size:11px;font-weight:700;color:#9CA3AF;background:#F4F9FC;padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:6px;">Hors ligne</div>
+        </div>
+        <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Diabétologue · 20 ans exp.</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:6px;">
+          <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.6</span><span style="font-size:10px;color:#6B7A8D;">(67)</span></div>
+          <span style="font-size:10px;color:#9CA3AF;font-weight:600;">🔔 Prendre un RDV</span>
+        </div>
+      </div>
+      <div style="font-size:20px;color:#C5D3DC;flex-shrink:0;">›</div>
+    </div>
+
+    <div style="height:10px;"></div>
+  </div>
+</div>
+
+<script>
+/* ── SCREEN 74 — Filtres médecins ── */
+window.openDocFilters = function() {
+  var overlay = document.getElementById('doc-filter-overlay');
+  var sheet   = document.getElementById('doc-filter-sheet');
+  if (!overlay || !sheet) return;
+  overlay.style.display = 'block';
+  sheet.style.display   = 'block';
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      overlay.style.opacity       = '1';
+      sheet.style.transform       = 'translateY(0)';
+    });
+  });
+};
+
+window.closeDocFilters = function() {
+  var overlay = document.getElementById('doc-filter-overlay');
+  var sheet   = document.getElementById('doc-filter-sheet');
+  if (!overlay || !sheet) return;
+  overlay.style.opacity   = '0';
+  sheet.style.transform   = 'translateY(100%)';
+  setTimeout(function() {
+    overlay.style.display = 'none';
+    sheet.style.display   = 'none';
+  }, 340);
+};
+
+window.toggleDocChip = function(el) {
+  var active = el.getAttribute('data-active') === '1';
+  if (active) {
+    el.style.background  = '#F4F9FC';
+    el.style.color       = '#6B7A8D';
+    el.style.borderColor = '#E2ECF2';
+    el.setAttribute('data-active', '0');
+  } else {
+    el.style.background  = '#E8F4F8';
+    el.style.color       = '#1A6B8A';
+    el.style.borderColor = '#1A6B8A';
+    el.setAttribute('data-active', '1');
+  }
+};
+
+window.resetDocFilters = function() {
+  document.querySelectorAll('.df-chip').forEach(function(chip) {
+    chip.style.background  = '#F4F9FC';
+    chip.style.color       = '#6B7A8D';
+    chip.style.borderColor = '#E2ECF2';
+    chip.setAttribute('data-active', '0');
+  });
+  var badge = document.getElementById('doc-filter-count');
+  if (badge) { badge.style.display = 'none'; badge.textContent = '0'; }
+  showToast('Filtres réinitialisés');
+};
+
+window.applyDocFilters = function() {
+  var active = document.querySelectorAll('.df-chip[data-active="1"]');
+  var count  = active.length;
+  var badge  = document.getElementById('doc-filter-count');
+  if (badge) {
+    if (count > 0) { badge.textContent = count; badge.style.display = 'flex'; }
+    else           { badge.style.display = 'none'; }
+  }
+  closeDocFilters();
+  if (count > 0) {
+    var labels = Array.from(active).map(function(c) { return c.textContent.trim(); });
+    showToast('✅ ' + count + ' filtre(s) : ' + labels.slice(0, 2).join(', ') + (labels.length > 2 ? '…' : ''));
+  } else {
+    showToast('Aucun filtre sélectionné — affichage de tous les médecins');
+  }
+};
+
+window.docFilter = function(type, el) {
+  document.querySelectorAll('#screen74 .doc-quick-chip').forEach(function(btn) {
+    btn.style.background  = 'rgba(255,255,255,0.15)';
+    btn.style.color       = 'rgba(255,255,255,0.9)';
+    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+  });
+  el.style.background  = '#fff';
+  el.style.color       = '#1A6B8A';
+  el.style.borderColor = '#fff';
+  var labels = { all:'tous les médecins', dispo:'médecins disponibles', video:'téléconsultation vidéo', general:'généralistes', cardio:'cardiologues', pedo:'pédiatres' };
+  if (type !== 'all') showToast('🔍 Filtre : ' + (labels[type] || type));
+};
+</script>
+
+<!-- ========================================
      SCREEN 33 — ALERTES RAPPELS
 ======================================== -->
 <div class="screen" id="screen36" data-device="mobile">
@@ -4806,7 +5146,7 @@ window.showPhTab = function(tab) {
       <div style="font-size:44px;margin-bottom:10px;">💬</div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:6px;">Aucun message</div>
       <div style="font-size:13px;color:#6B7A8D;margin-bottom:14px;">Démarrez une consultation avec votre médecin</div>
-      <button onclick="goToScreen(16)" style="padding:10px 20px;background:#27AE60;color:#fff;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">💬 Consulter un médecin</button>
+      <button onclick="goToScreen(74)" style="padding:10px 20px;background:#27AE60;color:#fff;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">💬 Consulter un médecin</button>
     </div>
     <!-- Empty 4: Search -->
     <div style="background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
@@ -6073,7 +6413,7 @@ window.showPhTab = function(tab) {
       <span style="font-size:20px;width:28px;text-align:center;">📍</span>
       <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#1A2332;">Pharmacies proches</span>
     </div>
-    <div onclick="goToScreen(16);closeDrawer();" style="display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background=''">
+    <div onclick="goToScreen(74);closeDrawer();" style="display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background=''">
       <span style="font-size:20px;width:28px;text-align:center;">💬</span>
       <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;color:#1A2332;">Consulter un médecin</span>
     </div>
@@ -6534,7 +6874,7 @@ window.showPhTab = function(tab) {
 <!-- ========================================
      SCREEN 71 — MODE HORS-LIGNE (FIG.2)
 ======================================== -->
-<div class="screen" id="screen74" data-device="mobile" style="background:#F4F9FC;">
+<div class="screen" id="screen71b" data-device="mobile" style="background:#F4F9FC;">
   <!-- Header -->
   <div style="background:linear-gradient(135deg,#F39C12,#E67E22);padding:54px 20px 20px;flex-shrink:0;">
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
