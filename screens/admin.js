@@ -85,7 +85,7 @@ window.FRAGMENTS['admin'] = `
     <!-- Accès rapide FIG.2 / FIG.3 / FIG.4 -->
     <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">🔬 Modules Techniques</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-      <div onclick="goToScreen(74)" style="background:linear-gradient(135deg,#F39C12,#E67E22);border-radius:14px;padding:14px;cursor:pointer;">
+      <div onclick="goToScreen('71b')" style="background:linear-gradient(135deg,#F39C12,#E67E22);border-radius:14px;padding:14px;cursor:pointer;">
         <div style="font-size:22px;margin-bottom:6px;">📡</div>
         <div style="font-size:12px;font-weight:700;color:#fff;">Mode Hors-ligne</div>
         <div style="font-size:10px;color:rgba(255,255,255,0.8);margin-top:2px;">Sync différée · FIG.2</div>
@@ -1957,15 +1957,128 @@ window.FRAGMENTS['admin'] = `
       </div>
     </div>
   </div>
+<!-- ========================================
+     SCREEN 74 — MODE HORS-LIGNE (FIG.2)
+======================================== -->
+<div class="screen" id="screen71b" data-device="mobile" style="background:#F4F9FC;">
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#F39C12,#E67E22);padding:54px 20px 20px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <button onclick="goToScreen(10)" style="background:rgba(255,255,255,0.2);border:none;border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;">←</button>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;">Mode Hors-ligne</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.2);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+      <div style="width:10px;height:10px;background:#fff;border-radius:50%;animation:blink 1s infinite;"></div>
+      <span style="font-size:12px;font-weight:700;color:#fff;">Réseau faible détecté — Synchronisation différée activée</span>
+    </div>
+  </div>
+
+  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;">
+    <!-- Statut réseau -->
+    <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#1A2332;margin-bottom:14px;">📡 Qualité Réseau (FIG.2 — Calcul IR)</div>
+      <div style="display:flex;align-items:flex-end;gap:4px;margin-bottom:12px;height:40px;">
+        <div style="width:14px;height:12px;background:#F39C12;border-radius:3px;"></div>
+        <div style="width:14px;height:18px;background:#F39C12;border-radius:3px;"></div>
+        <div style="width:14px;height:26px;background:#E2ECF2;border-radius:3px;"></div>
+        <div style="width:14px;height:34px;background:#E2ECF2;border-radius:3px;"></div>
+        <div style="width:14px;height:40px;background:#E2ECF2;border-radius:3px;"></div>
+        <div style="margin-left:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#F39C12;line-height:1;">Faible<br><span style="font-size:10px;color:#6B7A8D;font-weight:500;">2G · IR=0.31</span></div>
+      </div>
+      <div style="background:#FEF9EE;border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:11px;color:#6B7A8D;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Indice de Réseau (IR)</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#F39C12;">0.31</div>
+          <div style="font-size:11px;color:#E67E22;">Seuil critique &lt; 0.4 — Sync différée</div>
+        </div>
+        <div style="width:60px;height:60px;border-radius:50%;border:4px solid #F39C12;display:flex;align-items:center;justify-content:center;font-size:24px;">⚠️</div>
+      </div>
+    </div>
+
+    <!-- Transactions en attente -->
+    <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#1A2332;">🗃️ File d'attente (Sync différée)</div>
+        <div style="background:#FEF9EE;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;color:#F39C12;">4 en attente</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;padding:10px;background:#F4F9FC;border-radius:10px;">
+          <div style="width:32px;height:32px;background:#E74C3C;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🚨</div>
+          <div style="flex:1;"><div style="font-size:12px;font-weight:700;color:#1A2332;">Ordonnance #ORD-2851</div><div style="font-size:10px;color:#6B7A8D;">Critique · En attente depuis 2 min</div></div>
+          <div style="background:#FEF0EE;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;color:#E74C3C;">CRITIQUE</div>
+        </div>
+      </div>
+    </div>
+    <button onclick="showToast('🔄 Synchronisation forcée lancée…');goToScreen(28)" style="width:100%;padding:15px;background:linear-gradient(135deg,#F39C12,#E67E22);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">🔄 Forcer la Synchronisation</button>
+  </div>
 </div>
-    </div><!-- end browser-content -->
-  </div><!-- end web-frame -->
 
-</div><!-- end viewport -->
+<!-- ========================================
+     SCREEN 83 — ALERTES IR ÉPIDÉMIQUES (FIG.4)
+======================================== -->
+<div class="screen" id="screen83" data-device="mobile" style="background:#F4F9FC;">
+  <div style="background:linear-gradient(135deg,#E74C3C,#c0392b);padding:54px 20px 20px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <button onclick="goToScreen(28)" style="background:rgba(255,255,255,0.2);border:none;border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;">←</button>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;">Alertes Épidémiques</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.2);border-radius:12px;padding:10px 14px;display:flex;align-items:center;gap:10px;">
+      <div style="width:10px;height:10px;background:#fff;border-radius:50%;animation:blink 1s infinite;"></div>
+      <span style="font-size:12px;font-weight:700;color:#fff;">Algorithme Prédictif IR actif — Virus Émergent détecté</span>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;">
+    <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#1A2332;margin-bottom:14px;">🧮 Calcul IR — Algorithme Prédictif (FIG.4)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div style="background:#FEF0EE;border-radius:12px;padding:12px;text-align:center;">
+          <div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Criticité C_N</div>
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#E74C3C;">0.87</div>
+          <div style="font-size:10px;color:#E74C3C;font-weight:600;">&#62; Seuil 0.6 ⚠️</div>
+        </div>
+      </div>
+    </div>
+    <button onclick="goToScreen(76);showToast('📊 Rapport prévisionnel généré')" style="width:100%;padding:15px;background:linear-gradient(135deg,#E74C3C,#c0392b);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📊 Voir le Rapport Prévisionnel →</button>
+  </div>
+</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<!-- ========================================
+     SCREEN 76 — RAPPORT PRÉVISIONNEL (FIG.4)
+======================================== -->
+<div class="screen" id="screen76" data-device="mobile" style="background:#F4F9FC;">
+  <div style="background:linear-gradient(135deg,#0D3B2E,#27AE60);padding:54px 20px 20px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <button onclick="goToScreen(83)" style="background:rgba(255,255,255,0.2);border:none;border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;">←</button>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;">Rapport Prévisionnel</div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;">
+    <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:800;color:#1A2332;margin-bottom:14px;">📈 Projection 7 jours — Fièvre Lassa</div>
+      <div style="display:flex;align-items:flex-end;gap:5px;height:70px;margin-bottom:8px;">
+        <div style="flex:1;background:#E8F4F8;border-radius:4px 4px 0 0;height:30%;"></div>
+        <div style="flex:1;height:40%;background:#E8F4F8;border-radius:4px 4px 0 0;"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<script>
-
+<!-- ========================================
+     SCREEN 77 — CHAÎNAGE BLOCKCHAIN (FIG.3)
+======================================== -->
+<div class="screen" id="screen77" data-device="mobile" style="background:#F4F9FC;">
+  <div style="background:linear-gradient(135deg,#1A2332,#0F3F54);padding:54px 20px 20px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
+      <button onclick="goToScreen(28)" style="background:rgba(255,255,255,0.2);border:none;border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;">←</button>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;">Chaîne Cryptographique</div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
+    <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
+      <div style="background:linear-gradient(135deg,#27AE60,#2ecc71);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;color:#fff;">🧱 Bloc #001 — GENESIS</div>
+      </div>
+    </div>
+  </div>
+</div>
 `;

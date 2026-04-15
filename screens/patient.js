@@ -3100,8 +3100,8 @@ window.showDossierTab = function(tab) {
 <!-- ========================================
      SCREEN 84 — LOGIN PHARMACIEN INDIVIDUEL
 ======================================== -->
-      <div class="web-screen active" id="wscreen1">
-        <div style="height:100vh;display:flex;flex-direction:column;background:#F4F9FC;overflow-y:auto;">
+      <div class="web-screen" id="wscreen1">
+        <div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;overflow-y:auto;">
           <!-- Navbar -->
           <nav style="display:flex;justify-content:space-between;align-items:center;padding:24px 60px;background:#fff;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:100;">
             <div style="display:flex;align-items:center;gap:12px;">

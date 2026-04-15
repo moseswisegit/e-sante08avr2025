@@ -434,4 +434,105 @@ window.FRAGMENTS['shared'] = `
 
     <!-- SCREEN 7 — PATIENT HOME DASHBOARD -->
 
+
+<!-- ========================================
+     SCREEN 49 — 404 PAGE
+======================================== -->
+<div class="screen" id="screen49" data-device="mobile" style="background:#F4F9FC;justify-content:center;align-items:center;text-align:center;padding:32px;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <div style="position:relative;width:120px;height:120px;">
+      <div style="width:100px;height:100px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;margin:auto;">💊</div>
+      <div style="position:absolute;bottom:-4px;right:-4px;width:36px;height:36px;background:#E74C3C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:3px solid #fff;">✕</div>
+    </div>
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#E74C3C;">404</div>
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:700;color:#1A2332;">Oops! Page introuvable</div>
+    <div style="font-size:14px;color:#6B7A8D;line-height:1.6;max-width:260px;">Cette page n'existe pas ou a été déplacée. Retournez à l'accueil et réessayez.</div>
+    <button onclick="goToScreen(10)" style="padding:14px 32px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.3);">🏠 Retour à l'accueil</button>
+    <button onclick="showToast('Support contacté')" style="font-size:13px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:600;font-family:'DM Sans',sans-serif;">Contacter le support</button>
+  </div>
+</div>
+
+<!-- ========================================
+     SCREEN 50 — MAINTENANCE PAGE
+======================================== -->
+<div class="screen" id="screen50" data-device="mobile" style="background:linear-gradient(160deg,#0F3F54 0%,#1A6B8A 100%);justify-content:center;align-items:center;text-align:center;padding:32px;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <div style="width:100px;height:100px;background:rgba(255,255,255,0.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;border:2px solid rgba(255,255,255,0.2);">🛠️</div>
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#fff;">Maintenance en cours</div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6;max-width:260px;">Nous améliorons ILERA AFRICA pour vous offrir une meilleure expérience. Nous revenons dans :</div>
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:800;color:#fff;">02:00</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.6);">heures</div>
+    <!-- Progress bar -->
+    <div style="width:240px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:11px;color:rgba(255,255,255,0.6);">Progression</span><span style="font-size:11px;color:rgba(255,255,255,0.6);">67%</span></div>
+      <div style="height:6px;background:rgba(255,255,255,0.15);border-radius:50px;overflow:hidden;"><div style="width:67%;height:100%;background:linear-gradient(90deg,#27AE60,#4ADE80);border-radius:50px;"></div></div>
+    </div>
+    <div style="background:rgba(255,255,255,0.1);border-radius:14px;padding:14px 20px;border:1px solid rgba(255,255,255,0.15);">
+      <div style="font-size:12px;color:rgba(255,255,255,0.6);margin-bottom:4px;">Besoin d'aide urgente ?</div>
+      <div style="font-size:14px;font-weight:700;color:#fff;">📧 <a href="mailto:support@ilera.africa" class="__cf_email__">support@ilera.africa</a></div>
+      <div style="font-size:14px;font-weight:700;color:#fff;margin-top:4px;">📞 +225 27 21 XX XX XX</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================
+     SCREEN 51 — SUCCESS CONFIRMATION
+======================================== -->
+<div class="screen" id="screen51" data-device="mobile" style="background:#F4F9FC;justify-content:center;align-items:center;text-align:center;padding:32px;">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:20px;">
+    <!-- Animated checkmark -->
+    <div style="width:100px;height:100px;background:linear-gradient(135deg,#27AE60,#2ecc71);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 16px 48px rgba(39,174,96,0.35);animation:successPulse 2s ease-in-out infinite;">
+      <div style="font-size:44px;">✓</div>
+    </div>
+    <div id="success-title" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;">Ordonnance envoyée !</div>
+    <div id="success-msg" style="font-size:14px;color:#6B7A8D;line-height:1.6;max-width:270px;">Votre ordonnance a été envoyée avec succès à votre pharmacien.</div>
+    <div style="background:#fff;border-radius:16px;padding:16px 24px;box-shadow:0 2px 12px rgba(0,0,0,0.08);width:100%;">
+      <div id="success-ref-label" style="font-size:12px;color:#6B7A8D;margin-bottom:4px;">Référence de commande</div>
+      <div id="success-ref-val" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#1A6B8A;">#ORD-2024-089</div>
+    </div>
+    <div style="background:#E8F7EE;border-radius:14px;padding:14px;border:1px solid rgba(39,174,96,0.2);width:100%;">
+      <div style="font-size:13px;color:#27AE60;line-height:1.5;">🔔 Vous serez notifié dès la validation par votre médecin. Délai habituel : <strong>15-30 minutes</strong></div>
+    </div>
+    <button onclick="goToScreen(12)" style="width:100%;padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.3);">📦 Suivre ma commande</button>
+    <button onclick="goToScreen(10)" style="width:100%;padding:14px;background:transparent;color:#1A6B8A;border:2px solid #E2ECF2;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">🏠 Retour à l'accueil</button>
+  </div>
+</div>
+
+<!-- ========================================
+     SCREEN 52 — EMPTY STATES
+======================================== -->
+<div class="screen" id="screen52" data-device="mobile" style="background:#F4F9FC;">
+  <div style="background:#1A6B8A;padding:52px 20px 20px;display:flex;align-items:center;gap:12px;">
+    <button onclick="goToScreen(10)" style="width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;">←</button>
+    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;">États vides</div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;">
+    <!-- Empty 1: Ordonnances -->
+    <div style="background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:44px;margin-bottom:10px;">📄</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:6px;">Aucune ordonnance</div>
+      <div style="font-size:13px;color:#6B7A8D;margin-bottom:14px;">Envoyez votre première ordonnance pour commencer</div>
+      <button onclick="goToScreen(11)" style="padding:10px 20px;background:#1A6B8A;color:#fff;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📤 Envoyer une ordonnance</button>
+    </div>
+    <!-- Empty 2: Commandes -->
+    <div style="background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:44px;margin-bottom:10px;">🛍️</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:6px;">Aucune commande</div>
+      <div style="font-size:13px;color:#6B7A8D;">Vos commandes apparaîtront ici une fois votre ordonnance validée</div>
+    </div>
+    <!-- Empty 3: Messages -->
+    <div style="background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:44px;margin-bottom:10px;">💬</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:6px;">Aucun message</div>
+      <div style="font-size:13px;color:#6B7A8D;margin-bottom:14px;">Démarrez une consultation avec votre médecin</div>
+      <button onclick="goToScreen(74)" style="padding:10px 20px;background:#27AE60;color:#fff;border:none;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">💬 Consulter un médecin</button>
+    </div>
+    <!-- Empty 4: Search -->
+    <div style="background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+      <div style="font-size:44px;margin-bottom:10px;">🔍</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:6px;">Aucun résultat</div>
+      <div style="font-size:13px;color:#6B7A8D;">Aucun résultat pour cette recherche. Essayez d'autres mots-clés</div>
+    </div>
+  </div>
+</div>
 `;

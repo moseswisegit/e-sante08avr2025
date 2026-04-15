@@ -18,7 +18,7 @@
   const pharmacienFlow  = [84,85,86,87,88,89];
   const medecinFlow     = [62,63,64,65,66,67,68,69,70,71,74];
   const livreurFlow     = [54,55,56,57,58,59,60,61];
-  const adminFlow       = [27,28,48,78,79,80,81,82];
+  const adminFlow       = [27,28,48,78,79,80,81,82,76,77,83,'71b'];
 
   // ============================================================
   //  UI CORE FUNCTIONS (RESTORED)
@@ -110,8 +110,8 @@
     const btns = document.querySelectorAll('.switch-btn');
     
     if (device === 'mobile') {
-      if (mobileFrame) mobileFrame.style.display = 'block';
       if (webFrame) webFrame.style.display = 'none';
+      if (mobileFrame) mobileFrame.style.cssText = 'display:block;';
       if (btns[0]) btns[0].classList.add('active');
       if (btns[1]) btns[1].classList.remove('active');
       goToScreen(currentScreen);
@@ -148,9 +148,18 @@
 
   window.goToWebScreen = function(n) {
     currentWebScreen = n;
-    document.querySelectorAll('.web-screen').forEach(s => s.classList.remove('active'));
-    const target = document.getElementById('wscreen' + n);
-    if (target) target.classList.add('active');
+    const allWeb = document.querySelectorAll('.web-screen');
+    allWeb.forEach(s => s.classList.remove('active'));
+    
+    const target = document.getElementById('wscreen' + n) || document.getElementById(n);
+    if (target) {
+        target.classList.add('active');
+        const content = document.getElementById('browserContent');
+        if (content) content.scrollTop = 0;
+    } else if (n === 1 && allWeb.length > 0) {
+        allWeb[0].classList.add('active');
+    }
+    
     syncPickerDot(n);
     updateBrowserBar(n);
     document.dispatchEvent(new CustomEvent('screenChanged'));
@@ -183,9 +192,9 @@
     { label: '🧑 Patient', flow: 'patient', screens: [11,12,13,14,15,16,17,18,29,30,31,32,33,34,35,36,37,38,39,40,44,46,47,72,73] },
     { label: '🏥 Espace Pharmacie', flow: 'pharmacist', screens: [19,20,21,22,23,24,25,26,41,42,43,45,53,75] },
     { label: '👨‍⚕️ Pharmacien individuel', flow: 'pharmacien', screens: [84,85,86,87,88,89] },
-    { label: '🩺 Médecin', flow: 'medecin', screens: [62,63,64,65,66,67,68,69,70,71] },
+    { label: '🩺 Médecin', flow: 'medecin', screens: [62,63,64,65,66,67,68,69,70,71,74] },
     { label: '🛵 Livreur', flow: 'livreur', screens: [54,55,56,57,58,59,60,61] },
-    { label: '🛡️ Admin mobile', flow: 'admin', screens: [27,28,48,78,79,80,81,82] },
+    { label: '🛡️ Admin mobile', flow: 'admin', screens: [27,28,48,78,79,80,81,82,76,77,83,'71b'] },
     { label: '💻 WEB', isHeader: true },
     { label: '🌐 Patient web', flow: 'patient', web: true, screens: [1,2,3,4,7,8,9,10,11,12,13,14,15] },
     { label: '💊 Pharmacien web', flow: 'pharmacist', web: true, screens: [16,17,18,19,20,21] },
