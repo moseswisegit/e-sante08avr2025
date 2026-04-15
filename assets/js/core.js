@@ -2,7 +2,7 @@
   //  CORE GLOBAL VARIABLES & STATE
   // ============================================================
   let currentScreen = 1;
-  let currentWebScreen = 1;
+  let currentWebScreen = 0;
   let currentDevice = 'mobile';
   let navigating = false;
   let flowSteps = [];
@@ -44,6 +44,7 @@
     switchTo(device);
   };
 
+  // ============================================================
   window.handleLogin = function() {
     showToast('✅ Connexion réussie ! Bienvenue sur ILERA AFRICA');
     goToScreen(10);
@@ -106,31 +107,57 @@
   function switchTo(device) {
     currentDevice = device;
     const mobileFrame = document.getElementById('mobileFrame');
-    const webFrame = document.getElementById('webFrame');
-    const btns = document.querySelectorAll('.switch-btn');
-    
+    const webFrame    = document.getElementById('webFrame');
+
+    // Masquer tous les frames avant d'en afficher un
+    if (mobileFrame) mobileFrame.style.display = 'none';
+    if (webFrame)    webFrame.style.display    = 'none';   // sera passé en 'flex' si besoin
+    document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+
     if (device === 'mobile') {
-      if (webFrame) webFrame.style.display = 'none';
       if (mobileFrame) mobileFrame.style.cssText = 'display:block;';
-      if (btns[0]) btns[0].classList.add('active');
-      if (btns[1]) btns[1].classList.remove('active');
+      const btn = document.getElementById('btn-mobile');
+      if (btn) btn.classList.add('active');
       goToScreen(currentScreen);
+
     } else {
-      if (mobileFrame) mobileFrame.style.display = 'none';
-      if (webFrame) webFrame.style.display = 'block';
-      if (btns[0]) btns[0].classList.remove('active');
-      if (btns[1]) btns[1].classList.add('active');
-      goToWebScreen(currentWebScreen || 1);
+      // mode 'web' — affiche le webFrame en flex column (barre + contenu)
+      if (webFrame) webFrame.style.display = 'flex';
+      const btn = document.getElementById('btn-web');
+      if (btn) btn.classList.add('active');
+      // currentWebScreen=0 par défaut → vitrine (wscreen0)
+      goToWebScreen(currentWebScreen);
     }
+
     syncPickerDot(device === 'web' ? currentWebScreen : currentScreen);
   }
+
+  // ============================================================
+  //  RESPONSIVE SIZE SWITCHER (webFrame)
+  // ============================================================
+  window.setWebSize = function(size) {
+    const content = document.getElementById('browserContent');
+    if (!content) return;
+    // Ajuste la largeur max du contenu
+    const widths = { desktop: '100%', tablet: '768px', mobile: '390px' };
+    content.style.maxWidth  = widths[size] || '100%';
+    content.style.margin    = size === 'desktop' ? '' : '0 auto';
+    content.style.boxShadow = size === 'desktop' ? '' : '0 0 0 1px rgba(0,0,0,0.1)';
+    // URL bar label
+    const labels = { desktop:'🔒 ilera.africa — Desktop', tablet:'🔒 ilera.africa — Tablette', mobile:'🔒 ilera.africa — Mobile' };
+    const urlEl = document.getElementById('webBrowserUrl');
+    if (urlEl) urlEl.textContent = labels[size] || '🔒 ilera.africa';
+    // Sync boutons
+    document.querySelectorAll('.vitrine-size-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('btn-size-' + size);
+    if (btn) btn.classList.add('active');
+  };
 
   // ============================================================
   //  NAVIGATION FUNCTIONS
   // ============================================================
   window.goToScreen = function(n) {
     if (navigating) return;
-    const prev = document.getElementById('screen' + currentScreen);
     currentScreen = n;
     
     // Simple direct switch to avoid animation bugs during restoration
@@ -150,18 +177,39 @@
     currentWebScreen = n;
     const allWeb = document.querySelectorAll('.web-screen');
     allWeb.forEach(s => s.classList.remove('active'));
-    
+
     const target = document.getElementById('wscreen' + n) || document.getElementById(n);
     if (target) {
         target.classList.add('active');
         const content = document.getElementById('browserContent');
         if (content) content.scrollTop = 0;
-    } else if (n === 1 && allWeb.length > 0) {
+    } else if (allWeb.length > 0) {
+        // Fallback : premier écran disponible
         allWeb[0].classList.add('active');
     }
-    
+
+    // URL bar : wscreen0 = vitrine (accueil public)
+    const urlEl = document.getElementById('webBrowserUrl');
+    if (urlEl) {
+      const urlMap = {
+        0:  '🔒 ilera.africa',
+        1:  '🔒 ilera.africa — Accueil',
+        8:  '🔒 ilera.africa/login',
+        9:  '🔒 ilera.africa/patient/dashboard',
+        16: '🔒 ilera.africa/pharmacien/dashboard',
+        22: '🔒 ilera.africa/admin/login',
+        23: '🔒 ilera.africa/admin/dashboard',
+        57: '🔒 ilera.africa/medecin/login',
+        58: '🔒 ilera.africa/medecin/dashboard',
+      };
+      urlEl.textContent = urlMap[n] || ('🔒 ilera.africa/web/' + n);
+    }
+
+    // Bouton Home visible seulement si on n'est pas déjà sur la vitrine
+    const homeBtn = document.getElementById('web-home-btn');
+    if (homeBtn) homeBtn.style.opacity = (n === 0) ? '0.4' : '1';
+
     syncPickerDot(n);
-    updateBrowserBar(n);
     document.dispatchEvent(new CustomEvent('screenChanged'));
   };
 
@@ -178,9 +226,12 @@
   }
 
   function updateBrowserBar(n) {
-    const urlEl = document.querySelector('.browser-url');
-    if (!urlEl) return;
-    urlEl.textContent = '🔒 ilera.africa/' + (currentDevice === 'web' ? 'web/' : 'app/') + n;
+    // La mise à jour URL est maintenant faite dans goToWebScreen
+    // Pour mobile, on met à jour l'URL générique de la barre
+    if (currentDevice !== 'web') {
+      const urlEl = document.querySelector('.browser-url');
+      if (urlEl) urlEl.textContent = '🔒 ilera.africa/app/' + n;
+    }
   }
 
   // ============================================================
@@ -196,8 +247,10 @@
     { label: '🛵 Livreur', flow: 'livreur', screens: [54,55,56,57,58,59,60,61] },
     { label: '🛡️ Admin mobile', flow: 'admin', screens: [27,28,48,78,79,80,81,82,76,77,83,'71b'] },
     { label: '💻 WEB', isHeader: true },
-    { label: '🌐 Patient web', flow: 'patient', web: true, screens: [1,2,3,4,7,8,9,10,11,12,13,14,15] },
+    { label: '🌍 Vitrine (accueil)', flow: 'patient', web: true, screens: [0] },
+    { label: '👤 Patient web', flow: 'patient', web: true, screens: [1,2,3,4,7,8,9,10,11,12,13,14,15] },
     { label: '💊 Pharmacien web', flow: 'pharmacist', web: true, screens: [16,17,18,19,20,21] },
+    { label: '🩺 Médecin web', flow: 'medecin', web: true, screens: [57,58,59,60,61,62,63] },
     { label: '🛡️ Admin web', flow: 'admin', web: true, screens: [22,23,24,25,26,27,28,54,55,56,64,65,66,67,68,69] }
   ];
 
@@ -240,7 +293,7 @@
   // ============================================================
   //  UI HELPERS
   // ============================================================
-  window.filterCatalogCat = (cat, el) => {
+  window.filterCatalogCat = (_cat, el) => {
     document.querySelectorAll('#catalog-cats .cat-chip').forEach(c => {
       c.style.background = '#F4F9FC'; c.style.color = '#6B7A8D';
     });
@@ -322,15 +375,21 @@
     const nav = document.createElement('div');
     nav.id = 'flow-nav';
     nav.innerHTML = `
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:11px;font-weight:800;color:rgba(255,255,255,0.5);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">Parcours guidés</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:800;color:rgba(255,255,255,0.4);letter-spacing:0.5px;margin-bottom:6px;text-transform:uppercase;">📱 Parcours Mobile</div>
       <button class="flow-btn patient"    onclick="startFlow('patient')">🧑‍🦱 Patient</button>
       <button class="flow-btn pharmacist" onclick="startFlow('pharmacist')">🏥 Pharmacie</button>
       <button class="flow-btn pharmacist" onclick="startFlow('pharmacien')" style="background:#E8F7EE;color:#0D3B2E;">👨‍⚕️ Pharmacien</button>
       <button class="flow-btn medecin"    onclick="startFlow('medecin')">🩺 Médecin</button>
       <button class="flow-btn livreur"    onclick="startFlow('livreur')">🛵 Livreur</button>
       <button class="flow-btn admin"      onclick="startFlow('admin')">🛡️ Admin</button>
-      <div style="height:1px;background:rgba(255,255,255,0.1);margin:4px 0;"></div>
       <button class="flow-btn" style="background:#EEF4FF;color:#2D5BE3;" onclick="goToScreen(72);closeFlowNav()">🤖 Chatbot IA</button>
+      <div style="height:1px;background:rgba(255,255,255,0.1);margin:6px 0;"></div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:800;color:rgba(255,255,255,0.4);letter-spacing:0.5px;margin-bottom:6px;text-transform:uppercase;">💻 Parcours Web</div>
+      <button class="flow-btn" style="background:linear-gradient(135deg,#064E3B,#065F46);color:#6EE7B7;" onclick="switchTo('web');goToWebScreen(0);closeFlowNav()">🌍 Vitrine</button>
+      <button class="flow-btn patient"    onclick="switchTo('web');goToWebScreen(8);closeFlowNav()">👤 Patient web</button>
+      <button class="flow-btn medecin"    onclick="switchTo('web');goToWebScreen(57);closeFlowNav()">🩺 Médecin web</button>
+      <button class="flow-btn pharmacist" onclick="switchTo('web');goToWebScreen(16);closeFlowNav()">💊 Pharmacien web</button>
+      <button class="flow-btn admin"      onclick="switchTo('web');goToWebScreen(22);closeFlowNav()">🛡️ Admin web</button>
       <div style="font-size:10px;color:rgba(255,255,255,0.35);text-align:center;margin-top:4px;">← → pour naviguer</div>
       <button onclick="closeFlowNav()" style="margin-top:4px;padding:6px;background:rgba(255,255,255,0.05);border:none;border-radius:8px;color:rgba(255,255,255,0.35);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;width:100%;">Fermer ✕</button>
     `;

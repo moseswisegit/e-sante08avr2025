@@ -37,28 +37,42 @@
 
     <!-- DEVICE SWITCHER -->
     <div class="device-switcher">
-        <button class="switch-btn active" onclick="setDevice('mobile')">📱 Mobile</button>
-        <button class="switch-btn" onclick="setDevice('web')">💻 Web (Desktop)</button>
+        <button class="switch-btn active" id="btn-mobile" onclick="setDevice('mobile')">📱 Mobile</button>
+        <button class="switch-btn" id="btn-web" onclick="setDevice('web')">💻 Web</button>
     </div>
 
     <!-- VIEWPORT -->
-    <div class="viewport">
+    <div class="viewport" id="mainViewport">
         <!-- MOBILE FRAME -->
         <div class="mobile-frame" id="mobileFrame">
             <!-- Les écrans mobiles seront injectés ici -->
             <div id="sideMenuOverlay" style="position:absolute;inset:0;background:rgba(0,0,0,0.5);z-index:900;display:none;opacity:0;transition:opacity 0.3s;" onclick="closeDrawer()"></div>
         </div>
 
-        <!-- WEB FRAME -->
+        <!-- WEB FRAME — point d'entrée : vitrine (wscreen0) → login → dashboard -->
         <div class="web-frame" id="webFrame">
             <div class="web-browser-bar">
                 <div class="browser-dot red"></div>
                 <div class="browser-dot yellow"></div>
                 <div class="browser-dot green"></div>
-                <div class="browser-url">🔒 ilera.africa/web/dashboard</div>
+                <!-- Bouton Home → retour à la vitrine -->
+                <button
+                    id="web-home-btn"
+                    onclick="goToWebScreen(0)"
+                    title="Accueil vitrine"
+                    style="background:rgba(22,163,74,0.18);border:1px solid rgba(110,231,183,0.35);color:#6EE7B7;border-radius:6px;padding:2px 10px;font-size:11px;font-weight:700;cursor:pointer;margin-right:4px;display:flex;align-items:center;gap:4px;white-space:nowrap;flex-shrink:0;">
+                    🏠 Vitrine
+                </button>
+                <div class="browser-url" id="webBrowserUrl">🔒 ilera.africa</div>
+                <!-- Boutons responsive preview -->
+                <div class="vitrine-bar-actions">
+                    <button class="vitrine-size-btn active" id="btn-size-desktop" onclick="setWebSize('desktop')" title="Desktop">🖥</button>
+                    <button class="vitrine-size-btn" id="btn-size-tablet" onclick="setWebSize('tablet')" title="Tablette">📱</button>
+                    <button class="vitrine-size-btn" id="btn-size-mobile" onclick="setWebSize('mobile')" title="Mobile">📲</button>
+                </div>
             </div>
             <div class="browser-content" id="browserContent">
-                <!-- Les écrans web seront injectés ici -->
+                <!-- wscreen0 (vitrine iframe) + tous les écrans web injectés ici -->
             </div>
         </div>
     </div>
@@ -70,6 +84,7 @@
     <button id="screen-picker-toggle" onclick="toggleScreenPicker()">📺 <span id="sp-current">📱1</span></button>
 
     <!-- Fragments de contenu (chargement local compatible) -->
+    <script src="screens/vitrine.js"></script>
     <script src="screens/shared.js"></script>
     <script src="screens/patient.js"></script>
     <script src="screens/pharmacien.js"></script>
@@ -90,8 +105,8 @@
             const mobileFrame = document.getElementById('mobileFrame');
             const browserContent = document.getElementById('browserContent');
             
-            // Liste des modules à injecter
-            const fragments = ['shared', 'patient', 'pharmacien', 'medecin', 'livreur', 'admin', 'navigation'];
+            // Liste des modules à injecter (vitrine en premier = wscreen0)
+            const fragments = ['vitrine', 'shared', 'patient', 'pharmacien', 'medecin', 'livreur', 'admin', 'navigation'];
 
             
             console.log("Démarrage de l'injection des fragments...");

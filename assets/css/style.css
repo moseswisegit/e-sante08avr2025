@@ -546,11 +546,13 @@
   }
 
   /* ===== WEB FRAME ===== */
+  /* Affiché via JS avec display:flex (flex column = barre + contenu) */
   .web-frame {
-    display: none; /* Hidden by default, shown via JS */
+    display: none;
+    flex-direction: column;
     width: min(1200px, calc(100vw - 40px));
-    height: 800px;
-    background: #F4F9FC; /* Default light background */
+    height: min(820px, calc(100vh - 110px));
+    background: #F4F9FC;
     border-radius: 16px;
     overflow: hidden;
     position: relative;
@@ -590,13 +592,117 @@
     font-family: 'DM Sans', sans-serif;
   }
   .browser-content {
-    height: calc(100% - 44px); 
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* Prend toute la hauteur restante après la barre navigateur (44px) */
+    flex: 1;
+    min-height: 0;           /* indispensable dans un flex column pour ne pas déborder */
+    overflow: hidden;        /* les web-screen gèrent leur propre scroll */
     background: var(--bg);
     position: relative;
     display: flex;
     flex-direction: column;
+  }
+
+
+  /* ===== SWITCH BTN — VITRINE VARIANT ===== */
+  .switch-btn-vitrine {
+    background: linear-gradient(135deg, rgba(22,163,74,0.2), rgba(13,148,136,0.2));
+    border-color: rgba(110,231,183,0.4) !important;
+    color: #6EE7B7 !important;
+  }
+  .switch-btn-vitrine.active {
+    background: linear-gradient(135deg, #16A34A, #0D9488) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+    box-shadow: 0 4px 16px rgba(22,163,74,0.35);
+  }
+
+  /* ===== VITRINE FRAME ===== */
+  .vitrine-frame {
+    display: none;
+    width: min(1280px, calc(100vw - 40px));
+    height: min(820px, calc(100vh - 120px));
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+    z-index: 10;
+    border: 1px solid rgba(255,255,255,0.12);
+    flex-direction: column;
+  }
+  .vitrine-frame.active { display: flex; }
+
+  .vitrine-frame .web-browser-bar {
+    height: 48px;
+    background: linear-gradient(90deg, #0a1f14, #0a1a1f);
+    flex-shrink: 0;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  .vitrine-frame .browser-url {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border-radius: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    padding: 0 12px;
+    height: 28px;
+  }
+
+  /* Responsive size buttons in vitrine bar */
+  .vitrine-bar-actions {
+    display: flex;
+    gap: 4px;
+    margin-left: 4px;
+  }
+  .vitrine-size-btn {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .vitrine-size-btn:hover { background: rgba(22,163,74,0.25); border-color: rgba(110,231,183,0.4); color: #6EE7B7; }
+  .vitrine-size-btn.active { background: rgba(22,163,74,0.3); border-color: #6EE7B7; color: #6EE7B7; }
+
+  /* Inner wrapper — scrollable horizontalement si iframe < wrapper */
+  .vitrine-viewport-wrap {
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: #dde3e8;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    position: relative;
+  }
+  .vitrine-viewport-wrap::-webkit-scrollbar { height: 6px; }
+  .vitrine-viewport-wrap::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.25); border-radius: 3px; }
+
+  #vitrineIframe {
+    border: none;
+    display: block;
+    background: #fff;
+    /* L'iframe prend toute la hauteur du wrapper et défile en interne */
+    height: 100%;
+    flex-shrink: 0;
+    transition: width 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  /* Tailles responsive — l'iframe se redimensionne, le wrapper scroll horiz si besoin */
+  #vitrineIframe.size-desktop { width: 100%; min-width: 100%; }
+  #vitrineIframe.size-tablet  { width: 768px; box-shadow: 0 0 0 1px rgba(0,0,0,0.12); }
+  #vitrineIframe.size-mobile  { width: 390px; box-shadow: 0 0 0 1px rgba(0,0,0,0.12); }
+
+  /* Quand la vitrine est active, étend le viewport pour donner plus d'espace */
+  .viewport.vitrine-mode {
+    align-items: flex-start;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    min-height: calc(100vh - 80px);
   }
 
   /* ===== SCREENS CONTAINER ===== */
@@ -1070,12 +1176,32 @@
   /* ======== WEB SCREENS ======== */
   .web-screen {
     display: none;
-    height: 100%;
+    width: 100%;
     flex-direction: column;
     background: var(--bg);
+    position: relative;
     overflow: hidden;
   }
-  .web-screen.active { display: flex; }
+  /* flex:1 + min-height:0 = remplit le container flex sans déborder */
+  .web-screen.active {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+  }
+  /* wscreen0 contient une iframe : l'iframe doit occuper tout l'espace */
+  #wscreen0 {
+    overflow: hidden;
+    padding: 0;
+  }
+  #wscreen0 iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+    flex: 1;
+    min-height: 0;
+  }
 
   /* WEB LANDING */
   .web-nav {
@@ -1639,15 +1765,4 @@
   }
 
   /* Web screens — normal flow inside browser-content */
-  .web-screen {
-    display: none !important;
-    width: 100% !important;
-    height: 100% !important;
-    flex-direction: column;
-    overflow-y: auto;
-    background: var(--bg);
-    position: relative;
-  }
-  .web-screen.active {
-    display: flex !important;
-  }
+  /* Bloc dupliqué — fusionné dans le premier bloc .web-screen ci-dessus */
