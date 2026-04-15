@@ -2054,16 +2054,7 @@ window.switchStockTab = function(tab, el) {
     </div>
   </div><!-- end mobile-frame -->
 
-  <!-- ====== WEB FRAME ====== -->
-  <div class="web-frame" id="webFrame" style="display:none;">
-    <div class="web-browser-bar">
-      <div class="browser-dot red"></div>
-      <div class="browser-dot yellow"></div>
-      <div class="browser-dot green"></div>
-      <div class="browser-url">🔒 &nbsp; ilera.africa</div>
-    </div>
 
-    <div class="browser-content">
 
       <!-- WEB SCREEN 1 — MARKETING HOME -->
 <div class="web-screen" id="wscreen16">

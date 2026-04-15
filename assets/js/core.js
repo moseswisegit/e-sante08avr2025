@@ -115,17 +115,30 @@
     document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
 
     if (device === 'mobile') {
-      if (mobileFrame) mobileFrame.style.cssText = 'display:block;';
+      if (mobileFrame) {
+        mobileFrame.style.display = 'block';
+        mobileFrame.classList.add('active-mobile');
+      }
+      if (webFrame) {
+        webFrame.style.display = 'none';
+        webFrame.classList.remove('active-web');
+      }
       const btn = document.getElementById('btn-mobile');
       if (btn) btn.classList.add('active');
       goToScreen(currentScreen);
 
     } else {
-      // mode 'web' — affiche le webFrame en flex column (barre + contenu)
-      if (webFrame) webFrame.style.display = 'flex';
+      // mode 'web'
+      if (mobileFrame) {
+        mobileFrame.style.display = 'none';
+        mobileFrame.classList.remove('active-mobile');
+      }
+      if (webFrame) {
+        webFrame.style.display = 'flex';
+        webFrame.classList.add('active-web');
+      }
       const btn = document.getElementById('btn-web');
       if (btn) btn.classList.add('active');
-      // currentWebScreen=0 par défaut → vitrine (wscreen0)
       goToWebScreen(currentWebScreen);
     }
 
@@ -139,7 +152,7 @@
     const content = document.getElementById('browserContent');
     if (!content) return;
     // Ajuste la largeur max du contenu
-    const widths = { desktop: '100%', tablet: '768px', mobile: '390px' };
+    const widths = { desktop: '100%', tablet: '1024px', mobile: '390px' };
     content.style.maxWidth  = widths[size] || '100%';
     content.style.margin    = size === 'desktop' ? '' : '0 auto';
     content.style.boxShadow = size === 'desktop' ? '' : '0 0 0 1px rgba(0,0,0,0.1)';
@@ -174,35 +187,41 @@
   };
 
   window.goToWebScreen = function(n) {
+    console.log(`📡 Navigation Web vers : ${n}`);
     currentWebScreen = n;
     const allWeb = document.querySelectorAll('.web-screen');
     allWeb.forEach(s => s.classList.remove('active'));
 
-    const target = document.getElementById('wscreen' + n) || document.getElementById(n);
+    // Recherche de la cible par ID wscreenN ou N ou wN
+    const target = document.getElementById('wscreen' + n) || document.getElementById(n) || document.getElementById('w' + n);
+    
     if (target) {
         target.classList.add('active');
         const content = document.getElementById('browserContent');
         if (content) content.scrollTop = 0;
-    } else if (allWeb.length > 0) {
-        // Fallback : premier écran disponible
-        allWeb[0].classList.add('active');
+    } else {
+        console.warn(`❌ Écran web [${n}] non trouvé.`);
+        if (allWeb.length > 0) {
+            console.log("ℹ️ Affichage du premier écran web disponible par défaut.");
+            allWeb[0].classList.add('active');
+        }
     }
 
     // URL bar : wscreen0 = vitrine (accueil public)
     const urlEl = document.getElementById('webBrowserUrl');
     if (urlEl) {
       const urlMap = {
-        0:  '🔒 ilera.africa',
-        1:  '🔒 ilera.africa — Accueil',
-        8:  '🔒 ilera.africa/login',
-        9:  '🔒 ilera.africa/patient/dashboard',
-        16: '🔒 ilera.africa/pharmacien/dashboard',
+        0: '🔒 ilera.africa',
+        8: '🔒 ilera.africa/login',
+        10: '🔒 ilera.africa/patient/dashboard',
+        16: '🔒 ilera.africa/pharmacien/login',
+        17: '🔒 ilera.africa/pharmacien/dashboard',
         22: '🔒 ilera.africa/admin/login',
         23: '🔒 ilera.africa/admin/dashboard',
         57: '🔒 ilera.africa/medecin/login',
         58: '🔒 ilera.africa/medecin/dashboard',
       };
-      urlEl.textContent = urlMap[n] || ('🔒 ilera.africa/web/' + n);
+      urlEl.textContent = urlMap[n] || ('🔒 ilera.africa/web/screen-' + n);
     }
 
     // Bouton Home visible seulement si on n'est pas déjà sur la vitrine
@@ -259,13 +278,14 @@
     if (!panel) return;
     panel.innerHTML = `<div id="screen-picker-header"><span>📺 Navigation</span><button onclick="toggleScreenPicker()">✕</button></div><div id="screen-picker-body"></div>`;
     const body = panel.querySelector('#screen-picker-body');
+    
     SCREEN_GROUPS.forEach(group => {
       if (group.isHeader) {
         const h = document.createElement('div');
         h.style.cssText = 'font-size:10px;font-weight:800;color:rgba(255,255,255,0.4);margin-top:8px;padding:4px 0;border-top:1px solid rgba(255,255,255,0.1);';
         h.textContent = group.label;
         body.appendChild(h);
-      } else {
+      } else if (group.screens) {
         const dots = document.createElement('div');
         dots.className = 'sp-dots';
         group.screens.forEach(n => {

@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- CSS Modulaire -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=3">
     
     <style>
         /* Loader styles */
@@ -93,8 +93,8 @@
     <script src="screens/admin.js"></script>
     <script src="screens/navigation.js"></script>
 
-    <!-- Scripts Core -->
-    <script src="assets/js/core.js"></script>
+    <!-- Logique Principale -->
+    <script src="assets/js/core.js?v=2"></script>
     
     <script>
         /**
@@ -108,13 +108,12 @@
             // Liste des modules à injecter (vitrine en premier = wscreen0)
             const fragments = ['vitrine', 'shared', 'patient', 'pharmacien', 'medecin', 'livreur', 'admin', 'navigation'];
 
-            
-            console.log("Démarrage de l'injection des fragments...");
+            console.log("🚀 Démarrage de l'injection des fragments...");
             
             fragments.forEach(name => {
                 const html = (window.FRAGMENTS && window.FRAGMENTS[name]) || '';
                 if (!html) {
-                    console.warn(`Fragment [${name}] non trouvé ou vide.`);
+                    console.warn(`⚠️ Fragment [${name}] non trouvé ou vide.`);
                     return;
                 }
                 
@@ -123,26 +122,40 @@
                 
                 // 1. Répartition des écrans dans les bons conteneurs
                 const mobileScreens = temp.querySelectorAll('.screen');
+                console.log(`- Fragment [${name}]: ${mobileScreens.length} écrans mobiles trouvés.`);
                 mobileScreens.forEach(s => mobileFrame.appendChild(s));
                 
                 const webScreens = temp.querySelectorAll('.web-screen');
+                console.log(`- Fragment [${name}]: ${webScreens.length} écrans web trouvés.`);
                 webScreens.forEach(s => browserContent.appendChild(s));
 
                 // 2. Injection des autres composants globaux (drawers, modaux, overlays)
-                // On injecte tout ce qui reste (ex: sideMenuDrawer) directement dans le mobileFrame 
-                // pour qu'ils soient contraints par le cadre du téléphone
+                // On injecte tout ce qui reste directement dans le mobileFrame, en évitant les doublons de structure
                 [...temp.children].forEach(child => {
-                    if (!child.classList.contains('screen') && !child.classList.contains('web-screen')) {
-                        mobileFrame.appendChild(child);
+                    if (child.classList.contains('screen') || child.classList.contains('web-screen')) return;
+                    
+                    // Sécurité : ne jamais ré-injecter des conteneurs structurels principaux
+                    const forbiddenIds = ['webFrame', 'mobileFrame', 'browserContent', 'mainViewport'];
+                    if (child.id && forbiddenIds.includes(child.id)) {
+                        console.warn(`⚠️ Conteneur structurel en doublon ignoré : #${child.id} dans [${name}]`);
+                        return;
                     }
+
+                    mobileFrame.appendChild(child);
                 });
                 
-                console.log(`Fragment [${name}] injecté.`);
+                console.log(`✅ Fragment [${name}] injecté.`);
             });
 
             // Initialisation de la logique UI définie dans core.js
-            if (window.buildScreenPicker) buildScreenPicker();
-            if (window.buildFlowNav) buildFlowNav();
+            if (window.buildScreenPicker) {
+                console.log("🔨 Construction du picker d'écrans...");
+                buildScreenPicker();
+            }
+            if (window.buildFlowNav) {
+                console.log("🗺 Construction de la navigation parcours...");
+                buildFlowNav();
+            }
             
             // Retrait de l'écran de chargement
             if (loader) {
@@ -157,6 +170,7 @@
             setTimeout(() => {
                 if (window.showToast) showToast('✅ Maquette chargée avec succès !');
             }, 800);
+            console.log("✨ Application initialisée.");
         }
 
         // Lancement dès que le DOM est prêt

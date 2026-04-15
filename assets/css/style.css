@@ -511,6 +511,7 @@
 
   /* ===== VIEWPORT ===== */
   .viewport {
+    width: 100%;
     margin-top: 72px;
     margin-bottom: 20px;
     display: flex;
@@ -545,34 +546,45 @@
     z-index: 200;
   }
 
-  /* ===== WEB FRAME ===== */
-  /* Affiché via JS avec display:flex (flex column = barre + contenu) */
-  .web-frame {
+  /* ===== WEB FRAME (ID selector for high specificity) ===== */
+  #webFrame {
     display: none;
     flex-direction: column;
-    width: min(1200px, calc(100vw - 40px));
-    height: min(820px, calc(100vh - 110px));
-    background: #F4F9FC;
+    flex: 1;
+    width: 100%;
+    max-width: 1440px;
+    height: 90vh;
+    max-height: 820px;
+    background: #FFFFFF !important;
     border-radius: 16px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-    flex-shrink: 0;
-    z-index: 10;
-    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+    z-index: 1000;
+    margin: 20px auto;
+    border: 1px solid rgba(0,0,0,0.1);
   }
+  
+  #webFrame.active-web { 
+    display: flex !important; 
+  }
+
   @media (prefers-color-scheme: dark) {
-    .web-frame { background: #0D1117; }
+    #webFrame { background: #1A2332 !important; border-color: rgba(255,255,255,0.1); }
   }
 
   .web-browser-bar {
-    height: 44px;
-    background: #1e2a35;
+    height: 48px;
+    background: #F1F3F4;
     display: flex;
     align-items: center;
     padding: 0 16px;
-    gap: 8px;
+    gap: 12px;
     flex-shrink: 0;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  @media (prefers-color-scheme: dark) {
+    .web-browser-bar { background: #111827; border-bottom-color: #30363D; }
   }
   .browser-dot { width: 12px; height: 12px; border-radius: 50%; }
   .browser-dot.red { background: #FF5F56; }
@@ -580,23 +592,25 @@
   .browser-dot.green { background: #27C93F; }
   .browser-url {
     flex: 1;
-    height: 26px;
-    background: rgba(255,255,255,0.08);
+    height: 28px;
+    background: #ffffff;
+    border: 1px solid #ddd;
     border-radius: 6px;
     margin: 0 8px;
     display: flex;
     align-items: center;
     padding: 0 10px;
-    color: rgba(255,255,255,0.5);
-    font-size: 12px;
+    color: #333;
+    font-size: 13px;
     font-family: 'DM Sans', sans-serif;
   }
   .browser-content {
-    /* Prend toute la hauteur restante après la barre navigateur (44px) */
     flex: 1;
-    min-height: 0;           /* indispensable dans un flex column pour ne pas déborder */
-    overflow: hidden;        /* les web-screen gèrent leur propre scroll */
-    background: var(--bg);
+    width: 100%;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #FFFFFF;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1178,13 +1192,13 @@
     display: none;
     width: 100%;
     flex-direction: column;
-    background: var(--bg);
+    background: #F4F9FC;
     position: relative;
     overflow: hidden;
   }
   /* flex:1 + min-height:0 = remplit le container flex sans déborder */
   .web-screen.active {
-    display: flex;
+    display: flex !important;
     flex: 1;
     min-height: 0;
     overflow: hidden;
