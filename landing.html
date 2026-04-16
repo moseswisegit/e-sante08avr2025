@@ -1496,24 +1496,18 @@
         catch(e) { return false; }
     })();
 
-    /* Si intégré dans le webFrame : masquer les éléments inutiles */
+    /* Si intégré dans le webFrame : masquer uniquement les éléments inutiles */
     if (isInMaquette) {
         document.addEventListener('DOMContentLoaded', () => {
-            // Cacher la nav sticky (la maquette a sa propre chrome)
-            const h = document.getElementById('header');
-            if (h) h.style.display = 'none';
-            // Cacher le menu mobile overlay
+            // Garder la navbar visible — elle fait partie du parcours d'inscription
+            // Cacher le menu mobile overlay (burger non pertinent dans le frame desktop)
             const mm = document.getElementById('mobile-menu');
             if (mm) mm.style.display = 'none';
-            // Cacher le floating CTA (mobile only, inutile en desktop)
+            // Cacher le floating CTA (mobile only)
             const fc = document.getElementById('floating-cta');
             if (fc) fc.style.display = 'none';
-            // Retirer le padding-top du body (réservé au header sticky)
-            document.body.style.paddingTop = '0';
+            // Retirer le padding-bottom inutile
             document.body.style.paddingBottom = '0';
-            // Décaler la hero section (n'a plus à compenser le header)
-            const hero = document.getElementById('hero');
-            if (hero) hero.style.paddingTop = '60px';
         });
     }
 
@@ -1521,30 +1515,31 @@
        NAVIGATION VERS L'APP WEB (depuis la vitrine)
        Mapping rôle → écran de connexion/inscription
     ============================================================ */
-    const ROLE_TO_WSCREEN = {
-        patient:    8,   // wscreen8  = Login patient
-        medecin:    57,  // wscreen57 = Login médecin
-        pharmacien: 16,  // wscreen16 = Dashboard pharmacien
-        livreur:    8,   // wscreen8  (pas d'espace web livreur dédié)
-        default:    8
+    // Mapping rôle → écran d'INSCRIPTION
+    const INSCRIPTION_SCREENS = {
+        patient:    9,              // wscreen9  = Formulaire inscription patient
+        medecin:    '_enrollement', // wscreen_enrollement = Formulaire professionnel
+        pharmacien: '_enrollement', // wscreen_enrollement = Formulaire professionnel
+        livreur:    '_enrollement', // wscreen_enrollement = Formulaire professionnel
+        default:    '_enrollement'
     };
 
     /**
-     * Navigue vers l'app web si intégrée, sinon ouvre la modale.
+     * Bouton "S'inscrire" par profil → formulaire d'inscription correspondant.
      * @param {string} [role] - 'patient' | 'medecin' | 'pharmacien' | 'livreur'
      */
     function handleCTA(role) {
         if (isInMaquette) {
-            const screenId = ROLE_TO_WSCREEN[role] || ROLE_TO_WSCREEN.default;
+            const screenId = INSCRIPTION_SCREENS[role] || INSCRIPTION_SCREENS.default;
             window.parent.goToWebScreen(screenId);
         } else {
             openModal(role);
         }
     }
 
-    /** Connexion rapide → login patient */
+    /** Bouton "Se connecter" → écran de login universel avec sélection de profil */
     function handleLogin() {
-        if (isInMaquette) { window.parent.goToWebScreen(ROLE_TO_WSCREEN.patient); }
+        if (isInMaquette) { window.parent.goToWebScreen(8); }
         else { openModal(); }
     }
 

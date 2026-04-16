@@ -3191,13 +3191,14 @@ window.showDossierTab = function(tab) {
           
           <div style="flex:1;padding:60px 20px;display:flex;justify-content:center;">
             <div style="max-width:560px;width:100%;background:#fff;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,0.06);padding:40px;height:fit-content;">
-              <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;color:#1A2332;margin-bottom:8px;text-align:center;">Devenir Partenaire</h2>
-              <p style="font-size:15px;color:#6B7A8D;text-align:center;margin-bottom:32px;">Rejoignez notre réseau en tant que Pharmacien ou Livreur. Soumettez votre dossier pour approbation.</p>
-              
+              <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;color:#1A2332;margin-bottom:8px;text-align:center;">Créer un compte professionnel</h2>
+              <p style="font-size:15px;color:#6B7A8D;text-align:center;margin-bottom:32px;">Soumettez votre dossier. Nos équipes valideront votre compte et vous enverront vos accès par email.</p>
+
               <div style="display:flex;flex-direction:column;gap:20px;">
                 <div>
                   <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">Profil souhaité</label>
                   <select style="width:100%;padding:14px 16px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;">
+                    <option>Médecin</option>
                     <option>Pharmacien</option>
                     <option>Livreur Indépendant</option>
                   </select>
@@ -3251,8 +3252,15 @@ window.showDossierTab = function(tab) {
           <div style="max-width:480px;text-align:center;background:#fff;border-radius:24px;padding:48px;box-shadow:0 12px 40px rgba(0,0,0,0.06);">
             <div style="width:80px;height:80px;background:#E8F7EE;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;color:#27AE60;margin:0 auto 24px;">✅</div>
             <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#1A2332;margin-bottom:16px;">Dossier En Cours d'Analyse</h2>
-            <p style="font-size:16px;color:#6B7A8D;line-height:1.6;margin-bottom:32px;">Votre dossier est en cours d'analyse par nos équipes. Vous recevrez vos accès et instructions par email dès validation de vos pièces justificatives.</p>
-            <button onclick="goToWebScreen(1)" style="padding:14px 32px;background:#1A2332;color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">Retour à l'accueil</button>
+            <p style="font-size:16px;color:#6B7A8D;line-height:1.6;margin-bottom:16px;">Votre dossier est en cours d'analyse par nos équipes. Vous recevrez vos accès et instructions par email dès validation de vos pièces justificatives.</p>
+            <div style="background:#F4F9FC;border-radius:12px;padding:14px 18px;margin-bottom:28px;font-size:13px;color:#1A6B8A;display:flex;align-items:center;gap:8px;">
+              <span style="font-size:16px;">ℹ️</span>
+              <span>Une fois validé, connectez-vous sur la plateforme et accédez à votre tableau de bord.</span>
+            </div>
+            <div style="display:flex;gap:12px;justify-content:center;">
+              <button onclick="goToWebScreen(8)" style="padding:14px 28px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">Se connecter →</button>
+              <button onclick="goToWebScreen(0)" style="padding:14px 28px;background:#F4F9FC;color:#1A2332;border:1.5px solid #E2ECF2;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;">Accueil</button>
+            </div>
           </div>
         </div>
       </div>
@@ -3562,7 +3570,7 @@ window.showDossierTab = function(tab) {
             <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid #E2ECF2;">
               <p style="text-align:center;font-size:11px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px;">Accès professionnel</p>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-                <button onclick="goToWebScreen(19)" style="padding:10px 8px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">⚕️ Pharmacien</button>
+                <button onclick="goToWebScreen(16)" style="padding:10px 8px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">⚕️ Pharmacien</button>
                 <button onclick="goToWebScreen(57)" style="padding:10px 8px;background:#E8F7EE;color:#0D3B2E;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">🩺 Médecin</button>
                 <button onclick="goToWebScreen(23)" style="padding:10px 8px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">🛡️ Admin</button>
               </div>

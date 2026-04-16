@@ -50,6 +50,13 @@
     goToScreen(10);
   };
 
+  // Connexion web — redirige vers le dashboard patient par défaut
+  // (les boutons profils dans wscreen8 gèrent la redirection spécifique)
+  window.handleWebLogin = function() {
+    showToast('✅ Connexion réussie !');
+    goToWebScreen(10); // Dashboard patient
+  };
+
   // ============================================================
   //  DRAWER (menu latéral)
   // ============================================================
