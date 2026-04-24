@@ -687,21 +687,21 @@ window.FRAGMENTS['admin'] = `
       </div>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Dashboard Administration</div>
         <div style="display:flex;align-items:center;gap:12px;"><div style="font-size:13px;color:#6B7A8D;">📅 14 octobre 2024, 14:22</div><div style="position:relative;cursor:pointer;" onclick="showToast('5 alertes')"><div style="width:32px;height:32px;background:#FEF0EE;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">🔔</div><div style="position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#E74C3C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;">5</div></div></div>
       </div>
       <div style="padding:20px 24px;display:flex;flex-direction:column;gap:16px;">
         <!-- KPI Row -->
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-          <div style="background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:14px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">👥 Utilisateurs actifs</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;">2 847</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">↑ +23 cette semaine</div></div>
-          <div style="background:linear-gradient(135deg,#27AE60,#2ecc71);border-radius:14px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">📦 Commandes/jour</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;">156</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">↑ +12% vs hier</div></div>
-          <div style="background:linear-gradient(135deg,#E74C3C,#c0392b);border-radius:14px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">⚠️ Ruptures de stock</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;">8</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">↑ +3 nouvelles</div></div>
-          <div style="background:linear-gradient(135deg,#F39C12,#e67e22);border-radius:14px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">💰 Revenus du mois</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;">4 200 000</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">FCFA · ↑ +8%</div></div>
+          <div style="background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:16px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">👥 Utilisateurs actifs</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;">2 847</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">↑ +23 cette semaine</div></div>
+          <div style="background:linear-gradient(135deg,#27AE60,#2ecc71);border-radius:16px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">📦 Commandes/jour</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;">156</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">↑ +12% vs hier</div></div>
+          <div style="background:linear-gradient(135deg,#E74C3C,#c0392b);border-radius:16px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">⚠️ Ruptures de stock</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;">8</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">↑ +3 nouvelles</div></div>
+          <div style="background:linear-gradient(135deg,#F39C12,#e67e22);border-radius:16px;padding:18px;color:#fff;"><div style="font-size:11px;opacity:0.8;margin-bottom:6px;">💰 Revenus du mois</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;">4 200 000</div><div style="font-size:11px;opacity:0.7;margin-top:4px;">FCFA · ↑ +8%</div></div>
         </div>
         <!-- Row 2: Alerts + Audit -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">⚠️ Alertes critiques</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="background:#FEF0EE;border-radius:10px;padding:12px;border-left:3px solid #E74C3C;"><div style="font-size:12px;font-weight:700;color:#E74C3C;margin-bottom:2px;">Rupture stock — Paracétamol 500mg</div><div style="font-size:11px;color:#6B7A8D;">Stock: 0 unités · Seuil critique: 50 · <button onclick="goToWebScreen(25)" style="border:none;background:none;color:#1A6B8A;font-size:11px;font-weight:700;cursor:pointer;padding:0;font-family:'DM Sans',sans-serif;">Gérer →</button></div></div>
@@ -709,7 +709,7 @@ window.FRAGMENTS['admin'] = `
               <div style="background:#FEF9EE;border-radius:10px;padding:12px;border-left:3px solid #F39C12;"><div style="font-size:12px;font-weight:700;color:#F39C12;margin-bottom:2px;">Compte pharmacien non vérifié</div><div style="font-size:11px;color:#6B7A8D;">Dr. Ibrahim Koné · Documents manquants</div></div>
             </div>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Journal d'audit</div><button onclick="goToWebScreen(28)" style="font-size:12px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">Voir tout →</button></div>
             <div style="display:flex;flex-direction:column;gap:8px;">
               <div style="display:flex;gap:10px;align-items:center;padding:8px;background:#F4F9FC;border-radius:8px;"><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;flex-shrink:0;"></div><div style="flex:1;font-size:12px;color:#1A2332;">Utilisateur créé: J-M. Diabaté</div><div style="font-size:10px;color:#6B7A8D;white-space:nowrap;">09:14</div></div>
@@ -722,18 +722,18 @@ window.FRAGMENTS['admin'] = `
         </div>
         <!-- Quick actions -->
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-          <button onclick="goToWebScreen(24)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">👥</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Gérer utilisateurs</div></button>
-          <button onclick="goToWebScreen(25)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">💊</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Produits &amp; Stock</div></button>
-          <button onclick="goToWebScreen(27)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">📊</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Rapports</div></button>
-          <button onclick="goToWebScreen(64)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🛵</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Livreurs</div></button>
-          <button onclick="goToWebScreen(65)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🏥</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Pharmacies</div></button>
-          <button onclick="goToWebScreen(66)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">📈</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Analytics</div></button>
-          <button onclick="goToWebScreen(67)" style="background:linear-gradient(135deg,#FEF0EE,#FFD5D0);border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🦠</div><div style="font-size:12px;font-weight:700;color:#E74C3C;font-family:'DM Sans',sans-serif;">Épidémies IR</div></button>
-          <button onclick="goToWebScreen(68)" style="background:linear-gradient(135deg,#161B22,#1C2128);border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">⛓️</div><div style="font-size:12px;font-weight:700;color:#27AE60;font-family:'DM Sans',sans-serif;">Blockchain</div></button>
+          <button onclick="goToWebScreen(24)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">👥</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Gérer utilisateurs</div></button>
+          <button onclick="goToWebScreen(25)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">💊</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Produits &amp; Stock</div></button>
+          <button onclick="goToWebScreen(27)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">📊</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Rapports</div></button>
+          <button onclick="goToWebScreen(64)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🛵</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Livreurs</div></button>
+          <button onclick="goToWebScreen(65)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🏥</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Pharmacies</div></button>
+          <button onclick="goToWebScreen(66)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">📈</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Analytics</div></button>
+          <button onclick="goToWebScreen(67)" style="background:linear-gradient(135deg,#FEF0EE,#FFD5D0);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🦠</div><div style="font-size:12px;font-weight:700;color:#E74C3C;font-family:'DM Sans',sans-serif;">Épidémies IR</div></button>
+          <button onclick="goToWebScreen(68)" style="background:linear-gradient(135deg,#161B22,#1C2128);border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">⛓️</div><div style="font-size:12px;font-weight:700;color:#27AE60;font-family:'DM Sans',sans-serif;">Blockchain</div></button>
         </div>
         <!-- Live Chart Section -->
         <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;">
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
               <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Commandes — 7 derniers jours</div>
               <div style="font-size:11px;color:#27AE60;font-weight:700;">↑ +12% cette semaine</div>
@@ -743,7 +743,7 @@ window.FRAGMENTS['admin'] = `
               <span style="font-size:10px;color:#6B7A8D;">Lun</span><span style="font-size:10px;color:#6B7A8D;">Mar</span><span style="font-size:10px;color:#6B7A8D;">Mer</span><span style="font-size:10px;color:#6B7A8D;">Jeu</span><span style="font-size:10px;color:#6B7A8D;">Ven</span><span style="font-size:10px;color:#6B7A8D;">Sam</span><span style="font-size:10px;color:#1A6B8A;font-weight:700;">Auj</span>
             </div>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:16px;">Répartition profils</div>
             <div id="admin-donut-chart" style="position:relative;width:100%;display:flex;justify-content:center;"></div>
             <div style="display:flex;flex-direction:column;gap:6px;margin-top:12px;">
@@ -754,7 +754,7 @@ window.FRAGMENTS['admin'] = `
             </div>
           </div>
         </div>
-          <button onclick="goToWebScreen(28)" style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🔒</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Audit &amp; Sécurité</div></button>
+          <button onclick="goToWebScreen(28)" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border:none;cursor:pointer;text-align:center;"><div style="font-size:24px;margin-bottom:6px;">🔒</div><div style="font-size:12px;font-weight:700;color:#1A2332;font-family:'DM Sans',sans-serif;">Audit &amp; Sécurité</div></button>
         </div>
       </div>
     </div>
@@ -778,7 +778,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Gestion des Utilisateurs</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:180px;">
@@ -787,7 +787,7 @@ window.FRAGMENTS['admin'] = `
         </div>
       </div>
       <div style="padding:20px 24px;">
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Utilisateur</th>
@@ -860,7 +860,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💊 Produits &amp; Gestion des Stocks</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher produit..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:200px;">
@@ -877,7 +877,7 @@ window.FRAGMENTS['admin'] = `
           <button onclick="filterAlerts()" style="padding:7px 14px;background:#E74C3C;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir alertes</button>
         </div>
         <!-- Products table -->
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Produit</th>
@@ -950,7 +950,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📦 Supervision des Commandes</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher #CMD..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:180px;">
@@ -965,7 +965,7 @@ window.FRAGMENTS['admin'] = `
           <div style="background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:3px solid #F39C12;"><div style="font-size:11px;color:#6B7A8D;">En cours</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#F39C12;">24</div></div>
           <div style="background:#fff;border-radius:12px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:3px solid #E74C3C;"><div style="font-size:11px;color:#6B7A8D;">Signalées</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#E74C3C;">4</div></div>
         </div>
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Référence</th>
@@ -1033,7 +1033,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📈 Rapports &amp; Analytiques</div>
         <div style="display:flex;gap:8px;">
           <select style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;"><option>Ce mois-ci</option><option>Cette semaine</option><option>Ce trimestre</option><option>Cette année</option></select>
@@ -1050,24 +1050,24 @@ window.FRAGMENTS['admin'] = `
         </div>
         <!-- Summary KPIs -->
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-size:12px;color:#6B7A8D;margin-bottom:6px;">Revenus totaux (octobre)</div>
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;">4 200 000 FCFA</div>
             <div style="display:flex;align-items:center;gap:4px;margin-top:6px;"><span style="font-size:12px;color:#27AE60;font-weight:700;">↑ +8%</span><span style="font-size:11px;color:#6B7A8D;">vs septembre</span></div>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-size:12px;color:#6B7A8D;margin-bottom:6px;">Ordonnances validées</div>
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;">1 892</div>
             <div style="display:flex;align-items:center;gap:4px;margin-top:6px;"><span style="font-size:12px;color:#27AE60;font-weight:700;">↑ +5%</span><span style="font-size:11px;color:#6B7A8D;">vs septembre</span></div>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-size:12px;color:#6B7A8D;margin-bottom:6px;">Nouveaux patients</div>
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;">234</div>
             <div style="display:flex;align-items:center;gap:4px;margin-top:6px;"><span style="font-size:12px;color:#27AE60;font-weight:700;">↑ +12%</span><span style="font-size:11px;color:#6B7A8D;">vs septembre</span></div>
           </div>
         </div>
         <!-- Revenue chart -->
-        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:16px;">Revenus mensuels — 2024</div>
           <div style="display:flex;align-items:flex-end;gap:8px;height:120px;">
             <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;"><div style="width:100%;background:#E8F4F8;border-radius:6px 6px 0 0;height:52px;"></div><div style="font-size:10px;color:#6B7A8D;">Jan</div></div>
@@ -1083,7 +1083,7 @@ window.FRAGMENTS['admin'] = `
           </div>
         </div>
         <!-- Top pharmacies -->
-        <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Top Pharmacies — Octobre 2024</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div style="display:flex;align-items:center;gap:12px;"><div style="width:24px;height:24px;background:#F39C12;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;">1</div><div style="flex:1;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><span style="font-size:13px;font-weight:700;color:#1A2332;">Pharmacie du Plateau</span><span style="font-size:12px;font-weight:700;color:#1A6B8A;">1 420 000 FCFA</span></div><div style="height:6px;background:#E8F4F8;border-radius:3px;overflow:hidden;"><div style="width:100%;height:100%;background:#1A6B8A;border-radius:3px;"></div></div></div></div>
@@ -1113,7 +1113,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🔒 Audit &amp; Sécurité</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Filtrer par utilisateur..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:200px;">
@@ -1130,7 +1130,7 @@ window.FRAGMENTS['admin'] = `
           <div style="background:#E8F4F8;border-radius:12px;padding:14px;border:1px solid rgba(26,107,138,0.2);"><div style="font-size:11px;color:#1A6B8A;margin-bottom:4px;">Actions admin</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#1A6B8A;">42</div></div>
         </div>
         <!-- Audit log table -->
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Horodatage</th>
@@ -1164,7 +1164,7 @@ window.FRAGMENTS['admin'] = `
   <div style="display:flex;height:100%;overflow:hidden;">
     <!-- Patient top nav -->
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
         <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:20px;">
           <a onclick="goToWebScreen(10)" style="font-size:13px;color:#6B7A8D;cursor:pointer;font-family:'DM Sans',sans-serif;">Accueil</a>
@@ -1195,56 +1195,56 @@ window.FRAGMENTS['admin'] = `
           <!-- Product grid -->
           <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;transition:transform 0.2s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#E8F4F8;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💊</div>
+              <div style="width:52px;height:52px;background:#E8F4F8;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💊</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Amoxicilline 500mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Antibiotique · Boîte 12cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">2 100 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;font-weight:700;color:#F39C12;background:#FEF9EE;border-radius:6px;padding:2px 8px;display:inline-block;">Ordonnance requise</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#E8F7EE;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💊</div>
+              <div style="width:52px;height:52px;background:#E8F7EE;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💊</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Metformine 850mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Antidiabétique · Boîte 30cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">2 800 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;font-weight:700;color:#F39C12;background:#FEF9EE;border-radius:6px;padding:2px 8px;display:inline-block;">Ordonnance requise</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;opacity:0.7;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#F4F9FC;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💊</div>
+              <div style="width:52px;height:52px;background:#F4F9FC;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💊</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Paracétamol 500mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Analgésique · Boîte 16cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">1 200 FCFA</span><div style="width:8px;height:8px;background:#E74C3C;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;font-weight:700;color:#E74C3C;background:#FEF0EE;border-radius:6px;padding:2px 8px;display:inline-block;">Rupture de stock</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#FEF9EE;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🩺</div>
+              <div style="width:52px;height:52px;background:#FEF9EE;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🩺</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Ibuprofène 400mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Anti-inflammatoire · Boîte 20cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">1 800 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;color:#27AE60;background:#E8F7EE;border-radius:6px;padding:2px 8px;display:inline-block;font-weight:700;">Sans ordonnance</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#E8F4F8;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💉</div>
+              <div style="width:52px;height:52px;background:#E8F4F8;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">💉</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Insuline Glargine</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Antidiabétique · Stylo 3ml</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">18 500 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;font-weight:700;color:#F39C12;background:#FEF9EE;border-radius:6px;padding:2px 8px;display:inline-block;">Ordonnance requise</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#E8F4F8;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🌡️</div>
+              <div style="width:52px;height:52px;background:#E8F4F8;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🌡️</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Azithromycine 500mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Antibiotique · Boîte 3cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">3 400 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;font-weight:700;color:#F39C12;background:#FEF9EE;border-radius:6px;padding:2px 8px;display:inline-block;">Ordonnance requise</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#F4F9FC;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🫀</div>
+              <div style="width:52px;height:52px;background:#F4F9FC;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🫀</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Amlodipine 5mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Cardiovasculaire · Boîte 30cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">4 200 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
               <div style="margin-top:8px;font-size:10px;font-weight:700;color:#F39C12;background:#FEF9EE;border-radius:6px;padding:2px 8px;display:inline-block;">Ordonnance requise</div>
             </div>
             <div onclick="goToWebScreen(30)" style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div style="width:52px;height:52px;background:#E8F7EE;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🌿</div>
+              <div style="width:52px;height:52px;background:#E8F7EE;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:12px;">🌿</div>
               <div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:2px;">Cotrimoxazole 960mg</div>
               <div style="font-size:11px;color:#6B7A8D;margin-bottom:10px;">Antibiotique · Boîte 20cp</div>
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:16px;font-weight:800;color:#1A6B8A;">2 600 FCFA</span><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;"></div></div>
@@ -1260,7 +1260,7 @@ window.FRAGMENTS['admin'] = `
 <!-- ========================================
      WSCREEN 27 — FICHE MÉDICAMENT (WEB)
 ======================================== -->
-<div class="web-screen" id="wscreen48"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(23)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Dashboard Admin</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Vue Admin simplifiée</div><div style="width:8px;"></div></div><div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;"><div style="font-size:40px;">🛡️</div><div style="font-size:16px;font-weight:700;color:#1A2332;">Panneau d'administration</div><button onclick="goToWebScreen(23)" style="padding:14px 32px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">→ Aller au Dashboard Admin complet</button></div></div></div>
+<div class="web-screen" id="wscreen48"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(23)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Dashboard Admin</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Vue Admin simplifiée</div><div style="width:8px;"></div></div><div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;"><div style="font-size:40px;">🛡️</div><div style="font-size:16px;font-weight:700;color:#1A2332;">Panneau d'administration</div><button onclick="goToWebScreen(23)" style="padding:14px 32px;background:#1A2332;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">→ Aller au Dashboard Admin complet</button></div></div></div>
 
 <!-- ========================================
      WSCREEN 46 — 404 WEB
@@ -1282,7 +1282,7 @@ window.FRAGMENTS['admin'] = `
     </div>
     <!-- Content -->
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🛵 Gestion des Livreurs</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher livreur..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:200px;">
@@ -1293,13 +1293,13 @@ window.FRAGMENTS['admin'] = `
       <div style="padding:20px 24px;display:flex;flex-direction:column;gap:16px;">
         <!-- KPIs livreurs -->
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #4ADE80;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En ligne maintenant</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#27AE60;">18</div><div style="font-size:11px;color:#27AE60;">🟢 Disponibles</div></div>
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #F39C12;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En livraison</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#F39C12;">12</div><div style="font-size:11px;color:#F39C12;">🟡 En course</div></div>
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #6B7A8D;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Hors ligne</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#6B7A8D;">18</div><div style="font-size:11px;color:#6B7A8D;">⚫ Inactifs</div></div>
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #1A6B8A;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Note moyenne</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#1A6B8A;">4.8</div><div style="font-size:11px;color:#F39C12;">⭐ Satisfaction</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #4ADE80;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En ligne maintenant</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#27AE60;">18</div><div style="font-size:11px;color:#27AE60;">🟢 Disponibles</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #F39C12;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En livraison</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#F39C12;">12</div><div style="font-size:11px;color:#F39C12;">🟡 En course</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #6B7A8D;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Hors ligne</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#6B7A8D;">18</div><div style="font-size:11px;color:#6B7A8D;">⚫ Inactifs</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #1A6B8A;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Note moyenne</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#1A6B8A;">4.8</div><div style="font-size:11px;color:#F39C12;">⭐ Satisfaction</div></div>
         </div>
         <!-- Table livreurs -->
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Livreur</th>
@@ -1361,7 +1361,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="display:flex;align-items:center;gap:10px;"><button onclick="goToWebScreen(54)" style="font-size:13px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Livreurs</button><span style="color:#E2ECF2;">/</span><span style="font-size:13px;font-weight:600;color:#1A2332;">Kofi Mensah · #LIV-0042</span></div>
         <div style="display:flex;gap:8px;"><button onclick="showToast('Suspendre livreur')" style="padding:8px 14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">⏸ Suspendre</button><button onclick="goToWebScreen(56)" style="padding:8px 14px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🗺 Localiser</button></div>
       </div>
@@ -1381,7 +1381,7 @@ window.FRAGMENTS['admin'] = `
         </div>
         <!-- Infos + Livraisons actuelles -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Informations</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#6B7A8D;">Téléphone</span><span style="font-size:12px;font-weight:600;color:#1A6B8A;">+225 07 44 55 88 12</span></div>
@@ -1391,7 +1391,7 @@ window.FRAGMENTS['admin'] = `
               <div style="display:flex;justify-content:space-between;"><span style="font-size:12px;color:#6B7A8D;">Membre depuis</span><span style="font-size:12px;font-weight:600;color:#1A2332;">Janvier 2024</span></div>
             </div>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Livraison en cours</div>
             <div style="background:#FEF9EE;border-radius:12px;padding:14px;border:1.5px solid rgba(243,156,18,0.2);">
               <div style="font-size:13px;font-weight:700;color:#F39C12;margin-bottom:6px;">🛵 En route · #CMD-90214</div>
@@ -1444,7 +1444,7 @@ window.FRAGMENTS['admin'] = `
     </div>
     <!-- Carte principale -->
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🗺 Suivi en temps réel — Abidjan</div>
         <div style="display:flex;gap:10px;align-items:center;">
           <div style="display:flex;gap:6px;align-items:center;"><div style="width:10px;height:10px;background:#F39C12;border-radius:50%;"></div><span style="font-size:11px;color:#6B7A8D;">En livraison (12)</span></div>
@@ -1539,7 +1539,7 @@ window.FRAGMENTS['admin'] = `
       </div>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;border-bottom:1.5px solid #E2ECF2;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🛵 Gestion des Livreurs</div>
         <button onclick="showToast('➕ Nouveau livreur ajouté')" style="padding:8px 18px;background:#F39C12;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">+ Ajouter livreur</button>
       </div>
@@ -1552,7 +1552,7 @@ window.FRAGMENTS['admin'] = `
           <div style="background:linear-gradient(135deg,#8B5CF6,#7C3AED);border-radius:12px;padding:16px;color:#fff;"><div style="font-size:10px;opacity:0.8;margin-bottom:4px;">Note moyenne</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:800;">4.7⭐</div></div>
         </div>
         <!-- Tableau livreurs -->
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Livreur</th>
@@ -1599,7 +1599,7 @@ window.FRAGMENTS['admin'] = `
       </div>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;border-bottom:1.5px solid #E2ECF2;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🏥 Gestion des Pharmacies</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher une pharmacie…" style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:220px;">
@@ -1612,7 +1612,7 @@ window.FRAGMENTS['admin'] = `
           <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);text-align:center;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En attente vérif.</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#F39C12;">3</div></div>
           <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);text-align:center;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Suspendues</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#E74C3C;">2</div></div>
         </div>
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <table style="width:100%;border-collapse:collapse;">
             <thead style="background:#F4F9FC;"><tr>
               <th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Pharmacie</th>
@@ -1665,7 +1665,7 @@ window.FRAGMENTS['admin'] = `
         <div style="background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);text-align:center;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">NPS Score</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;font-weight:800;color:#F39C12;">+71</div><div style="font-size:10px;color:#27AE60;">Excellent</div></div>
       </div>
       <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;">
-        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Revenus 12 derniers mois (FCFA)</div>
           <div style="display:flex;align-items:flex-end;gap:6px;height:100px;">
             <div style="flex:1;height:55%;background:#B5D4F4;border-radius:4px 4px 0 0;"></div>
@@ -1685,7 +1685,7 @@ window.FRAGMENTS['admin'] = `
             <span>Avr</span><span>Mai</span><span>Jui</span><span>Jul</span><span>Aoû</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Déc</span><span>Jan</span><span>Fév</span><span>Mar</span>
           </div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Top médicaments</div>
           <div style="display:flex;flex-direction:column;gap:10px;">
             <div><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;"><span style="font-weight:600;color:#1A2332;">Amoxicilline</span><span style="color:#27AE60;font-weight:700;">34%</span></div><div style="height:6px;background:#E2ECF2;border-radius:3px;overflow:hidden;"><div style="width:34%;height:100%;background:#27AE60;border-radius:3px;"></div></div></div>
@@ -1733,7 +1733,7 @@ window.FRAGMENTS['admin'] = `
         <div style="background:linear-gradient(135deg,#0D3B2E,#27AE60);border-radius:12px;padding:16px;color:#fff;"><div style="font-size:10px;opacity:0.8;margin-bottom:4px;">Couverture info.</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:26px;font-weight:800;">83%</div><div style="font-size:10px;opacity:0.7;">Patients notifiés</div></div>
       </div>
       <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;">
-        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Projection J+7 — Fièvre Lassa</div>
           <div style="display:flex;align-items:flex-end;gap:8px;height:100px;">
             <div style="flex:1;height:30%;background:#B5D4F4;border-radius:4px 4px 0 0;"></div>
@@ -1747,7 +1747,7 @@ window.FRAGMENTS['admin'] = `
           <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:#6B7A8D;"><span>J+1</span><span>J+2</span><span>J+3</span><span>J+4</span><span>J+5</span><span>J+6</span><span>J+7</span></div>
           <div style="margin-top:10px;background:#FEF0EE;border-radius:8px;padding:10px;font-size:12px;color:#E74C3C;font-weight:600;">⚠️ Pic prévu J+7 — Intervention recommandée dès J+3</div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">Actions recommandées</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button onclick="showToast('📦 Commande ribavirine envoyée')" style="padding:10px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;">🚨 Commander ribavirine 200mg</button>
@@ -1787,7 +1787,7 @@ window.FRAGMENTS['admin'] = `
         <div style="background:rgba(39,174,96,0.2);border-radius:20px;padding:6px 16px;border:1px solid rgba(39,174,96,0.3);"><span style="font-size:12px;font-weight:700;color:#27AE60;">● Chaîne intègre · 0 altération · 3 blocs validés</span></div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
-        <div style="background:#161B22;border-radius:14px;border:1px solid rgba(39,174,96,0.3);overflow:hidden;">
+        <div style="background:#161B22;border-radius:16px;border:1px solid rgba(39,174,96,0.3);overflow:hidden;">
           <div style="background:linear-gradient(135deg,#27AE60,#2ecc71);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;color:#fff;">🧱 Bloc #001 — GENESIS</span><span style="background:rgba(255,255,255,0.25);border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;color:#fff;">VALIDÉ ✓</span></div>
           <div style="padding:14px;font-family:monospace;font-size:11px;">
             <div style="margin-bottom:8px;"><div style="color:#8B949E;margin-bottom:2px;">TIMESTAMP</div><div style="color:#E6EDF3;background:#0D1117;padding:4px 8px;border-radius:4px;">2026-04-10T06:00:00Z</div></div>
@@ -1795,7 +1795,7 @@ window.FRAGMENTS['admin'] = `
             <div><div style="color:#8B949E;margin-bottom:2px;">HASH</div><div style="color:#27AE60;background:#0D1117;padding:4px 8px;border-radius:4px;word-break:break-all;">0x3f7a2b9c...c891d4e2</div></div>
           </div>
         </div>
-        <div style="background:#161B22;border-radius:14px;border:1px solid rgba(26,107,138,0.4);overflow:hidden;">
+        <div style="background:#161B22;border-radius:16px;border:1px solid rgba(26,107,138,0.4);overflow:hidden;">
           <div style="background:linear-gradient(135deg,#1A6B8A,#2196B3);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;color:#fff;">🧱 Bloc #002</span><span style="background:rgba(255,255,255,0.25);border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;color:#fff;">VALIDÉ ✓</span></div>
           <div style="padding:14px;font-family:monospace;font-size:11px;">
             <div style="margin-bottom:8px;"><div style="color:#8B949E;margin-bottom:2px;">TIMESTAMP</div><div style="color:#E6EDF3;background:#0D1117;padding:4px 8px;border-radius:4px;">2026-04-10T08:32:17Z</div></div>
@@ -1804,7 +1804,7 @@ window.FRAGMENTS['admin'] = `
             <div><div style="color:#8B949E;margin-bottom:2px;">HASH</div><div style="color:#27AE60;background:#0D1117;padding:4px 8px;border-radius:4px;word-break:break-all;">0x9d4e1f7a...a2c780b3</div></div>
           </div>
         </div>
-        <div style="background:#161B22;border-radius:14px;border:2px dashed rgba(243,156,18,0.5);overflow:hidden;">
+        <div style="background:#161B22;border-radius:16px;border:2px dashed rgba(243,156,18,0.5);overflow:hidden;">
           <div style="background:linear-gradient(135deg,#F39C12,#e67e22);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:800;color:#fff;">🧱 Bloc #003 — EN COURS</span><span style="background:rgba(255,255,255,0.25);border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;color:#fff;">⏳ SYNC…</span></div>
           <div style="padding:14px;font-family:monospace;font-size:11px;">
             <div style="margin-bottom:8px;"><div style="color:#8B949E;margin-bottom:2px;">DATA EN ATTENTE</div><div style="color:#F39C12;background:#0D1117;padding:4px 8px;border-radius:4px;">ORD-2851 · Réseau faible IR=0.31</div></div>
@@ -1846,7 +1846,7 @@ window.FRAGMENTS['admin'] = `
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:20px 24px;">
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#1A2332;margin-bottom:16px;">⚙️ Configuration Système</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-        <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:16px;">📦 Paramètres Livraison</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#F4F9FC;border-radius:10px;"><span style="font-size:13px;color:#1A2332;font-weight:600;">Frais de livraison</span><div style="display:flex;align-items:center;gap:8px;"><input type="number" value="500" style="width:70px;padding:6px;border:1.5px solid #E2ECF2;border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;text-align:right;"><span style="font-size:12px;color:#6B7A8D;">FCFA</span></div></div>
@@ -1857,7 +1857,7 @@ window.FRAGMENTS['admin'] = `
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:16px;">
-          <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">🔧 Modules Actifs</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:13px;color:#1A2332;">Mode hors-ligne (FIG.2)</span><div onclick="showToast('✅ Actif')" style="width:44px;height:22px;background:#27AE60;border-radius:11px;position:relative;cursor:pointer;"><div style="position:absolute;right:3px;top:3px;width:16px;height:16px;background:#fff;border-radius:50%;"></div></div></div>
@@ -1866,7 +1866,7 @@ window.FRAGMENTS['admin'] = `
               <div style="display:flex;justify-content:space-between;align-items:center;"><span style="font-size:13px;color:#1A2332;">Mode maintenance</span><div onclick="showToast('⚠️ Maintenance activée')" style="width:44px;height:22px;background:#E2ECF2;border-radius:11px;position:relative;cursor:pointer;"><div style="position:absolute;left:3px;top:3px;width:16px;height:16px;background:#fff;border-radius:50%;"></div></div></div>
             </div>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:12px;">🔐 Actions Sécurité</div>
             <div style="display:flex;flex-direction:column;gap:8px;">
               <button onclick="showToast('🔑 Rotation clés lancée')" style="padding:10px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;">🔑 Rotation clés API blockchain</button>
@@ -1893,7 +1893,7 @@ window.FRAGMENTS['admin'] = `
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Inscriptions en attente</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:180px;">
@@ -1902,7 +1902,7 @@ window.FRAGMENTS['admin'] = `
       </div>
       
       <div style="padding:20px 24px;">
-        <div style="background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <!-- Enrollment Item 1 -->
           <div style="padding:20px;border-bottom:1px solid #E2ECF2;display:flex;justify-content:space-between;align-items:flex-start;">
             <div style="display:flex;gap:16px;">
@@ -2009,7 +2009,7 @@ window.FRAGMENTS['admin'] = `
         </div>
       </div>
     </div>
-    <button onclick="showToast('🔄 Synchronisation forcée lancée…');goToScreen(28)" style="width:100%;padding:15px;background:linear-gradient(135deg,#F39C12,#E67E22);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">🔄 Forcer la Synchronisation</button>
+    <button onclick="showToast('🔄 Synchronisation forcée lancée…');goToScreen(28)" style="width:100%;padding:15px;background:linear-gradient(135deg,#F39C12,#E67E22);color:#fff;border:none;border-radius:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">🔄 Forcer la Synchronisation</button>
   </div>
 </div>
 
@@ -2038,7 +2038,7 @@ window.FRAGMENTS['admin'] = `
         </div>
       </div>
     </div>
-    <button onclick="goToScreen(76);showToast('📊 Rapport prévisionnel généré')" style="width:100%;padding:15px;background:linear-gradient(135deg,#E74C3C,#c0392b);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📊 Voir le Rapport Prévisionnel →</button>
+    <button onclick="goToScreen(76);showToast('📊 Rapport prévisionnel généré')" style="width:100%;padding:15px;background:linear-gradient(135deg,#E74C3C,#c0392b);color:#fff;border:none;border-radius:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">📊 Voir le Rapport Prévisionnel →</button>
   </div>
 </div>
 

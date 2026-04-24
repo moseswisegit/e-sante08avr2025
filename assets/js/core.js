@@ -58,6 +58,146 @@
   };
 
   // ============================================================
+  //  ORDER DETAIL FUNCTION
+  // ============================================================
+  window.showOrderDetail = function(id, date, pharmacy, price, status) {
+    const elId = document.getElementById('od-orderId');
+    const elDate = document.getElementById('od-date');
+    if (elId) elId.textContent = '#' + id;
+    if (elDate) elDate.textContent = date;
+    goToScreen(14);
+  };
+
+  // ============================================================
+  //  ENROLLMENT FORM — Multi-step logic (3 étapes)
+  // ============================================================
+  window._enrollProfile = null;
+  window._enrollCurrentStep = 1;
+
+  window.enrollSelectProfile = function(profile) {
+    window._enrollProfile = profile;
+    var cfgs = {
+      medecin:    { color:'#059669', bg:'#ECFDF5', shadow:'rgba(5,150,105,0.15)' },
+      pharmacien: { color:'#1A6B8A', bg:'#E0F2FE', shadow:'rgba(26,107,138,0.15)' },
+      livreur:    { color:'#D97706', bg:'#FFFBEB', shadow:'rgba(217,119,6,0.15)' }
+    };
+    ['medecin','pharmacien','livreur'].forEach(function(p) {
+      var card  = document.getElementById('ecard-' + p);
+      var check = document.getElementById('echeck-' + p);
+      if (!card) return;
+      if (p === profile) {
+        var c = cfgs[p];
+        card.style.border     = '2.5px solid ' + c.color;
+        card.style.background = c.bg;
+        card.style.transform  = 'translateY(-6px)';
+        card.style.boxShadow  = '0 20px 48px ' + c.shadow;
+        if (check) { check.style.opacity = '1'; check.style.transform = 'scale(1)'; }
+      } else {
+        card.style.border     = '2px solid #E2ECF2';
+        card.style.background = '#fff';
+        card.style.transform  = 'translateY(0)';
+        card.style.boxShadow  = '0 4px 16px rgba(0,0,0,0.05)';
+        if (check) { check.style.opacity = '0'; check.style.transform = 'scale(0.8)'; }
+      }
+    });
+    var btn = document.getElementById('enroll-btn-1');
+    if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; btn.style.transform = 'none'; }
+  };
+
+  window.enrollGoToStep = function(step) {
+    for (var s = 1; s <= 3; s++) {
+      var el = document.getElementById('enroll-step-' + s);
+      if (el) el.style.display = 'none';
+    }
+    var target = document.getElementById('enroll-step-' + step);
+    if (target) { target.style.display = 'flex'; target.style.flexDirection = 'column'; target.style.gap = '28px'; }
+    window._enrollCurrentStep = step;
+    enrollUpdateStepper(step);
+    var sc = document.querySelector('.enroll-scroll');
+    if (sc) sc.scrollTop = 0;
+  };
+
+  window.enrollUpdateStepper = function(step) {
+    for (var s = 1; s <= 3; s++) {
+      var circle = document.getElementById('estep-c-' + s);
+      var label  = document.getElementById('estep-l-' + s);
+      var line   = document.getElementById('estep-line-' + s);
+      if (circle) {
+        if (s < step) {
+          circle.style.cssText = 'width:40px;height:40px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s;';
+          circle.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+        } else if (s === step) {
+          circle.style.cssText = 'width:40px;height:40px;border-radius:50%;background:#1A6B8A;display:flex;align-items:center;justify-content:center;font-family:Plus Jakarta Sans,sans-serif;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 0 0 4px rgba(26,107,138,0.15);transition:all 0.3s;';
+          circle.textContent = s;
+        } else {
+          circle.style.cssText = 'width:40px;height:40px;border-radius:50%;background:#E2ECF2;display:flex;align-items:center;justify-content:center;font-family:Plus Jakarta Sans,sans-serif;font-size:16px;font-weight:700;color:#9BA7B4;flex-shrink:0;transition:all 0.3s;';
+          circle.textContent = s;
+        }
+      }
+      if (label) {
+        label.style.fontWeight = s === step ? '700' : '500';
+        label.style.color = s < step ? '#059669' : (s === step ? '#1A2332' : '#9BA7B4');
+        label.style.transition = 'all 0.3s';
+      }
+      if (line) {
+        line.style.background = s < step ? '#059669' : '#E2ECF2';
+        line.style.transition = 'background 0.3s';
+      }
+    }
+  };
+
+  window.enrollNext = function(fromStep) {
+    if (fromStep === 1 && !window._enrollProfile) {
+      showToast('Veuillez choisir votre profil pour continuer');
+      return;
+    }
+    enrollGoToStep(fromStep + 1);
+    if (fromStep + 1 === 2) {
+      ['medecin','pharmacien','livreur'].forEach(function(p) {
+        var el = document.getElementById('einfo-' + p);
+        if (el) el.style.display = p === window._enrollProfile ? 'flex' : 'none';
+      });
+      var badges = { medecin:'🩺 Médecin', pharmacien:'💊 Pharmacien', livreur:'🛵 Livreur' };
+      var bcolors = { medecin:'#059669', pharmacien:'#1A6B8A', livreur:'#D97706' };
+      var bbgs    = { medecin:'#ECFDF5',  pharmacien:'#E0F2FE',  livreur:'#FFFBEB' };
+      var badge = document.getElementById('enroll-badge-step2');
+      if (badge) {
+        badge.textContent  = badges[window._enrollProfile]  || window._enrollProfile;
+        badge.style.color  = bcolors[window._enrollProfile] || '#1A6B8A';
+        badge.style.background = bbgs[window._enrollProfile] || '#E0F2FE';
+      }
+    }
+    if (fromStep + 1 === 3) {
+      ['medecin','pharmacien','livreur'].forEach(function(p) {
+        var el = document.getElementById('edocs-' + p);
+        if (el) el.style.display = p === window._enrollProfile ? 'grid' : 'none';
+      });
+      var badges2 = { medecin:'🩺 Médecin', pharmacien:'💊 Pharmacien', livreur:'🛵 Livreur' };
+      var bcolors2 = { medecin:'#059669', pharmacien:'#1A6B8A', livreur:'#D97706' };
+      var bbgs2    = { medecin:'#ECFDF5',  pharmacien:'#E0F2FE',  livreur:'#FFFBEB' };
+      var badge3 = document.getElementById('enroll-badge-step3');
+      if (badge3) {
+        badge3.textContent  = badges2[window._enrollProfile]  || window._enrollProfile;
+        badge3.style.color  = bcolors2[window._enrollProfile] || '#1A6B8A';
+        badge3.style.background = bbgs2[window._enrollProfile] || '#E0F2FE';
+      }
+    }
+  };
+
+  window.enrollFakeUpload = function(el, docName) {
+    el.style.borderColor = '#059669';
+    el.style.background  = '#ECFDF5';
+    el.querySelector('.upload-cta').style.background = '#059669';
+    el.querySelector('.upload-cta').innerHTML = '✓ Fichier chargé';
+    el.querySelector('.upload-icon').textContent = '✅';
+    showToast('📎 ' + docName + ' chargé avec succès');
+  };
+
+  window.enrollSubmit = function() {
+    goToWebScreen('_enrollement_success');
+  };
+
+  // ============================================================
   //  DRAWER (menu latéral)
   // ============================================================
   const DRAWER_MAP = {
@@ -218,17 +358,20 @@
     const urlEl = document.getElementById('webBrowserUrl');
     if (urlEl) {
       const urlMap = {
-        0: '🔒 ilera.africa',
-        8: '🔒 ilera.africa/login',
+        0:                      '🔒 ilera.africa',
+        '_enrollement':         '🔒 ilera.africa/inscription',
+        '_enrollement_success': '🔒 ilera.africa/inscription/confirmation',
+        8:  '🔒 ilera.africa/login',
+        9:  '🔒 ilera.africa/inscription/patient',
         10: '🔒 ilera.africa/patient/dashboard',
-        16: '🔒 ilera.africa/pharmacien/login',
-        17: '🔒 ilera.africa/pharmacien/dashboard',
+        16: '🔒 ilera.africa/pharmacien/dashboard',
+        17: '🔒 ilera.africa/pharmacien/ordonnances',
         22: '🔒 ilera.africa/admin/login',
         23: '🔒 ilera.africa/admin/dashboard',
         57: '🔒 ilera.africa/medecin/login',
         58: '🔒 ilera.africa/medecin/dashboard',
       };
-      urlEl.textContent = urlMap[n] || ('🔒 ilera.africa/web/screen-' + n);
+      urlEl.textContent = urlMap[n] !== undefined ? urlMap[n] : ('🔒 ilera.africa/web/screen-' + n);
     }
 
     // Bouton Home visible seulement si on n'est pas déjà sur la vitrine
@@ -274,6 +417,7 @@
     { label: '🛡️ Admin mobile', flow: 'admin', screens: [27,28,48,78,79,80,81,82,76,77,83,'71b'] },
     { label: '💻 WEB', isHeader: true },
     { label: '🌍 Vitrine (accueil)', flow: 'patient', web: true, screens: [0] },
+    { label: '📝 Inscription', flow: 'patient', web: true, screens: ['_enrollement', '_enrollement_success'] },
     { label: '👤 Patient web', flow: 'patient', web: true, screens: [1,2,3,4,7,8,9,10,11,12,13,14,15] },
     { label: '💊 Pharmacien web', flow: 'pharmacist', web: true, screens: [16,17,18,19,20,21] },
     { label: '🩺 Médecin web', flow: 'medecin', web: true, screens: [57,58,59,60,61,62,63] },
@@ -295,11 +439,19 @@
       } else if (group.screens) {
         const dots = document.createElement('div');
         dots.className = 'sp-dots';
+        // Labels lisibles pour les IDs non-numériques
+        const NICE_LABELS = {
+          '_enrollement':         '📝',
+          '_enrollement_success': '✅',
+          '_admin_enrollements':  '🗂️',
+          '71b':                  '71b'
+        };
         group.screens.forEach(n => {
           const b = document.createElement('button');
           b.className = 'nav-dot';
           b.id = (group.web ? 'navdot-w' : 'navdot-') + n;
-          b.textContent = n;
+          b.textContent = NICE_LABELS[n] !== undefined ? NICE_LABELS[n] : n;
+          b.title = String(n);
           b.onclick = () => {
             if (group.web) { switchTo('web'); goToWebScreen(n); }
             else { switchTo('mobile'); goToScreen(n); }
@@ -318,7 +470,7 @@
   };
 
   // ============================================================
-  //  UI HELPERS
+  //  UI HELPERS (RESTORED & ENHANCED)
   // ============================================================
   window.filterCatalogCat = (_cat, el) => {
     document.querySelectorAll('#catalog-cats .cat-chip').forEach(c => {
@@ -328,10 +480,65 @@
     showToast('📂 Catégorie : ' + el.textContent);
   };
 
-  window.updateQty = (delta) => {
-    const el = document.getElementById('med-qty');
-    if(el) el.textContent = Math.max(1, parseInt(el.textContent) + delta);
+  window.updateQty = (btnOrDelta, delta) => {
+    let el, d;
+    if (typeof btnOrDelta === 'number') {
+      el = document.getElementById('med-qty');
+      d = btnOrDelta;
+    } else {
+      el = btnOrDelta.parentElement.querySelector('.qty-val') || btnOrDelta.parentElement.querySelector('span');
+      d = delta;
+    }
+    if (el) {
+      let val = parseInt(el.textContent);
+      el.textContent = Math.max(1, val + d);
+    }
   };
+
+  window.decrementStock = (btn) => {
+    const el = btn.closest('[data-stock]') || btn.parentElement;
+    const stockEl = el.querySelector('.stock-val');
+    if (stockEl) {
+      let val = Math.max(0, parseInt(stockEl.textContent) - 1);
+      stockEl.textContent = val;
+      showToast('📦 Stock mis à jour : ' + val);
+    }
+  };
+
+  window.incrementStock = (btn) => {
+    const el = btn.closest('[data-stock]') || btn.parentElement;
+    const stockEl = el.querySelector('.stock-val');
+    if (stockEl) {
+      let val = parseInt(stockEl.textContent) + 1;
+      stockEl.textContent = val;
+      showToast('📦 Stock mis à jour : ' + val);
+    }
+  };
+
+  window.togglePassword = (btn) => {
+    const inp = btn.closest('div').querySelector('input');
+    if (!inp) return;
+    inp.type = inp.type === 'password' ? 'text' : 'password';
+    btn.textContent = inp.type === 'password' ? '👁' : '🙈';
+  };
+
+  window.otpNext = (el) => {
+    el.value = el.value.replace(/[^0-9]/g, '');
+    if (el.value.length === 1) {
+      const next = el.nextElementSibling;
+      if (next && (next.classList.contains('otp-input') || next.tagName === 'INPUT')) next.focus();
+    }
+  };
+
+  window.otpBack = (e, el) => {
+    if (e.key === 'Backspace' && !el.value) {
+      const prev = el.previousElementSibling;
+      if (prev) { prev.value = ''; prev.focus(); }
+    }
+  };
+
+  window.triggerSearch = () => showToast('🔍 Recherche en cours...');
+  window.refreshData = () => showToast('🔄 Données actualisées');
 
   // ============================================================
   //  KEYBOARD NAVIGATION (arrow keys)
@@ -486,6 +693,271 @@
     const bar = document.getElementById('flow-progress-bar');
     if (bar) bar.remove();
   };
+
+  // ============================================================
+  //  REGISTRATION HANDLERS
+  // ============================================================
+  window.handleRegister = function() {
+    showToast('✅ Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
+    setTimeout(() => goToScreen(51), 800);
+  };
+
+  window.handleRegisterWeb = function() {
+    showToast('✅ Compte créé avec succès ! Bienvenue sur ILERA AFRICA');
+    setTimeout(() => goToWebScreen(10), 800);
+  };
+
+  // ============================================================
+  //  MAP MODAL
+  // ============================================================
+  window.openMapModal = function() {
+    const overlay = document.getElementById('mapModalOverlay');
+    const modal   = document.getElementById('mapModal');
+    if (!overlay || !modal) return;
+    overlay.style.display = 'block';
+    modal.style.display   = 'block';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      overlay.style.opacity = '1';
+      modal.style.transform = 'translateY(0)';
+    }));
+  };
+
+  window.closeMapModal = function() {
+    const overlay = document.getElementById('mapModalOverlay');
+    const modal   = document.getElementById('mapModal');
+    if (!overlay || !modal) return;
+    overlay.style.opacity = '0';
+    modal.style.transform = 'translateY(100%)';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      modal.style.display   = 'none';
+    }, 350);
+  };
+
+  // ============================================================
+  //  ARTICLE MODAL (Conseils Santé)
+  // ============================================================
+  const _articles = {
+    paludisme:     { emoji:'💊', cat:'Prévention',  catColor:'#27AE60', catBg:'#E8F7EE', title:'Bien gérer son traitement antipaludéen',         time:'5 min de lecture', body:"Le paludisme reste l'une des maladies les plus répandues en Afrique de l'Ouest. Un traitement bien suivi est essentiel.<br><br><strong>Les points clés :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Prenez vos médicaments à heure fixe chaque jour</li><li>Ne jamais interrompre le traitement même si vous vous sentez mieux</li><li>Conservez les médicaments à l'abri de la chaleur</li><li>Consultez votre pharmacien en cas d'effets secondaires</li></ul><br><div style='background:#E8F7EE;border-radius:12px;padding:12px;font-size:12px;color:#27AE60;font-weight:600;'>Astuce : activez les rappels de prise dans l'appli ILERA AFRICA</div>" },
+    diabete:       { emoji:'🥗', cat:'Nutrition',   catColor:'#F39C12', catBg:'#FFF3CD', title:'Alimentation et diabète : les bons réflexes',     time:'7 min de lecture', body:"Une alimentation équilibrée est le premier pilier du contrôle du diabète de type 2.<br><br><strong>À privilégier :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Légumes verts, légumineuses, céréales complètes</li><li>Poissons, viandes blanches</li><li>Fruits entiers en quantité modérée</li></ul><br><strong>À limiter :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Sucres rapides (sodas, sucreries)</li><li>Graisses saturées et fritures</li></ul><br><div style='background:#FFF3CD;border-radius:12px;padding:12px;font-size:12px;color:#F39C12;font-weight:600;'>Consultez un nutritionniste pour un plan personnalisé</div>" },
+    stress:        { emoji:'🧘', cat:'Bien-être',   catColor:'#8B5CF6', catBg:'#F0E8FF', title:'Gérer le stress au quotidien',                    time:'4 min de lecture', body:"Le stress chronique impacte directement la santé. Quelques habitudes simples peuvent vous aider.<br><br><strong>Techniques efficaces :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Respiration abdominale : 4s inspiration, 6s expiration</li><li>30 minutes de marche par jour</li><li>Réduire le temps d'écran avant de dormir</li><li>Pratiquer la gratitude chaque soir</li></ul><br><div style='background:#F0E8FF;border-radius:12px;padding:12px;font-size:12px;color:#8B5CF6;font-weight:600;'>Si le stress persiste, parlez-en à votre médecin</div>" },
+    antibiotiques: { emoji:'🦠', cat:'Médicaments', catColor:'#E74C3C', catBg:'#FEF0EE', title:'Antibiotiques : ne pas interrompre le traitement', time:'6 min de lecture', body:"Les antibiotiques ne sont efficaces que contre les infections bactériennes.<br><br><strong>Règles essentielles :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Toujours terminer la cure prescrite</li><li>Ne jamais partager vos antibiotiques</li><li>Ne pas prendre pour un virus (rhume, grippe)</li><li>Respectez les heures de prise indiquées</li></ul><br><div style='background:#FEF0EE;border-radius:12px;padding:12px;font-size:12px;color:#E74C3C;font-weight:600;'>Antibiotiques uniquement sur ordonnance médicale</div>" },
+    hypertension:  { emoji:'❤️', cat:'Prévention',  catColor:'#27AE60', catBg:'#E8F7EE', title:'Hypertension : surveiller sa pression artérielle', time:'8 min de lecture', body:"L'hypertension artérielle est souvent silencieuse mais dangereuse si elle n'est pas prise en charge.<br><br><strong>Valeurs normales :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Idéale : moins de 120/80 mmHg</li><li>Normale haute : 130-139 / 85-89</li><li>Hypertension : 140/90 et plus</li></ul><br><strong>Conseils :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Réduire le sel dans l'alimentation</li><li>Pratiquer une activité physique régulière</li></ul><br><div style='background:#E8F7EE;border-radius:12px;padding:12px;font-size:12px;color:#27AE60;font-weight:600;'>Mesurez votre tension en pharmacie gratuitement</div>" },
+    hydratation:   { emoji:'💧', cat:'Nutrition',   catColor:'#F39C12', catBg:'#FFF3CD', title:"Bien s'hydrater en saison chaude",                time:'3 min de lecture', body:"En période de chaleur, le corps perd beaucoup d'eau. Une bonne hydratation est essentielle.<br><br><strong>Recommandations :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Boire au moins 1,5 à 2 litres d'eau par jour</li><li>Ne pas attendre d'avoir soif</li><li>Consommer des fruits et légumes riches en eau</li><li>Éviter l'alcool et les boissons sucrées</li></ul><br><div style='background:#FFF3CD;border-radius:12px;padding:12px;font-size:12px;color:#F39C12;font-weight:600;'>Une urine claire est signe d'une bonne hydratation</div>" },
+    sommeil:       { emoji:'🌙', cat:'Bien-être',   catColor:'#8B5CF6', catBg:'#F0E8FF', title:'Améliorer la qualité de son sommeil',             time:'5 min de lecture', body:"Un sommeil de qualité est essentiel pour la santé physique et mentale.<br><br><strong>Bonnes habitudes :</strong><ul style='margin:10px 0 0 16px;line-height:2;color:#1A2332;font-size:13px;'><li>Se coucher et se lever à heures régulières</li><li>Éteindre les écrans 30 min avant le coucher</li><li>Maintenir la chambre fraîche et obscure</li><li>Éviter caféine et repas lourds le soir</li></ul><br><div style='background:#F0E8FF;border-radius:12px;padding:12px;font-size:12px;color:#8B5CF6;font-weight:600;'>7 à 9 heures de sommeil recommandées pour un adulte</div>" }
+  };
+
+  window.showArticleModal = function(key) {
+    const a = _articles[key];
+    if (!a) return;
+    const el = document.getElementById('articleModalContent');
+    if (!el) return;
+    el.innerHTML = `<div style="display:inline-block;background:${a.catBg};color:${a.catColor};font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:10px;">${a.cat}</div><div style="font-size:36px;margin-bottom:10px;">${a.emoji}</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#1A2332;line-height:1.3;margin-bottom:6px;">${a.title}</div><div style="font-size:12px;color:#6B7A8D;margin-bottom:16px;">🕐 ${a.time}</div><hr style="border:none;border-top:1px solid #E2ECF2;margin-bottom:16px;"><div style="font-size:13px;color:#1A2332;line-height:1.7;">${a.body}</div><button onclick="closeArticleModal()" style="width:100%;margin-top:24px;padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Fermer</button>`;
+    const overlay = document.getElementById('articleModalOverlay');
+    const modal   = document.getElementById('articleModal');
+    if (!overlay || !modal) return;
+    overlay.style.display = 'block';
+    modal.style.display   = 'block';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      overlay.style.opacity = '1';
+      modal.style.transform = 'translateY(0)';
+    }));
+  };
+
+  window.closeArticleModal = function() {
+    const overlay = document.getElementById('articleModalOverlay');
+    const modal   = document.getElementById('articleModal');
+    if (!overlay || !modal) return;
+    overlay.style.opacity = '0';
+    modal.style.transform = 'translateY(100%)';
+    setTimeout(() => {
+      overlay.style.display = 'none';
+      modal.style.display   = 'none';
+    }, 350);
+  };
+
+  // ============================================================
+  //  MESSAGING
+  // ============================================================
+  window.sendMessage = function() {
+    const inputs = ['chat-input', 'msg-input', 'message-input'];
+    let sent = false;
+    for (const id of inputs) {
+      const inp = document.getElementById(id);
+      if (inp && inp.value.trim()) {
+        showToast('✉️ Message envoyé : ' + inp.value.trim().substring(0, 40));
+        inp.value = '';
+        sent = true;
+        break;
+      }
+    }
+    if (!sent) showToast('✉️ Message envoyé');
+  };
+
+  // ============================================================
+  //  PDF VIEWER CONTROLS
+  // ============================================================
+  window.rotatePDF    = function() { showToast('↻ Rotation de l\'ordonnance'); };
+  window.toggleFullscreen = function() { showToast('⛶ Mode plein écran'); };
+  window.zoomIn       = function() { showToast('🔍 Zoom +'); };
+  window.zoomOut      = function() { showToast('🔍 Zoom −'); };
+
+  // ============================================================
+  //  ADMIN ALERTS
+  // ============================================================
+  window.filterAlerts = function() { showToast('⚠️ Filtrage des alertes actif'); };
+
+  // ============================================================
+  //  PHARMACIEN — VALIDATION TABS (screen22)
+  // ============================================================
+  window.showPTab = function(n) {
+    ['ptab1', 'ptab2', 'ptab3'].forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const active = (i + 1 === n);
+      el.style.background = active ? 'rgba(255,255,255,0.15)' : 'transparent';
+      el.style.color       = active ? '#fff' : 'rgba(255,255,255,0.5)';
+    });
+    showToast(['Validation', 'Interactions médicamenteuses', 'Historique patient'][n - 1]);
+  };
+
+  // ============================================================
+  //  PHARMACIEN — STOCK TABS
+  // ============================================================
+  window.switchStockTab = function(tab, _el) {
+    ['all', 'rupture', 'critique', 'ok', 'perime'].forEach(t => {
+      const btn = document.getElementById('stab-' + t);
+      if (!btn) return;
+      if (t === tab) {
+        btn.style.background = '#0F3F54';
+        btn.style.color = '#fff';
+      } else {
+        btn.style.background = '#F4F9FC';
+        btn.style.color = t === 'rupture' ? '#E74C3C' : t === 'critique' ? '#F39C12' : t === 'ok' ? '#27AE60' : t === 'perime' ? '#9B59B6' : '#6B7A8D';
+      }
+    });
+    const labels = { all: 'Tous les médicaments', rupture: 'Ruptures de stock', critique: 'Stock critique', ok: 'Stock normal', perime: 'Périmés / Péremption proche' };
+    showToast('📦 ' + (labels[tab] || tab));
+  };
+
+  // ============================================================
+  //  PHARMACIEN — PATIENT DETAIL TABS (wscreen20)
+  // ============================================================
+  window.showPatientTab = function(n) {
+    [1, 2, 3, 4, 5].forEach(i => {
+      const el = document.getElementById('ptabw' + i);
+      if (!el) return;
+      el.style.borderBottomColor = (i === n) ? '#1A6B8A' : 'transparent';
+      el.style.color             = (i === n) ? '#1A6B8A' : '#6B7A8D';
+      el.style.fontWeight        = (i === n) ? '700'     : '500';
+    });
+    const names = ['Ordonnances', 'Commandes', 'Consultations', 'Documents', 'Notes'];
+    showToast('Onglet : ' + names[n - 1]);
+  };
+
+  // ============================================================
+  //  PATIENT — PHARMACIES FILTER (screen29)
+  // ============================================================
+  window.pharmaFilter = function(type) {
+    ['all', 'open', '24h', 'delivery', 'close'].forEach(f => {
+      const el = document.getElementById('phfil-' + f);
+      if (!el) return;
+      if (f === type) {
+        el.style.background = '#fff';
+        el.style.color      = '#1A6B8A';
+        el.style.border     = 'none';
+      } else {
+        el.style.background = 'rgba(255,255,255,0.15)';
+        el.style.color      = 'rgba(255,255,255,0.9)';
+        el.style.border     = '1px solid rgba(255,255,255,0.2)';
+      }
+    });
+    const labels = { all: 'Toutes les pharmacies', open: 'Ouvertes maintenant', '24h': 'Gardes 24h', delivery: 'Avec livraison', close: 'À moins de 1 km' };
+    showToast('Filtre : ' + labels[type]);
+  };
+
+  // ============================================================
+  //  PATIENT — DOSSIER MÉDICAL TABS (screen35)
+  // ============================================================
+  window.showDossierTab = function(tab) {
+    ['antecedents', 'traitements', 'vaccins', 'consultations'].forEach(t => {
+      const content = document.getElementById('dossier-' + t);
+      const btn     = document.getElementById('tab-' + t);
+      if (content) content.style.display = (t === tab) ? 'block' : 'none';
+      if (btn) {
+        btn.style.fontWeight        = (t === tab) ? '700'         : '600';
+        btn.style.color             = (t === tab) ? '#0F3F54'     : '#6B7A8D';
+        btn.style.borderBottomColor = (t === tab) ? '#0F3F54'     : 'transparent';
+      }
+    });
+  };
+
+  // ============================================================
+  //  PATIENT — PHARMACIE DETAIL TABS (screen30) + generic class-based tabs
+  // ============================================================
+  window.showPhTab = function(tab, btn) {
+    // Screen30 (detail pharmacie) — ID-based tabs
+    ['info', 'stock', 'avis'].forEach(t => {
+      const phtab     = document.getElementById('phtab-' + t);
+      const phcontent = document.getElementById('phcontent-' + t);
+      if (phtab) {
+        phtab.style.borderBottomColor = (t === tab) ? '#1A6B8A' : 'transparent';
+        phtab.style.color             = (t === tab) ? '#1A6B8A' : '#6B7A8D';
+        phtab.style.fontWeight        = (t === tab) ? '700'     : '600';
+      }
+      if (phcontent) {
+        phcontent.style.display       = (t === tab) ? 'flex'    : 'none';
+        if (t === tab) phcontent.style.flexDirection = 'column';
+      }
+    });
+    // Generic class-based tabs (other screens using .ph-tab-content / .ph-tab-btn)
+    document.querySelectorAll('.ph-tab-content').forEach(c => c.style.display = 'none');
+    const target = document.getElementById('ph-tab-' + tab);
+    if (target) target.style.display = 'block';
+    document.querySelectorAll('.ph-tab-btn').forEach(b => {
+      b.style.color      = '#6B7A8D';
+      b.style.borderBottom = 'none';
+      b.style.fontWeight = '600';
+    });
+    if (btn) {
+      btn.style.color        = '#1A6B8A';
+      btn.style.borderBottom = '2px solid #1A6B8A';
+      btn.style.fontWeight   = '700';
+    }
+  };
+
+  // ============================================================
+  //  SUCCESS SCREEN
+  // ============================================================
+  window.showSuccess = function(type, ref) {
+    const titles = { payment: 'Paiement confirmé !', order: 'Commande envoyée !', prescription: 'Ordonnance envoyée !' };
+    const msgs   = { payment: 'Votre paiement a été traité avec succès.', order: 'Votre commande a été transmise à la pharmacie.', prescription: 'Votre ordonnance a été envoyée avec succès à votre pharmacien.' };
+    const el = document.getElementById('success-title');
+    const em = document.getElementById('success-msg');
+    const er = document.getElementById('success-ref-val');
+    if (el) el.textContent = titles[type] || 'Succès !';
+    if (em) em.textContent = msgs[type] || 'Opération réalisée avec succès.';
+    if (er && ref) er.textContent = ref;
+    goToScreen(51);
+  };
+
+  // ============================================================
+  //  WEB PASSWORD TOGGLE
+  // ============================================================
+  window.toggleWebPwd = function() {
+    const inputs = document.querySelectorAll('.web-screen.active input[type="password"], .web-screen.active input[type="text"]');
+    inputs.forEach(inp => {
+      if (inp.closest('.field-wrap') || inp.type === 'password' || inp.type === 'text') {
+        inp.type = inp.type === 'password' ? 'text' : 'password';
+      }
+    });
+    showToast(document.querySelector('.web-screen.active input[type="text"]') ? '🙈 Mot de passe masqué' : '👁 Mot de passe visible');
+  };
+
+  // ============================================================
+  //  DOWNLOAD TRIGGER (maquette)
+  // ============================================================
+  window.triggerDownload = function() { showToast('📥 Téléchargement démarré...'); };
 
   // ============================================================
   //  INITIALIZATION (Moved to index.html loader)

@@ -884,12 +884,11 @@
                     Plateforme e-santé africaine
                 </div>
                 <h1 class="hero-title">
-                    Accédez à vos médicaments<br>
-                    <span class="highlight">en toute sécurité</span>
+                    ILERA E-SANTE — <br>
+                    <span class="highlight">Validée par un pharmacien</span>
                 </h1>
                 <p class="hero-sub">
-                    ILERA AFRICA connecte patients, médecins, pharmaciens et livreurs
-                    pour un accès simplifié aux soins de santé en Afrique.
+                    Votre pharmacien prépare vos médicaments et vérifie les antécédents médicaux pour votre santé.<br><strong>Bienvenue dans votre espace santé.</strong>
                 </p>
                 <div class="hero-actions">
                     <a href="#download" class="btn btn-primary btn-lg">
@@ -1126,7 +1125,7 @@
                 Rejoindre la plateforme
             </span>
             <h2 class="section-title reveal reveal-delay-1">Un espace pour chacun</h2>
-            <p class="section-sub reveal reveal-delay-2">Choisissez votre profil et rejoignez l'écosystème ILERA AFRICA adapté à votre rôle.</p>
+            <p class="section-sub reveal reveal-delay-2">Professionnel, livreur, patient? Inscrivez-vous sur notre plateforme web pour rejoindre le réseau.</p>
         </div>
 
         <div class="users-grid">
@@ -1479,7 +1478,7 @@
             <input type="password" class="form-input" placeholder="Minimum 8 caractères">
         </div>
 
-        <button class="form-submit">Créer mon compte gratuitement →</button>
+        <button class="form-submit" onclick="submitModal()">Créer mon compte gratuitement →</button>
     </div>
 </div>
 
@@ -1516,30 +1515,36 @@
        Mapping rôle → écran de connexion/inscription
     ============================================================ */
     // Mapping rôle → écran d'INSCRIPTION
-    const INSCRIPTION_SCREENS = {
-        patient:    9,              // wscreen9  = Formulaire inscription patient
-        medecin:    '_enrollement', // wscreen_enrollement = Formulaire professionnel
-        pharmacien: '_enrollement', // wscreen_enrollement = Formulaire professionnel
-        livreur:    '_enrollement', // wscreen_enrollement = Formulaire professionnel
-        default:    '_enrollement'
-    };
+    // Vérifie si on est dans la maquette au moment de l'appel
+    function checkInMaquette() {
+        try { return window.parent !== window && typeof window.parent.goToWebScreen === 'function'; }
+        catch(e) { return false; }
+    }
 
     /**
-     * Bouton "S'inscrire" par profil → formulaire d'inscription correspondant.
+     * Tous les boutons "S'inscrire" → ilera.africa/inscription (wscreen_enrollement)
+     * + pré-sélection automatique du profil si fourni.
      * @param {string} [role] - 'patient' | 'medecin' | 'pharmacien' | 'livreur'
      */
     function handleCTA(role) {
-        if (isInMaquette) {
-            const screenId = INSCRIPTION_SCREENS[role] || INSCRIPTION_SCREENS.default;
-            window.parent.goToWebScreen(screenId);
+        if (checkInMaquette()) {
+            window.parent.goToWebScreen('_enrollement');
+            // Pré-sélectionner le profil dans le formulaire après navigation
+            if (role) {
+                setTimeout(function() {
+                    if (typeof window.parent.enrollSelectProfile === 'function') {
+                        window.parent.enrollSelectProfile(role);
+                    }
+                }, 80);
+            }
         } else {
             openModal(role);
         }
     }
 
-    /** Bouton "Se connecter" → écran de login universel avec sélection de profil */
+    /** Bouton "Se connecter" → écran de login universel */
     function handleLogin() {
-        if (isInMaquette) { window.parent.goToWebScreen(8); }
+        if (checkInMaquette()) { window.parent.goToWebScreen(8); }
         else { openModal(); }
     }
 
@@ -1593,6 +1598,39 @@
     function selectRole(btn) {
         document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
+    }
+
+    // Soumission du formulaire modal → redirige vers le bon écran d'inscription
+    function submitModal() {
+        // Re-vérification au moment du clic (isInMaquette peut avoir échoué au chargement)
+        const inFrame = (function() {
+            try { return window.parent !== window && typeof window.parent.goToWebScreen === 'function'; }
+            catch(e) { return false; }
+        })();
+
+        const selected = document.querySelector('.role-btn.selected');
+        const role = selected ? selected.dataset.role : null;
+
+        if (inFrame) {
+            closeModal();
+            // Tous les profils → ilera.africa/inscription
+            window.parent.goToWebScreen('_enrollement');
+            if (role) {
+                setTimeout(function() {
+                    if (typeof window.parent.enrollSelectProfile === 'function') {
+                        window.parent.enrollSelectProfile(role);
+                    }
+                }, 80);
+            }
+        } else {
+            // Mode standalone : feedback visuel simple
+            const btn = document.querySelector('.form-submit');
+            if (btn) {
+                btn.textContent = '✅ Dossier reçu — Vérifiez votre email !';
+                btn.style.background = '#059669';
+                setTimeout(() => closeModal(), 2200);
+            }
+        }
     }
 
     /* ============================================================

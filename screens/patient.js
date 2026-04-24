@@ -112,8 +112,8 @@ window.FRAGMENTS['patient'] = `
             <div style="font-size:10px;color:#6B7A8D;">Chat</div>
           </div>
           <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;" onclick="goToScreen(17)">
-            <div style="font-size:22px;">👤</div>
-            <div style="font-size:10px;color:#6B7A8D;">Profil</div>
+            <div style="font-size:22px;">☰</div>
+            <div style="font-size:10px;color:#6B7A8D;">Autres</div>
           </div>
         </div>
       </div>
@@ -160,11 +160,7 @@ window.FRAGMENTS['patient'] = `
               </div>
             </div>
           </div>
-          <!-- Notes -->
-          <div>
-            <label style="font-size:12px;font-weight:600;color:#6B7A8D;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:8px;">Notes pour le pharmacien</label>
-            <textarea rows="3" placeholder="Ex: J'ai une allergie à la pénicilline. Le Dr Lefebvre a prescrit ce traitement pour 30 jours..." style="width:100%;padding:14px 16px;background:#fff;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;color:#1A2332;font-family:'DM Sans',sans-serif;outline:none;resize:none;line-height:1.5;">Allergie connue à la pénicilline. Traitement prescrit par Dr. Sophie Lefebvre le 14 oct. 2024.</textarea>
-          </div>
+
           <!-- Security badge -->
           <div style="background:linear-gradient(135deg,#E8F4F8,#EBF7EF);border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;border:1px solid rgba(26,107,138,0.12);">
             <span style="font-size:20px;">🔒</span>
@@ -222,14 +218,27 @@ window.FRAGMENTS['patient'] = `
       <!-- Contenu scrollable -->
       <div style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;">
 
-        <!-- Infos pharmacie -->
+        <!-- Infos pharmacie & Pharmacien -->
         <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:12px;">
           <div style="width:44px;height:44px;background:linear-gradient(135deg,#1A6B8A,#0F3F54);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🏥</div>
           <div style="flex:1;">
             <div style="font-size:14px;font-weight:700;color:#1A2332;font-family:'Plus Jakarta Sans',sans-serif;">Pharmacie du Plateau</div>
-            <div style="font-size:11px;color:#6B7A8D;">📍 Abidjan, Plateau · Dr. Sophie Lefebvre</div>
+            <div style="font-size:11px;color:#6B7A8D;">📍 Abidjan, Plateau</div>
+            <div style="font-size:11px;color:#1A6B8A;font-weight:600;margin-top:2px;">Pharmacien ayant servi le médicament : Dr. Amadou Diallo</div>
           </div>
           <button onclick="showToast('Contacter la pharmacie')" style="background:#E8F4F8;border:none;border-radius:10px;padding:8px 10px;font-size:12px;cursor:pointer;">💬</button>
+        </div>
+
+        <!-- CODE QR DE L'ORDONNANCE -->
+        <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);text-align:center;">
+          <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;color:#6B7A8D;text-transform:uppercase;margin-bottom:12px;letter-spacing:0.5px;">Sécurisé par QR Code</div>
+          <div style="width:160px;height:160px;background:#F4F9FC;border:2px dashed #E2ECF2;border-radius:16px;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;position:relative;">
+            <div style="font-size:80px;opacity:0.8;">🔳</div>
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                <div style="width:40px;height:40px;background:#1A6B8A;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">🛡️</div>
+            </div>
+          </div>
+          <div style="font-size:11px;color:#6B7A8D;font-weight:600;">Scannez ce code au comptoir pour valider la délivrance</div>
         </div>
 
         <!-- Médicaments prescrits -->
@@ -340,7 +349,7 @@ window.FRAGMENTS['patient'] = `
         <!-- Orders list -->
         <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;">
           <!-- Order card 1 -->
-          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <div data-status="ongoing" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
               <div>
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">#CMD-90214</div>
@@ -355,7 +364,7 @@ window.FRAGMENTS['patient'] = `
             </div>
           </div>
           <!-- Order card 2 -->
-          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <div data-status="delivered" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
               <div>
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">#CMD-90201</div>
@@ -370,7 +379,7 @@ window.FRAGMENTS['patient'] = `
             </div>
           </div>
           <!-- Order card 3 -->
-          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <div data-status="ongoing" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
               <div>
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">#CMD-90187</div>
@@ -385,7 +394,7 @@ window.FRAGMENTS['patient'] = `
             </div>
           </div>
           <!-- Order card 4 -->
-          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+          <div data-status="cancelled" style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
               <div>
                 <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">#CMD-90154</div>
@@ -631,72 +640,167 @@ window.FRAGMENTS['patient'] = `
 <!-- ========================================
      SCREEN 14 — PATIENT PROFILE
 ======================================== -->
-<div class="screen" id="screen17" data-device="mobile" style="background:#F4F9FC;">
-  <div style="background:#1A6B8A;padding:52px 20px 24px;">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+<div class="screen" id="screen17" data-device="mobile" style="background:#F4F9FC;display:flex;flex-direction:column;">
+  <!-- HEADER -->
+  <div style="background:linear-gradient(135deg,#0F3F54,#1A6B8A);padding:52px 20px 20px;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:12px;">
       <button onclick="goToScreen(10)" style="width:36px;height:36px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:18px;">←</button>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;">Mon Profil</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;">Mon Espace</div>
     </div>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-      <div style="width:72px;height:72px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;border:3px solid rgba(255,255,255,0.4);">👨🏿</div>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:#fff;">Moussa Koné</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.7);">+225 07 45 89 23</div>
-      <div style="background:rgba(39,174,96,0.2);border:1px solid rgba(39,174,96,0.4);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#4ADE80;">✓ Compte vérifié</div>
+    <!-- Profile card -->
+    <div style="margin-top:16px;background:rgba(255,255,255,0.1);border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;border:1px solid rgba(255,255,255,0.15);">
+      <div style="width:56px;height:56px;background:linear-gradient(135deg,rgba(255,255,255,0.25),rgba(255,255,255,0.1));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;border:2.5px solid rgba(255,255,255,0.4);flex-shrink:0;">👨🏿</div>
+      <div style="flex:1;">
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#fff;">Moussa Koné</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.7);margin-top:2px;">+225 07 45 89 23 · Abidjan, CI</div>
+        <div style="margin-top:6px;display:inline-flex;align-items:center;gap:5px;background:rgba(39,174,96,0.25);border:1px solid rgba(39,174,96,0.4);border-radius:20px;padding:3px 10px;"><div style="width:6px;height:6px;background:#4ADE80;border-radius:50%;"></div><span style="font-size:10px;font-weight:700;color:#4ADE80;">Compte vérifié</span></div>
+      </div>
+      <button onclick="showModal('edit-field-modal')" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:10px;padding:8px 12px;color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">✏️ Éditer</button>
     </div>
   </div>
-  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;">
-    <!-- Personal info -->
-    <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Informations personnelles</div>
-      <div style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#F4F9FC;border-radius:10px;">
-          <div><div style="font-size:11px;color:#6B7A8D;">Nom complet</div><div style="font-size:13px;font-weight:600;color:#1A2332;">Moussa Koné</div></div>
-          <button onclick="showModal('edit-field-modal')" style="font-size:12px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:600;">✏️</button>
+
+  <!-- SCROLLABLE CONTENT -->
+  <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px;padding-bottom:24px;">
+
+    <!-- Section : Ma Santé -->
+    <div>
+      <div style="font-size:11px;font-weight:800;color:#6B7A8D;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;padding-left:4px;">🩺 Ma Santé</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <div onclick="goToScreen(35)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📁</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Dossier Médical</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Antécédents, traitements, vaccins</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#F4F9FC;border-radius:10px;">
-          <div><div style="font-size:11px;color:#6B7A8D;">Âge</div><div style="font-size:13px;font-weight:600;color:#1A2332;">34 ans</div></div>
-          <button onclick="showModal('edit-field-modal')" style="font-size:12px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:600;">✏️</button>
+        <div onclick="goToScreen(36)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#FEF9EE;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔔</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Rappels & Alertes</div>
+            <div style="font-size:11px;color:#F39C12;margin-top:1px;font-weight:600;">1 rappel urgent</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
         </div>
-        <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#F4F9FC;border-radius:10px;">
-          <div><div style="font-size:11px;color:#6B7A8D;">Groupe sanguin</div><div style="font-size:13px;font-weight:600;color:#E74C3C;">O+</div></div>
-          <button onclick="showModal('edit-field-modal')" style="font-size:12px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:600;">✏️</button>
+        <div onclick="goToScreen(52)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#FEF0EE;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🏥</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Hôpitaux à proximité</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Urgences & Centres de santé</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="goToScreen(74)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#F0E8FF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">👨‍⚕️</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Consulter un médecin</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Téléconsultation & RDV</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
         </div>
       </div>
     </div>
-    <!-- Security -->
-    <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Sécurité</div>
-      <div onclick="showModal('edit-field-modal')" style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:#F4F9FC;border-radius:10px;cursor:pointer;margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:8px;"><span>🔑</span><span style="font-size:13px;font-weight:600;color:#1A2332;">Changer mot de passe</span></div>
-        <span style="color:#6B7A8D;">›</span>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px;background:#F4F9FC;border-radius:10px;">
-        <div style="display:flex;align-items:center;gap:8px;"><span>🛡️</span><span style="font-size:13px;font-weight:600;color:#1A2332;">Authentification 2FA</span></div>
-        <div onclick="showToast('2FA activée')" style="width:44px;height:24px;background:#27AE60;border-radius:50px;position:relative;cursor:pointer;"><div style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div>
+
+    <!-- Section : Services -->
+    <div>
+      <div style="font-size:11px;font-weight:800;color:#6B7A8D;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;padding-left:4px;">🏪 Services</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <div onclick="goToScreen(32)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F7EE;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📍</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Pharmacies à proximité</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Trouver une pharmacie</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="goToScreen(29)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💊</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Catalogue médicaments</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Rechercher un produit</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="goToScreen(47)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">⭐</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Programme PharmaPoints</div>
+            <div style="font-size:11px;color:#F39C12;margin-top:1px;font-weight:600;">1 250 pts disponibles</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="goToScreen(39)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💳</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Historique paiements</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Voir mes transactions</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
       </div>
     </div>
-    <!-- Notifications -->
-    <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Notifications</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#F4F9FC;border-radius:10px;margin-bottom:8px;">
-        <div style="display:flex;align-items:center;gap:8px;"><span>🔔</span><span style="font-size:13px;color:#1A2332;">Notifications Push</span></div>
-        <div onclick="showToast('Push activé')" style="width:44px;height:24px;background:#27AE60;border-radius:50px;position:relative;cursor:pointer;"><div style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div>
-      </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:#F4F9FC;border-radius:10px;">
-        <div style="display:flex;align-items:center;gap:8px;"><span>💬</span><span style="font-size:13px;color:#1A2332;">SMS</span></div>
-        <div onclick="showToast('SMS activé')" style="width:44px;height:24px;background:#27AE60;border-radius:50px;position:relative;cursor:pointer;"><div style="width:20px;height:20px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div>
+
+    <!-- Section : Paramètres -->
+    <div>
+      <div style="font-size:11px;font-weight:800;color:#6B7A8D;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;padding-left:4px;">⚙️ Paramètres</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <div onclick="showModal('edit-field-modal')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">👤</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Informations personnelles</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="showModal('edit-field-modal')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔒</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Sécurité & Mot de passe</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="goToScreen(18)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#FEF9EE;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🔔</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Notifications</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="showToast('Langue : Français, Wolof, Dioula')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🌐</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:#1A2332;">Langue</div>
+            <div style="font-size:11px;color:#6B7A8D;margin-top:1px;">Français (actuelle)</div>
+          </div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
       </div>
     </div>
-    <!-- Language -->
-    <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Langue</div>
-      <div style="display:flex;gap:8px;">
-        <button style="flex:1;padding:10px;background:#1A6B8A;color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Français</button>
-        <button onclick="showToast('Wolof sélectionné')" style="flex:1;padding:10px;background:#F4F9FC;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Wolof</button>
-        <button onclick="showToast('Dioula sélectionné')" style="flex:1;padding:10px;background:#F4F9FC;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;">Dioula</button>
+
+    <!-- Section : Aide -->
+    <div>
+      <div style="font-size:11px;font-weight:800;color:#6B7A8D;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;padding-left:4px;">❓ Aide & Légal</div>
+      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+        <div onclick="goToScreen(40)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F4F8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">❓</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">Aide & FAQ</div></div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="goToScreen(16)" style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#E8F7EE;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">💬</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">Contacter le support</div></div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
+        <div onclick="showToast('CGU & Politique de confidentialité')" style="display:flex;align-items:center;gap:14px;padding:14px 16px;cursor:pointer;" onmouseover="this.style.background='#F4F9FC'" onmouseout="this.style.background='#fff'">
+          <div style="width:38px;height:38px;background:#F4F9FC;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">📄</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">CGU & Confidentialité</div></div>
+          <span style="color:#C5D3DC;font-size:18px;">›</span>
+        </div>
       </div>
     </div>
-    <button onclick="showToast('Déconnexion...')" style="padding:14px;background:transparent;color:#E74C3C;border:2px solid #E74C3C;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;width:100%;">Se déconnecter</button>
+
+    <!-- Version & Logout -->
+    <div style="text-align:center;font-size:11px;color:#9CA3AF;padding:4px 0;">ILERA AFRICA · v2.4.1</div>
+    <button onclick="goToScreen(1)" style="width:100%;padding:14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">🚪 Se déconnecter</button>
   </div>
 </div>
 
@@ -1139,10 +1243,16 @@ window.pharmaFilter = function(type) {
   </div>
 
   <!-- ACTIONS RAPIDES -->
-  <div style="display:flex;gap:8px;padding:12px 14px;flex-shrink:0;">
-    <button onclick="goToScreen(29)" style="flex:2;padding:12px 8px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(26,107,138,0.3);">🛒 Commander</button>
-    <button onclick="showToast('📞 Appel en cours… +225 27 22 41 00 00')" style="flex:1;padding:12px 6px;background:#E8F7EE;color:#27AE60;border:none;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;">📞 Appeler</button>
-    <button onclick="showToast('🗺 Itinéraire ouvert dans Maps')" style="flex:1;padding:12px 6px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;">🗺 Y aller</button>
+  <div style="display:flex;flex-direction:column;gap:10px;padding:12px 14px;flex-shrink:0;">
+    <div style="display:flex;gap:8px;">
+      <button onclick="goToScreen(29)" style="flex:2;padding:12px 8px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(26,107,138,0.3);">🛒 Commander</button>
+      <button onclick="showToast('📞 Appel en cours… +225 27 22 41 00 00')" style="flex:1;padding:12px 6px;background:#E8F7EE;color:#27AE60;border:none;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;">📞 Appeler</button>
+      <button onclick="showToast('🗺 Itinéraire ouvert dans Maps')" style="flex:1;padding:12px 6px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:14px;font-size:12px;font-weight:700;cursor:pointer;">🗺 Y aller</button>
+    </div>
+    <!-- Nouveau bouton RDV -->
+    <button onclick="showToast('📅 Redirection vers l\'agenda de la pharmacie...')" style="width:100%;padding:12px;background:linear-gradient(135deg,#6366F1,#4F46E5);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(79,70,229,0.25);">
+      <span>📅 Prendre rendez-vous avec un pharmacien</span>
+    </button>
   </div>
 
   <!-- ONGLETS -->
@@ -3097,153 +3207,494 @@ window.showDossierTab = function(tab) {
      screen88 = Mon profil pharmacien
 ============================================================ -->
 
-<!-- ========================================
-     SCREEN 84 — LOGIN PHARMACIEN INDIVIDUEL
-======================================== -->
-      <div class="web-screen" id="wscreen1">
-        <div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;overflow-y:auto;">
-          <!-- Navbar -->
-          <nav style="display:flex;justify-content:space-between;align-items:center;padding:24px 60px;background:#fff;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:100;">
-            <div style="display:flex;align-items:center;gap:12px;">
-              <div style="width:40px;height:40px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="24" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg>
-              </div>
-              <span class="brand-cool" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;">ILERA AFRICA</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:32px;">
-              <a onclick="showToast('Téléchargez notre application mobile pour accéder.')" style="font-size:15px;font-weight:600;color:#1A2332;cursor:pointer;text-decoration:none;">Espace Patient</a>
-              <button onclick="goToWebScreen('_enrollement')" style="padding:12px 24px;background:#E8F7EE;color:#27AE60;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">Devenir Partenaire</button>
-            </div>
-          </nav>
-          
-          <!-- Hero Section -->
-          <div style="flex:1;display:flex;align-items:center;padding:60px 80px;background:linear-gradient(160deg,#F4F9FC 0%,#E0F0F7 100%);position:relative;overflow:hidden;">
-            <!-- Background Decorations -->
-            <div style="position:absolute;width:600px;height:600px;top:-150px;right:-100px;border-radius:50%;background:radial-gradient(circle,rgba(26,107,138,0.07) 0%,transparent 70%);"></div>
-            <div style="position:absolute;width:400px;height:400px;bottom:-100px;left:-80px;border-radius:50%;background:radial-gradient(circle,rgba(39,174,96,0.06) 0%,transparent 70%);"></div>
-            
-            <div style="max-width:600px;position:relative;z-index:2;">
-              <div style="display:inline-flex;align-items:center;gap:8px;background:#E8F7EE;border:1.5px solid rgba(39,174,96,0.3);border-radius:50px;padding:8px 20px;margin-bottom:24px;">
-                <div style="width:8px;height:8px;background:#27AE60;border-radius:50%;animation:blink 1.5s ease-in-out infinite;"></div>
-                <span style="font-size:12px;font-weight:700;color:#27AE60;letter-spacing:0.8px;">PLATEFORME SANTÉ N°1 EN CÔTE D'IVOIRE</span>
-              </div>
-              <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:54px;font-weight:800;color:#1A2332;line-height:1.15;margin-bottom:24px;">La Santé à portée de main, <br> <span style="color:#1A6B8A;">Où que vous soyez.</span></h1>
-              <p style="font-size:18px;color:#6B7A8D;line-height:1.6;margin-bottom:40px;">Découvrez notre écosystème révolutionnaire connectant cliniques, pharmacies et patients. Commandez vos ordonnances et recevez-les en moins de 2 heures grâce à notre réseau sécurisé.</p>
-              
-              <div style="display:flex;gap:16px;">
-                <!-- App Store Button -->
-                <button onclick="setDevice('mobile'); goToScreen(8);" style="display:flex;align-items:center;gap:12px;padding:12px 24px;background:#1A2332;color:#fff;border:none;border-radius:14px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.15);">
-                  <div style="font-size:24px;">🍏</div>
-                  <div style="text-align:left;">
-                    <div style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;">Télécharger dans l'</div>
-                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;">App Store</div>
-                  </div>
-                </button>
-                <!-- Play Store Button -->
-                <button onclick="setDevice('mobile'); goToScreen(8);" style="display:flex;align-items:center;gap:12px;padding:12px 24px;background:#1A2332;color:#fff;border:none;border-radius:14px;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.15);">
-                  <div style="font-size:24px;">▶️</div>
-                  <div style="text-align:left;">
-                    <div style="font-size:10px;color:rgba(255,255,255,0.7);margin-bottom:2px;">DISPONIBLE SUR</div>
-                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;">Google Play</div>
-                  </div>
-                </button>
-              </div>
-            </div>
-            
-            <!-- Hero Image / Visual -->
-            <div style="flex:1;display:flex;justify-content:center;position:relative;z-index:2;">
-              <div style="width:360px;height:680px;background:#fff;border-radius:40px;border:12px solid #1A2332;box-shadow:0 30px 80px rgba(26,107,138,0.25);overflow:hidden;position:relative;display:flex;flex-direction:column;">
-                <div style="width:140px;height:24px;background:#1A2332;position:absolute;top:0;left:50%;transform:translateX(-50%);border-radius:0 0 16px 16px;"></div>
-                <div style="background:#1A6B8A;padding:40px 20px 20px;text-align:center;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;">ILERA AFRICA</div>
-                <div style="padding:20px;display:flex;flex-direction:column;gap:12px;flex:1;background:#F4F9FC;">
-                  <div style="background:#fff;padding:16px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);display:flex;align-items:center;gap:12px;">
-                    <div style="font-size:24px;">🩺</div>
-                    <div><div style="font-size:14px;font-weight:700;color:#1A2332;">Consultation en ligne</div><div style="font-size:12px;color:#6B7A8D;">24/7 avec nos pharmaciens</div></div>
-                  </div>
-                  <div style="background:#fff;padding:16px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);display:flex;align-items:center;gap:12px;">
-                    <div style="font-size:24px;">📦</div>
-                    <div><div style="font-size:14px;font-weight:700;color:#1A2332;">Livraison express</div><div style="font-size:12px;color:#6B7A8D;">En moins de 2 heures</div></div>
-                  </div>
-                  <div style="background:#fff;padding:16px;border-radius:16px;box-shadow:0 4px 12px rgba(0,0,0,0.05);display:flex;align-items:center;gap:12px;">
-                    <div style="font-size:24px;">🔒</div>
-                    <div><div style="font-size:14px;font-weight:700;color:#1A2332;">Sécurité garantie</div><div style="font-size:12px;color:#6B7A8D;">Données HDS chiffrées</div></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- WEB SCREEN: ENROLLMENT FORM -->
+      <!-- WEB SCREEN: ENROLLMENT FORM — Multi-step Premium -->
       <div class="web-screen" id="wscreen_enrollement">
-        <div style="height:100vh;display:flex;flex-direction:column;background:#F4F9FC;overflow-y:auto;">
-          <!-- Navbar -->
-          <nav style="display:flex;justify-content:space-between;align-items:center;padding:24px 60px;background:#fff;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:100;">
-            <div style="display:flex;align-items:center;gap:12px;cursor:pointer;" onclick="goToWebScreen(1)">
-              <div style="width:40px;height:40px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:12px;display:flex;align-items:center;justify-content:center;">
-                <svg width="24" height="24" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg>
-              </div>
-              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#1A2332;letter-spacing:-0.5px;">ILERA AFRICA</span>
-            </div>
-            <button onclick="goToWebScreen(1)" style="padding:10px 20px;background:transparent;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Annuler</button>
-          </nav>
-          
-          <div style="flex:1;padding:60px 20px;display:flex;justify-content:center;">
-            <div style="max-width:560px;width:100%;background:#fff;border-radius:24px;box-shadow:0 12px 40px rgba(0,0,0,0.06);padding:40px;height:fit-content;">
-              <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:32px;font-weight:800;color:#1A2332;margin-bottom:8px;text-align:center;">Créer un compte professionnel</h2>
-              <p style="font-size:15px;color:#6B7A8D;text-align:center;margin-bottom:32px;">Soumettez votre dossier. Nos équipes valideront votre compte et vous enverront vos accès par email.</p>
+        <div class="enroll-scroll" style="height:100%;display:flex;flex-direction:column;background:linear-gradient(135deg,#F0F6FF 0%,#E8F4F8 45%,#F0FAF5 100%);overflow-y:auto;">
 
-              <div style="display:flex;flex-direction:column;gap:20px;">
-                <div>
-                  <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">Profil souhaité</label>
-                  <select style="width:100%;padding:14px 16px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;">
-                    <option>Médecin</option>
-                    <option>Pharmacien</option>
-                    <option>Livreur Indépendant</option>
-                  </select>
+          <!-- ── Sticky Nav ── -->
+          <nav style="display:flex;justify-content:space-between;align-items:center;padding:16px 48px;background:rgba(255,255,255,0.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(26,107,138,0.08);position:sticky;top:0;z-index:100;flex-shrink:0;">
+            <div style="display:flex;align-items:center;gap:10px;cursor:pointer;" onclick="goToWebScreen(0)">
+              <div style="width:36px;height:36px;background:linear-gradient(135deg,#1A6B8A,#27AE60);border-radius:10px;display:flex;align-items:center;justify-content:center;">
+                <svg width="20" height="20" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg>
+              </div>
+              <span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#1A2332;">ILERA <span style="color:#1A6B8A;">AFRICA</span></span>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span style="font-size:13px;color:#6B7A8D;">Déjà membre ?</span>
+              <button onclick="goToWebScreen(8)" style="padding:9px 22px;background:transparent;color:#1A6B8A;border:2px solid #1A6B8A;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#1A6B8A';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1A6B8A'">Se connecter</button>
+            </div>
+          </nav>
+
+          <!-- ── Content ── -->
+          <div style="flex:1;padding:48px 20px 80px;display:flex;flex-direction:column;align-items:center;">
+            <div style="width:100%;max-width:860px;">
+
+              <!-- ── Hero Header ── -->
+              <div style="text-align:center;margin-bottom:40px;">
+                <div style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#E0F2FE,#ECFDF5);border:1.5px solid rgba(26,107,138,0.2);border-radius:50px;padding:8px 20px;margin-bottom:20px;">
+                  <div style="width:8px;height:8px;background:#059669;border-radius:50%;animation:blink 1.5s ease-in-out infinite;"></div>
+                  <span style="font-size:12px;font-weight:700;color:#1A6B8A;letter-spacing:0.8px;text-transform:uppercase;">Inscription professionnelle</span>
                 </div>
-                <div>
-                  <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">Nom Complet / Raison Sociale</label>
-                  <input type="text" placeholder="Ex: Dr. Koné Moussa" style="width:100%;padding:14px 16px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;">
+                <h1 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:38px;font-weight:800;color:#1A2332;line-height:1.2;margin-bottom:12px;">Rejoindre ILERA AFRICA</h1>
+                <p style="font-size:16px;color:#6B7A8D;max-width:520px;margin:0 auto;line-height:1.6;">Soumettez votre dossier en <strong style="color:#1A2332;">3 étapes simples</strong>. Notre équipe valide sous 24h et vous envoie vos accès par email.</p>
+              </div>
+
+              <!-- ── Stepper ── -->
+              <div style="display:flex;align-items:center;justify-content:center;margin-bottom:44px;max-width:480px;margin-left:auto;margin-right:auto;">
+                <!-- Step 1 -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;">
+                  <div id="estep-c-1" style="width:40px;height:40px;border-radius:50%;background:#1A6B8A;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#fff;flex-shrink:0;box-shadow:0 0 0 4px rgba(26,107,138,0.15);">1</div>
+                  <span id="estep-l-1" style="font-size:12px;font-weight:700;color:#1A2332;white-space:nowrap;">Profil</span>
                 </div>
-                <div>
-                  <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">Localisation GPS de l'officine/résidence</label>
-                  <div style="display:flex;gap:10px;">
-                    <input type="text" placeholder="Latitude, Longitude" style="flex:1;padding:14px 16px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:15px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;">
-                    <button onclick="showToast('Localisation récupérée ✓')" style="padding:0 20px;background:#1A6B8A;color:#fff;border:none;border-radius:12px;cursor:pointer;">📍</button>
-                  </div>
+                <div id="estep-line-1" style="flex:1;height:3px;background:#E2ECF2;border-radius:2px;margin-bottom:20px;transition:background 0.3s;"></div>
+                <!-- Step 2 -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;">
+                  <div id="estep-c-2" style="width:40px;height:40px;border-radius:50%;background:#E2ECF2;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#9BA7B4;flex-shrink:0;">2</div>
+                  <span id="estep-l-2" style="font-size:12px;font-weight:500;color:#9BA7B4;white-space:nowrap;">Informations</span>
                 </div>
-                <div style="border-top:1.5px dashed #E2ECF2;margin:10px 0;"></div>
-                
-                <!-- Documents Uploads -->
-                <div>
-                  <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">1. Diplôme / Attestation professionnelle</label>
-                  <div style="border:2px dashed #1A6B8A;background:#E8F4F8;border-radius:12px;padding:24px;text-align:center;cursor:pointer;" onclick="showToast('Sélecteur de fichier ouvert...')">
-                    <span style="font-size:24px;margin-bottom:8px;display:block;">📄</span>
-                    <div style="font-size:13px;font-weight:700;color:#1A6B8A;">Cliquer pour uploader (PDF, Image)</div>
-                  </div>
-                </div>
-                <div>
-                  <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">2. Pièce d'identité (CNI/Passeport)</label>
-                  <div style="border:2px dashed #1A6B8A;background:#E8F4F8;border-radius:12px;padding:24px;text-align:center;cursor:pointer;" onclick="showToast('Sélecteur de fichier ouvert...')">
-                    <span style="font-size:24px;margin-bottom:8px;display:block;">🪪</span>
-                    <div style="font-size:13px;font-weight:700;color:#1A6B8A;">Cliquer pour uploader (PDF, Image)</div>
-                  </div>
-                </div>
-                <div>
-                  <label style="font-size:12px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;display:block;">3. Licence d'exploitation (Pharmacies)</label>
-                  <div style="border:2px dashed #1A6B8A;background:#E8F4F8;border-radius:12px;padding:24px;text-align:center;cursor:pointer;" onclick="showToast('Sélecteur de fichier ouvert...')">
-                    <span style="font-size:24px;margin-bottom:8px;display:block;">📜</span>
-                    <div style="font-size:13px;font-weight:700;color:#1A6B8A;">Cliquer pour uploader (PDF, Image)</div>
-                  </div>
+                <div id="estep-line-2" style="flex:1;height:3px;background:#E2ECF2;border-radius:2px;margin-bottom:20px;transition:background 0.3s;"></div>
+                <!-- Step 3 -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex:1;">
+                  <div id="estep-c-3" style="width:40px;height:40px;border-radius:50%;background:#E2ECF2;display:flex;align-items:center;justify-content:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#9BA7B4;flex-shrink:0;">3</div>
+                  <span id="estep-l-3" style="font-size:12px;font-weight:500;color:#9BA7B4;white-space:nowrap;">Documents</span>
                 </div>
               </div>
-              
-              <button onclick="goToWebScreen('_enrollement_success')" style="width:100%;margin-top:32px;padding:16px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,0.35);">Soumettre mon dossier →</button>
-            </div>
-          </div>
-        </div>
+
+              <!-- ════════════════════════════════════════════════
+                   ÉTAPE 1 — Sélection du profil
+              ════════════════════════════════════════════════ -->
+              <div id="enroll-step-1" style="display:flex;flex-direction:column;gap:28px;">
+
+                <div style="text-align:center;">
+                  <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:24px;font-weight:800;color:#1A2332;margin-bottom:8px;">Quel est votre profil ?</h2>
+                  <p style="font-size:14px;color:#6B7A8D;">Sélectionnez le rôle qui correspond à votre activité.</p>
+                </div>
+
+                <!-- Profile Cards -->
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+
+                  <!-- ── Médecin ── -->
+                  <div id="ecard-medecin" onclick="enrollSelectProfile('medecin')" style="border:2px solid #E2ECF2;border-radius:24px;padding:28px 22px;background:#fff;cursor:pointer;transition:all 0.25s ease;box-shadow:0 4px 16px rgba(0,0,0,0.05);position:relative;text-align:center;">
+                    <div id="echeck-medecin" style="position:absolute;top:14px;right:14px;width:26px;height:26px;background:#059669;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.8);transition:all 0.2s;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div style="width:72px;height:72px;background:linear-gradient(135deg,#ECFDF5,#A7F3D0);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 18px;box-shadow:0 4px 16px rgba(5,150,105,0.12);">🩺</div>
+                    <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#1A2332;margin-bottom:6px;">Médecin</h3>
+                    <p style="font-size:12px;color:#6B7A8D;margin-bottom:18px;line-height:1.5;">Praticien ou spécialiste agréé par l'Ordre des Médecins</p>
+                    <div style="display:flex;flex-direction:column;gap:7px;text-align:left;">
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#059669;font-weight:700;">✓</span>Ordonnances numériques</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#059669;font-weight:700;">✓</span>Suivi de l'observance</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#059669;font-weight:700;">✓</span>Messagerie sécurisée</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#059669;font-weight:700;">✓</span>Dossiers patients centralisés</div>
+                    </div>
+                    <div style="margin-top:20px;padding:9px 0;background:#ECFDF5;border-radius:10px;font-size:11px;font-weight:700;color:#059669;letter-spacing:0.5px;">ESPACE MÉDECIN</div>
+                  </div>
+
+                  <!-- ── Pharmacien ── -->
+                  <div id="ecard-pharmacien" onclick="enrollSelectProfile('pharmacien')" style="border:2px solid #E2ECF2;border-radius:24px;padding:28px 22px;background:#fff;cursor:pointer;transition:all 0.25s ease;box-shadow:0 4px 16px rgba(0,0,0,0.05);position:relative;text-align:center;">
+                    <div id="echeck-pharmacien" style="position:absolute;top:14px;right:14px;width:26px;height:26px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.8);transition:all 0.2s;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div style="width:72px;height:72px;background:linear-gradient(135deg,#E0F2FE,#7DD3FC);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 18px;box-shadow:0 4px 16px rgba(26,107,138,0.12);">💊</div>
+                    <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#1A2332;margin-bottom:6px;">Pharmacien</h3>
+                    <p style="font-size:12px;color:#6B7A8D;margin-bottom:18px;line-height:1.5;">Titulaire ou gérant d'officine agréée</p>
+                    <div style="display:flex;flex-direction:column;gap:7px;text-align:left;">
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#1A6B8A;font-weight:700;">✓</span>Validation ordonnances digitales</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#1A6B8A;font-weight:700;">✓</span>Gestion de stock intelligente</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#1A6B8A;font-weight:700;">✓</span>Tableau de bord analytique</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#1A6B8A;font-weight:700;">✓</span>Paiements automatisés</div>
+                    </div>
+                    <div style="margin-top:20px;padding:9px 0;background:#E0F2FE;border-radius:10px;font-size:11px;font-weight:700;color:#1A6B8A;letter-spacing:0.5px;">ESPACE PHARMACIEN</div>
+                  </div>
+
+                  <!-- ── Livreur ── -->
+                  <div id="ecard-livreur" onclick="enrollSelectProfile('livreur')" style="border:2px solid #E2ECF2;border-radius:24px;padding:28px 22px;background:#fff;cursor:pointer;transition:all 0.25s ease;box-shadow:0 4px 16px rgba(0,0,0,0.05);position:relative;text-align:center;">
+                    <div id="echeck-livreur" style="position:absolute;top:14px;right:14px;width:26px;height:26px;background:#D97706;border-radius:50%;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0.8);transition:all 0.2s;">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div style="width:72px;height:72px;background:linear-gradient(135deg,#FFFBEB,#FCD34D);border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 18px;box-shadow:0 4px 16px rgba(217,119,6,0.12);">🛵</div>
+                    <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#1A2332;margin-bottom:6px;">Livreur</h3>
+                    <p style="font-size:12px;color:#6B7A8D;margin-bottom:18px;line-height:1.5;">Coursier indépendant certifié ILERA</p>
+                    <div style="display:flex;flex-direction:column;gap:7px;text-align:left;">
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#D97706;font-weight:700;">✓</span>Missions géolocalisées</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#D97706;font-weight:700;">✓</span>Paiements hebdomadaires</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#D97706;font-weight:700;">✓</span>Formation & certification</div>
+                      <div style="font-size:12px;color:#6B7A8D;display:flex;align-items:center;gap:7px;"><span style="color:#D97706;font-weight:700;">✓</span>Application mobile dédiée</div>
+                    </div>
+                    <div style="margin-top:20px;padding:9px 0;background:#FFFBEB;border-radius:10px;font-size:11px;font-weight:700;color:#D97706;letter-spacing:0.5px;">ESPACE LIVREUR</div>
+                  </div>
+                </div>
+
+                <!-- Next button -->
+                <div style="display:flex;justify-content:center;">
+                  <button id="enroll-btn-1" onclick="enrollNext(1)" style="padding:16px 56px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 8px 28px rgba(26,107,138,0.3);opacity:0.4;pointer-events:none;transition:all 0.25s;">
+                    Continuer →
+                  </button>
+                </div>
+
+              </div><!-- /step-1 -->
+
+              <!-- ════════════════════════════════════════════════
+                   ÉTAPE 2 — Informations personnelles
+              ════════════════════════════════════════════════ -->
+              <div id="enroll-step-2" style="display:none;">
+
+                <!-- Section header -->
+                <div style="display:flex;align-items:center;gap:14px;background:#fff;border-radius:20px;padding:20px 28px;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+                  <div style="width:48px;height:48px;background:#E0F2FE;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👤</div>
+                  <div style="flex:1;">
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A2332;margin-bottom:2px;">Vos informations personnelles</div>
+                    <div style="font-size:13px;color:#6B7A8D;">Ces données resteront strictement confidentielles et chiffrées.</div>
+                  </div>
+                  <span id="enroll-badge-step2" style="padding:6px 16px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;background:#E0F2FE;color:#1A6B8A;white-space:nowrap;">Profil</span>
+                </div>
+
+                <!-- Form card -->
+                <div style="background:#fff;border-radius:24px;padding:36px;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+
+                  <!-- Common fields -->
+                  <div style="margin-bottom:28px;">
+                    <div style="font-size:11px;font-weight:700;color:#9BA7B4;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:16px;padding-bottom:8px;border-bottom:1.5px solid #F4F9FC;">Identité</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Prénom</label>
+                        <input type="text" placeholder="Moussa" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;transition:border-color 0.2s;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Nom de famille</label>
+                        <input type="text" placeholder="Koné" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Email professionnel</label>
+                        <input type="email" placeholder="docteur@email.com" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Téléphone</label>
+                        <div style="display:flex;gap:8px;">
+                          <div style="padding:13px 12px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:13px;font-weight:700;color:#1A6B8A;white-space:nowrap;flex-shrink:0;">+225</div>
+                          <input type="tel" placeholder="07 00 00 00 00" style="flex:1;min-width:0;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                        </div>
+                      </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Mot de passe</label>
+                        <input type="password" placeholder="••••••••" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Confirmer le mot de passe</label>
+                        <input type="password" placeholder="••••••••" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Profile-specific fields — MÉDECIN -->
+                  <div id="einfo-medecin" style="display:none;flex-direction:column;gap:16px;">
+                    <div style="font-size:11px;font-weight:700;color:#9BA7B4;letter-spacing:0.8px;text-transform:uppercase;padding-bottom:8px;border-bottom:1.5px solid #F4F9FC;">Informations médicales</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Spécialité médicale</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option value="">Sélectionner...</option>
+                          <option>Médecine générale</option>
+                          <option>Cardiologie</option>
+                          <option>Pédiatrie</option>
+                          <option>Gynécologie</option>
+                          <option>Chirurgie générale</option>
+                          <option>Ophtalmologie</option>
+                          <option>Dermatologie</option>
+                          <option>Neurologie</option>
+                          <option>Autre spécialité</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">N° Ordre des Médecins de CI</label>
+                        <input type="text" placeholder="Ex: CI-MED-2024-00123" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                    </div>
+                    <div>
+                      <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Établissement hospitalier / Cabinet</label>
+                      <input type="text" placeholder="Ex: CHU de Yopougon, Cabinet Médical du Plateau..." style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#E2ECF2'">
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Ville d'exercice</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>Abidjan</option><option>Bouaké</option><option>Yamoussoukro</option><option>San-Pédro</option><option>Daloa</option><option>Autre</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Années d'expérience</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#059669'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>Moins de 2 ans</option><option>2 - 5 ans</option><option>5 - 10 ans</option><option>10 - 20 ans</option><option>Plus de 20 ans</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Profile-specific fields — PHARMACIEN -->
+                  <div id="einfo-pharmacien" style="display:none;flex-direction:column;gap:16px;">
+                    <div style="font-size:11px;font-weight:700;color:#9BA7B4;letter-spacing:0.8px;text-transform:uppercase;padding-bottom:8px;border-bottom:1.5px solid #F4F9FC;">Informations de l'officine</div>
+                    <div>
+                      <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Nom de l'officine / Pharmacie</label>
+                      <input type="text" placeholder="Ex: Pharmacie du Plateau" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">N° Ordre des Pharmaciens de CI</label>
+                        <input type="text" placeholder="Ex: CI-PHA-2024-00456" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Ville</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>Abidjan</option><option>Bouaké</option><option>Yamoussoukro</option><option>San-Pédro</option><option>Autre</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Adresse complète de l'officine</label>
+                      <input type="text" placeholder="Ex: 12 Avenue Botreau-Roussel, Plateau, Abidjan" style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                    </div>
+                    <div>
+                      <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Localisation GPS</label>
+                      <div style="display:flex;gap:10px;">
+                        <input type="text" placeholder="Latitude, Longitude" style="flex:1;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;box-sizing:border-box;" onfocus="this.style.borderColor='#1A6B8A'" onblur="this.style.borderColor='#E2ECF2'">
+                        <button onclick="showToast('📍 Localisation récupérée avec succès ✓')" style="padding:0 18px;background:#1A6B8A;color:#fff;border:none;border-radius:12px;cursor:pointer;font-size:18px;flex-shrink:0;">📍</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Profile-specific fields — LIVREUR -->
+                  <div id="einfo-livreur" style="display:none;flex-direction:column;gap:16px;">
+                    <div style="font-size:11px;font-weight:700;color:#9BA7B4;letter-spacing:0.8px;text-transform:uppercase;padding-bottom:8px;border-bottom:1.5px solid #F4F9FC;">Informations de livraison</div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Type de véhicule</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#D97706'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>🛵 Moto / Scooter</option>
+                          <option>🚗 Voiture</option>
+                          <option>🚲 Vélo / Tricycle</option>
+                          <option>🛺 Taxi-moto</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Zone de livraison principale</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#D97706'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>Cocody</option><option>Plateau</option><option>Marcory</option><option>Treichville</option><option>Yopougon</option><option>Abobo</option><option>Adjamé</option><option>Autre commune</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Disponibilité</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#D97706'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>Temps plein (7j/7)</option>
+                          <option>Semaine uniquement</option>
+                          <option>Week-end uniquement</option>
+                          <option>Mi-temps</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label style="font-size:12px;font-weight:700;color:#6B7A8D;display:block;margin-bottom:8px;">Expérience livraison</label>
+                        <select style="width:100%;padding:13px 16px;background:#F8FAFC;border:1.5px solid #E2ECF2;border-radius:12px;font-size:14px;font-family:'DM Sans',sans-serif;color:#1A2332;outline:none;" onfocus="this.style.borderColor='#D97706'" onblur="this.style.borderColor='#E2ECF2'">
+                          <option>Débutant (0-1 an)</option>
+                          <option>Intermédiaire (1-3 ans)</option>
+                          <option>Expérimenté (+ 3 ans)</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                </div><!-- /form card -->
+
+                <!-- Navigation buttons -->
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <button onclick="enrollGoToStep(1)" style="padding:14px 28px;background:transparent;color:#6B7A8D;border:2px solid #E2ECF2;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='#1A6B8A';this.style.color='#1A6B8A'" onmouseout="this.style.borderColor='#E2ECF2';this.style.color='#6B7A8D'">← Retour</button>
+                  <button onclick="enrollNext(2)" style="padding:14px 48px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.3);transition:all 0.2s;" onmouseover="this.style.boxShadow='0 12px 32px rgba(26,107,138,0.4)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(26,107,138,0.3)'">Continuer →</button>
+                </div>
+
+              </div><!-- /step-2 -->
+
+              <!-- ════════════════════════════════════════════════
+                   ÉTAPE 3 — Upload des documents
+              ════════════════════════════════════════════════ -->
+              <div id="enroll-step-3" style="display:none;">
+
+                <!-- Section header -->
+                <div style="display:flex;align-items:center;gap:14px;background:#fff;border-radius:20px;padding:20px 28px;box-shadow:0 4px 20px rgba(0,0,0,0.05);">
+                  <div style="width:48px;height:48px;background:#FFFBEB;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">📂</div>
+                  <div style="flex:1;">
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:800;color:#1A2332;margin-bottom:2px;">Pièces justificatives</div>
+                    <div style="font-size:13px;color:#6B7A8D;">Tous les fichiers sont chiffrés et stockés de façon sécurisée (ISO 27001).</div>
+                  </div>
+                  <span id="enroll-badge-step3" style="padding:6px 16px;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;font-weight:700;background:#E0F2FE;color:#1A6B8A;white-space:nowrap;">Profil</span>
+                </div>
+
+                <!-- Security badges -->
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+                  <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid #E2ECF2;border-radius:50px;padding:7px 14px;font-size:12px;color:#6B7A8D;font-weight:600;">🔒 Chiffrement SSL 256-bit</div>
+                  <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid #E2ECF2;border-radius:50px;padding:7px 14px;font-size:12px;color:#6B7A8D;font-weight:600;">🛡️ Stockage HDS</div>
+                  <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid #E2ECF2;border-radius:50px;padding:7px 14px;font-size:12px;color:#6B7A8D;font-weight:600;">🗑️ Supprimé après vérification</div>
+                  <div style="display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid #E2ECF2;border-radius:50px;padding:7px 14px;font-size:12px;color:#6B7A8D;font-weight:600;">✅ Validation sous 24h</div>
+                </div>
+
+                <!-- Documents — MÉDECIN -->
+                <div id="edocs-medecin" style="display:none;grid-template-columns:1fr 1fr;gap:16px;">
+                  <!-- Doc 1 -->
+                  <div id="udoc-med-1" onclick="enrollFakeUpload(this,'Diplôme de médecine')" style="border:2px dashed #D1FAE5;background:linear-gradient(135deg,#F8FAFC,#F0FDF4);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;" onmouseover="this.style.borderColor='#059669';this.style.background='#ECFDF5'" onmouseout="if(!this.classList.contains('done')){this.style.borderColor='#D1FAE5';this.style.background='linear-gradient(135deg,#F8FAFC,#F0FDF4)'}">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🎓</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Diplôme de médecine</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Doctorat en Médecine (thèse)</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#059669;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#ECFDF5;color:#059669;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <!-- Doc 2 -->
+                  <div id="udoc-med-2" onclick="enrollFakeUpload(this,'N° Ordre des Médecins')" style="border:2px dashed #D1FAE5;background:linear-gradient(135deg,#F8FAFC,#F0FDF4);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;" onmouseover="this.style.borderColor='#059669';this.style.background='#ECFDF5'" onmouseout="if(!this.classList.contains('done')){this.style.borderColor='#D1FAE5';this.style.background='linear-gradient(135deg,#F8FAFC,#F0FDF4)'}">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">📋</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Attestation Ordre des Médecins CI</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Inscription en cours de validité</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#059669;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#ECFDF5;color:#059669;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <!-- Doc 3 -->
+                  <div id="udoc-med-3" onclick="enrollFakeUpload(this,'Pièce d\'identité')" style="border:2px dashed #D1FAE5;background:linear-gradient(135deg,#F8FAFC,#F0FDF4);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;" onmouseover="this.style.borderColor='#059669';this.style.background='#ECFDF5'" onmouseout="if(!this.classList.contains('done')){this.style.borderColor='#D1FAE5';this.style.background='linear-gradient(135deg,#F8FAFC,#F0FDF4)'}">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🪪</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Pièce d'identité</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">CNI ou Passeport en cours de validité</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#059669;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#ECFDF5;color:#059669;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <!-- Doc 4 -->
+                  <div id="udoc-med-4" onclick="enrollFakeUpload(this,'Photo professionnelle')" style="border:2px dashed #D1FAE5;background:linear-gradient(135deg,#F8FAFC,#F0FDF4);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;position:relative;" onmouseover="this.style.borderColor='#059669';this.style.background='#ECFDF5'" onmouseout="if(!this.classList.contains('done')){this.style.borderColor='#D1FAE5';this.style.background='linear-gradient(135deg,#F8FAFC,#F0FDF4)'}">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">📸</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Photo professionnelle</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Portrait face visible, fond neutre</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#6B7A8D;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#F4F9FC;color:#6B7A8D;border-radius:50px;font-size:10px;font-weight:700;">FACULTATIF</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">JPG, PNG · Max 2 MB</div>
+                  </div>
+                </div>
+
+                <!-- Documents — PHARMACIEN -->
+                <div id="edocs-pharmacien" style="display:none;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div id="udoc-pha-1" onclick="enrollFakeUpload(this,'Diplôme de pharmacie')" style="border:2px dashed #BAE6FD;background:linear-gradient(135deg,#F8FAFC,#EFF6FF);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#1A6B8A';this.style.background='#E0F2FE'" onmouseout="this.style.borderColor='#BAE6FD';this.style.background='linear-gradient(135deg,#F8FAFC,#EFF6FF)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🎓</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Diplôme de Pharmacie</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Diplôme d'État de Docteur en Pharmacie</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#1A6B8A;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#E0F2FE;color:#1A6B8A;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <div id="udoc-pha-2" onclick="enrollFakeUpload(this,'Licence d\'exploitation')" style="border:2px dashed #BAE6FD;background:linear-gradient(135deg,#F8FAFC,#EFF6FF);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#1A6B8A';this.style.background='#E0F2FE'" onmouseout="this.style.borderColor='#BAE6FD';this.style.background='linear-gradient(135deg,#F8FAFC,#EFF6FF)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">📜</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Licence d'exploitation</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Autorisation d'ouverture de l'officine</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#1A6B8A;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#E0F2FE;color:#1A6B8A;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <div id="udoc-pha-3" onclick="enrollFakeUpload(this,'Pièce d\'identité')" style="border:2px dashed #BAE6FD;background:linear-gradient(135deg,#F8FAFC,#EFF6FF);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#1A6B8A';this.style.background='#E0F2FE'" onmouseout="this.style.borderColor='#BAE6FD';this.style.background='linear-gradient(135deg,#F8FAFC,#EFF6FF)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🪪</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Pièce d'identité</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">CNI ou Passeport en cours de validité</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#1A6B8A;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#E0F2FE;color:#1A6B8A;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <div id="udoc-pha-4" onclick="enrollFakeUpload(this,'Photo de la pharmacie')" style="border:2px dashed #BAE6FD;background:linear-gradient(135deg,#F8FAFC,#EFF6FF);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#1A6B8A';this.style.background='#E0F2FE'" onmouseout="this.style.borderColor='#BAE6FD';this.style.background='linear-gradient(135deg,#F8FAFC,#EFF6FF)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🏪</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Photo de la pharmacie</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Façade extérieure et enseigne visible</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#1A6B8A;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#E0F2FE;color:#1A6B8A;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">JPG, PNG · Max 5 MB</div>
+                  </div>
+                </div>
+
+                <!-- Documents — LIVREUR -->
+                <div id="edocs-livreur" style="display:none;grid-template-columns:1fr 1fr;gap:16px;">
+                  <div id="udoc-liv-1" onclick="enrollFakeUpload(this,'Pièce d\'identité')" style="border:2px dashed #FDE68A;background:linear-gradient(135deg,#F8FAFC,#FFFBEB);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#D97706';this.style.background='#FFFBEB'" onmouseout="this.style.borderColor='#FDE68A';this.style.background='linear-gradient(135deg,#F8FAFC,#FFFBEB)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🪪</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Pièce d'identité</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">CNI ou Passeport en cours de validité</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#D97706;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#FFFBEB;color:#D97706;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <div id="udoc-liv-2" onclick="enrollFakeUpload(this,'Permis de conduire')" style="border:2px dashed #FDE68A;background:linear-gradient(135deg,#F8FAFC,#FFFBEB);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#D97706';this.style.background='#FFFBEB'" onmouseout="this.style.borderColor='#FDE68A';this.style.background='linear-gradient(135deg,#F8FAFC,#FFFBEB)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🪪</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Permis de conduire</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Catégorie A (moto) ou B (voiture)</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#D97706;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#FFFBEB;color:#D97706;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <div id="udoc-liv-3" onclick="enrollFakeUpload(this,'Photo du véhicule')" style="border:2px dashed #FDE68A;background:linear-gradient(135deg,#F8FAFC,#FFFBEB);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#D97706';this.style.background='#FFFBEB'" onmouseout="this.style.borderColor='#FDE68A';this.style.background='linear-gradient(135deg,#F8FAFC,#FFFBEB)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">🛵</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Photo du véhicule</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Immatriculation visible, vue de côté</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#D97706;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#FFFBEB;color:#D97706;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">JPG, PNG · Max 5 MB</div>
+                  </div>
+                  <div id="udoc-liv-4" onclick="enrollFakeUpload(this,'Casier judiciaire')" style="border:2px dashed #FDE68A;background:linear-gradient(135deg,#F8FAFC,#FFFBEB);border-radius:20px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#D97706';this.style.background='#FFFBEB'" onmouseout="this.style.borderColor='#FDE68A';this.style.background='linear-gradient(135deg,#F8FAFC,#FFFBEB)'">
+                    <div class="upload-icon" style="font-size:32px;margin-bottom:14px;">📑</div>
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Casier judiciaire vierge</div>
+                    <div style="font-size:11px;color:#6B7A8D;margin-bottom:16px;">Bulletin n°3, datant de moins de 3 mois</div>
+                    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;">
+                      <div class="upload-cta" style="display:inline-flex;align-items:center;gap:6px;padding:8px 18px;background:#D97706;color:#fff;border-radius:10px;font-size:12px;font-weight:700;">📎 Choisir fichier</div>
+                      <div style="padding:4px 10px;background:#FFFBEB;color:#D97706;border-radius:50px;font-size:10px;font-weight:700;">OBLIGATOIRE</div>
+                    </div>
+                    <div style="margin-top:10px;font-size:11px;color:#9BA7B4;">PDF, JPG, PNG · Max 5 MB</div>
+                  </div>
+                </div>
+
+                <!-- Final submit card -->
+                <div style="background:linear-gradient(135deg,#1A2332,#0F3F54);border-radius:24px;padding:32px 36px;display:flex;align-items:center;gap:24px;">
+                  <div style="flex:1;">
+                    <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:8px;">Prêt à soumettre votre dossier ?</div>
+                    <div style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;">Notre équipe examinera votre dossier sous <strong style="color:#4ADE80;">24 heures</strong>. Vous recevrez une confirmation par email avec vos identifiants d'accès.</div>
+                  </div>
+                  <button onclick="enrollSubmit()" style="padding:16px 36px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(39,174,96,0.4);white-space:nowrap;flex-shrink:0;transition:all 0.2s;" onmouseover="this.style.boxShadow='0 12px 32px rgba(39,174,96,0.55)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(39,174,96,0.4)'">Soumettre mon dossier →</button>
+                </div>
+
+                <!-- Back button -->
+                <div>
+                  <button onclick="enrollGoToStep(2)" style="padding:12px 24px;background:transparent;color:#6B7A8D;border:2px solid #E2ECF2;border-radius:50px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;" onmouseover="this.style.borderColor='#1A6B8A';this.style.color='#1A6B8A'" onmouseout="this.style.borderColor='#E2ECF2';this.style.color='#6B7A8D'">← Retour aux informations</button>
+                </div>
+
+              </div><!-- /step-3 -->
+
+            </div><!-- /max-width container -->
+          </div><!-- /content -->
+        </div><!-- /enroll-scroll -->
       </div>
       
       <!-- WEB SCREEN: ENROLLMENT SUCCESS -->
@@ -3566,9 +4017,10 @@ window.showDossierTab = function(tab) {
               <span>🔒 CRYPTAGE DE BOUT EN BOUT — SSL 256-bit</span>
             </div>
             <button class="web-cta" onclick="handleWebLogin()">Se connecter</button>
-            <p class="web-login-footer">Nouveau sur ILERA AFRICA ? <a onclick="goToWebScreen(9)">Créer un compte →</a></p>
-            <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid #E2ECF2;">
-              <p style="text-align:center;font-size:11px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:10px;">Accès professionnel</p>
+            <p class="web-login-footer">Patient ? <a onclick="goToWebScreen(9)">Créer un compte patient →</a></p>
+            <div style="margin-top:12px;padding:14px 16px;background:linear-gradient(135deg,#F0F6FF,#F0FAF5);border-radius:14px;border:1.5px solid #E2ECF2;">
+              <p style="text-align:center;font-size:12px;font-weight:700;color:#1A2332;margin-bottom:10px;">Professionnel de santé ? <a onclick="goToWebScreen('_enrollement')" style="color:#1A6B8A;cursor:pointer;font-weight:800;">Créer un compte pro →</a></p>
+              <p style="text-align:center;font-size:11px;font-weight:700;color:#6B7A8D;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;">Accès direct par profil</p>
               <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
                 <button onclick="goToWebScreen(16)" style="padding:10px 8px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">⚕️ Pharmacien</button>
                 <button onclick="goToWebScreen(57)" style="padding:10px 8px;background:#E8F7EE;color:#0D3B2E;border:none;border-radius:10px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;cursor:pointer;">🩺 Médecin</button>
@@ -4099,7 +4551,7 @@ window.showDossierTab = function(tab) {
 <div class="web-screen" id="wscreen14">
   <div style="display:flex;height:100%;background:#F4F9FC;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
         <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:20px;">
           <a onclick="goToWebScreen(10)" style="font-size:13px;color:#6B7A8D;cursor:pointer;font-family:'DM Sans',sans-serif;">Tableau de bord</a>
@@ -4230,7 +4682,7 @@ window.showDossierTab = function(tab) {
 <div class="web-screen" id="wscreen30">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
         <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:20px;">
           <a onclick="goToWebScreen(29)" style="font-size:13px;color:#1A6B8A;font-weight:700;cursor:pointer;">← Catalogue</a>
@@ -4274,7 +4726,7 @@ window.showDossierTab = function(tab) {
               <button onclick="goToWebScreen(31)" style="width:100%;padding:14px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:8px;">🛒 Ajouter au panier</button>
               <button onclick="goToWebScreen(13)" style="width:100%;padding:12px;background:#F4F9FC;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;">📋 Joindre une ordonnance</button>
             </div>
-            <div style="background:#FEF9EE;border-radius:14px;padding:14px;border:1px solid rgba(243,156,18,0.2);">
+            <div style="background:#FEF9EE;border-radius:16px;padding:14px;border:1px solid rgba(243,156,18,0.2);">
               <div style="font-size:12px;font-weight:700;color:#F39C12;margin-bottom:6px;">⚕️ Conseil pharmacien</div>
               <div style="font-size:12px;color:#6B7A8D;line-height:1.6;">Ce médicament nécessite une ordonnance médicale valide. Un pharmacien validera votre prescription avant expédition.</div>
             </div>
@@ -4291,7 +4743,7 @@ window.showDossierTab = function(tab) {
 <div class="web-screen" id="wscreen31">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
         <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <div style="display:flex;align-items:center;gap:16px;"><a onclick="goToWebScreen(29)" style="font-size:13px;color:#6B7A8D;cursor:pointer;">← Continuer les achats</a><div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;">MK</div></div>
       </div>
@@ -4300,19 +4752,19 @@ window.showDossierTab = function(tab) {
         <div style="display:grid;grid-template-columns:1fr 340px;gap:20px;">
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:16px;">
-              <div style="width:56px;height:56px;background:#E8F4F8;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">💊</div>
+              <div style="width:56px;height:56px;background:#E8F4F8;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">💊</div>
               <div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#1A2332;">Amoxicilline 500mg</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Boîte 12cp · Pharmacie du Plateau</div><div style="font-size:11px;color:#F39C12;margin-top:4px;">⚠ Ordonnance requise</div></div>
               <div style="display:flex;align-items:center;gap:10px;"><button onclick="decrementStock(this)" style="width:32px;height:32px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;">−</button><span style="font-size:16px;font-weight:700;color:#1A2332;min-width:24px;text-align:center;">2</span><button onclick="incrementStock(this)" style="width:32px;height:32px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;">+</button></div>
               <div style="text-align:right;min-width:80px;"><div style="font-size:16px;font-weight:800;color:#1A2332;">4 200 FCFA</div><button onclick="closeModal();showToast('🗑️ Supprimé')" style="font-size:11px;color:#E74C3C;background:none;border:none;cursor:pointer;margin-top:4px;">Supprimer</button></div>
             </div>
             <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:16px;">
-              <div style="width:56px;height:56px;background:#E8F7EE;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">💊</div>
+              <div style="width:56px;height:56px;background:#E8F7EE;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">💊</div>
               <div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#1A2332;">Metformine 850mg</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Boîte 30cp · Pharmacie du Plateau</div></div>
               <div style="display:flex;align-items:center;gap:10px;"><button onclick="decrementStock(this)" style="width:32px;height:32px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;">−</button><span style="font-size:16px;font-weight:700;color:#1A2332;min-width:24px;text-align:center;">1</span><button onclick="incrementStock(this)" style="width:32px;height:32px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;">+</button></div>
               <div style="text-align:right;min-width:80px;"><div style="font-size:16px;font-weight:800;color:#1A2332;">2 800 FCFA</div><button onclick="closeModal();showToast('🗑️ Supprimé')" style="font-size:11px;color:#E74C3C;background:none;border:none;cursor:pointer;margin-top:4px;">Supprimer</button></div>
             </div>
             <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;align-items:center;gap:16px;">
-              <div style="width:56px;height:56px;background:#FEF9EE;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">🩺</div>
+              <div style="width:56px;height:56px;background:#FEF9EE;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">🩺</div>
               <div style="flex:1;"><div style="font-size:15px;font-weight:700;color:#1A2332;">Ibuprofène 400mg</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Boîte 20cp · Pharmacie du Plateau</div></div>
               <div style="display:flex;align-items:center;gap:10px;"><button onclick="decrementStock(this)" style="width:32px;height:32px;background:#F4F9FC;border:1.5px solid #E2ECF2;border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;">−</button><span style="font-size:16px;font-weight:700;color:#1A2332;min-width:24px;text-align:center;">1</span><button onclick="incrementStock(this)" style="width:32px;height:32px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:16px;font-weight:700;">+</button></div>
               <div style="text-align:right;min-width:80px;"><div style="font-size:16px;font-weight:800;color:#1A2332;">1 800 FCFA</div><button onclick="closeModal();showToast('🗑️ Supprimé')" style="font-size:11px;color:#E74C3C;background:none;border:none;cursor:pointer;margin-top:4px;">Supprimer</button></div>
@@ -4329,7 +4781,7 @@ window.showDossierTab = function(tab) {
               <div style="border-top:1.5px solid #E2ECF2;padding-top:12px;display:flex;justify-content:space-between;margin-bottom:16px;"><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#1A2332;">Total</span><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:800;color:#1A6B8A;">9 300 FCFA</span></div>
               <button onclick="goToWebScreen(15)" style="width:100%;padding:14px;background:linear-gradient(135deg,#27AE60,#2ecc71);color:#fff;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(39,174,96,0.3);">Passer commande →</button>
             </div>
-            <div style="background:#E8F7EE;border-radius:14px;padding:14px;border:1px solid rgba(39,174,96,0.2);">
+            <div style="background:#E8F7EE;border-radius:16px;padding:14px;border:1px solid rgba(39,174,96,0.2);">
               <div style="font-size:12px;font-weight:700;color:#27AE60;margin-bottom:4px;">🎁 +93 PharmaPoints gagnés</div>
               <div style="font-size:11px;color:#6B7A8D;">= 465 FCFA de réduction sur votre prochain achat</div>
             </div>
@@ -4346,7 +4798,7 @@ window.showDossierTab = function(tab) {
 <div class="web-screen" id="wscreen32">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
         <div style="display:flex;align-items:center;gap:8px;"><div style="width:30px;height:30px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:10px;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 52 52" fill="none"><path d="M26 4C18 4 10 8 8 15C7 22 10 26 14 30C18 34 24 42 26 48C28 42 34 34 38 30C42 26 45 22 44 15C42 8 34 4 26 4Z" fill="white" opacity="0.9"/><rect x="23" y="14" width="6" height="16" rx="3" fill="#1A6B8A"/><rect x="18" y="19" width="16" height="6" rx="3" fill="#1A6B8A"/></svg></div><span style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A6B8A;">ILERA AFRICA</span></div>
         <a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a>
       </div>
@@ -4361,17 +4813,17 @@ window.showDossierTab = function(tab) {
         </div>
         <div style="width:340px;background:#F4F9FC;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;">3 pharmacies proches</div>
-          <div onclick="goToWebScreen(33)" style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;border-left:3px solid #1A6B8A;">
+          <div onclick="goToWebScreen(33)" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;border-left:3px solid #1A6B8A;">
             <div style="font-size:14px;font-weight:700;color:#1A2332;">Pharmacie du Plateau</div>
             <div style="font-size:12px;color:#6B7A8D;margin-top:2px;">0.8 km · Av. Botreau-Roussel</div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;"><span style="font-size:12px;font-weight:700;color:#27AE60;">● Ouvert</span><span style="font-size:11px;color:#6B7A8D;">⭐ 4.8 · 128 avis</span></div>
           </div>
-          <div onclick="goToWebScreen(33)" style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;">
+          <div onclick="goToWebScreen(33)" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;">
             <div style="font-size:14px;font-weight:700;color:#1A2332;">Pharma Express CI</div>
             <div style="font-size:12px;color:#6B7A8D;margin-top:2px;">1.4 km · Bd de Marseille</div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;"><span style="font-size:12px;font-weight:700;color:#27AE60;">● 24h/24</span><span style="font-size:11px;color:#6B7A8D;">⭐ 4.5 · 87 avis</span></div>
           </div>
-          <div onclick="goToWebScreen(33)" style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;">
+          <div onclick="goToWebScreen(33)" style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;">
             <div style="font-size:14px;font-weight:700;color:#1A2332;">Pharma Nord CI</div>
             <div style="font-size:12px;color:#6B7A8D;margin-top:2px;">2.1 km · Bd de la Paix</div>
             <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;"><span style="font-size:12px;font-weight:700;color:#E74C3C;">● Fermé</span><span style="font-size:11px;color:#6B7A8D;">⭐ 4.2 · 34 avis</span></div>
@@ -4388,7 +4840,7 @@ window.showDossierTab = function(tab) {
 <div class="web-screen" id="wscreen33">
   <div style="display:flex;height:100%;overflow:hidden;">
     <div style="flex:1;display:flex;flex-direction:column;overflow:hidden;">
-      <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
         <a onclick="goToWebScreen(32)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Pharmacies</a>
         <div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;">MK</div>
       </div>
@@ -4420,7 +4872,7 @@ window.showDossierTab = function(tab) {
 ======================================== -->
 <div class="web-screen" id="wscreen34">
   <div style="display:flex;height:100%;overflow:hidden;flex-direction:column;">
-    <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
       <a onclick="goToWebScreen(14)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Détail commande</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Suivi livraison — #CMD-90214</div>
       <div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;">MK</div>
@@ -4428,17 +4880,17 @@ window.showDossierTab = function(tab) {
     <div style="flex:1;overflow:hidden;display:flex;">
       <div style="flex:1;background:linear-gradient(135deg,#c5dfe8,#8fbdce);display:flex;align-items:center;justify-content:center;position:relative;">
         <div style="font-size:60px;opacity:0.4;">🚚</div>
-        <div style="position:absolute;bottom:20px;left:20px;right:20px;background:#fff;border-radius:14px;padding:14px 18px;box-shadow:0 4px 16px rgba(0,0,0,0.1);display:flex;justify-content:space-between;align-items:center;">
+        <div style="position:absolute;bottom:20px;left:20px;right:20px;background:#fff;border-radius:16px;padding:14px 18px;box-shadow:0 4px 16px rgba(0,0,0,0.1);display:flex;justify-content:space-between;align-items:center;">
           <div><div style="font-size:11px;color:#6B7A8D;">Livreur</div><div style="font-size:14px;font-weight:700;color:#1A2332;">DHL Pharma Express · ~2.4 km</div></div>
           <button onclick="showModal('call-modal')" style="padding:10px 20px;background:#1A6B8A;color:#fff;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📞 Appeler</button>
         </div>
       </div>
       <div style="width:360px;background:#F4F9FC;overflow-y:auto;padding:20px;flex-shrink:0;display:flex;flex-direction:column;gap:14px;">
-        <div style="background:#1A6B8A;border-radius:14px;padding:16px;text-align:center;color:#fff;">
+        <div style="background:#1A6B8A;border-radius:16px;padding:16px;text-align:center;color:#fff;">
           <div style="font-size:12px;opacity:0.8;">Livraison estimée</div>
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;margin-top:4px;">Aujourd'hui, 17:30</div>
         </div>
-        <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+        <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
           <div style="font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Étapes de livraison</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;gap:10px;"><div style="width:10px;height:10px;background:#27AE60;border-radius:50%;flex-shrink:0;margin-top:3px;"></div><div><div style="font-size:13px;font-weight:700;color:#27AE60;">Ordonnance validée</div><div style="font-size:11px;color:#6B7A8D;">09:30 — Dr. Lefebvre</div></div></div>
@@ -4461,16 +4913,16 @@ window.showDossierTab = function(tab) {
 <!-- WSCREEN 32 — Ordonnances archivées -->
 <div class="web-screen" id="wscreen35">
   <div style="display:flex;height:100%;overflow:hidden;flex-direction:column;">
-    <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
       <a onclick="goToWebScreen(13)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Ordonnances</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Mes Ordonnances archivées</div>
       <div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;">MK</div>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;">
       <div style="max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:12px;">
-        <div style="background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:700;color:#1A2332;">#ORD-089 · 14 oct. 2024</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Amoxicilline, Paracétamol · Dr. Lefebvre</div></div><div style="display:flex;gap:8px;align-items:center;"><span style="background:#FEF9EE;color:#F39C12;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;">⏳ En attente</span><button onclick="goToWebScreen(13)" style="padding:7px 14px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir →</button></div></div>
-        <div style="background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:700;color:#1A2332;">#ORD-071 · 2 oct. 2024</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Metformine 850mg · Dr. Diabaté</div></div><div style="display:flex;gap:8px;align-items:center;"><span style="background:#E8F7EE;color:#27AE60;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;">✓ Validée</span><button onclick="showToast('Voir QR')" style="padding:7px 14px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">QR Code</button></div></div>
-        <div style="background:#fff;border-radius:14px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:700;color:#1A2332;">#ORD-055 · 18 sept. 2024</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Ibuprofène 400mg · Dr. Lefebvre</div></div><div style="display:flex;gap:8px;align-items:center;"><span style="background:#FEF0EE;color:#E74C3C;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;">✕ Rejetée</span><button onclick="showToast('Motif rejet: signature illisible')" style="padding:7px 14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Motif</button></div></div>
+        <div style="background:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:700;color:#1A2332;">#ORD-089 · 14 oct. 2024</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Amoxicilline, Paracétamol · Dr. Lefebvre</div></div><div style="display:flex;gap:8px;align-items:center;"><span style="background:#FEF9EE;color:#F39C12;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;">⏳ En attente</span><button onclick="goToWebScreen(13)" style="padding:7px 14px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Voir →</button></div></div>
+        <div style="background:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:700;color:#1A2332;">#ORD-071 · 2 oct. 2024</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Metformine 850mg · Dr. Diabaté</div></div><div style="display:flex;gap:8px;align-items:center;"><span style="background:#E8F7EE;color:#27AE60;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;">✓ Validée</span><button onclick="showToast('Voir QR')" style="padding:7px 14px;background:#E8F4F8;color:#1A6B8A;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">QR Code</button></div></div>
+        <div style="background:#fff;border-radius:16px;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center;"><div><div style="font-size:15px;font-weight:700;color:#1A2332;">#ORD-055 · 18 sept. 2024</div><div style="font-size:12px;color:#6B7A8D;margin-top:2px;">Ibuprofène 400mg · Dr. Lefebvre</div></div><div style="display:flex;gap:8px;align-items:center;"><span style="background:#FEF0EE;color:#E74C3C;border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;">✕ Rejetée</span><button onclick="showToast('Motif rejet: signature illisible')" style="padding:7px 14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">Motif</button></div></div>
       </div>
     </div>
   </div>
@@ -4479,7 +4931,7 @@ window.showDossierTab = function(tab) {
 <!-- WSCREEN 33 — Rappels web -->
 <div class="web-screen" id="wscreen36">
   <div style="display:flex;height:100%;overflow:hidden;flex-direction:column;">
-    <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
       <a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🔔 Rappels & Alertes médicament</div>
       <button onclick="showToast('Nouveau rappel')" style="padding:8px 16px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">+ Nouveau rappel</button>
@@ -4499,7 +4951,7 @@ window.showDossierTab = function(tab) {
 <!-- WSCREEN 34 — Paramètres web -->
 <div class="web-screen" id="wscreen37">
   <div style="display:flex;height:100%;overflow:hidden;flex-direction:column;">
-    <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
       <a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⚙️ Paramètres du compte</div>
       <div style="width:32px;height:32px;background:#1A6B8A;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;">MK</div>
@@ -4521,7 +4973,7 @@ window.showDossierTab = function(tab) {
 <!-- WSCREEN 35 — Upload ordonnance web -->
 <div class="web-screen" id="wscreen38">
   <div style="display:flex;height:100%;overflow:hidden;flex-direction:column;">
-    <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
       <a onclick="goToWebScreen(13)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Ordonnances</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📋 Soumettre une ordonnance</div>
       <div style="width:8px;"></div>
@@ -4533,8 +4985,8 @@ window.showDossierTab = function(tab) {
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:#1A6B8A;margin-bottom:8px;">Glisser-déposer votre ordonnance</div>
           <div style="font-size:13px;color:#6B7A8D;">ou cliquez pour parcourir · JPG, PNG, PDF · Max 10 Mo</div>
         </div>
-        <div style="background:#FEF9EE;border-radius:14px;padding:14px 18px;border:1px solid rgba(243,156,18,0.2);"><div style="font-size:13px;font-weight:700;color:#F39C12;margin-bottom:6px;">⚠️ Exigences obligatoires</div><div style="font-size:12px;color:#6B7A8D;line-height:1.7;">Photo nette et lisible · Signature du médecin visible · Date de moins de 3 mois · Cachet du praticien requis</div></div>
-        <button onclick="goToWebScreen(13)" style="padding:16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:14px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.3);">Soumettre l'ordonnance →</button>
+        <div style="background:#FEF9EE;border-radius:16px;padding:14px 18px;border:1px solid rgba(243,156,18,0.2);"><div style="font-size:13px;font-weight:700;color:#F39C12;margin-bottom:6px;">⚠️ Exigences obligatoires</div><div style="font-size:12px;color:#6B7A8D;line-height:1.7;">Photo nette et lisible · Signature du médecin visible · Date de moins de 3 mois · Cachet du praticien requis</div></div>
+        <button onclick="goToWebScreen(13)" style="padding:16px;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;border:none;border-radius:16px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.3);">Soumettre l'ordonnance →</button>
       </div>
     </div>
   </div>
@@ -4543,7 +4995,7 @@ window.showDossierTab = function(tab) {
 <!-- WSCREEN 36 — Historique paiements web -->
 <div class="web-screen" id="wscreen39">
   <div style="display:flex;height:100%;overflow:hidden;flex-direction:column;">
-    <div style="background:#fff;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;border-bottom:1.5px solid #E2ECF2;">
       <a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💳 Historique des paiements</div>
       <button onclick="showToast('Export CSV')" style="padding:8px 14px;background:#E8F4F8;color:#1A6B8A;border:1.5px solid #E2ECF2;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">📥 Exporter</button>
@@ -4564,21 +5016,21 @@ window.showDossierTab = function(tab) {
 </div>
 
 <!-- WSCREEN 37 à 45 — Écrans secondaires compacts -->
-<div class="web-screen" id="wscreen40"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">❓ Aide & FAQ</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;"><div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Comment soumettre une ordonnance...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Comment soumettre une ordonnance ?</div><div style="font-size:13px;color:#6B7A8D;">Photographiez l'ordonnance signée par votre médecin et uploadez-la depuis la section Ordonnances.</div></div><div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Délais de livraison...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Quels sont les délais de livraison ?</div><div style="font-size:13px;color:#6B7A8D;">2–4 heures à Abidjan, 24h en région. Livraison 7j/7 de 8h à 22h.</div></div><div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Paiement...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Quels moyens de paiement acceptés ?</div><div style="font-size:13px;color:#6B7A8D;">MTN Mobile Money, Orange Money, Wave, carte bancaire et paiement à la livraison.</div></div><div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Confidentialité...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Mes données médicales sont-elles sécurisées ?</div><div style="font-size:13px;color:#6B7A8D;">Oui. Toutes les données sont chiffrées AES-256 et conformes aux normes HDS (Hébergeur Données de Santé).</div></div><button onclick="goToWebScreen(11)" style="padding:14px;background:#1A6B8A;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">💬 Contacter le support</button></div></div></div></div>
+<div class="web-screen" id="wscreen40"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">❓ Aide & FAQ</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;"><div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Comment soumettre une ordonnance...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Comment soumettre une ordonnance ?</div><div style="font-size:13px;color:#6B7A8D;">Photographiez l'ordonnance signée par votre médecin et uploadez-la depuis la section Ordonnances.</div></div><div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Délais de livraison...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Quels sont les délais de livraison ?</div><div style="font-size:13px;color:#6B7A8D;">2–4 heures à Abidjan, 24h en région. Livraison 7j/7 de 8h à 22h.</div></div><div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Paiement...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Quels moyens de paiement acceptés ?</div><div style="font-size:13px;color:#6B7A8D;">MTN Mobile Money, Orange Money, Wave, carte bancaire et paiement à la livraison.</div></div><div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);cursor:pointer;" onclick="showToast('Confidentialité...')"><div style="font-size:14px;font-weight:700;color:#1A2332;margin-bottom:4px;">Mes données médicales sont-elles sécurisées ?</div><div style="font-size:13px;color:#6B7A8D;">Oui. Toutes les données sont chiffrées AES-256 et conformes aux normes HDS (Hébergeur Données de Santé).</div></div><button onclick="goToWebScreen(11)" style="padding:14px;background:#1A6B8A;color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">💬 Contacter le support</button></div></div></div></div>
 
-<div class="web-screen" id="wscreen41"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard pharmacien</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💊 Gestion du stock</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:24px;"><div style="font-size:13px;color:#6B7A8D;text-align:center;margin-top:40px;">Voir <button onclick="goToWebScreen(25)" style="background:none;border:none;color:#1A6B8A;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">wscreen 22 — Produits &amp; Stock →</button></div></div></div></div>
+<div class="web-screen" id="wscreen41"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard pharmacien</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💊 Gestion du stock</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:24px;"><div style="font-size:13px;color:#6B7A8D;text-align:center;margin-top:40px;">Voir <button onclick="goToWebScreen(25)" style="background:none;border:none;color:#1A6B8A;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">wscreen 22 — Produits &amp; Stock →</button></div></div></div></div>
 
-<div class="web-screen" id="wscreen42"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📊 Statistiques pharmacien</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:24px;"><div style="font-size:13px;color:#6B7A8D;text-align:center;margin-top:40px;">Voir <button onclick="goToWebScreen(27)" style="background:none;border:none;color:#1A6B8A;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">wscreen 24 — Rapports &amp; Analytics →</button></div></div></div></div>
+<div class="web-screen" id="wscreen42"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📊 Statistiques pharmacien</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:24px;"><div style="font-size:13px;color:#6B7A8D;text-align:center;margin-top:40px;">Voir <button onclick="goToWebScreen(27)" style="background:none;border:none;color:#1A6B8A;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">wscreen 24 — Rapports &amp; Analytics →</button></div></div></div></div>
 
-<div class="web-screen" id="wscreen43"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⚙️ Paramètres Pro</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;"><div style="max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);"><div style="padding:16px 20px;border-bottom:1px solid #F4F9FC;display:flex;justify-content:space-between;cursor:pointer;" onclick="showToast('Horaires')"><span style="font-size:14px;font-weight:600;color:#1A2332;">🕐 Horaires d'ouverture</span><span>→</span></div><div style="padding:16px 20px;border-bottom:1px solid #F4F9FC;display:flex;justify-content:space-between;cursor:pointer;" onclick="showToast('Signature')"><span style="font-size:14px;font-weight:600;color:#1A2332;">✍️ Signature numérique</span><span>→</span></div><div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;" onclick="showToast('2FA actif')"><span style="font-size:14px;font-weight:600;color:#1A2332;">🔐 Authentification 2FA</span><span style="background:#E8F7EE;color:#27AE60;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">Activé</span></div></div><button onclick="goToWebScreen(15)" style="padding:14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Déconnexion</button></div></div></div></div>
+<div class="web-screen" id="wscreen43"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⚙️ Paramètres Pro</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;"><div style="max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);"><div style="padding:16px 20px;border-bottom:1px solid #F4F9FC;display:flex;justify-content:space-between;cursor:pointer;" onclick="showToast('Horaires')"><span style="font-size:14px;font-weight:600;color:#1A2332;">🕐 Horaires d'ouverture</span><span>→</span></div><div style="padding:16px 20px;border-bottom:1px solid #F4F9FC;display:flex;justify-content:space-between;cursor:pointer;" onclick="showToast('Signature')"><span style="font-size:14px;font-weight:600;color:#1A2332;">✍️ Signature numérique</span><span>→</span></div><div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;" onclick="showToast('2FA actif')"><span style="font-size:14px;font-weight:600;color:#1A2332;">🔐 Authentification 2FA</span><span style="background:#E8F7EE;color:#27AE60;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">Activé</span></div></div><button onclick="goToWebScreen(15)" style="padding:14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Déconnexion</button></div></div></div></div>
 
-<div class="web-screen" id="wscreen44"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🔍 Scanner QR Code</div><div style="width:8px;"></div></div><div style="flex:1;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><div style="width:280px;height:280px;border:3px solid #1A6B8A;border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;background:rgba(26,107,138,0.05);"><div style="font-size:80px;opacity:0.4;">📷</div></div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:#1A2332;margin-bottom:8px;">Pointez vers le QR Code</div><div style="font-size:13px;color:#6B7A8D;margin-bottom:24px;">Scannez le QR Code de l'ordonnance ou de la commande</div><button onclick="goToWebScreen(51)" style="padding:14px 32px;background:#1A6B8A;color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Simuler une lecture ✓</button></div></div></div></div>
+<div class="web-screen" id="wscreen44"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🔍 Scanner QR Code</div><div style="width:8px;"></div></div><div style="flex:1;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><div style="width:280px;height:280px;border:3px solid #1A6B8A;border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;background:rgba(26,107,138,0.05);"><div style="font-size:80px;opacity:0.4;">📷</div></div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:#1A2332;margin-bottom:8px;">Pointez vers le QR Code</div><div style="font-size:13px;color:#6B7A8D;margin-bottom:24px;">Scannez le QR Code de l'ordonnance ou de la commande</div><button onclick="goToWebScreen(51)" style="padding:14px 32px;background:#1A6B8A;color:#fff;border:none;border-radius:16px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Simuler une lecture ✓</button></div></div></div></div>
 
-<div class="web-screen" id="wscreen45"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(32)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Pharmacies</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Profil pharmacien</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;"><div style="background:linear-gradient(135deg,#0F3F54,#1A6B8A);border-radius:20px;padding:32px;display:flex;align-items:center;gap:20px;margin-bottom:20px;"><div style="width:72px;height:72px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;">👩‍⚕️</div><div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#fff;">Dr. Sophie Lefebvre</div><div style="font-size:14px;color:rgba(255,255,255,0.7);margin-top:4px;">Pharmacien · Ordre CI #4521 · ⭐ 4.9 (128 avis)</div><div style="display:flex;gap:8px;margin-top:10px;"><button onclick="goToWebScreen(11)" style="padding:10px 18px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">💬 Contacter</button><button onclick="goToWebScreen(29)" style="padding:10px 18px;background:#fff;color:#1A6B8A;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🛒 Commander</button></div></div></div></div></div></div></div>
+<div class="web-screen" id="wscreen45"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(32)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Pharmacies</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Profil pharmacien</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;"><div style="background:linear-gradient(135deg,#0F3F54,#1A6B8A);border-radius:20px;padding:32px;display:flex;align-items:center;gap:20px;margin-bottom:20px;"><div style="width:72px;height:72px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;">👩‍⚕️</div><div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#fff;">Dr. Sophie Lefebvre</div><div style="font-size:14px;color:rgba(255,255,255,0.7);margin-top:4px;">Pharmacien · Ordre CI #4521 · ⭐ 4.9 (128 avis)</div><div style="display:flex;gap:8px;margin-top:10px;"><button onclick="goToWebScreen(11)" style="padding:10px 18px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">💬 Contacter</button><button onclick="goToWebScreen(29)" style="padding:10px 18px;background:#fff;color:#1A6B8A;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🛒 Commander</button></div></div></div></div></div></div></div>
 
-<div class="web-screen" id="wscreen46"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⭐ Avis & Notes</div><button onclick="showToast('Laisser un avis...')" style="padding:8px 16px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">+ Mon avis</button></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#1A6B8A;border-radius:20px;padding:24px;text-align:center;color:#fff;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:800;">4.8</div><div style="font-size:24px;margin:8px 0;letter-spacing:3px;">★★★★★</div><div style="font-size:13px;opacity:0.7;">Basé sur 128 avis vérifiés</div></div><div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;"><div style="width:44px;height:44px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#1A2332;flex-shrink:0;">MK</div><div><div style="font-size:14px;font-weight:700;color:#1A2332;">Moussa Koné · <span style="color:#F39C12;">★★★★★</span></div><div style="font-size:13px;color:#6B7A8D;margin-top:4px;line-height:1.6;">Service impeccable, Dr. Lefebvre très professionnelle et réactive. Livraison en 2h chrono !</div></div></div><div style="background:#fff;border-radius:14px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;"><div style="width:44px;height:44px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#1A2332;flex-shrink:0;">FT</div><div><div style="font-size:14px;font-weight:700;color:#1A2332;">Fatou Traoré · <span style="color:#F39C12;">★★★★☆</span></div><div style="font-size:13px;color:#6B7A8D;margin-top:4px;line-height:1.6;">Livraison rapide, médicaments bien conditionnés. Interface très intuitive. Merci !</div></div></div></div></div></div></div>
+<div class="web-screen" id="wscreen46"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⭐ Avis & Notes</div><button onclick="showToast('Laisser un avis...')" style="padding:8px 16px;background:#1A6B8A;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">+ Mon avis</button></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#1A6B8A;border-radius:20px;padding:24px;text-align:center;color:#fff;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:48px;font-weight:800;">4.8</div><div style="font-size:24px;margin:8px 0;letter-spacing:3px;">★★★★★</div><div style="font-size:13px;opacity:0.7;">Basé sur 128 avis vérifiés</div></div><div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;"><div style="width:44px;height:44px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#1A2332;flex-shrink:0;">MK</div><div><div style="font-size:14px;font-weight:700;color:#1A2332;">Moussa Koné · <span style="color:#F39C12;">★★★★★</span></div><div style="font-size:13px;color:#6B7A8D;margin-top:4px;line-height:1.6;">Service impeccable, Dr. Lefebvre très professionnelle et réactive. Livraison en 2h chrono !</div></div></div><div style="background:#fff;border-radius:16px;padding:18px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);display:flex;gap:14px;"><div style="width:44px;height:44px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#1A2332;flex-shrink:0;">FT</div><div><div style="font-size:14px;font-weight:700;color:#1A2332;">Fatou Traoré · <span style="color:#F39C12;">★★★★☆</span></div><div style="font-size:13px;color:#6B7A8D;margin-top:4px;line-height:1.6;">Livraison rapide, médicaments bien conditionnés. Interface très intuitive. Merci !</div></div></div></div></div></div></div>
 
-<div class="web-screen" id="wscreen47"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⭐ Programme PharmaPoints</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:16px;"><div style="background:linear-gradient(135deg,#1A2332,#0F3F54);border-radius:20px;padding:32px;text-align:center;"><div style="font-size:48px;margin-bottom:12px;">⭐</div><div style="font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:6px;">Solde actuel</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:52px;font-weight:800;color:#F39C12;">1 250</div><div style="font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:16px;">PharmaPoints = 6 250 FCFA</div><button onclick="showToast('Utiliser mes points...')" style="padding:14px 32px;background:linear-gradient(135deg,#F39C12,#e67e22);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Utiliser mes points 🎁</button></div><div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:14px;">Historique</div><div style="display:flex;flex-direction:column;gap:10px;"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F4F9FC;"><span style="font-size:13px;color:#6B7A8D;">#CMD-90214 · 14 oct.</span><span style="font-size:14px;font-weight:700;color:#27AE60;">+125 pts</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F4F9FC;"><span style="font-size:13px;color:#6B7A8D;">#CMD-90197 · 2 oct.</span><span style="font-size:14px;font-weight:700;color:#27AE60;">+87 pts</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;"><span style="font-size:13px;color:#6B7A8D;">Réduction utilisée · 18 sept.</span><span style="font-size:14px;font-weight:700;color:#E74C3C;">−200 pts</span></div></div></div></div></div></div></div>
+<div class="web-screen" id="wscreen47"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⭐ Programme PharmaPoints</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:16px;"><div style="background:linear-gradient(135deg,#1A2332,#0F3F54);border-radius:20px;padding:32px;text-align:center;"><div style="font-size:48px;margin-bottom:12px;">⭐</div><div style="font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:6px;">Solde actuel</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:52px;font-weight:800;color:#F39C12;">1 250</div><div style="font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:16px;">PharmaPoints = 6 250 FCFA</div><button onclick="showToast('Utiliser mes points...')" style="padding:14px 32px;background:linear-gradient(135deg,#F39C12,#e67e22);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Utiliser mes points 🎁</button></div><div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.06);"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;color:#1A2332;margin-bottom:14px;">Historique</div><div style="display:flex;flex-direction:column;gap:10px;"><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F4F9FC;"><span style="font-size:13px;color:#6B7A8D;">#CMD-90214 · 14 oct.</span><span style="font-size:14px;font-weight:700;color:#27AE60;">+125 pts</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F4F9FC;"><span style="font-size:13px;color:#6B7A8D;">#CMD-90197 · 2 oct.</span><span style="font-size:14px;font-weight:700;color:#27AE60;">+87 pts</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;"><span style="font-size:13px;color:#6B7A8D;">Réduction utilisée · 18 sept.</span><span style="font-size:14px;font-weight:700;color:#E74C3C;">−200 pts</span></div></div></div></div></div></div></div>
 
 <div class="web-screen" id="wscreen49">
   <div style="height:100%;background:#F4F9FC;display:flex;align-items:center;justify-content:center;">
@@ -4638,3 +5090,108 @@ window.showDossierTab = function(tab) {
 <!-- WSCREEN 50 — Onboarding pharmacien web -->
 
 `;
+
+// ============================================================
+//  PATIENT UI HELPERS (RESTORED)
+// ============================================================
+
+window.showPhTab = function(tabName, btn) {
+  // Hide all tab contents
+  document.querySelectorAll('.ph-tab-content').forEach(c => c.style.display = 'none');
+  
+  // Show target tab
+  const target = document.getElementById('ph-tab-' + tabName);
+  if (target) target.style.display = 'block';
+  
+  // Update buttons
+  document.querySelectorAll('.ph-tab-btn').forEach(b => {
+    b.style.color = '#6B7A8D';
+    b.style.borderBottom = 'none';
+    b.style.fontWeight = '600';
+  });
+  
+  if (btn) {
+    btn.style.color = '#1A6B8A';
+    btn.style.borderBottom = '2px solid #1A6B8A';
+    btn.style.fontWeight = '700';
+  }
+};
+
+window.filterOrders = function(btn, type) {
+  document.querySelectorAll('.order-tab').forEach(b => {
+    b.style.background = '#F4F9FC';
+    b.style.color = '#6B7A8D';
+    b.style.border = '1.5px solid #E2ECF2';
+  });
+  
+  btn.style.background = '#1A6B8A';
+  btn.style.color = '#fff';
+  btn.style.border = '1.5px solid #1A6B8A';
+  
+  showToast('🔽 Filtrage des commandes : ' + type);
+};
+
+window.filterArticles = function(cat, btn) {
+  // Reset all filter chips (both class .art-chip and inline-style chips)
+  if (btn) {
+    const parent = btn.parentElement;
+    if (parent) {
+      parent.querySelectorAll('div').forEach(c => {
+        c.style.background = 'rgba(255,255,255,0.15)';
+        c.style.color = 'rgba(255,255,255,0.8)';
+      });
+    }
+    btn.style.background = '#fff';
+    btn.style.color = '#1A6B8A';
+  }
+
+  // Show/hide article cards by data-cat attribute
+  document.querySelectorAll('.article-card').forEach(card => {
+    card.style.display = (cat === 'tous' || card.dataset.cat === cat) ? 'flex' : 'none';
+  });
+};
+
+// --- CHATBOT SIMULATION ---
+window.chatbotSend = function() {
+  const inp = document.getElementById('chat-input');
+  if (!inp || !inp.value.trim()) return;
+  
+  const text = inp.value;
+  inp.value = '';
+  
+  // Add user message to UI
+  const msgArea = document.getElementById('chat-messages');
+  if (msgArea) {
+    const userMsg = document.createElement('div');
+    userMsg.style.cssText = 'align-self:flex-end;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;padding:12px 16px;border-radius:16px 16px 4px 16px;max-width:80%;font-size:14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(26,107,138,0.2)';
+    userMsg.textContent = text;
+    msgArea.appendChild(userMsg);
+    msgArea.scrollTop = msgArea.scrollHeight;
+  }
+  
+  // Fake reply
+  setTimeout(() => window.chatbotReply(text), 1500);
+};
+
+window.chatbotReply = function(userText) {
+  const msgArea = document.getElementById('chat-messages');
+  if (!msgArea) return;
+  
+  let reply = "Je ne suis pas sûr de comprendre, mais je peux vous aider à trouver une pharmacie ou un médecin !";
+  const t = userText.toLowerCase();
+  
+  if (t.includes('pharmacie')) reply = "Je peux vous montrer les pharmacies les plus proches de votre position. Souhaitez-vous voir la carte ?";
+  else if (t.includes('mal') || t.includes('tête') || t.includes('douleur')) reply = "Je suis désolé d'apprendre que vous ne vous sentez pas bien. Je vous conseille de consulter un médecin. Voulez-vous prendre rendez-vous ?";
+  else if (t.includes('bonjour')) reply = "Bonjour Moussa ! Comment puis-je vous aider dans votre parcours de santé aujourd'hui ?";
+  
+  const botMsgContainer = document.createElement('div');
+  botMsgContainer.style.cssText = 'display:flex;gap:8px;margin-bottom:8px;';
+  botMsgContainer.innerHTML = `
+    <div style="width:30px;height:30px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;">🤖</div>
+    <div style="background:#fff;color:#1A2332;padding:12px 16px;border-radius:4px 16px 16px 16px;max-width:80%;font-size:14px;box-shadow:0 2px 8px rgba(0,0,0,0.06)">
+    ${reply}
+    </div>
+  `;
+  msgArea.appendChild(botMsgContainer);
+  msgArea.scrollTop = msgArea.scrollHeight;
+};

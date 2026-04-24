@@ -363,7 +363,7 @@ window.FRAGMENTS['shared'] = `
           <p class="login-link">Pas encore de compte ? <a onclick="goToScreen(9)">Créer un compte</a></p>
           <div style="margin-top:16px;padding-top:16px;border-top:1.5px solid #E2ECF2;text-align:center;">
              <div style="font-size:24px;margin-bottom:8px;">⚕️</div>
-             <p style="font-size:13px;color:var(--text-muted);font-weight:500;line-height:1.6;">Professionnel ? <br><a onclick="setDevice('web'); setTimeout(() => goToWebScreen('wscreen1'), 100);" style="color:var(--primary);cursor:pointer;font-weight:700;text-decoration:none;">Inscrivez-vous sur notre plateforme web</a><br> pour rejoindre le réseau.</p>
+             <p style="font-size:13px;color:var(--text-muted);font-weight:500;line-height:1.6;">Professionnel ? <br><a onclick="setDevice('web'); setTimeout(() => goToWebScreen('_enrollement'), 100);" style="color:var(--primary);cursor:pointer;font-weight:700;text-decoration:none;">Inscrivez-vous sur notre plateforme web</a><br> pour rejoindre le réseau.</p>
           </div>
           <p class="legal-note">En vous connectant, vous acceptez nos <a href="#">Conditions d'utilisation</a> et notre <a href="#">Politique de confidentialité</a></p>
         </div>

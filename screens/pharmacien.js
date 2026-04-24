@@ -235,6 +235,16 @@ window.FRAGMENTS['pharmacien'] = `
       </div>
     </div>
 
+    <!-- Publicité / Marketing Section -->
+    <div onclick="showToast('🚀 Ouverture du gestionnaire d\'espaces publicitaires...')" style="background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px;cursor:pointer;box-shadow:0 4px 15px rgba(26,107,138,0.25);margin:4px 0;">
+      <div style="width:48px;height:48px;background:rgba(255,255,255,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🚀</div>
+      <div style="flex:1;">
+        <div style="font-size:14px;font-weight:800;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;">Boostez votre visibilité</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.85);margin-top:2px;">Achetez des espaces publicitaires et apparaissez en priorité sur le catalogue patients.</div>
+      </div>
+      <div style="width:28px;height:28px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;">➔</div>
+    </div>
+
     <!-- Actions rapides -->
     <div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;margin-bottom:8px;">⚡ Actions rapides</div>
@@ -2080,19 +2090,19 @@ window.switchStockTab = function(tab, el) {
       </div>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-size:12px;color:#6B7A8D;">Accueil › Tableau de bord</div>
         <div style="display:flex;align-items:center;gap:12px;"><div style="font-size:13px;color:#6B7A8D;">📅 14 octobre 2024</div><div style="position:relative;cursor:pointer;" onclick="showToast('3 notifications')"><div style="width:32px;height:32px;background:#F4F9FC;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;">🔔</div><div style="position:absolute;top:-2px;right:-2px;width:16px;height:16px;background:#E74C3C;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;">3</div></div></div>
       </div>
       <div style="padding:20px 24px;display:flex;flex-direction:column;gap:16px;">
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #E74C3C;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En attente</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#E74C3C;">12</div><div style="font-size:11px;color:#E74C3C;margin-top:4px;">🔴 Ordonnances</div></div>
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #27AE60;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Validées aujourd'hui</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#27AE60;">45</div><div style="font-size:11px;color:#27AE60;margin-top:4px;">🟢 Ordonnances</div></div>
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #F39C12;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Interactions signalées</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#F39C12;">3</div><div style="font-size:11px;color:#F39C12;margin-top:4px;">🟡 Alertes</div></div>
-          <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #1A6B8A;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Temps moy. validation</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#1A6B8A;">8</div><div style="font-size:11px;color:#1A6B8A;margin-top:4px;">⏱️ minutes</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #E74C3C;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">En attente</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#E74C3C;">12</div><div style="font-size:11px;color:#E74C3C;margin-top:4px;">🔴 Ordonnances</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #27AE60;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Validées aujourd'hui</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#27AE60;">45</div><div style="font-size:11px;color:#27AE60;margin-top:4px;">🟢 Ordonnances</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #F39C12;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Interactions signalées</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#F39C12;">3</div><div style="font-size:11px;color:#F39C12;margin-top:4px;">🟡 Alertes</div></div>
+          <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-top:3px solid #1A6B8A;"><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">Temps moy. validation</div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:#1A6B8A;">8</div><div style="font-size:11px;color:#1A6B8A;margin-top:4px;">⏱️ minutes</div></div>
         </div>
         <div style="display:grid;grid-template-columns:1.3fr 0.7fr;gap:16px;">
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;"><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;">Ordonnances urgentes</div><button onclick="goToWebScreen(17)" style="font-size:12px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">Voir tout →</button></div>
             <table style="width:100%;border-collapse:collapse;">
               <thead><tr style="border-bottom:1.5px solid #F4F9FC;"><th style="text-align:left;font-size:11px;color:#6B7A8D;padding:6px 0;font-weight:600;">Patient</th><th style="font-size:11px;color:#6B7A8D;padding:6px;font-weight:600;text-align:left;">Heure</th><th style="font-size:11px;color:#6B7A8D;padding:6px;font-weight:600;text-align:left;">Urgence</th><th style="font-size:11px;color:#6B7A8D;padding:6px 0;font-weight:600;text-align:left;">Action</th></tr></thead>
@@ -2104,7 +2114,7 @@ window.switchStockTab = function(tab, el) {
               </tbody>
             </table>
           </div>
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Activité récente</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:8px;height:8px;background:#27AE60;border-radius:50%;flex-shrink:0;margin-top:4px;"></div><div><div style="font-size:12px;font-weight:600;color:#1A2332;">#ORD-085 validée</div><div style="font-size:11px;color:#6B7A8D;">M. Koné · 5 min</div></div></div>
@@ -2115,7 +2125,7 @@ window.switchStockTab = function(tab, el) {
           </div>
         </div>
         <!-- Bar chart -->
-        <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Validations par heure — Aujourd'hui</div>
           <div style="display:flex;align-items:flex-end;gap:6px;height:90px;">
             <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;"><div style="width:100%;background:#E8F4F8;border-radius:4px 4px 0 0;height:20px;"></div><div style="font-size:10px;color:#6B7A8D;">07h</div></div>
@@ -2149,7 +2159,7 @@ window.switchStockTab = function(tab, el) {
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">File d'attente — Ordonnances</div>
         <div style="display:flex;gap:8px;">
           <input type="text" placeholder="Rechercher patient..." style="padding:8px 12px;border:1.5px solid #E2ECF2;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;width:180px;">
@@ -2160,7 +2170,7 @@ window.switchStockTab = function(tab, el) {
       </div>
       <div style="padding:20px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
         <!-- EN ATTENTE -->
-        <div style="background:#EFF6FB;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#EFF6FB;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:12px;font-weight:700;color:#1A6B8A;">🔵 EN ATTENTE</div><div style="background:#1A6B8A;color:#fff;border-radius:50%;width:22px;height:22px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">12</div></div>
           <div onclick="goToWebScreen(18)" style="background:#fff;border-radius:10px;padding:12px;cursor:pointer;border-left:3px solid #E74C3C;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
             <div style="display:flex;justify-content:space-between;margin-bottom:6px;"><span style="font-size:12px;font-weight:700;color:#1A2332;">Aïcha Diallo</span><span style="background:#FEF0EE;color:#E74C3C;border-radius:4px;padding:1px 6px;font-size:9px;font-weight:700;">URGENT</span></div>
@@ -2180,7 +2190,7 @@ window.switchStockTab = function(tab, el) {
           <div style="text-align:center;font-size:11px;color:#6B7A8D;cursor:pointer;" onclick="showToast('9 autres...')">+ 9 autres en attente</div>
         </div>
         <!-- EN COURS -->
-        <div style="background:#FFFBF0;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#FFFBF0;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:12px;font-weight:700;color:#F39C12;">🟡 EN COURS</div><div style="background:#F39C12;color:#fff;border-radius:50%;width:22px;height:22px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">3</div></div>
           <div style="background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
             <div style="font-size:12px;font-weight:700;color:#1A2332;margin-bottom:4px;">Fatou Traoré</div>
@@ -2194,14 +2204,14 @@ window.switchStockTab = function(tab, el) {
           </div>
         </div>
         <!-- VALIDÉES -->
-        <div style="background:#F0FBF5;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#F0FBF5;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:12px;font-weight:700;color:#27AE60;">🟢 VALIDÉES</div><div style="background:#27AE60;color:#fff;border-radius:50%;width:22px;height:22px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">45</div></div>
           <div style="background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);"><div style="font-size:12px;font-weight:700;color:#1A2332;margin-bottom:2px;">Moussa Koné</div><div style="font-size:11px;color:#6B7A8D;">#ORD-085 · 09:45 ✓</div></div>
           <div style="background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);"><div style="font-size:12px;font-weight:700;color:#1A2332;margin-bottom:2px;">Ibrahim Sanogo</div><div style="font-size:11px;color:#6B7A8D;">#ORD-083 · 09:22 ✓</div></div>
           <div style="text-align:center;font-size:11px;color:#27AE60;font-weight:600;cursor:pointer;" onclick="showToast('43 autres...')">+ 43 autres ce matin</div>
         </div>
         <!-- REJETÉES -->
-        <div style="background:#FEF5F5;border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px;">
+        <div style="background:#FEF5F5;border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px;">
           <div style="display:flex;justify-content:space-between;align-items:center;"><div style="font-size:12px;font-weight:700;color:#E74C3C;">🔴 REJETÉES</div><div style="background:#E74C3C;color:#fff;border-radius:50%;width:22px;height:22px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;">2</div></div>
           <div style="background:#fff;border-radius:10px;padding:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
             <div style="font-size:12px;font-weight:700;color:#1A2332;margin-bottom:2px;">#ORD-081</div>
@@ -2250,7 +2260,7 @@ window.switchStockTab = function(tab, el) {
       <!-- Right: form -->
       <div style="width:50%;overflow-y:auto;background:#F4F9FC;padding:20px;display:flex;flex-direction:column;gap:14px;">
         <!-- Patient -->
-        <div style="background:#fff;border-radius:14px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="display:flex;align-items:center;gap:12px;">
             <div style="width:44px;height:44px;background:#E8F4F8;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;">👩🏿</div>
             <div style="flex:1;"><div style="font-size:14px;font-weight:700;color:#1A2332;">Aïcha Diallo</div><div style="display:flex;gap:8px;margin-top:4px;"><span style="font-size:11px;color:#6B7A8D;">32 ans</span><span style="background:#FEF0EE;border-radius:6px;padding:1px 6px;font-size:11px;font-weight:700;color:#E74C3C;">AB+</span><span style="background:#FEF0EE;border-radius:6px;padding:1px 6px;font-size:10px;font-weight:700;color:#E74C3C;">URGENT</span></div></div>
@@ -2264,7 +2274,7 @@ window.switchStockTab = function(tab, el) {
           <button onclick="goToWebScreen(19)" style="margin-left:auto;font-size:11px;color:#1A6B8A;background:none;border:none;cursor:pointer;font-weight:700;white-space:nowrap;font-family:'DM Sans',sans-serif;">Vérif. manuelle →</button>
         </div>
         <!-- Decision -->
-        <div style="background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <div style="background:#fff;border-radius:16px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <div style="font-size:13px;font-weight:700;color:#1A2332;margin-bottom:12px;">Décision de validation</div>
           <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px;">
             <label style="display:flex;align-items:center;gap:10px;padding:10px;background:#E8F7EE;border-radius:10px;cursor:pointer;border:1.5px solid #27AE60;"><input type="radio" name="wdecision" checked style="accent-color:#27AE60;"><span style="font-size:13px;font-weight:600;color:#27AE60;">✅ Approuver</span></label>
@@ -2301,12 +2311,12 @@ window.switchStockTab = function(tab, el) {
       </nav>
     </div>
     <div style="flex:1;overflow-y:auto;background:#F4F9FC;">
-      <div style="background:#fff;padding:14px 24px;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
+      <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;position:sticky;top:0;z-index:10;">
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⚗️ Vérificateur d'Interactions Médicamenteuses</div>
       </div>
       <div style="padding:20px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <div style="background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Médicaments à analyser</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div><div style="font-size:11px;color:#6B7A8D;margin-bottom:4px;">MÉDICAMENT 1</div><input value="Amoxicilline 500mg" style="width:100%;padding:10px 12px;border:1.5px solid #1A6B8A;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;color:#1A2332;box-sizing:border-box;"></div>
@@ -2319,7 +2329,7 @@ window.switchStockTab = function(tab, el) {
           <button onclick="showToast('Analyse lancée...')" style="padding:14px;background:linear-gradient(135deg,#0F3F54,#1A6B8A);color:#fff;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(26,107,138,0.3);">⚗️ Analyser les interactions</button>
         </div>
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <div style="background:#fff;border-radius:14px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+          <div style="background:#fff;border-radius:16px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
             <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:700;color:#1A2332;margin-bottom:14px;">Résultats d'analyse</div>
             <div style="display:flex;flex-direction:column;gap:10px;">
               <div style="background:#E8F7EE;border-radius:12px;padding:14px;border:1.5px solid rgba(39,174,96,0.2);">
@@ -2395,7 +2405,7 @@ window.switchStockTab = function(tab, el) {
         <button id="ptabw5" onclick="showPatientTab(5)" style="padding:14px 20px;border:none;border-bottom:3px solid transparent;background:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:#6B7A8D;cursor:pointer;">Notes</button>
       </div>
       <div style="padding:24px 28px;">
-        <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+        <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
           <thead style="background:#F4F9FC;"><tr><th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Réf.</th><th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Date</th><th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Médicaments</th><th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Statut</th><th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Pharmacien</th><th style="text-align:left;padding:12px 16px;font-size:12px;color:#6B7A8D;font-weight:600;">Action</th></tr></thead>
           <tbody>
             <tr style="border-top:1px solid #F4F9FC;"><td style="padding:12px 16px;font-size:13px;font-weight:700;color:#1A6B8A;">#ORD-089</td><td style="padding:12px 16px;font-size:13px;color:#1A2332;">14 oct. 2024</td><td style="padding:12px 16px;font-size:13px;color:#1A2332;">Amoxicilline, Paracétamol</td><td style="padding:12px 16px;"><span style="background:#FEF0EE;color:#E74C3C;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">En attente</span></td><td style="padding:12px 16px;font-size:13px;color:#6B7A8D;">Dr. Lefebvre</td><td style="padding:12px 16px;"><button onclick="goToWebScreen(18)" style="font-size:12px;color:#1A6B8A;background:#E8F4F8;border:none;border-radius:8px;padding:6px 12px;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">Traiter</button></td></tr>
@@ -2419,18 +2429,71 @@ window.switchStockTab = function(tab, el) {
 </div>
 
 <!-- ========================================
-     WEB SCREEN 18 — PHARMACIST MESSAGERIE (WEB)
+     WEB SCREEN 18 — PHARMACIEN MESSAGERIE (WEB)
 ======================================== -->
 <div class="web-screen" id="wscreen21">
-<div class="web-screen" id="wscreen41"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard pharmacien</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💊 Gestion du stock</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:24px;"><div style="font-size:13px;color:#6B7A8D;text-align:center;margin-top:40px;">Voir <button onclick="goToWebScreen(25)" style="background:none;border:none;color:#1A6B8A;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">wscreen 22 — Produits &amp; Stock →</button></div></div></div></div>
-
-<div class="web-screen" id="wscreen42"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📊 Statistiques pharmacien</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:24px;"><div style="font-size:13px;color:#6B7A8D;text-align:center;margin-top:40px;">Voir <button onclick="goToWebScreen(27)" style="background:none;border:none;color:#1A6B8A;font-size:13px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">wscreen 24 — Rapports &amp; Analytics →</button></div></div></div></div>
-
-<div class="web-screen" id="wscreen43"><div style="height:100%;display:flex;flex-direction:column;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">⚙️ Paramètres Pro</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;background:#F4F9FC;padding:32px;"><div style="max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:12px;"><div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.06);"><div style="padding:16px 20px;border-bottom:1px solid #F4F9FC;display:flex;justify-content:space-between;cursor:pointer;" onclick="showToast('Horaires')"><span style="font-size:14px;font-weight:600;color:#1A2332;">🕐 Horaires d'ouverture</span><span>→</span></div><div style="padding:16px 20px;border-bottom:1px solid #F4F9FC;display:flex;justify-content:space-between;cursor:pointer;" onclick="showToast('Signature')"><span style="font-size:14px;font-weight:600;color:#1A2332;">✍️ Signature numérique</span><span>→</span></div><div style="padding:16px 20px;display:flex;justify-content:space-between;align-items:center;" onclick="showToast('2FA actif')"><span style="font-size:14px;font-weight:600;color:#1A2332;">🔐 Authentification 2FA</span><span style="background:#E8F7EE;color:#27AE60;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;">Activé</span></div></div><button onclick="goToWebScreen(15)" style="padding:14px;background:#FEF0EE;color:#E74C3C;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Déconnexion</button></div></div></div></div>
-
-<div class="web-screen" id="wscreen44"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(10)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Accueil</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🔍 Scanner QR Code</div><div style="width:8px;"></div></div><div style="flex:1;display:flex;align-items:center;justify-content:center;"><div style="text-align:center;"><div style="width:280px;height:280px;border:3px solid #1A6B8A;border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;background:rgba(26,107,138,0.05);"><div style="font-size:80px;opacity:0.4;">📷</div></div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:18px;font-weight:700;color:#1A2332;margin-bottom:8px;">Pointez vers le QR Code</div><div style="font-size:13px;color:#6B7A8D;margin-bottom:24px;">Scannez le QR Code de l'ordonnance ou de la commande</div><button onclick="goToWebScreen(51)" style="padding:14px 32px;background:#1A6B8A;color:#fff;border:none;border-radius:14px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:700;cursor:pointer;">Simuler une lecture ✓</button></div></div></div></div>
-
-<div class="web-screen" id="wscreen45"><div style="height:100%;display:flex;flex-direction:column;background:#F4F9FC;"><div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;"><a onclick="goToWebScreen(32)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;">← Pharmacies</a><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">Profil pharmacien</div><div style="width:8px;"></div></div><div style="flex:1;overflow-y:auto;padding:32px;"><div style="max-width:700px;margin:0 auto;"><div style="background:linear-gradient(135deg,#0F3F54,#1A6B8A);border-radius:20px;padding:32px;display:flex;align-items:center;gap:20px;margin-bottom:20px;"><div style="width:72px;height:72px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:34px;">👩‍⚕️</div><div><div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:800;color:#fff;">Dr. Sophie Lefebvre</div><div style="font-size:14px;color:rgba(255,255,255,0.7);margin-top:4px;">Pharmacien · Ordre CI #4521 · ⭐ 4.9 (128 avis)</div><div style="display:flex;gap:8px;margin-top:10px;"><button onclick="goToWebScreen(11)" style="padding:10px 18px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">💬 Contacter</button><button onclick="goToWebScreen(29)" style="padding:10px 18px;background:#fff;color:#1A6B8A;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;">🛒 Commander</button></div></div></div></div></div></div></div>
+  <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;">
+      <a onclick="goToWebScreen(16)" style="font-size:13px;color:#1A6B8A;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💬 Messagerie sécurisée — Pharmacien</div>
+    </div>
+    <div style="flex:1;display:flex;overflow:hidden;">
+      <!-- Sidebar conversations -->
+      <div style="width:280px;border-right:1.5px solid #E2ECF2;display:flex;flex-direction:column;background:#fff;overflow-y:auto;flex-shrink:0;">
+        <div style="padding:12px 16px;background:#E8F4F8;font-size:11px;font-weight:700;color:#1A6B8A;letter-spacing:0.5px;">🩺 MÉDECINS</div>
+        <div onclick="goToWebScreen(21)" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;background:#F4F9FC;">
+          <div style="width:40px;height:40px;background:#E8F7EE;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🩺</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">Dr. Konan Yao</div><div style="font-size:11px;color:#6B7A8D;">Atorvastatine disponible ✓ — 09:14</div></div>
+          <div style="width:18px;height:18px;background:#1A6B8A;border-radius:50%;font-size:10px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;">2</div>
+        </div>
+        <div onclick="showToast('Dr. Ama Mensah')" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;">
+          <div style="width:40px;height:40px;background:#F4F9FC;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">🩺</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">Dr. Ama Mensah</div><div style="font-size:11px;color:#6B7A8D;">OK pour substitution — Hier</div></div>
+        </div>
+        <div style="padding:12px 16px;background:#E8F4F8;font-size:11px;font-weight:700;color:#1A6B8A;letter-spacing:0.5px;margin-top:8px;">👥 PATIENTS</div>
+        <div onclick="showToast('Chat Aïcha Diallo')" style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid #F4F9FC;cursor:pointer;">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;">A</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">Aïcha Diallo</div><div style="font-size:11px;color:#6B7A8D;">Merci pour la livraison ! — 11:20</div></div>
+        </div>
+        <div onclick="showToast('Chat Kofi Mensah')" style="display:flex;align-items:center;gap:10px;padding:14px 16px;cursor:pointer;">
+          <div style="width:40px;height:40px;background:linear-gradient(135deg,#27AE60,#2ecc71);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;">K</div>
+          <div style="flex:1;"><div style="font-size:13px;font-weight:700;color:#1A2332;">Kofi Mensah</div><div style="font-size:11px;color:#6B7A8D;">Ordonnance soumise — Hier</div></div>
+        </div>
+      </div>
+      <!-- Chat area -->
+      <div style="flex:1;display:flex;flex-direction:column;background:#F4F9FC;">
+        <div style="background:#fff;padding:0 24px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;">
+          <div style="width:42px;height:42px;background:#E8F7EE;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;">🩺</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#1A2332;">Dr. Konan Yao — Cardiologue · CHU de Cocody</div>
+            <div style="font-size:11px;color:#27AE60;">● En ligne</div>
+          </div>
+        </div>
+        <div style="flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px;">
+          <div style="text-align:center;font-size:11px;color:#6B7A8D;background:#fff;border-radius:20px;padding:5px 16px;align-self:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);">Aujourd'hui 09:05</div>
+          <div style="display:flex;gap:10px;align-items:flex-end;">
+            <div style="width:32px;height:32px;background:#E8F7EE;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">🩺</div>
+            <div style="background:#fff;border-radius:14px 14px 14px 4px;padding:12px 16px;box-shadow:0 2px 8px rgba(0,0,0,0.06);max-width:400px;">
+              <div style="font-size:13px;color:#1A2332;">Bonjour Dr. Lefebvre. L'ordonnance #ORD-089 de Mme Aïcha Diallo contient de l'Amoxicilline 1g et du Paracétamol 500mg. Pouvez-vous confirmer la disponibilité ?</div>
+              <div style="font-size:10px;color:#6B7A8D;margin-top:4px;">09:07</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-end;justify-content:flex-end;">
+            <div style="background:linear-gradient(135deg,#0F3F54,#1A6B8A);border-radius:14px 14px 4px 14px;padding:12px 16px;max-width:400px;">
+              <div style="font-size:13px;color:#fff;">Bonjour Dr. Konan. Amoxicilline 1g ✓ disponible. Paracétamol 500mg ✓ en stock. Préparation lancée, livraison estimée dans 45 min.</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.7);margin-top:4px;">09:14 ✓✓</div>
+            </div>
+            <div style="width:32px;height:32px;background:linear-gradient(135deg,#0F3F54,#1A6B8A);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;color:#fff;font-weight:700;flex-shrink:0;">SL</div>
+          </div>
+        </div>
+        <div style="background:#fff;padding:16px 24px;border-top:1.5px solid #E2ECF2;display:flex;gap:10px;align-items:center;">
+          <input type="text" placeholder="Message sécurisé..." style="flex:1;border:1.5px solid #E2ECF2;border-radius:50px;padding:11px 18px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;background:#F4F9FC;" />
+          <button onclick="showToast('Message envoyé ✓')" style="width:42px;height:42px;background:linear-gradient(135deg,#1A6B8A,#2196B3);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="web-screen" id="wscreen53">
   <div style="height:100%;background:linear-gradient(135deg,#F4F9FC,#E0F0F7);display:flex;align-items:center;justify-content:center;">
@@ -2448,8 +2511,8 @@ window.switchStockTab = function(tab, el) {
       </div>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#1A2332;margin-bottom:16px;">Étape 3 sur 6 — Documents professionnels</div>
       <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:24px;">
-        <div style="border:2px dashed #1A6B8A;border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:#E8F4F8;" onclick="showToast('Upload diplôme...')"><div style="font-size:28px;margin-bottom:6px;">🎓</div><div style="font-size:13px;font-weight:700;color:#1A6B8A;">Diplôme de pharmacien</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">PDF ou image · Max 5 Mo</div></div>
-        <div style="border:2px dashed #27AE60;border-radius:14px;padding:20px;text-align:center;cursor:pointer;background:#E8F7EE;" onclick="showToast('Upload autorisation...')"><div style="font-size:28px;margin-bottom:6px;">📋</div><div style="font-size:13px;font-weight:700;color:#27AE60;">Autorisation d'exercice (Ordre CI) <span style="background:#27AE60;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;margin-left:4px;">✓ Chargé</span></div></div>
+        <div style="border:2px dashed #1A6B8A;border-radius:16px;padding:20px;text-align:center;cursor:pointer;background:#E8F4F8;" onclick="showToast('Upload diplôme...')"><div style="font-size:28px;margin-bottom:6px;">🎓</div><div style="font-size:13px;font-weight:700;color:#1A6B8A;">Diplôme de pharmacien</div><div style="font-size:11px;color:#6B7A8D;margin-top:2px;">PDF ou image · Max 5 Mo</div></div>
+        <div style="border:2px dashed #27AE60;border-radius:16px;padding:20px;text-align:center;cursor:pointer;background:#E8F7EE;" onclick="showToast('Upload autorisation...')"><div style="font-size:28px;margin-bottom:6px;">📋</div><div style="font-size:13px;font-weight:700;color:#27AE60;">Autorisation d'exercice (Ordre CI) <span style="background:#27AE60;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;margin-left:4px;">✓ Chargé</span></div></div>
       </div>
       <div style="display:flex;gap:10px;">
         <button onclick="goToWebScreen(15)" style="flex:1;padding:14px;background:#F4F9FC;color:#6B7A8D;border:1.5px solid #E2ECF2;border-radius:12px;font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;">← Précédent</button>
@@ -2468,3 +2531,36 @@ window.switchStockTab = function(tab, el) {
 ======================================== -->
 
 `;
+
+// ============================================================
+//  PHARMACIEN UI HELPERS (RESTORED)
+// ============================================================
+
+window.validateOrder = function(status) {
+  if (status === 'approve') {
+    showToast('✅ Ordonnance validée avec succès');
+  } else {
+    showToast('📋 Demande de précision envoyée au client');
+  }
+  setTimeout(() => goToScreen(20), 1500);
+};
+
+window.filterPharmacistOrders = function(type, el) {
+  // Update UI filters
+  document.querySelectorAll('.ph-order-filter').forEach(b => {
+    b.style.background = '#F4F9FC';
+    b.style.color = '#6B7A8D';
+  });
+  
+  if (el) {
+    el.style.background = '#1A6B8A';
+    el.style.color = '#fff';
+  }
+  
+  showToast('📂 Vue filtrée : ' + type);
+};
+
+window.startChat = function(user) {
+  showToast('💬 Ouverture du chat avec ' + user);
+  // Navigation vers l'écran de chat approprié si disponible
+};

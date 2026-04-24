@@ -94,7 +94,7 @@ window.FRAGMENTS['medecin'] = `
       </button>
       <button onclick="goToScreen(68)" style="background:#fff;border:none;border-radius:14px;padding:16px;text-align:left;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
         <div style="font-size:24px;margin-bottom:8px;">💬</div>
-        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;">Messagerie</div>
+        <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:700;color:#1A2332;">Consultation</div>
         <div style="font-size:11px;color:#6B7A8D;margin-top:2px;">Patients & pharmaciens</div>
       </button>
       <button onclick="goToScreen(69)" style="background:#fff;border:none;border-radius:14px;padding:16px;text-align:left;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
@@ -338,7 +338,7 @@ window.FRAGMENTS['medecin'] = `
   <div style="background:linear-gradient(135deg,#0D3B2E,#1A6B50);padding:54px 20px 16px;flex-shrink:0;">
     <div style="display:flex;align-items:center;gap:12px;">
       <button onclick="goToScreen(64)" style="background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:34px;height:34px;color:#fff;font-size:16px;cursor:pointer;">←</button>
-      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;">💬 Messagerie sécurisée</div>
+      <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:17px;font-weight:700;color:#fff;">💬 Consultation sécurisée</div>
     </div>
   </div>
   <div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;">
@@ -686,9 +686,8 @@ window.FRAGMENTS['medecin'] = `
     <!-- Chips rapides -->
     <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;">
       <div id="docfil-all" class="doc-quick-chip" onclick="docFilter('all',this)" style="flex-shrink:0;background:#fff;color:#1A6B8A;border-radius:50px;padding:6px 14px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;">Tous</div>
-      <div class="doc-quick-chip" onclick="docFilter('dispo',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">🟢 Disponible</div>
-      <div class="doc-quick-chip" onclick="docFilter('video',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">📹 Vidéo</div>
-      <div class="doc-quick-chip" onclick="docFilter('general',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">🩺 Généraliste</div>
+      <div class="doc-quick-chip" onclick="docFilter('dispo',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">🟢 Disponibles</div>
+      <div class="doc-quick-chip" onclick="docFilter('general',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">🩺 Généralistes</div>
       <div class="doc-quick-chip" onclick="docFilter('cardio',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">❤️ Cardio</div>
       <div class="doc-quick-chip" onclick="docFilter('pedo',this)" style="flex-shrink:0;background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.9);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:600;cursor:pointer;white-space:nowrap;border:1px solid rgba(255,255,255,0.2);">👶 Pédiatrie</div>
     </div>
@@ -712,7 +711,6 @@ window.FRAGMENTS['medecin'] = `
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
           <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.9</span><span style="font-size:10px;color:#6B7A8D;">(203)</span></div>
           <span style="width:3px;height:3px;background:#D1D5DB;border-radius:50%;"></span>
-          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">📹 Vidéo</div>
           <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">💬 Chat</div>
         </div>
       </div>
@@ -734,7 +732,7 @@ window.FRAGMENTS['medecin'] = `
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
           <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.8</span><span style="font-size:10px;color:#6B7A8D;">(178)</span></div>
           <span style="width:3px;height:3px;background:#D1D5DB;border-radius:50%;"></span>
-          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">📹 Vidéo</div>
+          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">💬 Chat</div>
         </div>
       </div>
       <div style="font-size:20px;color:#C5D3DC;flex-shrink:0;">›</div>
@@ -775,7 +773,6 @@ window.FRAGMENTS['medecin'] = `
         <div style="display:flex;align-items:center;gap:8px;margin-top:6px;">
           <div style="display:flex;align-items:center;gap:3px;"><span style="color:#F39C12;font-size:11px;">★</span><span style="font-size:11px;font-weight:700;color:#1A2332;">4.9</span><span style="font-size:10px;color:#6B7A8D;">(312)</span></div>
           <span style="width:3px;height:3px;background:#D1D5DB;border-radius:50%;"></span>
-          <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">📹 Vidéo</div>
           <div style="font-size:10px;color:#1A6B8A;font-weight:600;background:#E8F4F8;padding:2px 6px;border-radius:10px;">💬 Chat</div>
         </div>
       </div>
@@ -887,7 +884,7 @@ window.docFilter = function(type, el) {
   el.style.background  = '#fff';
   el.style.color       = '#1A6B8A';
   el.style.borderColor = '#fff';
-  var labels = { all:'tous les médecins', dispo:'médecins disponibles', video:'téléconsultation vidéo', general:'généralistes', cardio:'cardiologues', pedo:'pédiatres' };
+  var labels = { all:'tous les médecins', dispo:'médecins disponibles', general:'généralistes', cardio:'cardiologues', pedo:'pédiatres' };
   if (type !== 'all') showToast('🔍 Filtre : ' + (labels[type] || type));
 };
 </script>
@@ -1049,7 +1046,7 @@ window.docFilter = function(type, el) {
 ===================================================== -->
 <div class="web-screen" id="wscreen59">
   <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;">
-    <div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div style="display:flex;align-items:center;gap:12px;">
         <a onclick="goToWebScreen(58)" style="font-size:13px;color:#27AE60;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">📋 Gestion des Ordonnances</div>
@@ -1120,7 +1117,7 @@ window.docFilter = function(type, el) {
 ===================================================== -->
 <div class="web-screen" id="wscreen60">
   <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;">
-    <div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div style="display:flex;align-items:center;gap:12px;">
         <a onclick="goToWebScreen(58)" style="font-size:13px;color:#27AE60;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">👥 Dossiers Patients</div>
@@ -1193,7 +1190,7 @@ window.docFilter = function(type, el) {
 ===================================================== -->
 <div class="web-screen" id="wscreen61">
   <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;">
-    <div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
       <div style="display:flex;align-items:center;gap:12px;">
         <a onclick="goToWebScreen(58)" style="font-size:13px;color:#27AE60;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a>
         <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🗺 Pharmacies & Disponibilité Stock</div>
@@ -1276,7 +1273,7 @@ window.docFilter = function(type, el) {
 ===================================================== -->
 <div class="web-screen" id="wscreen62">
   <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;">
-    <div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;flex-shrink:0;">
       <a onclick="goToWebScreen(58)" style="font-size:13px;color:#27AE60;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">💬 Messagerie sécurisée — Médecin</div>
     </div>
@@ -1306,7 +1303,7 @@ window.docFilter = function(type, el) {
       <!-- Chat area -->
       <div style="flex:1;display:flex;flex-direction:column;background:#F4F9FC;">
         <!-- Chat header -->
-        <div style="background:#fff;padding:14px 24px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;">
+        <div style="background:#fff;padding:0 24px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;">
           <div style="width:42px;height:42px;background:#E8F4F8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;">👩‍⚕️</div>
           <div>
             <div style="font-size:14px;font-weight:700;color:#1A2332;">Dr. Sophie Lefebvre — Pharmacie Centrale, Cocody</div>
@@ -1346,7 +1343,7 @@ window.docFilter = function(type, el) {
 ===================================================== -->
 <div class="web-screen" id="wscreen63">
   <div style="height:100%;display:flex;flex-direction:column;overflow:hidden;">
-    <div style="background:#fff;padding:14px 32px;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;flex-shrink:0;">
+    <div style="background:#fff;padding:0 32px;height:60px;flex-shrink:0;border-bottom:1.5px solid #E2ECF2;display:flex;align-items:center;gap:12px;flex-shrink:0;">
       <a onclick="goToWebScreen(58)" style="font-size:13px;color:#27AE60;cursor:pointer;font-weight:700;font-family:'DM Sans',sans-serif;">← Dashboard</a>
       <div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;font-weight:700;color:#1A2332;">🩺 Profil Médecin</div>
     </div>
@@ -1409,3 +1406,63 @@ window.docFilter = function(type, el) {
 ======================================== -->
 
 `;
+
+// ============================================================
+//  MÉDECIN UI HELPERS (RESTORED)
+// ============================================================
+
+window.openDocFilters = function() {
+  const overlay = document.getElementById('doc-filter-overlay');
+  const sheet = document.getElementById('doc-filter-sheet');
+  if (!overlay || !sheet) return;
+  
+  overlay.style.display = 'block';
+  sheet.style.display = 'block';
+  requestAnimationFrame(() => {
+    overlay.style.opacity = '1';
+    sheet.style.transform = 'translateY(0)';
+  });
+};
+
+window.closeDocFilters = function() {
+  const overlay = document.getElementById('doc-filter-overlay');
+  const sheet = document.getElementById('doc-filter-sheet');
+  if (!overlay || !sheet) return;
+  
+  overlay.style.opacity = '0';
+  sheet.style.transform = 'translateY(100%)';
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    sheet.style.display = 'none';
+  }, 320);
+};
+
+window.toggleDocChip = function(el) {
+  const isActive = el.getAttribute('data-active') === '1';
+  if (isActive) {
+    el.setAttribute('data-active', '0');
+    el.style.background = '#F4F9FC';
+    el.style.color = '#6B7A8D';
+    el.style.borderColor = '#E2ECF2';
+  } else {
+    el.setAttribute('data-active', '1');
+    el.style.background = '#E8F4F8';
+    el.style.color = '#1A6B8A';
+    el.style.borderColor = '#1A6B8A';
+  }
+};
+
+window.resetDocFilters = function() {
+  document.querySelectorAll('.df-chip').forEach(el => {
+    el.setAttribute('data-active', '0');
+    el.style.background = '#F4F9FC';
+    el.style.color = '#6B7A8D';
+    el.style.borderColor = '#E2ECF2';
+  });
+  showToast('🔄 Filtres réinitialisés');
+};
+
+window.applyDocFilters = function() {
+  showToast('🔍 Recherche filtrée...');
+  window.closeDocFilters();
+};
