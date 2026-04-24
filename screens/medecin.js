@@ -1466,3 +1466,18 @@ window.applyDocFilters = function() {
   showToast('🔍 Recherche filtrée...');
   window.closeDocFilters();
 };
+
+window.docFilter = function(type, el) {
+  document.querySelectorAll('#screen74 .doc-quick-chip').forEach(function(btn) {
+    btn.style.background  = 'rgba(255,255,255,0.15)';
+    btn.style.color       = 'rgba(255,255,255,0.9)';
+    btn.style.borderColor = 'rgba(255,255,255,0.2)';
+  });
+  if (el) {
+    el.style.background  = '#fff';
+    el.style.color       = '#1A6B8A';
+    el.style.borderColor = '#fff';
+  }
+  var labels = { all: 'tous les médecins', dispo: 'médecins disponibles', general: 'généralistes', cardio: 'cardiologues', pedo: 'pédiatres' };
+  if (type !== 'all') showToast('🔍 Filtre : ' + (labels[type] || type));
+};

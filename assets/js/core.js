@@ -33,7 +33,27 @@
 
   window.showModal = function(id) {
     const m = document.getElementById(id);
-    if (m) m.classList.add('active');
+    if (m) { m.classList.add('active'); return; }
+    const labels = {
+      'call-modal':            '📞 Appel en cours...',
+      'pdf-modal':             '📄 Ouverture du document PDF...',
+      'file-modal':            '📎 Sélection de fichier...',
+      'edit-field-modal':      '✏️ Modification enregistrée',
+      'confirm-delete-modal':  '🗑️ Confirmer la suppression ?',
+      'confirm-modal':         '✓ Confirmation demandée',
+      'confirm-suspend-modal': '⏸ Suspendre ce compte ?',
+      'fullmap-modal':         '🗺️ Ouverture de la carte complète...',
+      'add-product-modal':     '💊 Ajouter un produit',
+      'add-user-modal':        '👤 Ajouter un utilisateur',
+      'edit-user-modal':       '✏️ Modifier l\'utilisateur',
+      'filter-catalog-modal':  '⌥ Filtres du catalogue',
+      'qr-modal':              '🔲 Génération du QR Code...',
+      'consent-modal':         '📋 Consentement patient enregistré',
+      'med-select-modal':      '💊 Sélectionner un médicament',
+      'patient-select-modal':  '👤 Sélectionner un patient',
+      'map-modal':             '🗺️ Carte en cours de chargement...',
+    };
+    showToast(labels[id] || '🔔 ' + id.replace(/-/g, ' '));
   };
 
   window.closeModal = function() {
@@ -527,6 +547,14 @@
     if (el.value.length === 1) {
       const next = el.nextElementSibling;
       if (next && (next.classList.contains('otp-input') || next.tagName === 'INPUT')) next.focus();
+    }
+  };
+
+  window.webOtpNext = (el) => {
+    el.value = el.value.replace(/[^0-9]/g, '');
+    if (el.value.length === 1) {
+      const next = el.nextElementSibling;
+      if (next && (next.classList.contains('web-otp-box') || next.tagName === 'INPUT')) next.focus();
     }
   };
 

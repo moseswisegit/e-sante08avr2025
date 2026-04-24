@@ -3972,9 +3972,9 @@ window.showDossierTab = function(tab) {
             </div>
             <div class="web-nav-logo-text brand-cool">ILERA AFRICA</div>
           </div>
-          <a class="web-nav-link" onclick="showModal('map-modal')">Accueil</a>
-          <a class="web-nav-link" onclick="showModal('map-modal')">Ordonnances</a>
-          <a class="web-nav-link" onclick="showModal('map-modal')">Commandes</a>
+          <a class="web-nav-link" onclick="goToWebScreen(13)">Accueil</a>
+          <a class="web-nav-link" onclick="goToWebScreen(12)">Ordonnances</a>
+          <a class="web-nav-link" onclick="goToWebScreen(14)">Commandes</a>
           <button class="web-nav-btn" onclick="showToast('Déjà connecté !')">Connexion</button>
         </nav>
         <div class="web-login-wrap">
@@ -5118,16 +5118,18 @@ window.showPhTab = function(tabName, btn) {
 };
 
 window.filterOrders = function(btn, type) {
+  if (typeof btn === 'string') {
+    showToast('🔽 Filtrage : ' + btn);
+    return;
+  }
   document.querySelectorAll('.order-tab').forEach(b => {
     b.style.background = '#F4F9FC';
     b.style.color = '#6B7A8D';
     b.style.border = '1.5px solid #E2ECF2';
   });
-  
   btn.style.background = '#1A6B8A';
   btn.style.color = '#fff';
   btn.style.border = '1.5px solid #1A6B8A';
-  
   showToast('🔽 Filtrage des commandes : ' + type);
 };
 
@@ -5153,14 +5155,14 @@ window.filterArticles = function(cat, btn) {
 
 // --- CHATBOT SIMULATION ---
 window.chatbotSend = function() {
-  const inp = document.getElementById('chat-input');
+  const inp = document.getElementById('chatbot-input') || document.getElementById('chat-input');
   if (!inp || !inp.value.trim()) return;
-  
+
   const text = inp.value;
   inp.value = '';
-  
+
   // Add user message to UI
-  const msgArea = document.getElementById('chat-messages');
+  const msgArea = document.getElementById('chatbot-messages') || document.getElementById('chat-messages');
   if (msgArea) {
     const userMsg = document.createElement('div');
     userMsg.style.cssText = 'align-self:flex-end;background:linear-gradient(135deg,#1A6B8A,#2196B3);color:#fff;padding:12px 16px;border-radius:16px 16px 4px 16px;max-width:80%;font-size:14px;margin-bottom:8px;box-shadow:0 2px 8px rgba(26,107,138,0.2)';
@@ -5174,7 +5176,7 @@ window.chatbotSend = function() {
 };
 
 window.chatbotReply = function(userText) {
-  const msgArea = document.getElementById('chat-messages');
+  const msgArea = document.getElementById('chatbot-messages') || document.getElementById('chat-messages');
   if (!msgArea) return;
   
   let reply = "Je ne suis pas sûr de comprendre, mais je peux vous aider à trouver une pharmacie ou un médecin !";
